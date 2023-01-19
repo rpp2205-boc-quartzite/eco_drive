@@ -12,10 +12,11 @@ document:
   is_rider:     true,
   driver_routes: [
     {
-      start_address:  "123 MyLane",
-      end_address:    "456 WorkPlace",
-      time:           "7:00 AM Jan 2",
-      open_seats:     4
+      start_address:          "123 MyLane",
+      end_address:            "456 WorkPlace",
+      time:                   "7:00 AM Jan 2",
+      total_seats_available:  4,
+      open_seats:             2
     }
   ],
   rider_routes: [
@@ -67,7 +68,7 @@ document:
 
 document:
 {
-  _id: 2,
+  _id:          2,
   full_name:    "Blake Crawford",
   email:        "BeeKeeperBlake@gmail.com",
   password:     "heLovesJS",
