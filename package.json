@@ -1,0 +1,25 @@
+{
+  "name": "green_earth",
+  "version": "1.0.0",
+  "description": "blue ocean captsone project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp2205-boc-quartzite/green_earth.git"
+  },
+  "author": "Becca, Blake, Brandon, Cameron, Chelsea, Huan, Nick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp2205-boc-quartzite/green_earth/issues"
+  },
+  "homepage": "https://github.com/rpp2205-boc-quartzite/green_earth#readme",
+  "devDependencies": {
+    "jest": "^29.3.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
