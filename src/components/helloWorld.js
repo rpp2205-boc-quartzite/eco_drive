@@ -6,8 +6,7 @@ class HelloWorld extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0,
-      isTrue: true,
+      isTrue: false,
       message: "Hello World"
     }
   }
