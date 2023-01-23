@@ -5,7 +5,7 @@ const port = 3001;
 const app = express();
 
 app.use(bodyParser.json());
-app.use('/goodbye', goodbye);
+app.use('/', goodbye);
 
 
 app.listen(port, () => {
