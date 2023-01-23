@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const db = require('../database/index');
+
 const port = 3001;
 const app = express();
 // eslint-disable-next-line object-curly-newline
