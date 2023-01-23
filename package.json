@@ -17,8 +17,8 @@
     "mongoose": "^6.8.4"
   },
   "scripts": {
-    "start2": "react-scripts start",
-    "start": "node ./server/index.js",
+    "start": "react-scripts start",
+    "start2": "node ./server/index.js",
     "build": "react-scripts build",
     "test2": "jest --coverage",
     "test": "react-scripts test --coverage",
