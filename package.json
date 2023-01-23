@@ -3,24 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "description": "blue ocean capstone project",
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "body-parser": "^1.20.1",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "mongoose": "^6.8.4"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "start2": "node ./server/index.js",
     "build": "react-scripts build",
-    "test2": "jest --coverage",
+    "test:example": "jest --coverage",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
@@ -33,7 +31,7 @@
       "react-app/jest"
     ]
   },
-  "author": "Becca, Blake, Brandon, Cameron, Chelsea, Huan, Nick",
+  "authors": "Becca, Blake, Brandon, Cameron, Chelsea, Huan, Nick",
   "browserslist": {
     "production": [
       ">0.2%",
