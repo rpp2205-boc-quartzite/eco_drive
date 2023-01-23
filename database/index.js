@@ -1,43 +1,29 @@
-// require('dotenv').config();
-// const mongoose = require('mongoose');
+/* eslint-disable block-scoped-var */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable padded-blocks */
+/* eslint-disable vars-on-top */
+/* eslint-disable no-var */
+/* eslint-disable no-console */
+/* eslint-disable comma-dangle */
 
-// mongoose.connect('mongodb+srv://cluster-0.zhkkdpj.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority', {
-//   sslCA: `${__dirname}/../green-earth.pem`,
-//   authMechanism: 'MONGODB-X509',
-// });
+require('dotenv').config();
+const mongoose = require('mongoose');
 
-// const db = mongoose.connection;
+try {
+  // Connect to the MongoDB cluster
+  mongoose.connect(
+    process.env.DATABASE_CONNECTION_ADDRESS,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    },
+    () => console.log('mongoose is connected')
+  );
 
-// db.on('error', () => {
-//   console.log('mongoose connection error');
-// });
+  var db = mongoose.connection;
 
-// db.once('open', () => {
-//   console.log('mongoose connected successfully');
-// });
-
-// module.exports = db;
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const fs = require('fs');
-const credentials = `${__dirname}/../green-earth.pem`;
-const client = new MongoClient('mongodb+srv://cluster-0.zhkkdpj.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority', {
-  sslKey: credentials,
-  sslCert: credentials,
-  serverApi: ServerApiVersion.v1
-});
-async function run() {
-  try {
-    await client.connect();
-    const database = client.db("testDB");
-    const collection = database.collection("testCol");
-    const docCount = await collection.countDocuments({});
-    console.log(docCount);
-    console.log('connnect success');
-    // perform actions using client
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
+} catch (e) {
+  console.log('mongoose could not connect to cluster');
 }
-run().catch(console.dir);
+
+module.exports = db;
