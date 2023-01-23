@@ -25,5 +25,9 @@ try {
 } catch (e) {
   console.log('mongoose could not connect to cluster');
 }
+<<<<<<< HEAD
 
 module.exports = db;
+=======
+run().catch(console.dir);
+>>>>>>> aed6f0a193eba884aad8e03e870c38429d8a0d04
