@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 module.exports = {
@@ -16,5 +18,4 @@ module.exports = {
     console.log('saved new user');
     res.sendStatus(200);
   }
-
 };
