@@ -14,7 +14,7 @@ class HelloWorld extends Component {
 
   componentDidMount() {
     if (this.state.isTrue) {
-      axios.get('/goodbye')
+      axios.get('/')
       .then(response => {
         this.setState({
           message: response.data

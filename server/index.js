@@ -13,7 +13,7 @@ const port = 8080;
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // routes
-app.get('/goodbye', (req, res) => {
+app.get('/', (req, res) => {
   //console.log('path', path.join(__dirname, '../client/dist/index.html'));
   //res.sendFile(path.join(__dirname, '../client/dist/index.html'));
   res.send('Goodbye');
