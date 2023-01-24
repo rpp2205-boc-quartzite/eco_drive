@@ -28,7 +28,7 @@ app.get('/goodbye', (req, res) => {
 // });
 
 app.listen(port, () => {
-  console.log(`listening on port ${port}, on path ${path.join(__dirname, '../client/dist/index.html')}`);
+  console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist/index.html')}`);
 });
 
 //module.exports = server;
