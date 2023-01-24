@@ -25,33 +25,33 @@ app.get('/goodbye', (req, res) => {
 
 // ---- Authentication Routes ---- //
 
-app.post('/register', (request, response) => {
+app.post('/register', (req, res) => {
   bcrypt
-    .hash(request.query.password, 10)
+    .hash(req.query.password, 10)
     .then((hashedPassword) => {
       const user = new User({
-        full_name: 'blake',
-        email: request.query.email,
+        full_name: req.query.name,
+        email: req.query.email,
         password: hashedPassword,
       });
 
       user
         .save()
         .then((result) => {
-          response.status(201).send({
+          res.status(201).send({
             message: 'User Created Successfully',
             result: result,
           });
         })
         .catch((error) => {
-          response.status(500).send({
-            message: 'Error creating user',
+          res.status(500).send({
+            message: 'Error Creating User',
             error: error,
           });
         });
     })
     .catch((error) => {
-      response.status(500).send({
+      res.status(500).send({
         message: 'Password was not hashed successfully',
         error: error,
       });
