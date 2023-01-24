@@ -21,8 +21,13 @@ const User = require('../database/controllers/user');
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
   console.log('HERE');
-  User.addExampleUser(req, res);
 });
+
+// test db entry
+app.post('/database', (req, res) => {
+  console.log('DIS ONE');
+  User.addExampleUser(req, res);
+})
 
 // set port and listen for requests
 const port = 3001;

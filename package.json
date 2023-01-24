@@ -9,12 +9,14 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.3",
     "dotenv": "^16.0.3",
+    "mongoose": "^6.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "server-dev": "nodemon ./server/index.js",
     "start": "react-scripts start",
     "start2": "node ./server/index.js",
     "build": "react-scripts build",

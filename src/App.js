@@ -1,11 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 //import HelloWorld from './components/helloWorld';
 
 function App() {
   // return (
   //   <HelloWorld />
   // )
+
+  const addEntry = () => {
+    axios.post('database', {})
+      .then((res) => console.log('DONE'))
+      .catch((err) => console.log('ERROR: ', err))
+  }
+
+  addEntry();
+
   return (
     <div className="App">
       <header className="App-header">
