@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 try {
   // Connect to the MongoDB cluster
+  mongoose.set('strictQuery', true);
   mongoose.connect(
     process.env.DATABASE_CONNECTION_ADDRESS,
     {
@@ -11,7 +12,7 @@ try {
     },
     () => console.log('mongoose is connected')
   );
-
+  
   var db = mongoose.connection;
 
 } catch (e) {
