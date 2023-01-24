@@ -1,5 +1,6 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable key-spacing */
+
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
