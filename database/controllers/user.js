@@ -1,7 +1,3 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable no-console */
-/* eslint-disable padded-blocks */
-
 const User = require('../models/user');
 
 module.exports = {
