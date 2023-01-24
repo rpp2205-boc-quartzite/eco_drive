@@ -1,7 +1,5 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable no-console */
-/* eslint-disable padded-blocks */
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 module.exports = {
@@ -50,5 +48,4 @@ module.exports = {
     );
     return;
   }
-
 };

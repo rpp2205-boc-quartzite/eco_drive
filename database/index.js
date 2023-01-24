@@ -1,11 +1,3 @@
-/* eslint-disable block-scoped-var */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable padded-blocks */
-/* eslint-disable vars-on-top */
-/* eslint-disable no-var */
-/* eslint-disable no-console */
-/* eslint-disable comma-dangle */
-
 require('dotenv').config();
 const mongoose = require('mongoose');
 
@@ -13,6 +5,7 @@ const cluster = 'mongodb+srv://cluster-0.zhkkdpj.mongodb.net/green-earth?authSou
 
 try {
   // Connect to the MongoDB cluster
+  mongoose.set('strictQuery', true);
   mongoose.connect(
     cluster,
     {
