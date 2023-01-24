@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = 8080;
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 //const goodbye = require('./routes/goodbye.js');
 
 // connect to db
