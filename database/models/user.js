@@ -77,8 +77,13 @@ const userSchema = mongoose.Schema({
     }
   ]
 
-});
+}, { collection: 'user' });
+
+// const userSchema = mongoose.Schema({
+//   full_name: String,
+//   email: String
+// })
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports.User = User;

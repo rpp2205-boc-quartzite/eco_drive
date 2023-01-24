@@ -1,24 +1,21 @@
-require('dotenv').config();
 const mongoose = require('mongoose');
 
-const cluster = 'mongodb+srv://cluster-0.zhkkdpj.mongodb.net/green-earth?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority';
+const user = 'green-earth-1';
+const pass = 'GreenEarth123';
+const cluster = 'cluster0.ydd0dgw'
+const dbname = 'green-earth';
 
-try {
-  // Connect to the MongoDB cluster
-  mongoose.set('strictQuery', true);
-  mongoose.connect(
-    cluster,
-    {
-      useNewUrlParser:    true,
-      useUnifiedTopology: true
-    },
-    () => console.log('mongoose is connected')
-  );
+const connectStr = `mongodb+srv://${user}:${pass}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`
 
-  var db = mongoose.connection;
+// Clear Warning
+mongoose.set('strictQuery', true);
 
-} catch (e) {
-  console.log('mongoose could not connect to cluster');
-}
+// Connect to the MongoDB cluster
+mongoose.connect(connectStr, {},
+  (err) => {
+    if (err) { console.log('ERROR: ', err) }
+    else { console.log('mongoose is connected') }
+  }
+);
 
-module.exports = db;
+module.exports = mongoose.connection;
