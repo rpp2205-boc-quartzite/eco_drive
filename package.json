@@ -61,7 +61,7 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "nodemon ./server/index.js",
+    "start": "node ./server/index.js",
     "build": "webpack --mode=production --node-env=production",
     "test": "jest --coverage",
     "build:dev": "webpack --mode=development",
