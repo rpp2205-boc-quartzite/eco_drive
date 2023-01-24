@@ -62,7 +62,6 @@
   },
   "scripts": {
     "start": "node ./server/index.js",
-    "prestart": "npm run build",
     "build": "webpack --mode=production --node-env=production",
     "test": "jest --coverage",
     "build:dev": "webpack --mode=development",
