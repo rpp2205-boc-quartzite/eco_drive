@@ -26,3 +26,6 @@ yarn-error.log*
 
 .github
 green-earth.pem
+
+client/dist/main.js
+coverage/

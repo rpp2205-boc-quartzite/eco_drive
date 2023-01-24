@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 class HelloWorld extends Component {
@@ -17,7 +18,7 @@ class HelloWorld extends Component {
       .then(response => {
         this.setState({
           message: response.data
-        })
+        }, () => { console.log(this.state.message) })
       })
       .catch(function (error) {
         console.error(error);
@@ -30,7 +31,6 @@ class HelloWorld extends Component {
       <div>{this.state.message}</div>
     )
   }
-
 }
 
 export default HelloWorld;
