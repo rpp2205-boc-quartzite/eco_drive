@@ -7,7 +7,7 @@ class HelloWorld extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isTrue: true,
+      isTrue: false,
       message: "Welcome to EcoDrive"
     }
   }
