@@ -62,7 +62,10 @@ class DriverView extends React.Component {
         <p className="headerAvatar">Profile photo</p>
         </div>
 
-        <h2 style={{ display: 'inline-block' }} >Welcome [name],</h2>
+        <div>
+        <h2>Welcome [name],</h2>
+        </div>
+
         <h3>Find your nearest riders</h3>
           <form>
           <div>

@@ -9,14 +9,21 @@ h1 {
 
 /* -------- BECCA CSS -------- */
 
+.defaultViewHeader {
+  display: inline-block;
+}
+
 .headerToggleView {
   float: left;
+  padding-right: 120px;
 }
 .headerAvatar {
   float: right;
 }
 .welcome {
   margin: 10px;
-  display: 'inline-block'
+  float: left;
+  /* display: 'inline-block' */
+
 }
 /* -------- BECCA CSS END -------- */
