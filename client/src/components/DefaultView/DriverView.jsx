@@ -7,8 +7,8 @@ class DriverView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticatedUserID: '', // The successfully authenticated user's ID, not sure whether this prop will be necessary
-      userName: '',
+      userId: '63d0c1c65e3f6035caf68958', // The authenticated user's ID, hardcoded until prop received
+      full_name: '',
       start_address: '',
       start_lat: '',
       start_lng: '',
@@ -23,9 +23,22 @@ class DriverView extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
+  componentDidMount () {
+    var id = this.state.userId;
+    axios.get('/driverview', { params: {id} })
+    .then((result) => {
+      console.log('got da driver', result.data[0].full_name)
+      this.setState({
+        full_name: result.data[0].full_name
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
+  handleSubmit(e) {
     console.log(this.state)
-    var route = this.state;
+    e.preventDefault()
+    // var route = this.state;
     // Write to the user's document in db
     // route to Riders List
   }
@@ -66,7 +79,7 @@ class DriverView extends React.Component {
         </div>
 
         <div>
-        <h2>Welcome [name],</h2>
+        <h2>Welcome {this.state.full_name},</h2>
         </div>
 
         <h3>Find your nearest riders</h3>
@@ -102,10 +115,10 @@ class DriverView extends React.Component {
             <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => this.handleChange(e, 'start_time')}/> <br/>
             <input type="text" name="AvailableSeats" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => this.handleChange(e, 'total_seats')}/> <br/>
             <input type="radio" value="SaveDefaultRoute"  name="default"/> Set as default route <br/>
-            <button type="Submit" className="findRiders" onClick={this.handleSubmit}>Find riders</button>
+            <input type="button" className="findRiders" value="Find riders" onClick={(e) => this.handleSubmit(e)}></input>
           </div>
           </form>
-{/* below is all temporary */}
+{/* below all temporary placeholders */}
         <div>
           _____________________________________________ <br/>
           Ongoing Trip

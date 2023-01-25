@@ -1,15 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
-import { Link } from 'react-router-dom'
-// import TimePicker from 'react-time-picker';
+import { Link } from 'react-router-dom';
 
 class RiderView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticatedUserID: '', // The successfully authenticated user's ID, not sure whether this prop will be necessary
-      userName: '',
+      userId: '63d0c1c65e3f6035caf68958', // The authenticated user's ID, hardcoded until prop received
+      full_name: '',
       start_address: '',
       start_lat: '',
       start_lng: '',
@@ -24,11 +23,23 @@ class RiderView extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount () {
+    var id = this.state.userId;
+    axios.get('/riderview', { params: {id} })
+    .then((result) => {
+      console.log('got da rider', result.data[0].full_name)
+      this.setState({
+        full_name: result.data[0].full_name
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
   handleSubmit() {
     console.log(this.state)
-    var route = this.state;
+    // var route = this.state;
     // Write to the user's document in db
-    // route to Riders List
+    // route to Drivers List
   }
 
   handleChange (e, field) {
@@ -50,8 +61,6 @@ class RiderView extends React.Component {
       })
     } else if (field === 'start_time') {
         this.setState({ time: e.target.value })
-    } else if (field === 'total_seats') {
-      this.setState({ total_seats: e.target.value})
     }
   }
 
@@ -67,7 +76,7 @@ class RiderView extends React.Component {
         </div>
 
         <div>
-        <h2>Welcome [name],</h2>
+        <h2>Welcome {this.state.full_name},</h2>
         </div>
 
         <h3>Find your nearest drivers</h3>
@@ -101,12 +110,11 @@ class RiderView extends React.Component {
             />
             {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
             <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => this.handleChange(e, 'start_time')}/> <br/>
-
             <input type="radio" value="SaveDefaultRoute"  name="default"/> Set as default route <br/>
             <button type="Submit" className="findRiders" onClick={this.handleSubmit}>Find drivers</button>
           </div>
           </form>
-{/* below is all temporary */}
+{/* below all temporary placeholders */}
         <div>
           _____________________________________________ <br/>
           Ongoing Trip
