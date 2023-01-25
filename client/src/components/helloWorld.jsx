@@ -14,12 +14,11 @@ class HelloWorld extends Component {
 
   componentDidMount() {
     if (this.state.isTrue) {
-      console.log('this is another test');
       axios.get('/goodbye')
       .then(response => {
         this.setState({
           message: response.data
-        }, () => { console.log(this.state.message) })
+        })
       })
       .catch(function (error) {
         console.error(error);
