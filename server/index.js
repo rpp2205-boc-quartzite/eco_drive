@@ -10,7 +10,7 @@ const port = 8080;
 
 // db controllers
 //const User = require('../database/controllers/user');
-app.use(express.static(path.join(__dirname, '../client/dist')));
+//app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // routes
 app.get('/', (req, res) => {
