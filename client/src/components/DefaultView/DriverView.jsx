@@ -92,7 +92,7 @@ class DriverView extends React.Component {
             <button type="Submit" className="findRiders" onClick={this.handleSubmit}>Find riders</button>
           </div>
           </form>
-
+{/* below is all temporary */}
         <div>
           _____________________________________________ <br/>
           Ongoing Trip

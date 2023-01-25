@@ -1,6 +1,7 @@
 import React from 'react';
 import HelloWorld from './components/helloWorld.jsx';
 import DriverView from './components/DefaultView/DriverView.jsx';
+import RiderView from './components/DefaultView/RiderView.jsx';
 import axios from 'axios';
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
 
   return (
     // <HelloWorld />
-    <DriverView />
+    <RiderView />
   )
 }
 
