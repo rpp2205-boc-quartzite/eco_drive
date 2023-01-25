@@ -66,7 +66,7 @@
     "start": "nodemon ./server/index.js",
     "build": "webpack --mode=production --node-env=production",
     "test": "jest --coverage",
-    "build:dev": "webpack --mode=development",
+    "build:dev": "webpack --mode=development --watch",
     "build:prod": "webpack --mode=production",
     "watch": "webpack --watch & nodemon ./server/index.js"
   },
