@@ -5,8 +5,7 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-//const bodyParser = require('body-parser');
-//const goodbye = require('./routes/goodbye.js');
+const bodyParser = require('body-parser');
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -31,13 +30,21 @@ app.use((req, res, next) => {
 
 // ----  Routes ---- //
 
+//get routes
 app.get('/goodbye', (req, res) => {
-  //console.log('path', path.join(__dirname, '../client/dist/index.html'));
-  //res.sendFile(path.join(__dirname, '../client/dist/index.html'));
   res.send('Thanks For Visiting');
-  //console.log('HERE');
-  //User.addExampleUser(req, res);
 });
+
+//app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
+
+
+//post routes
+//app.post('/reviews', postReviewHandler);
+
+
+//put routes
+//app.put('/reviews/:review_id/report', updateReportForReview);
+//app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
 
 // ---- Trip Completion  ---- //
 
@@ -59,13 +66,11 @@ app.post('/register', register);
 // Login Endpoint
 app.post('/login', login);
 
-
+// ---- Set Port and Listen For Requests ---- //
 
 // const server = app.listen(port, () => {
 //   console.log(`listening on port ${port}`);
 // });
-
-// ---- Set Port and Listen For Requests ---- //
 
 const port = 8080;
 
