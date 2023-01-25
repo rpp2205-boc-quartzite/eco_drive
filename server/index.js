@@ -22,7 +22,7 @@ const User = require('../database/controllers/user.js');
 app.get('/goodbye', (req, res) => {
   //console.log('path', path.join(__dirname, '../client/dist/index.html'));
   //res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-  res.send('Goodbye');
+  res.send('Thanks For Visiting');
   //console.log('HERE');
   //User.addExampleUser(req, res);
 });
@@ -30,7 +30,7 @@ app.get('/goodbye', (req, res) => {
 // ---- Trip Completion  ---- //
 
 app.post('/database', async (req, res) => {
-  console.log('here');
+  console.log('server/index.js - app.post - /database - here');
   await User.addExampleUser()
   res.send('complete')
 })
@@ -54,7 +54,7 @@ app.post('/login', login);
 const port = 8080;
 
 app.listen(port, () => {
-  console.log(`listening on port ${port}, on path ${path.join(__dirname, '../client/dist/index.html')}`);
+  console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
 });
 
 //module.exports = server;
