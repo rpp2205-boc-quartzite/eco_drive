@@ -3,7 +3,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-
+const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
 //const bodyParser = require('body-parser');
 //const goodbye = require('./routes/goodbye.js');
@@ -36,6 +36,10 @@ app.post('/database', async (req, res) => {
 })
 
 // ---- Authentication  ---- //
+
+app.get('/auth-endpoint', auth, (request, response) => {
+  response.json({ message: 'You are authorized to access me' });
+});
 
 // Register Endpoint
 app.post('/register', register);
