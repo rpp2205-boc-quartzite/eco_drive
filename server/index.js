@@ -1,44 +1,64 @@
-const express = require('express');
-//const bodyParser = require('body-parser');
+/* eslint-disable no-unused-vars */
+
 const path = require('path');
+const express = require('express');
 const app = express();
-const port = 8080;
+const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
+//const bodyParser = require('body-parser');
 //const goodbye = require('./routes/goodbye.js');
+
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // connect to db
 const db = require('../database/index.js');
 
 // db controllers
-const User = require('../database/models/user');
+const User = require('../database/controllers/user.js');
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// routes
+// ----  Routes ---- //
+
 app.get('/goodbye', (req, res) => {
   //console.log('path', path.join(__dirname, '../client/dist/index.html'));
   //res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-  res.send('Goodbye');
+  res.send('Thanks For Visiting');
   //console.log('HERE');
   //User.addExampleUser(req, res);
 });
 
-// ---- Authentication Routes ---- //
+// ---- Trip Completion  ---- //
 
-// Register Endpoint 
+app.post('/database', async (req, res) => {
+  console.log('server/index.js - app.post - /database - here');
+  await User.addExampleUser()
+  res.send('complete')
+})
+
+// ---- Authentication  ---- //
+
+app.get('/auth-endpoint', auth, (request, response) => {
+  response.json({ message: 'You are authorized to access me' });
+});
+
+// Register Endpoint
 app.post('/register', register);
 
 // Login Endpoint
 app.post('/login', login);
 
-// set port and listen for requests
+
 
 // const server = app.listen(port, () => {
 //   console.log(`listening on port ${port}`);
 // });
 
+// ---- Set Port and Listen For Requests ---- //
+
+const port = 8080;
+
 app.listen(port, () => {
-  console.log(`listening on port ${port}, on path ${path.join(__dirname, '../client/dist/index.html')}`);
+  console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
 });
 
 //module.exports = server;

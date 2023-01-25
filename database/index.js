@@ -1,23 +1,21 @@
-require('dotenv').config();
 const mongoose = require('mongoose');
 
-try {
-  // Connect to the MongoDB cluster
-  mongoose.set('strictQuery', true);
-  mongoose.connect(
-    process.env.DATABASE_CONNECTION_ADDRESS,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    },
-    () => console.log('mongoose is connected')
-  );
-  
-  var db = mongoose.connection;
+const user = 'green-earth-1';
+const pass = 'GreenEarth123';
+const cluster = 'cluster0.ydd0dgw'
+const dbname = 'green-earth';
 
-} catch (e) {
-  console.log('mongoose could not connect to cluster');
-}
+const connectStr = `mongodb+srv://${user}:${pass}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`
 
-module.exports = db;
-//run().catch(console.dir);
+// Clear Warning
+mongoose.set('strictQuery', true);
+
+// Connect to the MongoDB cluster
+mongoose.connect(connectStr, {},
+  (err) => {
+    if (err) { console.log('ERROR: ', err) }
+    else { console.log('mongoose is connected') }
+  }
+);
+
+module.exports = mongoose.connection;

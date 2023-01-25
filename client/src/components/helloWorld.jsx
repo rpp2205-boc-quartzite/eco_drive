@@ -7,8 +7,8 @@ class HelloWorld extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isTrue: true,
-      message: "Hello World"
+      isTrue: false,
+      message: "Welcome to EcoDrive"
     }
   }
 
@@ -18,7 +18,7 @@ class HelloWorld extends Component {
       .then(response => {
         this.setState({
           message: response.data
-        }, () => { console.log(this.state.message) })
+        })
       })
       .catch(function (error) {
         console.error(error);
@@ -28,7 +28,9 @@ class HelloWorld extends Component {
 
   render() {
     return (
-      <div>{this.state.message}</div>
+      <div>
+        <h1>{this.state.message}</h1>
+      </div>
     )
   }
 }

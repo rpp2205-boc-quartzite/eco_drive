@@ -1,3 +1,6 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable key-spacing */
+
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
@@ -74,8 +77,13 @@ const userSchema = mongoose.Schema({
     }
   ]
 
-});
+}, { collection: 'user' });
+
+// const userSchema = mongoose.Schema({
+//   full_name: String,
+//   email: String
+// })
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports.User = User;

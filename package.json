@@ -10,7 +10,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@webpack-cli/generators": "^2.5.0",
     "axios": "^1.2.3",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
@@ -59,17 +58,19 @@
     "terser-webpack-plugin": "^5.3.6",
     "web-vitals": "^2.1.4",
     "webpack": "^5.64.4",
+    "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "nodemon ./server/index.js",
+    "start": "webpack --mode=production --node-env=production && node ./server/index.js",
     "build": "webpack --mode=production --node-env=production",
     "test": "jest --coverage",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production",
-    "watch": "webpack --watch & nodemon ./server/index.js"
+    "build:dev": "webpack --mode=development --watch",
+    "build:prod": "webpack --mode=production --node-env=production && node ./server/index.js",
+    "watch": "webpack --watch & nodemon ./server/index.js",
+    "react-babel": "babel client/src --out-dir client/compiled --presets=@babel/preset-react --source-maps inline --watch"
   },
   "engines": {
     "node": ">=16.0.0 <17.0.0"
@@ -94,6 +95,6 @@
     ]
   },
   "devDependencies": {
-    "webpack-cli": "^5.0.1"
+    "@babel/cli": "^7.20.7"
   }
 }
