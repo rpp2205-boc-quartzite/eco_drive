@@ -22,7 +22,7 @@ const User = require('../database/controllers/user.js');
 app.get('/goodbye', (req, res) => {
   //console.log('path', path.join(__dirname, '../client/dist/index.html'));
   //res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-  res.send('Goodbye World');
+  res.send('Thanks For Visiting');
   //console.log('HERE');
   //User.addExampleUser(req, res);
 });

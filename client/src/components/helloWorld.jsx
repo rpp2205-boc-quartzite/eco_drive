@@ -8,12 +8,11 @@ class HelloWorld extends Component {
     super(props);
     this.state = {
       isTrue: true,
-      message: "Hello World"
+      message: "Welcome to EcoDrive"
     }
   }
 
   componentDidMount() {
-    console.log('this is a test');
     if (this.state.isTrue) {
       console.log('this is another test');
       axios.get('/goodbye')
@@ -30,7 +29,9 @@ class HelloWorld extends Component {
 
   render() {
     return (
-      <div>{this.state.message}</div>
+      <div>
+        <h1>{this.state.message}</h1>
+      </div>
     )
   }
 }
