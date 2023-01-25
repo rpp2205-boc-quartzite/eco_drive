@@ -7,7 +7,7 @@ class DriverView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticatedUserID: '', // The successfully authenticated user's ID, not sure what Blake will call this prop yet
+      authenticatedUserID: '', // The successfully authenticated user's ID, not sure whether this prop will be necessary
       userName: '',
       start_address: '',
       start_lat: '',
@@ -25,6 +25,9 @@ class DriverView extends React.Component {
 
   handleSubmit() {
     console.log(this.state)
+    var route = this.state;
+    // Write to the user's document in db
+    // route to Riders List
   }
 
   handleChange (e, field) {
@@ -54,8 +57,12 @@ class DriverView extends React.Component {
   render () {
     return (
       <div>
-        <small>Switch to Rider View</small>
-        <h2>Welcome [name],</h2>
+        <div className="defaultViewHeader">
+        <p className="headerToggleView">Switch to Rider View</p>
+        <p className="headerAvatar">Profile photo</p>
+        </div>
+
+        <h2 style={{ display: 'inline-block' }} >Welcome [name],</h2>
         <h3>Find your nearest riders</h3>
           <form>
           <div>

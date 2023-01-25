@@ -6,3 +6,17 @@ h1 {
   color: navy;
   font-size: 2rem;
 }
+
+/* -------- BECCA CSS -------- */
+
+.headerToggleView {
+  float: left;
+}
+.headerAvatar {
+  float: right;
+}
+.welcome {
+  margin: 10px;
+  display: 'inline-block'
+}
+/* -------- BECCA CSS END -------- */
