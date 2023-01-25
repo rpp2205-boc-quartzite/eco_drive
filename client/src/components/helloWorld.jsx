@@ -7,14 +7,16 @@ class HelloWorld extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isTrue: false,
+      isTrue: true,
       message: "Hello World"
     }
   }
 
   componentDidMount() {
+    console.log('this is a test');
     if (this.state.isTrue) {
-      axios.get('/')
+      console.log('this is another test');
+      axios.get('/goodbye')
       .then(response => {
         this.setState({
           message: response.data

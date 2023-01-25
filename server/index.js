@@ -10,13 +10,14 @@ const port = 8080;
 
 // db controllers
 //const User = require('../database/controllers/user');
-//app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // routes
-app.get('/', (req, res) => {
+
+app.get('/goodbye', (req, res) => {
   //console.log('path', path.join(__dirname, '../client/dist/index.html'));
   //res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-  res.send('Goodbye');
+  res.send('Goodbye World');
   //console.log('HERE');
   //User.addExampleUser(req, res);
 });

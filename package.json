@@ -60,11 +60,11 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "node ./server/index.js",
+    "start": "webpack --mode=production --node-env=production && node ./server/index.js",
     "build": "webpack --mode=production --node-env=production",
     "test": "jest --coverage",
     "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production",
+    "build:prod": "webpack --mode=production --node-env=production && node ./server/index.js",
     "watch": "webpack --watch & nodemon ./server/index.js"
   },
   "engines": {
@@ -88,5 +88,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.0.1"
   }
 }
