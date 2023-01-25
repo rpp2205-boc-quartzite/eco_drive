@@ -3,6 +3,7 @@ import HelloWorld from './components/helloWorld.jsx';
 import DriverView from './components/DefaultView/DriverView.jsx';
 import RiderView from './components/DefaultView/RiderView.jsx';
 import axios from 'axios';
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
 
@@ -15,8 +16,15 @@ function App() {
   testDB();
 
   return (
-    // <HelloWorld />
-    <DriverView />
+    <div>
+      <Routes>
+        <Route exact path="/" element={<HelloWorld />} />
+        <Route path="/driverview" element={<DriverView />} />
+        <Route path="/riderview" element={<RiderView />} />
+      </Routes>
+    {/* <HelloWorld /> */}
+    {/* <DriverView /> */}
+    </div>
   )
 }
 

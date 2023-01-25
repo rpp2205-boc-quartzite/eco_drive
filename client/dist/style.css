@@ -12,10 +12,10 @@ h1 {
 .defaultViewHeader {
   display: inline-block;
 }
-
 .headerToggleView {
   float: left;
   padding-right: 120px;
+  padding-top: 20px;
 }
 .headerAvatar {
   float: right;

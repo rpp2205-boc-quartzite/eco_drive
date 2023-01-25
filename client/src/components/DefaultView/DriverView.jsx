@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
-// import TimePicker from 'react-time-picker';
+import { Link } from 'react-router-dom';
 
 class DriverView extends React.Component {
   constructor(props) {
@@ -58,7 +58,10 @@ class DriverView extends React.Component {
     return (
       <div>
         <div className="defaultViewHeader">
-        <p className="headerToggleView">Switch to Rider View</p>
+        <div className="headerToggleView">
+          <Link to="/riderview">
+          <button>Switch to rider view</button>
+          </Link></div>
         <p className="headerAvatar">Profile photo</p>
         </div>
 
