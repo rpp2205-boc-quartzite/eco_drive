@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { useState } from "react";
 import HelloWorld from './components/helloWorld.jsx';
 import axios from 'axios';
+import { Login } from './components/Authentication/Login.jsx';
+import { Register } from './components/Authentication/Register.jsx';
 
 function App() {
 
-  var testDB = () => {
-    axios.post('database')
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
+  const [currentForm, setCurrentForm] = useState('login');
+
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
   }
 
-  testDB();
+  // var testDB = () => {
+  //   axios.post('database')
+  //     .then((res) => console.log(res))
+  //     .catch((err) => console.log(err))
+  // }
+
+  // testDB();
 
   return (
-    <HelloWorld />
-  )
+    <div className="App">
+      <HelloWorld />
+      {currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />}
+  </div>
+  );
 }
 
 export default App;
