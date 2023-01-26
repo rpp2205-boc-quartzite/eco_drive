@@ -1,5 +1,6 @@
-body {
-  background-color: lightgreen;
+body,
+html {
+  font-family: Poppins, Helvetica, sans-serif;
 }
 
 h1 {
