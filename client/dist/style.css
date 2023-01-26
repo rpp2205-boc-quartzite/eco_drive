@@ -6,3 +6,24 @@ h1 {
   color: navy;
   font-size: 2rem;
 }
+
+/* -------- BECCA CSS -------- */
+
+.defaultViewHeader {
+  display: inline-block;
+}
+.headerToggleView {
+  float: left;
+  padding-right: 120px;
+  padding-top: 20px;
+}
+.headerAvatar {
+  float: right;
+}
+.welcome {
+  margin: 10px;
+  float: left;
+  /* display: 'inline-block' */
+
+}
+/* -------- BECCA CSS END -------- */

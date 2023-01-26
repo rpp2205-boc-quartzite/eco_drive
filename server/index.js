@@ -5,9 +5,13 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
+const { getDriver, getRider } = require('../database/controllers/defaultviews.js')
+//const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.json())
 
 // connect to db
 const db = require('../database/index.js');
@@ -65,6 +69,29 @@ app.post('/register', register);
 
 // Login Endpoint
 app.post('/login', login);
+
+
+// ---- Default Driver view routes  ---- //
+app.get('/driverview', function(req, res) {
+  let userid = req.query.id;
+  getDriver(userid)
+  .then((result) => {
+    console.log(result)
+    res.send(result)
+  })
+  .catch(err => console.log(err))
+});
+
+// ---- Default Rider view routes  ---- //
+app.get('/riderview', function(req, res) {
+  let userid = req.query.id;
+  getRider(userid)
+  .then((result) => {
+    console.log(result)
+    res.send(result)
+  })
+  .catch(err => console.log(err))
+});
 
 // ---- Set Port and Listen For Requests ---- //
 
