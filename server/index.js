@@ -32,14 +32,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get('/*', function(req, res) {
-//   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
-//     if (err) {
-//       res.status(500).send(err)
-//     }
-//   })
-// })
-
 // ----  Routes ---- //
 
 //get routes
@@ -102,6 +94,14 @@ app.get('/riderview', function(req, res) {
 });
 
 // ---- Set Port and Listen For Requests ---- //
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 // const server = app.listen(port, () => {
 //   console.log(`listening on port ${port}`);
