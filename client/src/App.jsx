@@ -4,8 +4,9 @@ import axios from 'axios';
 import HelloWorld from './components/helloWorld.jsx';
 import DriverView from './components/DefaultView/DriverView.jsx';
 import RiderView from './components/DefaultView/RiderView.jsx';
-import { Login } from './components/Authentication/Login.jsx';
-import { Register } from './components/Authentication/Register.jsx';
+import Dashboard from './components/Authentication/Dashboard.jsx';
+import Login from './components/Authentication/Login.jsx';
+import Register from './components/Authentication/Register.jsx';
 
 function App() {
 
@@ -26,7 +27,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route exact path="/" element={<HelloWorld />} />
+        <Route exact path="/" element={<Dashboard />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
         <Route path="/driverview" element={<DriverView />} />
         <Route path="/riderview" element={<RiderView />} />
       </Routes>

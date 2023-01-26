@@ -27,3 +27,23 @@ h1 {
 
 }
 /* -------- BECCA CSS END -------- */
+
+/* -------- Authentication CSS -------- */
+.signup-form-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.sign-form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+/* -------- Authentication CSS END -------- */
