@@ -35,8 +35,9 @@ class RiderView extends React.Component {
     .catch(err => console.log(err))
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
     console.log(this.state)
+    e.preventDefault()
     // var route = this.state;
     // Write to the user's document in db
     // route to Drivers List
@@ -111,7 +112,7 @@ class RiderView extends React.Component {
             {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
             <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => this.handleChange(e, 'start_time')}/> <br/>
             <input type="radio" value="SaveDefaultRoute"  name="default"/> Set as default route <br/>
-            <button type="Submit" className="findRiders" onClick={this.handleSubmit}>Find drivers</button>
+            <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => this.handleSubmit(e)}></input>
           </div>
           </form>
 {/* below all temporary placeholders */}

@@ -7,7 +7,7 @@ class DriverView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d0c1c65e3f6035caf68958', // The authenticated user's ID, hardcoded until prop received
+      userId: '63d244c024407b7b0ddb7ed0', // The authenticated user's ID, hardcoded until prop received
       full_name: '',
       start_address: '',
       start_lat: '',
