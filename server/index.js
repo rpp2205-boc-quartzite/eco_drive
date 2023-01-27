@@ -6,6 +6,8 @@ const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
 const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
+const { getDriverList } = require('../database/controllers/driverList.js')
+const { calculateDistance } = require('./helpers/driverListHelpers.js')
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
@@ -94,6 +96,22 @@ app.get('/getriderview', function(req, res) {
   .catch(err => console.log(err))
 });
 
+// ---- Driver List Routes ---- //
+app.post('/driver-list', async (req, res) => {
+  const rider =  {
+    id: req.body.userId,
+    start_address: req.body.start_address,
+    start_lat: req.body.start_lat,
+    start_lng: req.body.start_lng,
+    end_address: req.body.end_address,
+    end_lat: req.body.end_lat,
+    end_lng: req.body.end_lng,
+    time: req.body.time,
+  }
+
+  const drivers = await getDriverList();
+})
+
 // ---- Catch all for routing ---- //
 
 app.get('*', function(req, res) {
@@ -103,7 +121,6 @@ app.get('*', function(req, res) {
     }
   })
 });
-
 // ---- Set Port and Listen For Requests ---- //
 
 // const server = app.listen(port, () => {
