@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-body,
-html {
-  font-family: Poppins, Helvetica, sans-serif;
-=======
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&family=Poppins:wght@300;400;500;600&display=swap');
 body {
   background-color: lightgreen;
   font-family: 'Poppins', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
->>>>>>> main
 }
 
 h1 {
@@ -35,3 +29,84 @@ h1 {
 
 }
 /* -------- BECCA CSS END -------- */
+
+/* ------------------------------------------------ CHELSEA CSS START ------------------------------------------------ */
+
+.profileToggle {
+  float: left;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #338F24;
+}
+
+.profileToggleButton {
+  padding-left: 15px;
+  color: #262929;
+}
+
+.profileHomeButton {
+  float: right;
+  padding-right: 15px;
+  color: #262929;
+}
+
+.profileLogoutButton {
+  float: right;
+  color: #262929;
+}
+
+.profilePhotoDiv {
+  padding-top: 16px;
+}
+
+.profilePhoto {
+  border-radius: 80%;
+  width: 88.77px;
+  height: 88.77px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profileName {
+  text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #262929;
+}
+
+.profileOnline{
+  color: #338F24;
+  font-size: xx-large;
+}
+
+.profileRatingStars {
+  text-align: center;
+  font-style: normal;
+  color:#FFB629;
+}
+
+.profileButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.profileUpdateButton {
+  background-color: white;
+  color: #338F24;
+  border: 1px solid #338F24;
+  border-radius: 19px;
+  padding: 5px 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+/* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */

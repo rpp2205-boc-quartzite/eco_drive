@@ -20,15 +20,48 @@ class DriverProfile extends React.Component {
     };
   }
 
+  componentDidMount () {
+    var id = this.state.userId;
+    axios.get('/getdriverview', { params: {id} })
+    .then((result) => {
+      console.log('got da driver', result)
+      this.setState({
+        full_name: result.data[0].full_name
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
   render () {
     return (
       <div>
-      Rider <HiOutlineRefresh/>
-      <AiFillHome/>
-      <MdLogout />
-      Update Profile <FaPen
-          size="10px"
-          color="green" />
+      {/* TOP BUTTONS */}
+        <span className='profileToggle'>Rider</span>
+        <span className='profileToggleButton'><HiOutlineRefresh/></span>
+        <span className='profileLogoutButton'><MdLogout /></span>
+        <span className='profileHomeButton'><AiFillHome/></span>
+
+      {/* PROFILE PHOTO */}
+        <div className='profilePhotoDiv'>
+          <img className='profilePhoto' src="https://drive.google.com/uc?export=view&id=1xQppZAiV12AkQ55WdO8CWhgv-Y5Xtl3t" alt="drive image"/>
+          {/* REMINDER: replace w/ user profile later */}
+        </div>
+        <div className='profileName'>
+         {this.state.full_name} <span className='profileOnline'>&#183;</span>
+        </div>
+
+      {/* RATING STARS */}
+        <div className='profileRatingStars'>
+          &#9733; &#9733; &#9733; &#9733; &#9733;
+        </div>
+
+      {/* UPDATE PROFILE */}
+        <div className='profileButton'> <button className='profileUpdateButton'>
+          Update Profile <FaPen
+            size="10px"
+            color="green" />
+        </button></div>
+
       </div>
     )
   }
