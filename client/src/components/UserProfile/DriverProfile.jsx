@@ -10,8 +10,9 @@ class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d2456024407b7b0ddb7ed2', //hardcoded for now
+      userId: '63d244c024407b7b0ddb7ed0', //hardcoded for now
       full_name: '',
+      email: '',
       start_address: '',
       end_address: '',
       time: '',
@@ -26,7 +27,11 @@ class DriverProfile extends React.Component {
     .then((result) => {
       console.log('got da driver', result)
       this.setState({
-        full_name: result.data[0].full_name
+        full_name: result.data[0].full_name,
+        email: result.data[0].email,
+        start_address: result.data[0].driver_route.start_address,
+        end_address: result.data[0].driver_route.end_address,
+        time: result.data[0].driver_route.time
       })
     })
     .catch(err => console.log(err))
@@ -61,6 +66,40 @@ class DriverProfile extends React.Component {
             size="10px"
             color="green" />
         </button></div>
+
+      {/* REVIEWS */}
+        <div className='profileReviewDiv'>
+          <span className='profileTitle'>Reviews</span>
+        </div>
+
+      {/* RECENT DRIVERS */}
+        <div>
+          <span className='profileTitle'>Recent drivers</span>
+        </div>
+
+      {/* CURRENT ROUTE */}
+        <div>
+          <span className='profileTitle'>Current route</span>
+          <div className='profileCurrentRoute'>
+            <div className='profileCurrentRouteTitle'>From:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.start_address}</div>
+            <div className='profileCurrentRouteTitle'>To:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.end_address}</div>
+            <div className='profileCurrentRouteTitle'>Time:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.time}</div>
+
+          </div>
+        </div>
+
+      {/* PREVIOUS ROUTE */}
+        <div>
+          <span className='profileTitle'>Previous routes</span>
+        </div>
+
+      {/* SAVINGS THIS MONTH */}
+      <div>
+          <span className='profileTitle'>Your savings this month</span>
+        </div>
 
       </div>
     )

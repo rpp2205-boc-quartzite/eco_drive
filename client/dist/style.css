@@ -109,4 +109,47 @@ h1 {
   line-height: 21px;
 }
 
+.profileReviewDiv {
+  padding-top: 10px;
+}
+
+.profileReviewTitle{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262929;
+}
+
+.profileTitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262929;
+}
+
+.profileCurrentRouteTitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #97AAB0;
+}
+
+.profileCurrentRouteInfo {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 27px;
+  color: #262929;
+}
+
+.profileCurrentRoute {
+  border: solid 1px #97AAB0;
+  padding: 9px;
+  border-radius: 9px;
+  margin: 6px;
+}
+
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */
