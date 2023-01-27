@@ -26,21 +26,30 @@ const userSchema = mongoose.Schema({
   },
 
   driver_route: {
-    started:        Boolean,
+    started: {
+      type: Boolean,
+      default: false,
+    },
     start_address:  String,
     end_address:    String,
-    latitude:       Number,
-    longitude:      Number,
+    start_lat:      Number,
+    start_lng:      Number,
+    end_lat:        Number,
+    end_lng:        Number,
     time:           String,
     total_seats:    Number,
     default:        Boolean,
-    riders:         [
-      { user_id: Number }
-    ]
+    riders: {
+      type: [mongoose.SchemaTypes.ObjectId],
+      ref: 'User'
+    }
   },
 
   rider_route: {
-    started:  Boolean,
+    started: {
+      type: Boolean,
+      default: false,
+    },
     start_address: String,
     end_address:  String,
     time:  String,
@@ -55,8 +64,15 @@ const userSchema = mongoose.Schema({
     {
       start_address:  String,
       end_address:  String,
+      start_lat:      Number,
+      start_lng:      Number,
+      end_lat:        Number,
+      end_lng:        Number,
       time: String,
-      number_of_riders: Number
+      number_of_riders: {
+        type: Number,
+        default: 0,
+      }
     }
   ],
 
@@ -64,6 +80,10 @@ const userSchema = mongoose.Schema({
     {
       start_address: String,
       end_address: String,
+      start_lat:      Number,
+      start_lng:      Number,
+      end_lat:        Number,
+      end_lng:        Number,
       time: String,
       driver_id: {
         type: mongoose.SchemaTypes.ObjectId,
@@ -78,7 +98,10 @@ const userSchema = mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'User'
       },
-      rating: Number,
+      rating: {
+        type: Number,
+        default: 0,
+      },
       review_text:  String
     }
   ],
@@ -89,7 +112,10 @@ const userSchema = mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'User'
       },
-      rating: Number,
+      rating: {
+        type: Number,
+        default: 0,
+      },
       review_text: String
     }
   ]

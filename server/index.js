@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { getDriver, getRider } = require('../database/controllers/defaultviews.js')
+const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
@@ -33,6 +33,7 @@ app.use((req, res, next) => {
 });
 
 // ----  Routes ---- //
+
 
 //get routes
 app.get('/goodbye', (req, res) => {
@@ -72,9 +73,9 @@ app.post('/login', login);
 
 
 // ---- Default Driver view routes  ---- //
-app.get('/driverview', function(req, res) {
+app.get('/getdriverview', function(req, res) {
   let userid = req.query.id;
-  getDriver(userid)
+  getDriverView(userid)
   .then((result) => {
     console.log(result)
     res.send(result)
@@ -83,14 +84,24 @@ app.get('/driverview', function(req, res) {
 });
 
 // ---- Default Rider view routes  ---- //
-app.get('/riderview', function(req, res) {
+app.get('/getriderview', function(req, res) {
   let userid = req.query.id;
-  getRider(userid)
+  getRiderView(userid)
   .then((result) => {
     console.log(result)
     res.send(result)
   })
   .catch(err => console.log(err))
+});
+
+// ---- Catch all for routing ---- //
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
 });
 
 // ---- Set Port and Listen For Requests ---- //
