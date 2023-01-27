@@ -111,6 +111,7 @@ h1 {
 
 .profileReviewDiv {
   padding-top: 10px;
+  padding-bottom: 21px;
 }
 
 .profileReviewTitle{
@@ -150,6 +151,43 @@ h1 {
   padding: 9px;
   border-radius: 9px;
   margin: 6px;
+}
+
+.profileReviewBox {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  gap: 6px;
+  width: 237px;
+  height: 190px;
+  background: #E3F1F5;
+  border-radius: 5px;
+  margin-top: 6px;
+}
+
+.profileReviewerName {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262929;
+}
+
+.profileReviewText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #262929
+}
+
+.profileReviewDate {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: right;
+  color: #76858A;
 }
 
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */

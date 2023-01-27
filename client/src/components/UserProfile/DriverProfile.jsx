@@ -10,7 +10,7 @@ class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d244c024407b7b0ddb7ed0', //hardcoded for now
+      userId: '63d36d4bcd478f26557c4a30', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
@@ -23,7 +23,7 @@ class DriverProfile extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
-    axios.get('/getdriverview', { params: {id} })
+    axios.get('/getDriverView', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)
       this.setState({
@@ -31,7 +31,8 @@ class DriverProfile extends React.Component {
         email: result.data[0].email,
         start_address: result.data[0].driver_route.start_address,
         end_address: result.data[0].driver_route.end_address,
-        time: result.data[0].driver_route.time
+        time: result.data[0].driver_route.time,
+        avatar: result.data[0].avatar
       })
     })
     .catch(err => console.log(err))
@@ -48,7 +49,7 @@ class DriverProfile extends React.Component {
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
-          <img className='profilePhoto' src="https://drive.google.com/uc?export=view&id=1xQppZAiV12AkQ55WdO8CWhgv-Y5Xtl3t" alt="drive image"/>
+          <img className='profilePhoto' src={this.state.avatar} alt="drive image"/>
           {/* REMINDER: replace w/ user profile later */}
         </div>
         <div className='profileName'>
@@ -70,6 +71,12 @@ class DriverProfile extends React.Component {
       {/* REVIEWS */}
         <div className='profileReviewDiv'>
           <span className='profileTitle'>Reviews</span>
+          <div className='profileReviewBox'>
+            <div className='profileReviewerName'>Amy Johnson</div>
+            <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+            <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            <div className='profileReviewDate'>1/26/23</div>
+          </div>
         </div>
 
       {/* RECENT DRIVERS */}
