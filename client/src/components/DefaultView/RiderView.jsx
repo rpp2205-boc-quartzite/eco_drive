@@ -2,12 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
+import { MdLogout } from 'react-icons/Md';
 
 class RiderView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d244c024407b7b0ddb7ed0', // The authenticated user's ID, hardcoded until prop received
+      userId: '63d36ee5cd478f26557c4a38', // The authenticated user's ID, hardcoded until prop received
       full_name: '',
       start_address: '',
       start_lat: '',
@@ -67,13 +68,14 @@ class RiderView extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="allDefaultView">
         <div className="defaultViewHeader">
         <div className="headerToggleView">
           <Link to="/driverview">
           <button>Switch to driver view</button>
           </Link></div>
-        <p className="headerAvatar">Profile photo</p>
+        <div className="headerAvatar"><p>Avatar</p></div>
+        <div className="headerLogout"><MdLogout size={25}/></div>
         </div>
 
         <div>
@@ -117,15 +119,15 @@ class RiderView extends React.Component {
           </form>
 {/* below all temporary placeholders */}
         <div>
-          _____________________________________________ <br/>
+          ______________________________ <br/>
           Ongoing Trip
         </div>
         <div>
-          _____________________________________________ <br/>
+          ______________________________ <br/>
           Upcoming Trip
         </div>
         <div>
-          _____________________________________________ <br/>
+          ______________________________ <br/>
           Default route
         </div>
       </div>

@@ -11,21 +11,41 @@ h1 {
 
 /* -------- BECCA CSS -------- */
 
+.allDefaultView {
+  height: 100%;
+  width: 100%;
+}
+
 .defaultViewHeader {
   display: inline-block;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 .headerToggleView {
-  float: left;
+  display: inline-block;
+  flex-direction: row;
   padding-right: 120px;
-  padding-top: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .headerAvatar {
-  float: right;
+  display: inline-block;
+  flex-direction: row;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.headerLogout {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
 }
 .welcome {
   margin: 10px;
   float: left;
-  /* display: 'inline-block' */
-
 }
 /* -------- BECCA CSS END -------- */
