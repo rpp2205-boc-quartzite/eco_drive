@@ -25,9 +25,9 @@ class DriverView extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
-    axios.get('/driverview', { params: {id} })
+    axios.get('/getdriverview', { params: {id} })
     .then((result) => {
-      console.log('got da driver', result.data[0].full_name)
+      console.log('got da driver', result)
       this.setState({
         full_name: result.data[0].full_name
       })

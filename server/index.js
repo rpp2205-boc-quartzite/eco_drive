@@ -7,6 +7,9 @@ const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
 const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
+const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
+const { getDriverList } = require('../database/controllers/driverList.js')
+const { calculateDistance } = require('./helpers/driverListHelpers.js')
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
@@ -35,6 +38,7 @@ app.use((req, res, next) => {
 
 // ----  Routes ---- //
 
+
 //get routes
 app.get('/goodbye', (req, res) => {
   res.send('Thanks For Visiting');
@@ -62,9 +66,9 @@ app.post('/login', login);
 
 
 // ---- Default Driver view routes  ---- //
-app.get('/driverview', function(req, res) {
+app.get('/getdriverview', function(req, res) {
   let userid = req.query.id;
-  getDriver(userid)
+  getDriverView(userid)
   .then((result) => {
     console.log(result)
     res.send(result)
@@ -73,9 +77,9 @@ app.get('/driverview', function(req, res) {
 });
 
 // ---- Default Rider view routes  ---- //
-app.get('/riderview', function(req, res) {
+app.get('/getriderview', function(req, res) {
   let userid = req.query.id;
-  getRider(userid)
+  getRiderView(userid)
   .then((result) => {
     console.log(result)
     res.send(result)
@@ -112,6 +116,31 @@ app.post('/ratings_reviews', (req, res) => {
 // app.put('/reviews/:review_id/report', updateReportForReview);
 // app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
 
+// ---- Driver List Routes ---- //
+app.post('/driver-list', async (req, res) => {
+  const rider =  {
+    id: req.body.userId,
+    start_address: req.body.start_address,
+    start_lat: req.body.start_lat,
+    start_lng: req.body.start_lng,
+    end_address: req.body.end_address,
+    end_lat: req.body.end_lat,
+    end_lng: req.body.end_lng,
+    time: req.body.time,
+  }
+
+  const drivers = await getDriverList();
+})
+
+// ---- Catch all for routing ---- //
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
 // ---- Set Port and Listen For Requests ---- //
 
 // const server = app.listen(port, () => {
