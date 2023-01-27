@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { getDriver, getRider } = require('../database/controllers/defaultviews.js')
+const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 const { getDriverList } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
 //const goodbye = require('./routes/goodbye.js');
@@ -95,6 +95,7 @@ app.get('/getriderview', function(req, res) {
   })
   .catch(err => console.log(err))
 });
+
 // ---- Driver List Routes ---- //
 app.post('/driver-list', async (req, res) => {
   const rider =  {
