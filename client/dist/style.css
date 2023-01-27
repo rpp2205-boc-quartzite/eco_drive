@@ -1,6 +1,16 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
 body {
   background-color: lightgreen;
 }
+
+/* body {
+  background: #76b852;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+} */
 
 h1 {
   color: navy;
@@ -27,3 +37,139 @@ h1 {
 
 }
 /* -------- BECCA CSS END -------- */
+
+/* -------- BRANDON CSS -------- */
+
+/* .review_modal_centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+/* .review_modal {
+  background: white;
+  border-color: black;
+  overflow: scroll;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+} */
+
+/* .review_modal_closeBtn {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: 18px;
+  color: #2c3e50;
+  background: white;
+  transition: all 0.25s ease;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+  position: absolute;
+  right: 0;
+  top: 0;
+  align-self: flex-end;
+  margin-top: -7px;
+  margin-right: -7px;
+} */
+
+.form-container {
+  width: 400px;
+  background-color: white;
+  margin: auto;
+  justify-content: space-evenly;
+  /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
+  padding: 10px;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.rf-label {
+  margin: 10px 0px;
+  padding: 10px 0px;
+}
+
+.rf-header {
+  display: flex;
+  align-content: space-around;
+  justify-content: space-around;
+  margin-top: 0px;
+  font-size: 20px;
+}
+
+.success-message {
+  font-family: "Roboto", sans-serif;
+  background-color: #3f89f8;
+  padding: 15px;
+  color: white;
+}
+
+.form-field {
+  margin: 10px 0 10px 0;
+  padding: 15px;
+  font-size: 16px;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+span {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: red;
+  margin-bottom: 15px;
+}
+
+input {
+  background: #f2f2f2;
+}
+
+input.rating {
+  display: none;
+}
+
+/* .star {
+  cursor:pointer;
+  transition: color 200ms;
+  padding-right: 5px;
+  padding-left: 5px;
+} */
+
+.modal-title {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  line-height: var(--bs-modal-title-line-height);
+}
+
+.modal-header .btn-close {
+  padding: calc(var(--bs-modal-header-padding-y) * .5) calc(var(--bs-modal-header-padding-x) * .5);
+}
+
+textarea {
+  background: #f2f2f2;
+}
+
+.error {
+  border-style: solid;
+  border: 2px solid #ffa4a4;
+}
+
+button {
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+/* -------- BRANDON CSS END -------- */
+

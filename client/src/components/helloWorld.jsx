@@ -34,6 +34,9 @@ class HelloWorld extends Component {
         <Link to="/driverview">
         <button>Go to Default Driver View Page</button>
         </Link>
+        <Link to="/ratings_reviews">
+        <button>Go to Ratings and Reviews</button>
+        </Link>
       </div>
     )
   }

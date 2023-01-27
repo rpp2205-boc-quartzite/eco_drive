@@ -5,7 +5,8 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { getDriver, getRider } = require('../database/controllers/defaultviews.js')
+const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
+const { postReviewHandler } = require('../database/controllers/reviews.js');
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
@@ -38,17 +39,6 @@ app.use((req, res, next) => {
 app.get('/goodbye', (req, res) => {
   res.send('Thanks For Visiting');
 });
-
-//app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
-
-
-//post routes
-//app.post('/reviews', postReviewHandler);
-
-
-//put routes
-//app.put('/reviews/:review_id/report', updateReportForReview);
-//app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
 
 // ---- Trip Completion  ---- //
 
@@ -92,6 +82,35 @@ app.get('/riderview', function(req, res) {
   })
   .catch(err => console.log(err))
 });
+
+// ---- Ratings and Reviews routes  ---- //
+app.get('/ratings_reviews', function(req, res) {
+  let userid = req.query.id;
+  getRider(userid)
+  .then((result) => {
+    console.log(result)
+    res.send(result)
+  })
+  .catch(err => console.log(err))
+});
+
+//app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
+
+app.post('/ratings_reviews', (req, res) => {
+  let review = req.body;
+  postReviewHandler(review)
+  .then(response => {
+    console.log('review', response);
+    res.status(201).send(`new review post was made successfully!`)
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
+});
+
+
+// app.put('/reviews/:review_id/report', updateReportForReview);
+// app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
 
 // ---- Set Port and Listen For Requests ---- //
 
