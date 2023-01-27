@@ -41,9 +41,6 @@ const config = {
         minimizer: [new TerserPlugin({
             extractComments: false
         })]
-    },
-    devServer: {
-        historyApiFallback: true
     }
 };
 

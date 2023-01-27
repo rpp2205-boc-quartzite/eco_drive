@@ -25,7 +25,7 @@ class RiderView extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
-    axios.get('/riderview', { params: {id} })
+    axios.get('/getriderview', { params: {id} })
     .then((result) => {
       console.log('got da rider', result.data[0].full_name)
       this.setState({
