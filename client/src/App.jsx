@@ -6,6 +6,7 @@ import DriverView from './components/DefaultView/DriverView.jsx';
 import RiderView from './components/DefaultView/RiderView.jsx';
 import { Login } from './components/Authentication/Login.jsx';
 import { Register } from './components/Authentication/Register.jsx';
+import DriverList from './components/driver-list/DriverList.jsx';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route exact path="/" element={<HelloWorld />} />
         <Route path="/driverview" element={<DriverView />} />
         <Route path="/riderview" element={<RiderView />} />
+        <Route path="/driver-list" element={<DriverList />} />
       </Routes>
     {/* <HelloWorld /> */}
     {/* <DriverView /> */}

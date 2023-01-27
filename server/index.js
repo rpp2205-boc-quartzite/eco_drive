@@ -108,8 +108,24 @@ app.post('/driver-list', async (req, res) => {
     end_lng: req.body.end_lng,
     time: req.body.time,
   }
+  const driverList = [];
 
-  const drivers = await getDriverList();
+  try {
+    const activeDrivers = await getDriverList();
+    console.log(activeDrivers)
+    for (let driver of activeDrivers) {
+      const startDistance = await calculateDistance(rider.start_lat, rider.start_lng, driver.driver_route.start_lat, driver.driver_route.start_lng);
+      const endDistance = await calculateDistance(rider.end_lat, rider.end_lng, driver.driver_route.end_lat, driver.driver_route.end_lng);
+      driverList.push({driverInfo: driver, startDistance, endDistance})
+      driverList.sort((a, b) => {
+        return a.startDistance.value - b.startDistance.value
+      })
+    }
+    res.status(200).send(driverList)
+  } catch (err) {
+    console.log('Get driver list server err: ', err)
+    res.status(404).send(err)
+  }
 })
 
 // ---- Catch all for routing ---- //
