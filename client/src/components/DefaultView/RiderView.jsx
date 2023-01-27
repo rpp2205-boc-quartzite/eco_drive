@@ -7,7 +7,7 @@ class RiderView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d0c1c65e3f6035caf68958', // The authenticated user's ID, hardcoded until prop received
+      userId: '63d244c024407b7b0ddb7ed0', // The authenticated user's ID, hardcoded until prop received
       full_name: '',
       start_address: '',
       start_lat: '',
@@ -25,7 +25,7 @@ class RiderView extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
-    axios.get('/riderview', { params: {id} })
+    axios.get('/getriderview', { params: {id} })
     .then((result) => {
       console.log('got da rider', result.data[0].full_name)
       this.setState({
@@ -35,8 +35,9 @@ class RiderView extends React.Component {
     .catch(err => console.log(err))
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
     console.log(this.state)
+    e.preventDefault()
     // var route = this.state;
     // Write to the user's document in db
     // route to Drivers List
@@ -111,7 +112,7 @@ class RiderView extends React.Component {
             {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
             <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => this.handleChange(e, 'start_time')}/> <br/>
             <input type="radio" value="SaveDefaultRoute"  name="default"/> Set as default route <br/>
-            <button type="Submit" className="findRiders" onClick={this.handleSubmit}>Find drivers</button>
+            <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => this.handleSubmit(e)}></input>
           </div>
           </form>
 {/* below all temporary placeholders */}
