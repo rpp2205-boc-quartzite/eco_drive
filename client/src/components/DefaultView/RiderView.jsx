@@ -8,7 +8,7 @@ class RiderView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d36ee5cd478f26557c4a38', // The authenticated user's ID, hardcoded until prop received
+      userId: '63d36d69cd478f26557c4a34', // The authenticated user's ID, hardcoded until prop received
       full_name: '',
       start_address: '',
       start_lat: '',
@@ -18,6 +18,7 @@ class RiderView extends React.Component {
       total_seats: '',
       end_lat: '',
       end_lng: '',
+      default: false,
       avatar: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -39,7 +40,8 @@ class RiderView extends React.Component {
   handleSubmit(e) {
     console.log(this.state)
     e.preventDefault()
-    // var route = this.state;
+    var currentRoute = this.state;
+    axios.post('/postRiderRoute', { data: currentRoute })
     // Write to the user's document in db
     // route to Drivers List
   }
@@ -63,6 +65,8 @@ class RiderView extends React.Component {
       })
     } else if (field === 'start_time') {
         this.setState({ time: e.target.value })
+    } else if (field === 'default') {
+      this.setState({ default: true })
     }
   }
 

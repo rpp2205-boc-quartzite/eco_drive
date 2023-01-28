@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
+const { getDriverView, getRiderView, postDriverRoute, postRiderRoute } = require('../database/controllers/defaultviews.js')
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
@@ -93,6 +93,21 @@ app.get('/getriderview', function(req, res) {
   })
   .catch(err => console.log(err))
 });
+
+app.post('/postDriverRoute', function(req, res) {
+  var data = req.body.data;
+  postDriverRoute(data)
+  .then(result => res.end())
+  .catch(err => console.log(err))
+})
+
+app.post('/postRiderRoute', function(req, res) {
+  console.log(req.body.data)
+  var data = req.body.data;
+  postRiderRoute(data)
+  .then(result => res.end())
+  .catch(err => console.log(err))
+})
 
 // ---- Catch all for routing ---- //
 

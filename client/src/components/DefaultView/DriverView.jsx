@@ -18,6 +18,7 @@ class DriverView extends React.Component {
       total_seats: '',
       end_lat: '',
       end_lng: '',
+      default: false,
       avatar: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -37,10 +38,10 @@ class DriverView extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log(this.state)
     e.preventDefault()
-    // var route = this.state;
-    // Write to the user's document in db
+    var currentRoute = this.state;
+    axios.post('/postDriverRoute', { data: currentRoute })
+    // Write to the user's document in db X
     // route to Riders List
   }
 
@@ -65,6 +66,8 @@ class DriverView extends React.Component {
         this.setState({ time: e.target.value })
     } else if (field === 'total_seats') {
       this.setState({ total_seats: e.target.value})
+    } else if (field === 'default') {
+      this.setState({ default: true })
     }
   }
 
@@ -116,7 +119,7 @@ class DriverView extends React.Component {
             {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
             <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => this.handleChange(e, 'start_time')}/> <br/>
             <input type="text" name="AvailableSeats" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => this.handleChange(e, 'total_seats')}/> <br/>
-            <input type="radio" value="SaveDefaultRoute"  name="default"/> Set as default route <br/>
+            <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => this.handleChange(e, 'default')}/> Set as default route <br/>
             <input type="button" className="findRiders" value="Find riders" onClick={(e) => this.handleSubmit(e)}></input>
           </div>
           </form>
