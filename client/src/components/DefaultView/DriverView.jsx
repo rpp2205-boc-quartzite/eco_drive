@@ -75,7 +75,9 @@ class DriverView extends React.Component {
           <Link to="/riderview">
           <button>Switch to rider view</button>
           </Link></div>
+        <Link to="/driverprofile">
         <p className="headerAvatar">Profile photo</p>
+        </Link>
         </div>
 
         <div>
