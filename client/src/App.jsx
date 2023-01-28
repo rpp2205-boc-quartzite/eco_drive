@@ -30,6 +30,7 @@ function App() {
         <Route path="/riderview" element={<RiderView />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />
+        <Route path="/driver-list" element={<DriverList />} />
       </Routes>
     {/* <HelloWorld /> */}
     {/* <DriverView /> */}
