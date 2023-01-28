@@ -5,12 +5,16 @@ const User = require('../models/user.js').User;
 module.exports = {
   register: (req, res) => {
     bcrypt
-    .hash(req.query.password, 10)
+    .hash(req.body.password, 10)
     .then((hashedPassword) => {
       const user = new User({
-        full_name: req.query.name,
-        email: req.query.email,
+        full_name: req.body.full_name,
+        email: req.body.email,
         password: hashedPassword,
+        dob: req.body.dob,
+        drivers_license: req.body.drivers_license,
+        license_plate: req.body.license_plate,
+        is_driver: req.body.is_driver
       });
 
       user
