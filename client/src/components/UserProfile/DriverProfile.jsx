@@ -87,7 +87,7 @@ class DriverProfile extends React.Component {
         <div>
           <span className='profileTitle'>Recent drivers</span>
         </div>
-
+        <Link to="/ratings_reviews"><button>Go to Ratings and Reviews</button></Link>
       {/* CURRENT ROUTE */}
         <div>
           <span className='profileTitle'>Current route</span>

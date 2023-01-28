@@ -10,6 +10,7 @@ import Register from './components/Authentication/Register.jsx';
 import Reviews from './components/RatingsReviews/Reviews.jsx';
 import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
+import DriverList from './components/DriverList/DriverList.jsx';
 
 function App() {
 
