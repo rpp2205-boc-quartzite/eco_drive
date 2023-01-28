@@ -51,8 +51,8 @@ const handleClick = (rating) => {
   props.close();
  }
 
- const handleSubmit = (event) => {
-    event.preventDefault();
+ const handleSubmit = (e) => {
+    e.preventDefault();
     let review = {
       userid: props.userid,
       rating: values.rating,
@@ -63,9 +63,13 @@ const handleClick = (rating) => {
 
     axios.post('/ratings_reviews', review)
     .then((response) => {
-      console.log(response);
-      closeModal();
+      console.log('ratings_reviews - post - response', response);
       setSubmitted(true);
+      props.submit();
+      setTimeout(
+        () => closeModal(),
+        2000
+      )
     })
     .catch((error) => {
       console.error(error);
@@ -90,16 +94,18 @@ const handleClick = (rating) => {
             <form id="review-form">
               <label className="rf-label">
                 <h4 className="rf-header">Overall Rating</h4>
-                <StarRating click={handleClick}/>
+                <div id="star-ranks">
+                  <StarRating click={handleClick}/>
+                </div>
               </label>
               <label className="rf-label">
                 <h4 className="rf-header">Add a written review</h4>
                 <textarea value={values.text} className="form-field" required minLength="50" maxLength="1000" placeholder="How was your experience?"  onChange={handleTextInputChange}/>
                 {values.characterCount > 0 ? <div>Minimum required characters left: [{values.characterCount}]</div> :<div>Minimum reached</div>}
               </label>
-              <button className="form-field" type="submit" onSubmit={handleSubmit}>Submit</button>
+              <button className="form-field" type="submit" onClick={handleSubmit}>Submit</button>
             </form>
-            {submitted && <div class='success-message'>Success! Thank you for your review!</div>}
+            {submitted && <div className='success-message'>Success! Thank you for your review!</div>}
           </div>
         </Modal.Body>
         {/* <Modal.Footer>

@@ -75,20 +75,43 @@ h1 {
   margin-right: -7px;
 } */
 
+/* //.form-container { */
+  /* width: 400px; */
+  /* width: 360px; */
+  /* background-color: white;
+  margin: auto; */
+  /* justify-content: space-evenly; */
+  /* box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%); */
+  /* padding: 10px; */
+/* //} */
+
 .form-container {
-  width: 400px;
+  /* width: 400px; */
+  /* width: 360px; */
   background-color: white;
   margin: auto;
-  justify-content: space-evenly;
-  /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
-  padding: 10px;
+  /* justify-content: space-evenly; */
+  /* box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%); */
+  /* padding: 10px; */
 }
 
-.review-form {
+.person-of-interest {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  font-size: x-large;
+}
+
+#review-form {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   padding: 10px;
+}
+
+#star-ranks {
+  margin: 10px 89px;
 }
 
 .rf-label {
@@ -111,6 +134,16 @@ h1 {
   color: white;
 }
 
+textarea.form-field {
+  margin: 10px 0px 10px 0px;
+  padding: 15px;
+  font-size: 16px;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+  height: 86px;
+  width: 310px;
+}
+
 .form-field {
   margin: 10px 0 10px 0;
   padding: 15px;
@@ -119,12 +152,12 @@ h1 {
   font-family: "Roboto", sans-serif;
 }
 
-span {
+/* span {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   color: red;
   margin-bottom: 15px;
-}
+} */
 
 input {
   background: #f2f2f2;
@@ -162,14 +195,100 @@ textarea {
   border: 2px solid #ffa4a4;
 }
 
-button {
+button.form-field {
   background: #4caf50;
   color: white;
   cursor: pointer;
 }
 
-button:disabled {
+button.btn-write-review {
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 250px;
+}
+
+.poi-overall-rating {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+/* button.btn-write-review {
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 40px;
+} */
+
+button.form-field:disabled {
   cursor: default;
+}
+
+.review-photo {
+  max-width: 100%;
+  display: flex;
+  /* align-content: stretch; */
+  justify-content: space-between;
+  margin: auto;
+}
+
+.tile {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.show_more {
+  cursor: pointer;
+}
+
+.five-stars {
+  display: flex;
+  align-items: center;
+}
+
+.single-star-container {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: #b1b1b1;
+  overflow: hidden;
+  width: 16px;
+}
+
+.single-star-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #fde16d;
+}
+
+.single-star-outline:before, .single-star-fill:before {
+  content:"\2605";
+}
+
+.single-star-outline:before {
+  -webkit-text-stroke: 1px #848484;
+}
+
+.single-star-fill:before {
+  -webkit-text-stroke: 1px orange;
 }
 
 /* -------- BRANDON CSS END -------- */

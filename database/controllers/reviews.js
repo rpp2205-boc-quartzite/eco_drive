@@ -1,13 +1,15 @@
 const User = require('../models/user.js').User;
 
 module.exports = {
-  postReviewHandler: async (object) => {
-    try {
-      return await User.findOneAndUpdate({_id: object.userid}, {$push: {"rider_reviews": object}})
-    } catch (error) {
-      // Rejection caught
-      console.error(error);
-    }
+  postReviewHandler: (object) => {
+    console.log('object', object);
+    return User.findOneAndUpdate({_id: object.userid}, {$push: {"rider_reviews": object}}, {new: true})
+    .then(response => {
+      return response;
+    })
+    .catch(error => {
+      console.error(error)
+    })
   }
 }
 
@@ -22,4 +24,11 @@ module.exports = {
 //     // Rejection caught
 //     console.log(error); // logs Error('Cannot divide by 0')
 //   }
-// }
+// },
+
+// try {
+//   return await User.findOneAndUpdate({_id: object.userid}, {$push: {"rider_reviews": object}}, {new: true})
+// } catch (error) {
+//   // Rejection caught
+//   console.error(error);
+// ////}

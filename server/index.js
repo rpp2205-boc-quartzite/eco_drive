@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
+//const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 const { getDriverList } = require('../database/controllers/driverList.js')
@@ -90,7 +90,7 @@ app.get('/getriderview', function(req, res) {
 // ---- Ratings and Reviews routes  ---- //
 app.get('/ratings_reviews', function(req, res) {
   let userid = req.query.id;
-  getRider(userid)
+  getRiderView(userid)
   .then((result) => {
     console.log(result)
     res.send(result)
@@ -102,10 +102,11 @@ app.get('/ratings_reviews', function(req, res) {
 
 app.post('/ratings_reviews', (req, res) => {
   let review = req.body;
+  console.log('this is a test', req);
   postReviewHandler(review)
-  .then(response => {
+  .then((response) => {
     console.log('review', response);
-    res.status(201).send(`new review post was made successfully!`)
+    res.status(201).send(response);
   })
   .catch(err => {
     res.status(500).send(err);
