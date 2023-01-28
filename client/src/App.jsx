@@ -4,6 +4,7 @@ import axios from 'axios';
 import HelloWorld from './components/helloWorld.jsx';
 import DriverView from './components/DefaultView/DriverView.jsx';
 import RiderView from './components/DefaultView/RiderView.jsx';
+import Reviews from './components/RatingsReviews/Reviews.jsx';
 import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
 import { Login } from './components/Authentication/Login.jsx';
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/" element={<HelloWorld />} />
         <Route path="/driverview" element={<DriverView />} />
         <Route path="/riderview" element={<RiderView />} />
+        <Route path="/ratings_reviews" element={<Reviews />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />
         <Route path="/driver-list" element={<DriverList />} />

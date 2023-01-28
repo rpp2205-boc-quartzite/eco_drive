@@ -5,8 +5,8 @@ module.exports = {
   // test adding a fake user
   addExampleUser: async () => {
     const doc = new User({
-      full_name: 'cam the man',
-      email: 'camjhirsh@gmail.com'
+      full_name: 'john smith',
+      email: 'jsmith@yahoo.com'
     });
     await doc.save();
   },
