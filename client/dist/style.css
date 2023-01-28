@@ -1,9 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body {
   background-color: var(--gray1);
   font-family: 'Poppins', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+/* body {
+  background: #76b852;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+} */
 h1, h2, h3, h4, h5, h6, p {
   margin: 0
 }
@@ -34,7 +42,7 @@ h1 {
 }
 /* -------- BECCA CSS END -------- */
 
-/* -------- Authentication CSS -------- */
+/* -------- BLAKE Authentication CSS -------- */
 .signup-form-container {
   display: flex;
   flex-direction: column;
@@ -53,6 +61,261 @@ h1 {
   position: absolute;
 }
 /* -------- Authentication CSS END -------- */
+
+/* -------- BRANDON CSS -------- */
+
+/* .review_modal_centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+/* .review_modal {
+  background: white;
+  border-color: black;
+  overflow: scroll;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+} */
+
+/* .review_modal_closeBtn {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: 18px;
+  color: #2c3e50;
+  background: white;
+  transition: all 0.25s ease;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+  position: absolute;
+  right: 0;
+  top: 0;
+  align-self: flex-end;
+  margin-top: -7px;
+  margin-right: -7px;
+} */
+
+/* //.form-container { */
+  /* width: 400px; */
+  /* width: 360px; */
+  /* background-color: white;
+  margin: auto; */
+  /* justify-content: space-evenly; */
+  /* box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%); */
+  /* padding: 10px; */
+/* //} */
+
+.form-container {
+  /* width: 400px; */
+  /* width: 360px; */
+  background-color: white;
+  margin: auto;
+  /* justify-content: space-evenly; */
+  /* box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%); */
+  /* padding: 10px; */
+}
+
+.person-of-interest {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  font-size: x-large;
+}
+
+#review-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+#star-ranks {
+  margin: 10px 89px;
+}
+
+.rf-label {
+  margin: 10px 0px;
+  padding: 10px 0px;
+}
+
+.rf-header {
+  display: flex;
+  align-content: space-around;
+  justify-content: space-around;
+  margin-top: 0px;
+  font-size: 20px;
+}
+
+.success-message {
+  font-family: "Roboto", sans-serif;
+  background-color: #3f89f8;
+  padding: 15px;
+  color: white;
+}
+
+textarea.form-field {
+  margin: 10px 0px 10px 0px;
+  padding: 15px;
+  font-size: 16px;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+  height: 86px;
+  width: 310px;
+}
+
+.form-field {
+  margin: 10px 0 10px 0;
+  padding: 15px;
+  font-size: 16px;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+/* span {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: red;
+  margin-bottom: 15px;
+} */
+
+input {
+  background: #f2f2f2;
+}
+
+input.rating {
+  display: none;
+}
+
+/* .star {
+  cursor:pointer;
+  transition: color 200ms;
+  padding-right: 5px;
+  padding-left: 5px;
+} */
+
+.modal-title {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  line-height: var(--bs-modal-title-line-height);
+}
+
+.modal-header .btn-close {
+  padding: calc(var(--bs-modal-header-padding-y) * .5) calc(var(--bs-modal-header-padding-x) * .5);
+}
+
+textarea {
+  background: #f2f2f2;
+}
+
+.error {
+  border-style: solid;
+  border: 2px solid #ffa4a4;
+}
+
+button.form-field {
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+button.btn-write-review {
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 250px;
+}
+
+.poi-overall-rating {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+/* button.btn-write-review {
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 40px;
+} */
+
+button.form-field:disabled {
+  cursor: default;
+}
+
+.review-photo {
+  max-width: 100%;
+  display: flex;
+  /* align-content: stretch; */
+  justify-content: space-between;
+  margin: auto;
+}
+
+.tile {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.show_more {
+  cursor: pointer;
+}
+
+.five-stars {
+  display: flex;
+  align-items: center;
+}
+
+.single-star-container {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: #b1b1b1;
+  overflow: hidden;
+  width: 16px;
+}
+
+.single-star-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #fde16d;
+}
+
+.single-star-outline:before, .single-star-fill:before {
+  content:"\2605";
+}
+
+.single-star-outline:before {
+  -webkit-text-stroke: 1px #848484;
+}
+
+.single-star-fill:before {
+  -webkit-text-stroke: 1px orange;
+}
+
+/* -------- BRANDON CSS END -------- */
+
 /* ------------------------------------------------ CHELSEA CSS START ------------------------------------------------ */
 
 .profileToggle {

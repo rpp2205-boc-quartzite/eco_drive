@@ -7,6 +7,7 @@ import RiderView from './components/DefaultView/RiderView.jsx';
 import Dashboard from './components/Authentication/Dashboard.jsx';
 import Login from './components/Authentication/Login.jsx';
 import Register from './components/Authentication/Register.jsx';
+import Reviews from './components/RatingsReviews/Reviews.jsx';
 import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path="/driverview" element={<DriverView />} />
         <Route path="/riderview" element={<RiderView />} />
+        <Route path="/ratings_reviews" element={<Reviews />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />
         <Route path="/driver-list" element={<DriverList />} />
