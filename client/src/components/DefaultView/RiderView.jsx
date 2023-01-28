@@ -19,7 +19,8 @@ class RiderView extends React.Component {
       end_lat: '',
       end_lng: '',
       default: false,
-      avatar: ''
+      avatar: '',
+      default_route: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,7 +32,8 @@ class RiderView extends React.Component {
     .then((result) => {
       console.log('got da rider', result.data[0].full_name)
       this.setState({
-        full_name: result.data[0].full_name
+        full_name: result.data[0].full_name,
+        default_route: result.data[0].rider_route
       })
     })
     .catch(err => console.log(err))
@@ -132,7 +134,10 @@ class RiderView extends React.Component {
         </div>
         <div>
           ______________________________ <br/>
-          Default route
+          Default route <br />
+          From: {this.state.default_route.start_address} <br />
+          To: {this.state.default_route.end_address} <br />
+          Time: {this.state.default_route.time} <br />
         </div>
       </div>
     )
