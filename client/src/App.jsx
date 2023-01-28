@@ -8,6 +8,7 @@ import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
 import { Login } from './components/Authentication/Login.jsx';
 import { Register } from './components/Authentication/Register.jsx';
+import DriverList from './components/driver-list/DriverList.jsx';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/riderview" element={<RiderView />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />
+        <Route path="/driver-list" element={<DriverList />} />
       </Routes>
     {/* <HelloWorld /> */}
     {/* <DriverView /> */}
