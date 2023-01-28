@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export default function Login(props) {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const navigate=useNavigate();
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(email);
+      event.preventDefault();
+      axios.post('/login', {email, pass})
+        .then((result) => {
+          navigate('/driverview');
+        })
     }
 
     return (
@@ -18,9 +24,7 @@ export default function Login(props) {
                 <input value={email} onChange={(event) => setEmail(event.target.value)}type='email' placeholder='Enter Email' id='email' name='email' />
               <label htmlFor='password'>Password</label>
                 <input value={pass} onChange={(event) => setPass(event.target.value)} type='password' placeholder='Enter Password' id='password' name='password' />
-              <Link to='/driverview'>
                 <button type='submit'>Log In</button>
-              </Link>  
             <Link to='/register'>
               <button className='link-btn'>Don't have an account? Sign Up here.</button>
             </Link>  

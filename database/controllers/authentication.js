@@ -41,10 +41,10 @@ module.exports = {
   },
 
   login: (req, res) => {
-    User.findOne({ email: req.query.email })
+    User.findOne({ email: req.body.email })
     .then((user) => {
       bcrypt
-        .compare(req.query.password, user.password)
+        .compare(req.body.pass, user.password)
         .then((passwordCheck) => {
           if(!passwordCheck) {
             return res.status(400).send({
