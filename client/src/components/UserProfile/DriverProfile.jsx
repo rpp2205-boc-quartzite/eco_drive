@@ -10,14 +10,16 @@ class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d36d4bcd478f26557c4a30', //hardcoded for now
+      userId: '63d36f099d38b4ed1dba8f3a', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
       end_address: '',
       time: '',
       total_seats: '',
-      avatar: ''
+      avatar: '',
+      drive_license: '',
+      rider_reviews: []
     };
   }
 
@@ -32,7 +34,9 @@ class DriverProfile extends React.Component {
         start_address: result.data[0].driver_route.start_address,
         end_address: result.data[0].driver_route.end_address,
         time: result.data[0].driver_route.time,
-        avatar: result.data[0].avatar
+        avatar: result.data[0].avatar,
+        drive_license: result.data[0].drive_license,
+        rider_reviews: result.data[0].rider_reviews
       })
     })
     .catch(err => console.log(err))
@@ -45,7 +49,7 @@ class DriverProfile extends React.Component {
         <span className='profileToggle'>Rider</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
         <span className='profileLogoutButton'><MdLogout /></span>
-        <span className='profileHomeButton'><AiFillHome/></span>
+        <Link to="/"><span className='profileHomeButton'><AiFillHome/></span></Link>
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
