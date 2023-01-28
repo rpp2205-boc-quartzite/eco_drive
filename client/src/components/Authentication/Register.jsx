@@ -61,7 +61,7 @@ export default function Register(props) {
               <input value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' />
             <input type="checkbox" id="checkbox" />
               <label htmlFor="checkbox">I agree to Terms of Service </label>
-            <button type='submit' onClick={handleSubmit}>Next</button> 
+            <button type='submit' onClick={handleSubmit}>Sign Up</button> 
           <Link to='riderview'condition={registered}></Link>  
           <Link to='/login'>
             <button className='link-btn'>Already have an account? Login here.</button> 
