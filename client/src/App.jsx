@@ -1,19 +1,9 @@
 import React from 'react';
-import HelloWorld from './components/helloWorld.jsx';
-import axios from 'axios';
+import TripComplete from './components/tripComplete.jsx';
 
 function App() {
-
-  var testDB = () => {
-    axios.post('database')
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
-  }
-
-  testDB();
-
   return (
-    <HelloWorld />
+    <TripComplete/>
   )
 }
 

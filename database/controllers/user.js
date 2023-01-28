@@ -11,8 +11,14 @@ module.exports = {
     await doc.save();
   },
 
+  // clear the users collection
   clearUsers: async () => {
     await User.deleteMany( {} );
-  }
+  },
+
+  // once completed, add a trip to a user document
+  // addTrip: async (_id) => {
+  //   await User.findOne
+  // }
 
 };
