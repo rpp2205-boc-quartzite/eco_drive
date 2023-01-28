@@ -45,20 +45,20 @@ export default function Register(props) {
         <form className='sign-form' onSubmit={handleSubmit}>
           <h2>Sign Up</h2>        
             <label htmlFor='name'>Your Name</label>
-              <input value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' />
+              <input value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
             <label htmlFor='email'>Email</label>
-              <input value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' />
+              <input value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
             <label htmlFor='dob'>Date of Birth</label>
-              <input  value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob'/>
+              <input  value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
             <label htmlFor='dl'>Driver's License #</label>
               <input  value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
             <label htmlFor='licensePlate'>License Plate #</label>
               <input  value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>                            
             <label htmlFor='password'>Password</label>
-              <input value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' />
+              <input value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
             <label htmlFor='confirmPass'>Confirm Password</label>
-              <input value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' />
-            <input type="checkbox" id="checkbox" />
+              <input value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
+            <input type="checkbox" id="checkbox" required/>
               <label htmlFor="checkbox">I agree to Terms of Service </label>
             <button type='submit' onClick={handleSubmit}>Sign Up</button> 
           <Link to='/login'>
