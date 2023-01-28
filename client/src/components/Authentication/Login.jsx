@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 
 export default function Login(props) {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
-    const navigate=useNavigate();
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      axios.post('/login', {email, pass})
-        .then((result) => {
-          navigate('/driverview');
-        })
+      props.authCheck(email, pass);
     }
 
     return (

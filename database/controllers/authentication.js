@@ -63,7 +63,8 @@ module.exports = {
 
           res.status(200).send({
             message: 'Login Successful',
-            email: user.email,
+            user: user.id,
+            driver: user.is_driver,
             token,
           });
         })

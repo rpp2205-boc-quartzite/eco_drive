@@ -11,7 +11,6 @@ export default function Register(props) {
   const [confirmPass, setConfirmPass] = useState('');
   const [drivers_license, setDl] = useState('');
   const [license_plate, setlicensePlate] = useState('');
-  const [registered, setRegister] = useState('');
   const navigate=useNavigate();
 
   const handleSubmit = (event) => {
@@ -62,7 +61,6 @@ export default function Register(props) {
             <input type="checkbox" id="checkbox" />
               <label htmlFor="checkbox">I agree to Terms of Service </label>
             <button type='submit' onClick={handleSubmit}>Sign Up</button> 
-          <Link to='riderview'condition={registered}></Link>  
           <Link to='/login'>
             <button className='link-btn'>Already have an account? Login here.</button> 
           </Link>  
