@@ -46,15 +46,14 @@ class DriverProfile extends React.Component {
     return (
       <div>
       {/* TOP BUTTONS */}
-        <span className='profileToggle'>Rider</span>
+        <span className='profileToggle'>Driver</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
         <span className='profileLogoutButton'><MdLogout /></span>
-        <Link to="/"><span className='profileHomeButton'><AiFillHome/></span></Link>
+        <Link to="/driverview"><span className='profileHomeButton'><AiFillHome/></span></Link>
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
           <img className='profilePhoto' src={this.state.avatar} alt="drive image"/>
-          {/* REMINDER: replace w/ user profile later */}
         </div>
         <div className='profileName'>
          {this.state.full_name} <span className='profileOnline'>&#183;</span>
@@ -75,17 +74,40 @@ class DriverProfile extends React.Component {
       {/* REVIEWS */}
         <div className='profileReviewDiv'>
           <span className='profileTitle'>Reviews</span>
-          <div className='profileReviewBox'>
-            <div className='profileReviewerName'>Amy Johnson</div>
-            <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-            <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-            <div className='profileReviewDate'>1/26/23</div>
+          <div className='profileReviewContainer'>
+            <div className='profileReviewBox'>
+              <div className='profileReviewerName'>Amy Johnson</div>
+              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div className='profileReviewDate'>1/26/23</div>
+            </div>
+
+            <div className='profileReviewBox'>
+              <div className='profileReviewerName'>Mike Tree</div>
+              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div className='profileReviewDate'>1/26/23</div>
+            </div>
+
+            <div className='profileReviewBox'>
+              <div className='profileReviewerName'>Steve Apple</div>
+              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+              <div className='profileReviewDate'>1/26/23</div>
+            </div>
+
           </div>
         </div>
 
       {/* RECENT DRIVERS */}
         <div>
           <span className='profileTitle'>Recent drivers</span>
+          <div className='profileRecentDriverContainer'>
+            <div><img className='profileRecentDriver' src={this.state.avatar} alt="drive image"/></div>
+            {/* <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1xQppZAiV12AkQ55WdO8CWhgv-Y5Xtl3t" alt="drive image"/></div>
+            <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1BOoSYj1tACcqgXSAMj2iSDMhqApwcLJK" alt="drive image"/></div> */}
+          </div>
+
         </div>
         <Link to="/ratings_reviews"><button>Go to Ratings and Reviews</button></Link>
       {/* CURRENT ROUTE */}
