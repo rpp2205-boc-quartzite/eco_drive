@@ -3,6 +3,8 @@ import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 
+import OngoingTrip from './OngoingTrip.jsx';
+
 class RiderView extends React.Component {
   constructor(props) {
     super(props);
@@ -119,6 +121,7 @@ class RiderView extends React.Component {
         <div>
           _____________________________________________ <br/>
           Ongoing Trip
+          <OngoingTrip />
         </div>
         <div>
           _____________________________________________ <br/>

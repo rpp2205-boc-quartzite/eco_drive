@@ -12,6 +12,8 @@ const userSchema = mongoose.Schema({
   },
   password:         String,
   drivers_license:  String,
+  license_plate:    String,
+  dob:              String,
   avatar:           String,
   is_driver:        Boolean,
   is_rider:         Boolean,

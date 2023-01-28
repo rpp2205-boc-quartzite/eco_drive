@@ -3,11 +3,13 @@ import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 
+import OngoingTrip from './OngoingTrip.jsx';
+
 class DriverView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d244c024407b7b0ddb7ed0', // The authenticated user's ID, hardcoded until prop received
+      userId: '63d36f099d38b4ed1dba8f3a', // The authenticated user's ID, hardcoded until prop received
       full_name: '',
       start_address: '',
       start_lat: '',
@@ -124,6 +126,7 @@ class DriverView extends React.Component {
         <div>
           _____________________________________________ <br/>
           Ongoing Trip
+          <OngoingTrip />
         </div>
         <div>
           _____________________________________________ <br/>

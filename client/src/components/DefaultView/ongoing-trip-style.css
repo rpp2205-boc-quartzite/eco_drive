@@ -1,0 +1,13 @@
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.end {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+button {
+  width: 100px;
+}
