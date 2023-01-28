@@ -19,7 +19,6 @@ function App() {
   const authenticate = (email, pass) => {
     axios.post('/login', {email, pass})
     .then((result) => {
-      console.log(result)
       setUserId(result.data.user);
       if (result.is_driver) {
         navigate('/driverview');
