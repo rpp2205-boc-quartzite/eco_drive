@@ -28,3 +28,5 @@ yarn-error.log*
 green-earth.pem
 
 client/dist/main.js
+
+client/src/components/DriverInteractions/apiKey.js

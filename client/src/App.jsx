@@ -6,6 +6,8 @@ import DriverView from './components/DefaultView/DriverView.jsx';
 import RiderView from './components/DefaultView/RiderView.jsx';
 import { Login } from './components/Authentication/Login.jsx';
 import { Register } from './components/Authentication/Register.jsx';
+// import DriverInteractions from './components/DriverInteractions/DriverInteractions.jsx';
+import Placeholder from './components/DriverInteractions/Placeholder.jsx'
 
 function App() {
 
@@ -29,6 +31,7 @@ function App() {
         <Route exact path="/" element={<HelloWorld />} />
         <Route path="/driverview" element={<DriverView />} />
         <Route path="/riderview" element={<RiderView />} />
+        <Route path="/driver-interactions" element={<Placeholder/>} />
       </Routes>
     {/* <HelloWorld /> */}
     {/* <DriverView /> */}
