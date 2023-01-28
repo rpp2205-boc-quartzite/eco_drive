@@ -10,10 +10,6 @@ class Dashboard extends React.Component {
     };
   }
 
-  componentDidMount() {
-
-  }
-
   render() {
     return (
       <div>

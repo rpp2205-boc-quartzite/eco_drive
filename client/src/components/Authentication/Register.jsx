@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 export default function Register(props) {
@@ -11,6 +12,7 @@ export default function Register(props) {
   const [drivers_license, setDl] = useState('');
   const [license_plate, setlicensePlate] = useState('');
   const [registered, setRegister] = useState('');
+  const navigate=useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,7 +25,7 @@ export default function Register(props) {
     if (drivers_license === '') {
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, is_driver: false})
         .then((result) => {
-          setRegister('true');
+          navigate('/riderview');
         })
         .catch((err) => {
           alert('Email already in use.');
@@ -31,7 +33,7 @@ export default function Register(props) {
     } else {
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, is_driver: true})
         .then((result) => {
-          setRegister('true');
+          navigate('/driverview');
         })
         .catch((err) => {
           alert('Email already in use.');
