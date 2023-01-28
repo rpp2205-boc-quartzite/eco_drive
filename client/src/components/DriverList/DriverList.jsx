@@ -3,12 +3,11 @@ import axios from 'axios';
 import './driver-list-style.css'
 
 import DriverCard from './DriverCard.jsx'
-import DriverConfirmation from './DriverConfirmation.jsx'
 
 const DriverList = (props) => {
 
   const [drivers, setDrivers] = useState([]);
-  const [confirmDriverModalOn, setConfirmDriverModal] = useState(false);
+  const [bookedDriver, setBookedDriver] = useState({})
 
   const findDrivers = () => {
     // const rider = {
@@ -40,17 +39,28 @@ const DriverList = (props) => {
   }
 
   useEffect(() => {findDrivers()}, [])
+  useEffect(() => {findDrivers()}, [props])
 
-  const selectDriver = (driverInfo) => {
-
+  const bookDriver = (driverInfo) => {
+    setBookedDriver(driverInfo)
   }
+
+  useEffect(() => {
+    console.log(bookedDriver);
+  }, [bookedDriver]);
 
 
   if (drivers.length > 0) {
     return (
       <div>
         {drivers.map((driver) => (
-          <DriverCard key={driver.driverInfo._id} driverInfo={driver.driverInfo} startDistance={driver.startDistance} endDistance={driver.endDistance} />
+          <DriverCard
+            key={driver.driverInfo._id}
+            driverInfo={driver.driverInfo}
+            startDistance={driver.startDistance}
+            endDistance={driver.endDistance}
+            bookDriver={bookDriver}
+          />
         ))}
       </div>
     )
