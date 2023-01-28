@@ -3,10 +3,12 @@ import axios from 'axios';
 import './driver-list-style.css'
 
 import DriverCard from './DriverCard.jsx'
+import DriverConfirmation from './DriverConfirmation.jsx'
 
 const DriverList = (props) => {
 
   const [drivers, setDrivers] = useState([]);
+  const [confirmDriverModalOn, setConfirmDriverModal] = useState(false);
 
   const findDrivers = () => {
     // const rider = {
@@ -38,6 +40,10 @@ const DriverList = (props) => {
   }
 
   useEffect(() => {findDrivers()}, [])
+
+  const selectDriver = (driverInfo) => {
+
+  }
 
 
   if (drivers.length > 0) {

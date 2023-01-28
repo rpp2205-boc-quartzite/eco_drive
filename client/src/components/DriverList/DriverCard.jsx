@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiInfo } from "react-icons/fi";
+import { CgProfile } from "react-icons/cg";
 
 const DriverCard = (props) => {
 
@@ -8,7 +9,7 @@ const DriverCard = (props) => {
       <div className='card-header'>
         <img className='avatar' src={props.driverInfo.avatar} alt="Driver Avatar" />
         <p>{props.driverInfo.full_name}</p>
-        <FiInfo className='info-icon'/>
+        <CgProfile className='info-icon'/>
       </div>
       <p>From: {props.startDistance.text} from your starting point</p>
       <p>To: {props.endDistance.text} from your destination</p>
