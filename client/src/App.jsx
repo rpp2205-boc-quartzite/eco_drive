@@ -35,7 +35,7 @@ function App() {
     <div>
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/register' element={<Register authCheck={authenticate}/>} />
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
         <Route path="/driverview" element={<DriverView userId={userId}/>} />
         <Route path="/riderview" element={<RiderView userId={userId}/>} />

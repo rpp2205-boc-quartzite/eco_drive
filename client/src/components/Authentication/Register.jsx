@@ -24,7 +24,7 @@ export default function Register(props) {
     if (drivers_license === '') {
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, is_driver: false})
         .then((result) => {
-          navigate('/riderview');
+          props.authCheck(email, password);
         })
         .catch((err) => {
           alert('Email already in use.');
@@ -32,7 +32,7 @@ export default function Register(props) {
     } else {
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, is_driver: true})
         .then((result) => {
-          navigate('/driverview');
+          props.authCheck(email, password);
         })
         .catch((err) => {
           alert('Email already in use.');
