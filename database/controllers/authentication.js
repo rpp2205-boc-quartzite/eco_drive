@@ -5,12 +5,16 @@ const User = require('../models/user.js').User;
 module.exports = {
   register: (req, res) => {
     bcrypt
-    .hash(req.query.password, 10)
+    .hash(req.body.password, 10)
     .then((hashedPassword) => {
       const user = new User({
-        full_name: req.query.name,
-        email: req.query.email,
+        full_name: req.body.full_name,
+        email: req.body.email,
         password: hashedPassword,
+        dob: req.body.dob,
+        drivers_license: req.body.drivers_license,
+        license_plate: req.body.license_plate,
+        is_driver: req.body.is_driver
       });
 
       user
@@ -37,10 +41,10 @@ module.exports = {
   },
 
   login: (req, res) => {
-    User.findOne({ email: req.query.email })
+    User.findOne({ email: req.body.email })
     .then((user) => {
       bcrypt
-        .compare(req.query.password, user.password)
+        .compare(req.body.pass, user.password)
         .then((passwordCheck) => {
           if(!passwordCheck) {
             return res.status(400).send({
@@ -59,7 +63,8 @@ module.exports = {
 
           res.status(200).send({
             message: 'Login Successful',
-            email: user.email,
+            user: user.id,
+            driver: user.is_driver,
             token,
           });
         })

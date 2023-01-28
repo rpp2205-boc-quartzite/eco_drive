@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { AiFillHome } from 'react-icons/Ai';
-import { MdLogout } from 'react-icons/Md';
-import { HiOutlineRefresh } from 'react-icons/Hi';
-import { FaPen } from 'react-icons/Fa';
+import { AiFillHome } from 'react-icons/ai';
+import { MdLogout } from 'react-icons/md';
+import { HiOutlineRefresh } from 'react-icons/hi';
+import { FaPen } from 'react-icons/fa';
 
 class DriverProfile extends React.Component {
   constructor(props) {
@@ -109,7 +109,7 @@ class DriverProfile extends React.Component {
           </div>
 
         </div>
-
+        <Link to="/ratings_reviews"><button>Go to Ratings and Reviews</button></Link>
       {/* CURRENT ROUTE */}
         <div>
           <span className='profileTitle'>Current route</span>

@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
+//const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
+const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 const { getDriverList } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
@@ -41,17 +43,6 @@ app.use((req, res, next) => {
 app.get('/goodbye', (req, res) => {
   res.send('Thanks For Visiting');
 });
-
-//app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
-
-
-//post routes
-//app.post('/reviews', postReviewHandler);
-
-
-//put routes
-//app.put('/reviews/:review_id/report', updateReportForReview);
-//app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
 
 // ---- Trip Completion  ---- //
 
@@ -96,6 +87,36 @@ app.get('/getriderview', function(req, res) {
   .catch(err => console.log(err))
 });
 
+// ---- Ratings and Reviews routes  ---- //
+app.get('/ratings_reviews', function(req, res) {
+  let userid = req.query.id;
+  getRiderView(userid)
+  .then((result) => {
+    console.log(result)
+    res.send(result)
+  })
+  .catch(err => console.log(err))
+});
+
+//app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
+
+app.post('/ratings_reviews', (req, res) => {
+  let review = req.body;
+  console.log('this is a test', req);
+  postReviewHandler(review)
+  .then((response) => {
+    console.log('review', response);
+    res.status(201).send(response);
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
+});
+
+
+// app.put('/reviews/:review_id/report', updateReportForReview);
+// app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
+
 // ---- Driver List Routes ---- //
 app.post('/driver-list', async (req, res) => {
   const rider =  {
@@ -108,8 +129,26 @@ app.post('/driver-list', async (req, res) => {
     end_lng: req.body.end_lng,
     time: req.body.time,
   }
+  const driverList = [];
 
-  const drivers = await getDriverList();
+  try {
+    const activeDrivers = await getDriverList();
+    for (let driver of activeDrivers) {
+      const startDistance = await calculateDistance(rider.start_lat, rider.start_lng, driver.driver_route.start_lat, driver.driver_route.start_lng);
+      const endDistance = await calculateDistance(rider.end_lat, rider.end_lng, driver.driver_route.end_lat, driver.driver_route.end_lng);
+      if (startDistance !== undefined && endDistance !== undefined) {
+        driverList.push({driverInfo: driver, startDistance, endDistance})
+      }
+      console.log(driverList)
+      driverList.sort((a, b) => {
+        return a.startDistance.value - b.startDistance.value
+      })
+    }
+    res.status(200).send(driverList)
+  } catch (err) {
+    console.log('Get driver list server err: ', err)
+    res.status(404).send(err)
+  }
 })
 
 // ---- Catch all for routing ---- //
