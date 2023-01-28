@@ -8,7 +8,7 @@ class DriverView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d36ee5cd478f26557c4a38', // The authenticated user's ID, hardcoded until prop received
+      userId: props.userId, // The authenticated user's ID, hardcoded until prop received
       full_name: '',
       start_address: '',
       start_lat: '',
@@ -28,6 +28,7 @@ class DriverView extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
+    console.log(this.state.userId);
     axios.get('/getdriverview', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)
@@ -45,6 +46,7 @@ class DriverView extends React.Component {
     axios.post('/postDriverRoute', { data: currentRoute })
     // Write to the user's document in db X
     // route to Riders List
+
   }
 
   handleChange (e, field) {
@@ -81,8 +83,10 @@ class DriverView extends React.Component {
           <Link to="/riderview">
           <button>Switch to rider view</button>
           </Link></div>
-        <div className="headerAvatar"><p>Avatar</p></div>
         <div className="headerLogout"><MdLogout size={25}/></div>
+        <Link to="/driverprofile">
+        <p className="headerAvatar">Profile photo</p>
+        </Link>
         </div>
 
         <div>

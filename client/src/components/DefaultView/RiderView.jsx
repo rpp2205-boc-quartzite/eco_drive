@@ -8,7 +8,7 @@ class RiderView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d36d69cd478f26557c4a34', // The authenticated user's ID, hardcoded until prop received
+      userId: props.userId, // The authenticated user's ID, hardcoded until prop received
       full_name: '',
       start_address: '',
       start_lat: '',
