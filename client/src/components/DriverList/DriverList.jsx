@@ -7,6 +7,7 @@ import DriverCard from './DriverCard.jsx'
 const DriverList = (props) => {
 
   const [drivers, setDrivers] = useState([]);
+  const [bookedDriver, setBookedDriver] = useState({})
 
   const findDrivers = () => {
     // const rider = {
@@ -38,13 +39,28 @@ const DriverList = (props) => {
   }
 
   useEffect(() => {findDrivers()}, [])
+  useEffect(() => {findDrivers()}, [props])
+
+  const bookDriver = (driverInfo) => {
+    setBookedDriver(driverInfo)
+  }
+
+  useEffect(() => {
+    console.log(bookedDriver);
+  }, [bookedDriver]);
 
 
   if (drivers.length > 0) {
     return (
       <div>
         {drivers.map((driver) => (
-          <DriverCard key={driver.driverInfo._id} driverInfo={driver.driverInfo} startDistance={driver.startDistance} endDistance={driver.endDistance} />
+          <DriverCard
+            key={driver.driverInfo._id}
+            driverInfo={driver.driverInfo}
+            startDistance={driver.startDistance}
+            endDistance={driver.endDistance}
+            bookDriver={bookDriver}
+          />
         ))}
       </div>
     )

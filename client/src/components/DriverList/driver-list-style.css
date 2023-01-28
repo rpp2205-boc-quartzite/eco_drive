@@ -1,0 +1,150 @@
+:root {
+  --green1: #D7ECD1;
+  --green2: #93CA85;
+  --green3: #338F24;
+  --green4: #1D6C33;
+  --gray1: #FCFCFC;
+  --gray2: #E3F1F5;
+  --gray3: #CAD6DD;
+  --gray4: #97AAB0;
+  --gray5: #76858A;
+  --gray6: #262929;
+  --yellow: #FFB629;
+  --red: #E72E2E;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid var(--gray4);
+  border-radius: 5px;
+  padding: 16px 16px;
+  margin: 0
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.big-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.primary-btn {
+  background-color: var(--green3);
+  border: 0px;
+  border-radius: 100px;
+  color: var(--gray1);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.primary-btn:hover {
+  background-color: var(--green4);
+}
+
+.secondary-btn {
+  background-color: var(--gray1);
+  border: 1.5px solid var(--green3);
+  border-radius: 100px;
+  color: var(--green3);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.secondary-btn:hover {
+  background-color: var(--green1);
+}
+
+.cancel-btn {
+  background-color: var(--gray3);
+  border: 0px;
+  border-radius: 100px;
+  color: var(--gray6);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.cancel-btn:hover {
+  background-color: var(--gray4);
+}
+
+
+/* ------------- Driver Confirmation --------------------------- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  z-index: 9000;
+}
+
+.display-block {
+  display: block;
+  z-index: 9000;
+}
+
+.dark-space {
+  background-color: rgba(0, 0, 0, 0.85);
+  width:100%;
+  height: 100%;
+}
+
+.driver-confirmation-container {
+  position: absolute;
+  top:50%;
+  left:50%;
+  right:auto;
+  bottom: auto;
+  max-width: 343px;
+  width: 100%;
+  padding: 24px 5%;
+  background-color: var(--gray1);
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  color: var(--gray6)
+}
+
+.confirmation-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.confirmation-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.btn-horizontal-flex {
+  width: 100%;
+  display: flex;
+  align-items: space-between;
+  gap: 16px;
+}
+
+.btn-horizontal-flex button {
+  flex-grow: 1;
+}
