@@ -5,7 +5,7 @@ import LeaveReviews from './LeaveReviews.jsx';
   // this trip info will be written to the database as soon as the Complete Button is Clicked,
   // and also sent to the analytics component in the client coded
 
-const tripComplete = () => {
+const TripComplete = () => {
   return (
     <div>
       <h1>Trip Completed!</h1>
@@ -15,4 +15,4 @@ const tripComplete = () => {
   )
 }
 
-export default tripComplete;
+export default TripComplete;
