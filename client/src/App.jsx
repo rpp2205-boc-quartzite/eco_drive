@@ -24,6 +24,7 @@ function App() {
   // const toggleForm = (formName) => {
   //   setCurrentForm(formName);
   // }
+
   const authenticate = (email, pass) => {
     axios.post('/login', {email, pass})
     .then((result) => {
