@@ -427,6 +427,14 @@ button.form-field:disabled {
   color: #97AAB0;
 }
 
+.profileSavingsTitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: #338F24;
+}
+
 .profileCurrentRouteInfo {
   font-style: normal;
   font-weight: 400;
@@ -440,6 +448,14 @@ button.form-field:disabled {
   padding: 9px;
   border-radius: 9px;
   margin: 8px;
+}
+
+.profileSavings {
+  border: solid 1px #338F24;
+  padding: 9px;
+  border-radius: 9px;
+  margin: 8px;
+  text-align: center;
 }
 
 .profileReviewBox {

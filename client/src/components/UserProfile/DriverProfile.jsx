@@ -99,9 +99,9 @@ class DriverProfile extends React.Component {
           </div>
         </div>
 
-      {/* RECENT DRIVERS */}
+      {/* RECENT RIDERS */}
         <div>
-          <span className='profileTitle'>Recent drivers</span>
+          <span className='profileTitle'>Recent riders</span>
           <div className='profileRecentDriverContainer'>
             <div><img className='profileRecentDriver' src={this.state.avatar} alt="drive image"/></div>
             {/* <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1xQppZAiV12AkQ55WdO8CWhgv-Y5Xtl3t" alt="drive image"/></div>
@@ -110,6 +110,7 @@ class DriverProfile extends React.Component {
 
         </div>
         <Link to="/ratings_reviews"><button>Go to Ratings and Reviews</button></Link>
+
       {/* CURRENT ROUTE */}
         <div>
           <span className='profileTitle'>Current route</span>
@@ -127,11 +128,31 @@ class DriverProfile extends React.Component {
       {/* PREVIOUS ROUTE */}
         <div>
           <span className='profileTitle'>Previous routes</span>
+          <div className='profileCurrentRoute'>
+            <div className='profileCurrentRouteTitle'>From:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.start_address}</div>
+            <div className='profileCurrentRouteTitle'>To:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.end_address}</div>
+            <div className='profileCurrentRouteTitle'>Time:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.time}</div>
+
+          </div>
         </div>
 
       {/* SAVINGS THIS MONTH */}
       <div>
           <span className='profileTitle'>Your savings this month</span>
+          <div className='profileSavings'>
+            <div className='profileSavingsTitle'>You saved</div>
+            <div className='profileCurrentRouteInfo'>2.5 trees &#127794; <div>or</div> 30 minutes of driving &#128663;</div>
+            <div className='profileSavingsTitle'>This translates to</div>
+            <div className='profileCurrentRouteInfo'>$40.49 you saved on gas &#9981;</div>
+          </div>
+          <span className='profileTitle'>Fact of the day</span>
+          <div className='profileCurrentRoute'>
+            <div className='profileCurrentRouteTitle'>Did you know? &#128173;</div>
+            <div className='profileCurrentRouteInfo'>Los Angeles, Long Beach & Riverside are the number 1 cities in CA with highest levels of transportation related pollution</div>
+          </div>
         </div>
 
       </div>
