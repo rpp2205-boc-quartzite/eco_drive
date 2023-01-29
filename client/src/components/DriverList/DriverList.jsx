@@ -64,7 +64,7 @@ const DriverList = (props) => {
   } else {
     return (<div className='loading-screen'>
       <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
-      <p>Please wait...</p>
+      <p>Finding drivers...</p>
     </div>)
   }
 }
