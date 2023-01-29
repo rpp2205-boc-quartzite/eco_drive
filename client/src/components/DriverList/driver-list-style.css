@@ -14,6 +14,8 @@
   --red2: #BC1F1F;
 }
 
+div
+
 .card {
   width: 100%;
   display: flex;
@@ -91,7 +93,7 @@
   padding: 10px 20px;
 }
 
-.cancel-btn:hover {
+.negative-btn:hover {
   background-color: var(--red2);
 }
 
@@ -117,7 +119,7 @@
   height: 100%;
 }
 
-.driver-confirmation-container {
+.popup-container {
   position: absolute;
   top:50%;
   left:50%;
@@ -162,4 +164,21 @@
 
 .btn-horizontal-flex button {
   flex-grow: 1;
+}
+
+/* ---------------- Loading Screen ---------------- */
+.loading-screen {
+  width: 100%;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.loading-gif {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
