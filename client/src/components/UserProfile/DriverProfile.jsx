@@ -6,12 +6,13 @@ import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { FaPen } from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
+import Ratings from 'react-ratings-declarative';
 
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d36f099d38b4ed1dba8f3a', //hardcoded for now
+      userId: '63d36ee5cd478f26557c4a38', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
@@ -20,7 +21,10 @@ class DriverProfile extends React.Component {
       total_seats: '',
       avatar: '',
       drive_license: '',
-      rider_reviews: []
+      rider_reviews: [],
+      recent_drivers: [],
+      rating: 4
+      //hardcoded rating ^ for now
     };
   }
 
@@ -37,7 +41,8 @@ class DriverProfile extends React.Component {
         time: result.data[0].driver_route.time,
         avatar: result.data[0].avatar,
         drive_license: result.data[0].drive_license,
-        rider_reviews: result.data[0].rider_reviews
+        rider_reviews: result.data[0].rider_reviews,
+        recent_drivers: result.data[0].recent_drivers
       })
     })
     .catch(err => console.log(err))
@@ -62,7 +67,18 @@ class DriverProfile extends React.Component {
 
       {/* RATING STARS */}
         <div className='profileRatingStars'>
-          &#9733; &#9733; &#9733; &#9733; &#9733;
+        <Ratings
+              rating={this.state.rating}
+              widgetRatedColors="#FFB629"
+              widgetDimensions="18px"
+              widgetSpacings="1px"
+            >
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+            </Ratings>
         </div>
 
       {/* UPDATE PROFILE */}
@@ -82,13 +98,9 @@ class DriverProfile extends React.Component {
         <div>
           <span className='profileTitle'>Recent riders</span>
           <div className='profileRecentDriverContainer'>
-            <div><img className='profileRecentDriver' src={this.state.avatar} alt="drive image"/></div>
-            {/* <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1xQppZAiV12AkQ55WdO8CWhgv-Y5Xtl3t" alt="drive image"/></div>
-            <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1BOoSYj1tACcqgXSAMj2iSDMhqApwcLJK" alt="drive image"/></div> */}
+          <Link to="/ratings_reviews"><div><img className='profileRecentDriver' src={this.state.avatar} alt="drive image"/></div></Link>
           </div>
-
         </div>
-        <Link to="/ratings_reviews"><button>Go to Ratings and Reviews</button></Link>
 
       {/* CURRENT ROUTE */}
         <div>

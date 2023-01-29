@@ -1,24 +1,52 @@
 import React from 'react';
-
+import axios from 'axios';
+import Ratings from 'react-ratings-declarative';
 class DriverReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      full_name: ''
     }
   }
 
+  componentDidMount () {
+    var id = this.props.id;
+    console.log('IDDDD', id)
+    axios.get('/getDriverView', { params: {id} })
+    .then((result) => {
+      console.log('ID!!!', result)
+      this.setState({
+        full_name: result.data[0].full_name
+      })
+    })
+    .catch(err => console.log(err))
+  }
 
   render() {
-    console.log('this.props.name', this.props.name)
+    console.log('this.state.name', this.state.name)
       return (
-        <div>
-              <div className='profileReviewBox'>
-                <div className='profileReviewerName'>{this.props.name.slice(0, 20)}</div>
-                <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                <div className='profileReviewText'>{this.props.review.slice(0, 190)}</div>
-                <div className='profileReviewDate'>1/26/23</div>
-            </div>
+        <div className='profileReviewBox'>
+          {/* <div className='profileReviewerName'>{this.state.full_name}</div>
+          ***** hardcoding this due to lack of good data in DB for now */}
+          <div className='profileReviewerName'>Amy Johnson</div>
+          <div>
+            <Ratings
+              rating={this.props.rating}
+              widgetRatedColors="#FFB629"
+              widgetDimensions="15px"
+              widgetSpacings="1px"
+            >
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+            </Ratings>
+          </div>
+          <div className='profileReviewText'>{this.props.review.slice(0, 200)}</div>
+          <div className='profileReviewDate'>1/26/23</div>
         </div>
+
       )
 
   }

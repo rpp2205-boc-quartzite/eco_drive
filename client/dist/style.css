@@ -459,7 +459,6 @@ button.form-field:disabled {
 }
 
 .profileReviewBox {
-  height: 20rem;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -475,6 +474,9 @@ button.form-field:disabled {
   white-space: pre-wrap;
   border-radius: 10px;
   word-wrap: break-word;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  position: relative;
 }
 
 .profileReviewerName {
@@ -500,12 +502,15 @@ button.form-field:disabled {
   line-height: 18px;
   text-align: right;
   color: #76858A;
+  bottom: 10px;
+  height: 30px;
+  width: 100%;
+  position: absolute;
+  bottom: -4px;
+  left: -9px;
 }
 
 .profileReviewContainer {
-  /* display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden; */
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -522,6 +527,7 @@ button.form-field:disabled {
   object-fit: cover;
   flex: 33.33%;
   padding: 5px;
+  margin-left: 3px;
 }
 .secondprofileRecentDriver {
   width: 40px;

@@ -17,7 +17,7 @@ class DriverReviewsList extends React.Component {
             <div>
               {this.props.rider_reviews.map((review) =>
                 <DriverReviewTile
-                name={review._id}
+                id={review._id}
                 review={review.review_text}
                 rating={review.rating}
                 />
