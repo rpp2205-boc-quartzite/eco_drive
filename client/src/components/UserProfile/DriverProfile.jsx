@@ -5,12 +5,13 @@ import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { FaPen } from 'react-icons/fa';
+import DriverReviewsList from './DriverReviewsList.jsx';
 
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d36d62cd478f26557c4a33', //hardcoded for now
+      userId: '63d36f099d38b4ed1dba8f3a', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
@@ -74,29 +75,7 @@ class DriverProfile extends React.Component {
       {/* REVIEWS */}
         <div className='profileReviewDiv'>
           <span className='profileTitle'>Reviews</span>
-          <div className='profileReviewContainer'>
-            <div className='profileReviewBox'>
-              <div className='profileReviewerName'>Amy Johnson</div>
-              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-              <div className='profileReviewDate'>1/26/23</div>
-            </div>
-
-            <div className='profileReviewBox'>
-              <div className='profileReviewerName'>Mike Tree</div>
-              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-              <div className='profileReviewDate'>1/26/23</div>
-            </div>
-
-            <div className='profileReviewBox'>
-              <div className='profileReviewerName'>Steve Apple</div>
-              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-              <div className='profileReviewDate'>1/26/23</div>
-            </div>
-
-          </div>
+          <DriverReviewsList rider_reviews={this.state.rider_reviews} />
         </div>
 
       {/* RECENT RIDERS */}

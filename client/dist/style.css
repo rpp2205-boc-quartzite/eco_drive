@@ -474,6 +474,7 @@ button.form-field:disabled {
   display: inline-block;
   white-space: pre-wrap;
   border-radius: 10px;
+  word-wrap: break-word;
 }
 
 .profileReviewerName {
