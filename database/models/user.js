@@ -120,6 +120,16 @@ const userSchema = mongoose.Schema({
       },
       review_text: String
     }
+  ],
+
+  reported: [
+    {
+      reviewer_user_id: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'User'
+      },
+      report_text: String
+    }
   ]
 
 }, { collection: 'user' });
