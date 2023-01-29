@@ -11,6 +11,7 @@
   --gray6: #262929;
   --yellow: #FFB629;
   --red: #E72E2E;
+  --red2: #BC1F1F;
 }
 
 .card {
@@ -78,6 +79,20 @@
 
 .cancel-btn:hover {
   background-color: var(--gray4);
+}
+
+.negative-btn {
+  background-color: var(--red);
+  border: 0px;
+  border-radius: 100px;
+  color: var(--gray6);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.cancel-btn:hover {
+  background-color: var(--red2);
 }
 
 
