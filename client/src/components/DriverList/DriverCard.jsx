@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import DriverConfirmation from './DriverConfirmation.jsx'
 import BookingSuccessMessage from './BookingSuccessMessage.jsx'
 
-const DriverCard = ({driverInfo, startDistance, endDistance, bookDriver, updateRiderOnGoingRoute}) => {
+const DriverCard = ({driverInfo, startDistance, endDistance, updateRiderOnGoingRoute}) => {
 
   const [driverConfirmationOn, setDriverConfirmation] = useState(false);
   const [successMessageOn, setSuccessMessage] = useState(false);
@@ -27,7 +27,6 @@ const DriverCard = ({driverInfo, startDistance, endDistance, bookDriver, updateR
           driverInfo={driverInfo}
           toggleDriverConfirmation={toggleDriverConfirmation}
           toggleSuccessMessage={toggleSuccessMessage}
-          bookDriver={bookDriver}
           updateRiderOnGoingRoute={updateRiderOnGoingRoute}
         />
       }
