@@ -2,23 +2,6 @@ import React from 'react';
 
 const DriverConfirmation = ({driverInfo, toggleDriverConfirmation, toggleSuccessMessage, updateRiderOnGoingRoute}) => {
 
-  const toggleSuccess = async () => {
-    toggleSuccessMessage()
-    const timeoutId = setTimeout(()=>{toggleSuccessMessage()}, 3000)
-    return () => clearTimeout(timeoutId);
-  }
-  const promiseFunction = () => {
-    return new Promise((resolve, reject) => {
-      toggleSuccess((err, data) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(data);
-        }
-      })
-    })
-  }
-
   return (
     <div className='modal trans-bg display-block'>
       <div className='popup-container'>
