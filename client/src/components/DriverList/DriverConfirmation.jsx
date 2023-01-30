@@ -1,10 +1,10 @@
 import React from 'react';
 
-const DriverConfirmation = ({driverInfo, toggleDriverConfirmation, bookDriver}) => {
+const DriverConfirmation = ({driverInfo, toggleDriverConfirmation, toggleSuccessMessage, updateRiderOnGoingRoute}) => {
 
   return (
     <div className='modal trans-bg display-block'>
-      <div className='driver-confirmation-container'>
+      <div className='popup-container'>
         <div className='confirmation-header'>
           <h3>Confirmation</h3>
           <img className='big-avatar' src={driverInfo.avatar} alt="" />
@@ -20,8 +20,13 @@ const DriverConfirmation = ({driverInfo, toggleDriverConfirmation, bookDriver}) 
           <button
             className='primary-btn'
             onClick={() => {
-              bookDriver(driverInfo);
-              toggleDriverConfirmation();
+              toggleDriverConfirmation()
+              toggleSuccessMessage();
+              const timeoutId = setTimeout(()=>{
+                toggleSuccessMessage();
+                updateRiderOnGoingRoute(driverInfo);
+              }, 1500)
+              return () => clearTimeout(timeoutId);
             }}>Book Driver</button>
         </div>
       </div>
@@ -31,3 +36,4 @@ const DriverConfirmation = ({driverInfo, toggleDriverConfirmation, bookDriver}) 
 }
 
 export default DriverConfirmation;
+

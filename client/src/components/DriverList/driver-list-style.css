@@ -11,7 +11,29 @@
   --gray6: #262929;
   --yellow: #FFB629;
   --red: #E72E2E;
+  --red2: #BC1F1F;
 }
+
+.driver-list {
+  max-width: 400px;
+  width: 100%;
+  padding: 0 16px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px
+}
+
+.driver-list p {
+  margin: 0;
+}
+
+.card p {
+  margin: 0
+}
+
+div
 
 .card {
   width: 100%;
@@ -37,6 +59,25 @@
   border-radius: 100px;
   object-fit: cover;
 }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid var(--gray3);
+  padding: 0 0 16px 0;
+}
+
+.header-info {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ------------- Buttons --------------------------- */
 
 .primary-btn {
   background-color: var(--green3);
@@ -80,6 +121,20 @@
   background-color: var(--gray4);
 }
 
+.negative-btn {
+  background-color: var(--red);
+  border: 0px;
+  border-radius: 100px;
+  color: var(--gray6);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.negative-btn:hover {
+  background-color: var(--red2);
+}
+
 
 /* ------------- Driver Confirmation --------------------------- */
 .modal {
@@ -102,7 +157,7 @@
   height: 100%;
 }
 
-.driver-confirmation-container {
+.popup-container {
   position: absolute;
   top:50%;
   left:50%;
@@ -110,13 +165,13 @@
   bottom: auto;
   max-width: 343px;
   width: 100%;
-  padding: 24px 5%;
+  padding: 24px 16px;
   background-color: var(--gray1);
   border-radius: 5px;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 24px;
   color: var(--gray6)
 }
@@ -147,4 +202,56 @@
 
 .btn-horizontal-flex button {
   flex-grow: 1;
+}
+/* ---------------- Loading Screen ---------------- */
+.loading-screen {
+  width: 100%;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.loading-gif {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* ---------------- Success Message ---------------- */
+
+.success-message-text {
+  color: var(--green3);
+}
+
+.success-icon {
+  color: var(--green3);
+  font-size: 56px;
+}
+
+/* ---------------- Icons ---------------- */
+
+.card-icon {
+  font-size: 24px;
+}
+
+.outlined-heart-icon {
+  color: var(--gray5)
+}
+
+.full-heart-icon {
+  color: var(--red)
+}
+
+.info-icon {
+  color: var(--gray5)
+}
+
+.icons-flex {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  align-items: center;
 }

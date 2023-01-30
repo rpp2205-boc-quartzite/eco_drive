@@ -54,6 +54,10 @@ const userSchema = mongoose.Schema({
     },
     start_address: String,
     end_address:  String,
+    start_lat:      Number,
+    start_lng:      Number,
+    end_lat:        Number,
+    end_lng:        Number,
     time:  String,
     default: Boolean,
     driver_id: {
@@ -130,7 +134,12 @@ const userSchema = mongoose.Schema({
       },
       report_text: String
     }
-  ]
+  ],
+
+  favorites: {
+    type: [mongoose.SchemaTypes.ObjectId],
+    ref: 'User'
+  }
 
 }, { collection: 'user' });
 

@@ -31,6 +31,17 @@ function App() {
     })
   }
 
+  const [riderOnGoingRoute, setRiderOnGoingRoute] = useState({});
+  const updateRiderOnGoingRoute = (driverInfo) => {
+    // axios.put('/driver-list', driverInfo)
+    // .then((result) => {
+    //   setRiderOnGoingRoute(driverInfo);
+    //   navigate('/riderview')
+    // })
+    setRiderOnGoingRoute(driverInfo);
+    navigate('/riderview')
+  }
+
   return (
     <div>
       <Routes>
@@ -38,11 +49,11 @@ function App() {
         <Route path='/register' element={<Register authCheck={authenticate}/>} />
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
         <Route path="/driverview" element={<DriverView userId={userId}/>} />
-        <Route path="/riderview" element={<RiderView userId={userId}/>} />
+        <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute}/>} />
         <Route path="/ratings_reviews" element={<Reviews />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />
-        <Route path="/driver-list" element={<DriverList />} />
+        <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
       </Routes>
     {/* <HelloWorld /> */}
     {/* <DriverView /> */}

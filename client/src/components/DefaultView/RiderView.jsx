@@ -14,10 +14,10 @@ class RiderView extends React.Component {
       start_lng: '',
       end_address: '',
       time: '',
-      total_seats: '',
       end_lat: '',
       end_lng: '',
-      avatar: ''
+      avatar: '',
+      default: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,6 +66,7 @@ class RiderView extends React.Component {
   }
 
   render () {
+    console.log('Ongoing route: ', this.props.riderOnGoingRoute)
     return (
       <div>
         <div className="defaultViewHeader">
@@ -112,7 +113,10 @@ class RiderView extends React.Component {
             {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
             <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => this.handleChange(e, 'start_time')}/> <br/>
             <input type="radio" value="SaveDefaultRoute"  name="default"/> Set as default route <br/>
-            <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => this.handleSubmit(e)}></input>
+            {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => this.handleSubmit(e)}></input> */}
+            <Link to="/driver-list" state={{route: this.state}}>
+              <button>Find Drivers</button>
+            </Link>
           </div>
           </form>
 {/* below all temporary placeholders */}
