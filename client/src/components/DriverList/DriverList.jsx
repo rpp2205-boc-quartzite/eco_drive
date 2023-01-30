@@ -65,10 +65,12 @@ const DriverList = (props) => {
       </div>
     )
   } else {
-    return (<div className='loading-screen'>
-      <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
-      <p>Finding drivers...</p>
-    </div>)
+    return (
+      <div className='loading-screen'>
+        <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
+        <p>Finding drivers...</p>
+      </div>
+    )
   }
 }
 
