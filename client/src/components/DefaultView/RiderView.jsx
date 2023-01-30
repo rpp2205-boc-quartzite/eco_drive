@@ -23,6 +23,19 @@ function RiderView ({ userId }) {
   const [default_route, setDefaultRoute] = useState({});
   const navigate = useNavigate();
 
+  const route = {
+    id: userId,
+    full_name: name,
+    start_address: start.start_address,
+    start_lat: start.start_lat,
+    start_lng: start.start_lng,
+    end_address: end.end_address,
+    end_lat: end.end_lat,
+    end_lng: end.end_lng,
+    time: time,
+    default: def
+  }
+
   useEffect(() => {
     axios.get('/getriderview', { params: {userId} })
     .then((result) => {
@@ -35,8 +48,8 @@ function RiderView ({ userId }) {
     .catch(err => console.log(err))
   }, [])
 
-  const handleSubmit = (e) => {
-    const submitRoute = {
+  const handleSubmit = (e) => { // Need selected driver to write to db
+    const route = {
       id: userId,
       full_name: name,
       start_address: start.start_address,
@@ -48,10 +61,10 @@ function RiderView ({ userId }) {
       time: time,
       default: def
     }
-    console.log(submitRoute)
+    console.log(route)
     e.preventDefault()
     e.stopPropagation();
-    navigate('/driver-list', { state: submitRoute });
+    //navigate('/driver-list', route);
     // axios.post('/postRiderRoute', { data: submitRoute })
     // .then((result) => {
     //   console.log('posted updated route')
@@ -68,7 +81,13 @@ function RiderView ({ userId }) {
         <Link to="/driverview">
         <button>Switch to driver view</button>
         </Link></div>
-      <div className="headerAvatar">{avatar}</div>
+
+      <div className="headerAvatar">
+        <Link to="/riderprofile">
+        <button>Avatar</button>
+        </Link>
+      </div>
+
       <div className="headerLogout"><MdLogout size={25}/></div>
       </div>
 
@@ -112,7 +131,10 @@ function RiderView ({ userId }) {
           {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
           <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => setTime(e.target.value)}/> <br/>
           <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setDef(true)} /> Set as default route <br/>
-          <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input>
+          {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input> */}
+          <Link to="/driver-list" state={{route: route}}>
+            <button>Find Drivers</button>
+          </Link>
         </div>
         </form>
       {/* below all temporary placeholders */}

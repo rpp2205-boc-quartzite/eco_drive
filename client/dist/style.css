@@ -368,9 +368,10 @@ button.form-field:disabled {
 }
 
 .profilePhoto {
-  border-radius: 80%;
-  width: 88.77px;
-  height: 88.77px;
+  width: 89.77px;
+  height: 89.77px;
+  border-radius: 100px;
+  object-fit: cover;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -434,6 +435,8 @@ button.form-field:disabled {
   font-size: 16px;
   line-height: 24px;
   color: #262929;
+  padding-left: 8px;
+
 }
 
 .profileCurrentRouteTitle {
@@ -456,19 +459,25 @@ button.form-field:disabled {
   border: solid 1px #97AAB0;
   padding: 9px;
   border-radius: 9px;
-  margin: 6px;
+  margin: 8px;
 }
 
 .profileReviewBox {
-  display: flex;
+  height: 20rem;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   padding: 12px 16px;
   gap: 6px;
   width: 237px;
   height: 190px;
   background: #E3F1F5;
-  border-radius: 5px;
   margin-top: 6px;
+  margin-right: 8px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: pre-wrap;
+  border-radius: 10px;
 }
 
 .profileReviewerName {
@@ -495,5 +504,36 @@ button.form-field:disabled {
   text-align: right;
   color: #76858A;
 }
+
+.profileReviewContainer {
+  /* display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden; */
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.profileRecentDriverContainer {
+  display: flex;
+}
+
+.profileRecentDriver {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  object-fit: cover;
+  flex: 33.33%;
+  padding: 5px;
+}
+.secondprofileRecentDriver {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  object-fit: cover;
+  flex: 33.33%;
+  padding: 5px;
+}
+
 
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */

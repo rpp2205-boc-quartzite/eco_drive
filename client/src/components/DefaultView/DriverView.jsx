@@ -24,6 +24,19 @@ function DriverView ({ userId }) {
   const [default_route, setDefaultRoute] = useState({});
   const navigate = useNavigate();
 
+  const route = {
+    id: userId,
+    full_name: name,
+    start_address: start.start_address,
+    start_lat: start.start_lat,
+    start_lng: start.start_lng,
+    end_address: end.end_address,
+    end_lat: end.end_lat,
+    end_lng: end.end_lng,
+    time: time,
+    default: def
+  }
+
   useEffect(() => {
     axios.get('/getriderview', { params: {userId} })
     .then((result) => {
@@ -37,7 +50,7 @@ function DriverView ({ userId }) {
   }, [])
 
   const handleSubmit = (e) => {
-    const submitRoute = {
+    const route = {
       id: userId,
       full_name: name,
       start_address: start.start_address,
@@ -50,10 +63,10 @@ function DriverView ({ userId }) {
       default: def,
       total_seats: seats
     }
-    console.log(submitRoute)
+    console.log(route)
     e.preventDefault()
     e.stopPropagation();
-    navigate('/rider-list', { state: submitRoute });
+    // navigate('/rider-list', { state: route });
     // axios.post('/postRiderRoute', { data: submitRoute })
     // .then((result) => {
     //   console.log('posted updated route')
@@ -70,9 +83,15 @@ function DriverView ({ userId }) {
         <Link to="/riderview">
         <button>Switch to rider view</button>
         </Link></div>
-      <div className="headerAvatar">{avatar}</div>
-      <div className="headerLogout"><MdLogout size={25}/></div>
+
+      <div className="headerAvatar">
+        <Link to="/driverprofile">
+        <button>Avatar</button>
+        </Link>
       </div>
+
+      <div className="headerLogout"><MdLogout size={25}/></div>
+    </div>
 
       <div>
       <h2>Welcome {name},</h2>
@@ -115,7 +134,10 @@ function DriverView ({ userId }) {
           <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => setTime(e.target.value)}/> <br/>
             <input type="text" name="AvailableSeats" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/> <br/>
             <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setDef(true)} /> Set as default route <br/>
-          <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input>
+          {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input> */}
+          <Link to="/rider-list" state={{route: route}}>
+            <button>Find Riders</button>
+          </Link>
         </div>
         </form>
       {/* below all temporary placeholders */}

@@ -149,11 +149,13 @@ app.post('/driver-list', async (req, res) => {
 
   try {
     const activeDrivers = await getDriverList();
-    console.log(activeDrivers)
     for (let driver of activeDrivers) {
       const startDistance = await calculateDistance(rider.start_lat, rider.start_lng, driver.driver_route.start_lat, driver.driver_route.start_lng);
       const endDistance = await calculateDistance(rider.end_lat, rider.end_lng, driver.driver_route.end_lat, driver.driver_route.end_lng);
-      driverList.push({driverInfo: driver, startDistance, endDistance})
+      if (startDistance !== undefined && endDistance !== undefined) {
+        driverList.push({driverInfo: driver, startDistance, endDistance})
+      }
+      console.log(driverList)
       driverList.sort((a, b) => {
         return a.startDistance.value - b.startDistance.value
       })
