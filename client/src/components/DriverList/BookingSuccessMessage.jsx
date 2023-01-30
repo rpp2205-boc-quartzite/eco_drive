@@ -6,8 +6,8 @@ const BookingSuccessMessage = () => {
   return (
     <div className='modal trans-bg display-block'>
       <div className='popup-container'>
-        <HiCheckCircle />
-        <p>You successfully booked the driver!</p>
+        <HiCheckCircle className='success-icon'/>
+        <p className='success-message-text'>You successfully booked the driver!</p>
       </div>
       <div className='dark-space'></div>
     </div>

@@ -50,15 +50,18 @@ const DriverList = (props) => {
   if (drivers.length > 0) {
     return (
       <div>
-        {drivers.map((driver) => (
-          <DriverCard
-            key={driver.driverInfo._id}
-            driverInfo={driver.driverInfo}
-            startDistance={driver.startDistance}
-            endDistance={driver.endDistance}
-            updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
-          />
-        ))}
+        <div className='top-bar'></div>
+        <div className='driver-list'>
+          {drivers.map((driver) => (
+            <DriverCard
+              key={driver.driverInfo._id}
+              driverInfo={driver.driverInfo}
+              startDistance={driver.startDistance}
+              endDistance={driver.endDistance}
+              updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
+            />
+          ))}
+        </div>
       </div>
     )
   } else {

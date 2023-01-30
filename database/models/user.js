@@ -134,7 +134,12 @@ const userSchema = mongoose.Schema({
       },
       report_text: String
     }
-  ]
+  ],
+
+  favorites: {
+    type: [mongoose.SchemaTypes.ObjectId],
+    ref: 'User'
+  }
 
 }, { collection: 'user' });
 
