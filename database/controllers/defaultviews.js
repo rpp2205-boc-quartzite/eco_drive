@@ -30,7 +30,7 @@ module.exports = {
   },
 
   postRiderRoute: (newRoute) => {
-    const id = {_id: newRoute.userId}
+    const id = {_id: newRoute.id}
     const update = {
       start_address: newRoute.start_address,
       start_lat: newRoute.start_lat,
@@ -41,6 +41,6 @@ module.exports = {
       time: newRoute.time,
       default: newRoute.default
     }
-    return User.findOneAndUpdate(id, {rider_route: update}).then((result) => console.log('Updated user record with new route')).catch(err => console.log('Error updating record'));
+      return User.findOneAndUpdate(id, {rider_route: update}).then((result) => console.log('Updated user record with new route')).catch(err => console.log('Error updating record'));
   }
 }

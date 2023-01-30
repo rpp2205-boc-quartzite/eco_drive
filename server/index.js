@@ -79,7 +79,7 @@ app.get('/getdriverview', function(req, res) {
 
 // ---- Default Rider view routes  ---- //
 app.get('/getriderview', function(req, res) {
-  let userid = req.query.id;
+  let userid = req.query.userId;
   getRiderView(userid)
   .then((result) => {
     console.log(result)
@@ -96,7 +96,7 @@ app.post('/postDriverRoute', function(req, res) {
 })
 
 app.post('/postRiderRoute', function(req, res) {
-  console.log(req.body.data)
+  //console.log(req.body.data)
   var data = req.body.data;
   postRiderRoute(data)
   .then(result => res.end())
