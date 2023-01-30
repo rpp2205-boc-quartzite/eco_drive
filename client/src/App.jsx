@@ -11,6 +11,7 @@ import Reviews from './components/RatingsReviews/Reviews.jsx';
 import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
 import DriverList from './components/DriverList/DriverList.jsx';
+import Placeholder from './components/RiderList/Placeholder.jsx';
 
 function App() {
   const [userId, setUserId] = useState('');
@@ -54,6 +55,7 @@ function App() {
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />
         <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
+        <Route path="/rider-list" element={<Placeholder updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
       </Routes>
     {/* <HelloWorld /> */}
     {/* <DriverView /> */}
