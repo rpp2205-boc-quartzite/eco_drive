@@ -73,7 +73,7 @@ export default function Placeholder() {
   }
 
 
-  // if (!Object.keys(directionsResponse).length) {
+  if (!Object.keys(directionsResponse).length) {
     return (
           <div className="App">
              {console.log(Object.keys(directionsResponse).length)};
@@ -89,11 +89,10 @@ export default function Placeholder() {
             </div>
           </div>
           )
-  // } else {
-  //   return (
-  //     <DriverInteractions directions={directionsResponse} />
-  //   )
-
-
+  } else {
+    return (
+      <DriverInteractions directions={directionsResponse} />
+    )
+  }
 
 }

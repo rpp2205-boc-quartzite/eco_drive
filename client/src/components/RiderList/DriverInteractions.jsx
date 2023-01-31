@@ -38,10 +38,10 @@ const DriverInteractions = function(props) {
   const [duration, setDuration] = React.useState('');
 
   useEffect(() => {
-        setDirectionsResponse(props.directions.direction);
-        setDistance(props.directions.distance);
-        setDuration(props.directions.duration);
-        console.log(props.directions.direction);
+        setDirectionsResponse(props.directions);
+        setDistance(props.directions.routes[0].legs[0].distance.text);
+        setDuration(props.directions.routes[0].legs[0].duration.text);
+        console.log(props.directions);
   }, [props]);
 
 
