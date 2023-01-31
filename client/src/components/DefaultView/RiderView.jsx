@@ -4,6 +4,7 @@ import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/Md';
 import { useNavigate } from "react-router-dom";
+import DefaultRoute from './DefaultRoute.jsx';
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({
@@ -149,10 +150,7 @@ function RiderView ({ userId }) {
       <div>
         ______________________________ <br/>
         Default route <br />
-        From: {default_route.start_address} <br />
-        To: {default_route.end_address} <br />
-        Time: {default_route.time} <br />
-
+        < DefaultRoute default_route={default_route}/>
       </div>
     </div>
   )

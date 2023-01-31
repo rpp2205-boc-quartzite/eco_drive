@@ -4,6 +4,7 @@ import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/Md';
 import { useNavigate } from "react-router-dom";
+import DefaultRoute from './DefaultRoute.jsx';
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -42,8 +43,8 @@ function DriverView ({ userId }) {
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
-      if (result.data[0].rider_route.default) {
-        setDefaultRoute(result.data[0].rider_route)
+      if (result.data[0].driver_route.default) {
+        setDefaultRoute(result.data[0].driver_route)
       }
     })
     .catch(err => console.log(err))
@@ -141,6 +142,7 @@ function DriverView ({ userId }) {
         </div>
         </form>
       {/* below all temporary placeholders */}
+
       <div>
         ______________________________ <br/>
         Ongoing Trip
@@ -152,11 +154,9 @@ function DriverView ({ userId }) {
       <div>
         ______________________________ <br/>
         Default route <br />
-        From: {default_route.start_address} <br />
-        To: {default_route.end_address} <br />
-        Time: {default_route.time} <br />
-
+        < DefaultRoute default_route={default_route} />
       </div>
+
     </div>
   )
 }
