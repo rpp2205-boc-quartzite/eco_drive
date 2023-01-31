@@ -1,0 +1,105 @@
+
+.top-area {
+  position: relative;
+  top: 10%;
+  margin: auto;
+  border-color: rgb(6, 161, 9);
+  border-width: thin;
+  border-style: dashed;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+@media (min-width: 600px) {
+  .top-area {
+    position: relative;
+    top: 10%;
+    margin: auto;
+    border-color: rgb(6, 161, 9);
+    border-width: thin;
+    border-style: dashed;
+    border-radius: 5px;
+    padding: 3px;
+  }
+}
+
+.setting {
+  position: relative;
+  padding: 5px;
+  color:forestgreen;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  }
+
+.toggle-rider {
+  position: relative;
+  padding: 5px;
+  color:forestgreen;
+  border-radius: 90px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+
+.profile-picture {
+  position: relative;
+  padding: 0px, 5px, 5px, 5px;
+  height: 40px;
+  width: 40px;
+  border-radius: 90px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.return-main {
+  position: relative;
+  padding: 5px;
+  color:forestgreen;
+  border-radius: 90px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.start-trip {
+  position: relative;
+  padding: 5px;
+  color:forestgreen;
+  border-radius: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.back-button {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+
+}
+
+.MapData {
+  height: 250px;
+  width: 250px;
+  margin: auto;
+  border-radius: 5px;
+  border-color: green;
+  border-width: thick;
+  border-style: solid;
+  justify-content: center;
+  text-align: center;
+}
+
+.Gmap {
+  height: 275px;
+  width: 370px;
+  margin: auto;
+  position: relative;
+  border-radius: 5px;
+  justify-content: center;
+  text-align: center;
+
+}

@@ -5,9 +5,10 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
+const { getDriverView, getRiderView, postDriverRoute, postRiderRoute } = require('../database/controllers/defaultviews.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
-const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
+//const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 const { getDriverList } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
 //const goodbye = require('./routes/goodbye.js');
@@ -78,7 +79,7 @@ app.get('/getdriverview', function(req, res) {
 
 // ---- Default Rider view routes  ---- //
 app.get('/getriderview', function(req, res) {
-  let userid = req.query.id;
+  let userid = req.query.userId;
   getRiderView(userid)
   .then((result) => {
     console.log(result)
@@ -87,6 +88,21 @@ app.get('/getriderview', function(req, res) {
   .catch(err => console.log(err))
 });
 
+app.post('/postDriverRoute', function(req, res) {
+  var data = req.body.data;
+  postDriverRoute(data)
+  .then(result => res.end())
+  .catch(err => console.log(err))
+})
+
+app.post('/postRiderRoute', function(req, res) {
+  //console.log(req.body.data)
+  var data = req.body.data;
+  postRiderRoute(data)
+  .then(result => res.end())
+  .catch(err => console.log(err))
+
+});
 // ---- Ratings and Reviews routes  ---- //
 app.get('/ratings_reviews', function(req, res) {
   let userid = req.query.id;
