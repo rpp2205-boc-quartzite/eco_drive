@@ -37,14 +37,14 @@ h1 {
 .headerToggleView {
   display: inline-block;
   flex-direction: row;
-  padding-right: 120px;
+  padding-right: 170px;
   padding-top: 5px;
   padding-bottom: 5px;
 }
 .headerAvatar {
   display: inline-block;
   flex-direction: row;
-  padding-right: 25px;
+  padding-right: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
 }
@@ -53,12 +53,25 @@ h1 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* padding-top: 5px;
-  padding-bottom: 5px; */
 }
 .welcome {
   margin: 10px;
   float: left;
+}
+
+.viewToggleButton {
+  padding-left: 15px;
+  color: #262929;
+  size: 25px
+}
+
+.viewToggle {
+  float: left;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #338F24;
 }
 /* -------- BECCA CSS END -------- */
 

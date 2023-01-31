@@ -3,6 +3,7 @@ import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/Md';
+import { HiOutlineRefresh } from 'react-icons/Hi';
 import { useNavigate } from "react-router-dom";
 import DefaultRoute from './DefaultRoute.jsx';
 import UpcomingTrip from './UpcomingTrip.jsx';
@@ -53,13 +54,20 @@ function RiderView ({ userId }) {
       <div className="defaultViewHeader">
       <div className="headerToggleView">
         <Link to="/driverview">
-        <button>Switch to driver view</button>
+          <div className="viewToggle">Driver</div>
+          <HiOutlineRefresh className="viewToggleButton" size={25}/>
         </Link> </div>
+
       <div className="headerAvatar">
         <Link to="/riderprofile">
         <button>Avatar</button>
         </Link> </div>
-      <div className="headerLogout"><MdLogout size={25}/></div>
+
+      <div className="headerLogout">
+        <Link to="/">
+        <MdLogout size={20}/>
+        </Link>
+      </div>
     </div>
 
       <div>
@@ -104,7 +112,7 @@ function RiderView ({ userId }) {
           <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setIsDefault(true)} /> Set as default route <br/>
           {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input> */}
           <Link to="/driver-list" state={{route: route}}>
-            <button>Find Drivers</button>
+            <button className="primary-btn">Find Drivers</button>
           </Link>
         </div>
         </form>
