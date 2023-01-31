@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-export default function DefaultRoute ({ default_route }) {
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-  const [time, setTime] = useState('');
+const DefaultRoute = ({ userId, upcoming }) => {
 
-  return (
-    <div>
-      From: {default_route.start_address} <br />
-      To: {default_route.end_address} <br />
-      Time: {default_route.time} <br />
-    </div>
-  )
+  if (upcoming.default) {
+    return (
+      <div>
+        _______________________________ <br></br>
+        <div>Default Route</div>
+        From: {upcoming.start_address} <br />
+        To: {upcoming.end_address} <br />
+        Time: {upcoming.time} <br />
+      </div>
+    )
+  }
 }
+
+export default DefaultRoute;

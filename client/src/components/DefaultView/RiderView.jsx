@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/Md';
 import { useNavigate } from "react-router-dom";
 import DefaultRoute from './DefaultRoute.jsx';
+import UpcomingTrip from './UpcomingTrip.jsx';
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({
@@ -18,10 +19,10 @@ function RiderView ({ userId }) {
     end_lng: ''
   })
   const [name, setName] = useState('');
-  const [time, setTime] = useState('');
-  const [def, setDef] = useState(false);
   const [avatar, setAvatar] = useState('');
-  const [default_route, setDefaultRoute] = useState({});
+  const [time, setTime] = useState('');
+  const [isDefault, setIsDefault] = useState(false);
+  const [upcoming, setUpcoming] = useState({});
   const navigate = useNavigate();
 
   const route = {
@@ -34,7 +35,7 @@ function RiderView ({ userId }) {
     end_lat: end.end_lat,
     end_lng: end.end_lng,
     time: time,
-    default: def
+    default: isDefault
   }
 
   useEffect(() => {
@@ -42,38 +43,10 @@ function RiderView ({ userId }) {
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
-      if (result.data[0].rider_route.default) {
-        setDefaultRoute(result.data[0].rider_route)
-      }
+      setUpcoming(result.data[0].rider_route)
     })
     .catch(err => console.log(err))
   }, [])
-
-  const handleSubmit = (e) => { // Need selected driver to write to db
-    const route = {
-      id: userId,
-      full_name: name,
-      start_address: start.start_address,
-      start_lat: start.start_lat,
-      start_lng: start.start_lng,
-      end_address: end.end_address,
-      end_lat: end.end_lat,
-      end_lng: end.end_lng,
-      time: time,
-      default: def
-    }
-    console.log(route)
-    e.preventDefault()
-    e.stopPropagation();
-    //navigate('/driver-list', route);
-    // axios.post('/postRiderRoute', { data: submitRoute })
-    // .then((result) => {
-    //   console.log('posted updated route')
-    // })
-    // .catch((err) => {
-    //   alert('There was an error finding drivers');
-    // })
-  }
 
   return (
     <div className="allDefaultView">
@@ -81,16 +54,13 @@ function RiderView ({ userId }) {
       <div className="headerToggleView">
         <Link to="/driverview">
         <button>Switch to driver view</button>
-        </Link></div>
-
+        </Link> </div>
       <div className="headerAvatar">
         <Link to="/riderprofile">
         <button>Avatar</button>
-        </Link>
-      </div>
-
+        </Link> </div>
       <div className="headerLogout"><MdLogout size={25}/></div>
-      </div>
+    </div>
 
       <div>
       <h2>Welcome {name},</h2>
@@ -131,26 +101,24 @@ function RiderView ({ userId }) {
           />
           {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
           <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => setTime(e.target.value)}/> <br/>
-          <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setDef(true)} /> Set as default route <br/>
+          <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setIsDefault(true)} /> Set as default route <br/>
           {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input> */}
           <Link to="/driver-list" state={{route: route}}>
             <button>Find Drivers</button>
           </Link>
         </div>
         </form>
-      {/* below all temporary placeholders */}
+
       <div>
         ______________________________ <br/>
         Ongoing Trip
       </div>
       <div>
         ______________________________ <br/>
-        Upcoming Trip
+        UpcomingTrip
       </div>
       <div>
-        ______________________________ <br/>
-        Default route <br />
-        < DefaultRoute default_route={default_route}/>
+        < DefaultRoute userId={userId} upcoming={upcoming} />
       </div>
     </div>
   )
