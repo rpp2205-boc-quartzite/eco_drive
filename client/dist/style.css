@@ -64,7 +64,7 @@ h1 {
 
 /* -------- BLAKE Authentication CSS -------- */
 
-/* .first-view {
+.first-view {
   position: relative;
   width: 375px;
   height: 812px;
@@ -77,7 +77,6 @@ h1 {
   align-items: center;
   padding: 0px;
   gap: 20px;
-
   position: absolute;
   width: 269.39px;
   height: 183.33px;
@@ -85,13 +84,20 @@ h1 {
   top: 232px;
 }
 
-.logo-title {
-  width: 219.29px;
-  height: 139.33px;
+.eco-subtitle {
+  width: 269.39px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #76858A;
   flex: none;
-  order: 0;
+  order: 1;
   flex-grow: 0;
-} */
+}
 
 .link-frame {
   display: flex;
@@ -100,7 +106,6 @@ h1 {
   align-items: center;
   padding: 40px 16px;
   gap: 16px;
-  
   position: absolute;
   height: 161px;
   left: 0px;
@@ -108,86 +113,7 @@ h1 {
   bottom: 0px;
 }
 
-.signup-form-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.sign-form {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-}
-
-/* .eco-title {
-  position: absolute;
-  left: 11.8%;
-  right: 11.8%;
-  top: 83.44%;
-  bottom: 0%;
-  color: #338F24;
-}
-
-.eco-subtitle {
-  /* Think globally, carpool locally */
-  width: 269.39px;
-  height: 24px;
-
-  /* Body */
-
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  /* identical to box height */
-
-  text-align: center;
-
-  /* Gray/gray5 */
-
-  color: #76858A;
-
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-}
-
 .signup-btn {
-  width: 54px;
-height: 21px;
-
-/* Button */
-
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 21px;
-/* identical to box height */
-
-text-transform: capitalize;
-
-/* Gray/gray1 */
-
-color: #FCFCFC;
-
-
-/* Inside auto layout */
-
-flex: none;
-order: 1;
-flex-grow: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -204,6 +130,21 @@ flex-grow: 0;
   flex-grow: 0;
 }
 
+.sign-up-link {
+  width: 54px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
 .login-btn {
   display: flex;
   flex-direction: row;
@@ -211,18 +152,34 @@ flex-grow: 0;
   align-items: center;
   padding: 0px;
   gap: 12px;
-  
   width: 343px;
   height: 24px;
-  
   border-radius: 5px;
-  
   flex: none;
   order: 1;
   align-self: stretch;
   flex-grow: 0;
-} */
+}
 
+.login-btn-link {
+  width: 47px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  color: #338F24;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.inner-fields {
+  display: flex;
+  flex-direction: column;
+}
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */
