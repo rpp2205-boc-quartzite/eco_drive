@@ -80,8 +80,13 @@ const DriverInteractions = function(props) {
       <div>
         <div className="top-area">
           <div className="setting">Driver</div>
+
           <button className="toggle-rider" type="submit">circle</button>
-          <img className="profile-picture" alt="lady from FEC" src="https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"/>
+
+          <div className="profile-pic-padd">
+            <img className="profile-picture" alt="lady from FEC" src="https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"/>
+          </div>
+
           <button className="return-main" type="submit">return</button>
         </div>
       </div>
@@ -92,10 +97,8 @@ const DriverInteractions = function(props) {
       <br></br>
       <div className="MapData">
         <div className="route">
-          <h5>Total Distance:</h5>
-          <h5>{distance}</h5>
-          <h5>Expected Duration:</h5>
-          <h5>{duration}</h5>
+          <h3>Total Distance: {distance}</h3>
+          <h3>Expected Duration: {duration}</h3>
         </div>
       </div>
         <br></br>

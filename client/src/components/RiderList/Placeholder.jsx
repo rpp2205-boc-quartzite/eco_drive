@@ -91,7 +91,7 @@ export default function Placeholder() {
           )
   } else {
     return (
-      <DriverInteractions directions={directionsResponse} />
+      <DriverInteractions directions={directionsResponse} riders={ridersArray}/>
     )
   }
 
