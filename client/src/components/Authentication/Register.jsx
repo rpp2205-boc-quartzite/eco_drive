@@ -73,12 +73,14 @@ export default function Register(props) {
           </Link> 
         </div>}
       {driverCheck === true &&
-        <form>
-          <label htmlFor='dl'>Driver's License #</label>
-            <input  value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
-          <label htmlFor='licensePlate'>License Plate #</label>
-            <input  value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>
+        <form className='sign-form'>
+          <div className='inner-fields'>
+            <label htmlFor='dl'>Driver's License #</label>
+              <input  value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
+            <label htmlFor='licensePlate'>License Plate #</label>
+              <input  value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>
             <button type='submit' onClick={handleSubmit}>Submit</button>
+          </div>
         </form>} 
   </div>
   )
