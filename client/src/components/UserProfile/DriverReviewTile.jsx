@@ -9,21 +9,20 @@ class DriverReviewTile extends React.Component {
     }
   }
 
-  componentDidMount () {
-    var id = this.props.id;
-    console.log('IDDDD', id)
-    axios.get('/getDriverView', { params: {id} })
-    .then((result) => {
-      console.log('ID!!!', result)
-      this.setState({
-        full_name: result.data[0].full_name
-      })
-    })
-    .catch(err => console.log(err))
-  }
+  // componentDidMount () {
+  //   var id = this.props.id;
+  //   //console.log('IDDDD', id)
+  //   axios.get('/getDriverView', { params: {id} })
+  //   .then((result) => {
+  //     //console.log('ID!!!', result)
+  //     this.setState({
+  //       full_name: result.data[0].full_name
+  //     })
+  //   })
+  //   .catch(err => console.log(err))
+  // }
 
   render() {
-    console.log('this.state.name', this.state.name)
       return (
         <div className='profileReviewBox'>
           {/* <div className='profileReviewerName'>{this.state.full_name}</div>

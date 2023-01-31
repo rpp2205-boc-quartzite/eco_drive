@@ -561,5 +561,18 @@ button.form-field:disabled {
   padding-bottom: 21px;
 }
 
+.editProfileForm {
+  z-index: 100;
+  position: absolute;
+  width: 343px;
+  height: 425px;
+  left: 4.5%;
+  top: 19%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 0 0 99999px rgb(0 0 0 / 50%);
+}
 
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */

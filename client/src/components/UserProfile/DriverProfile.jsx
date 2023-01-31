@@ -55,10 +55,13 @@ class DriverProfile extends React.Component {
   editProfileOrClose() {
     if (this.state.editProfile === true) {
       this.setState({editProfile: false})
+      console.log('SET TO FALSE', this.state.editProfile)
     } else {
       this.setState({editProfile: true})
+      console.log('SET TO TRUE', this.state.editProfile)
     }
   }
+
 
 
   render () {
@@ -98,11 +101,21 @@ class DriverProfile extends React.Component {
         </div>
 
       {/* UPDATE PROFILE */}
-        <div className='profileButton'> <button className='profileUpdateButton'>
-          Update Profile <FaPen
-            size="10px"
-            color="green" />
-        </button></div>
+        <div>
+          <div className='profileButton'> <button className='profileUpdateButton' onClick={this.editProfileOrClose}>
+            Update Profile <FaPen
+              size="10px"
+              color="green" />
+          </button>
+          </div>
+          {this.state.editProfile ?
+          <div className='editProfileForm'>
+            <button onClick={this.editProfileOrClose}>Cancel</button>
+            <button>Submit</button>
+          </div>
+          : null
+          }
+        </div>
 
       {/* REVIEWS */}
         <div className='profileReviewDiv'>
