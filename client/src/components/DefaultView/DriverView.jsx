@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/Md';
+import { MdLogout } from 'react-icons/md';
 import { useNavigate } from "react-router-dom";
 
 function DriverView ({ userId }) {

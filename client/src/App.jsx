@@ -33,14 +33,13 @@ function App() {
   }
 
   const [riderOnGoingRoute, setRiderOnGoingRoute] = useState({});
-  const updateRiderOnGoingRoute = (driverInfo) => {
-    // axios.put('/driver-list', driverInfo)
-    // .then((result) => {
-    //   setRiderOnGoingRoute(driverInfo);
-    //   navigate('/riderview')
-    // })
-    setRiderOnGoingRoute(driverInfo);
-    navigate('/riderview')
+  const updateRiderOnGoingRoute = (driverInfo, userRouteInfo) => {
+    userRouteInfo.driver_id = driverInfo._id;
+    axios.post('/postRiderRoute', userRouteInfo)
+    .then((result) => {
+      setRiderOnGoingRoute(driverInfo);
+      navigate('/riderview')
+    })
   }
 
   return (

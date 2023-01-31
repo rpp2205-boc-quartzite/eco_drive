@@ -8,14 +8,14 @@ import DriverCard from './DriverCard.jsx'
 const DriverList = (props) => {
 
   const [drivers, setDrivers] = useState([]);
+  const [userRouteInfo, setUserRouteInfo] = useState({})
 
   const info = useLocation()
   const {route} = info.state
 
   const findDrivers = () => {
-    console.log(route)
     const rider = {
-      _id: route.userId,
+      _id: route._id,
       start_address: route.start_address,
       start_lat: route.start_lat,
       start_lng: route.start_lng,
@@ -35,6 +35,7 @@ const DriverList = (props) => {
     //   end_lng: 	-121.87354,
     //   time: '9:00 am',
     // }
+    setUserRouteInfo(rider);
     return axios.post('/driver-list', rider)
       .then((res) => {
         console.log(res.data)
@@ -56,6 +57,7 @@ const DriverList = (props) => {
             <DriverCard
               key={driver.driverInfo._id}
               driverInfo={driver.driverInfo}
+              userRouteInfo={userRouteInfo}
               startDistance={driver.startDistance}
               endDistance={driver.endDistance}
               updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}

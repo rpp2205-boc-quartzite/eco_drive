@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/Md';
+import { MdLogout } from 'react-icons/md';
 import { useNavigate } from "react-router-dom";
 
 function RiderView ({ userId }) {
@@ -24,7 +24,7 @@ function RiderView ({ userId }) {
   const navigate = useNavigate();
 
   const route = {
-    id: userId,
+    _id: userId,
     full_name: name,
     start_address: start.start_address,
     start_lat: start.start_lat,

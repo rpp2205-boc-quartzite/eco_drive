@@ -29,9 +29,10 @@ module.exports = {
     return User.findOneAndUpdate(id, {driver_route: update}).then((result) => console.log('Updated user record with new route')).catch(err => console.log('Error updating record'));
   },
 
-  postRiderRoute: (newRoute) => {
-    const id = {_id: newRoute.id}
+  postRiderRoute: async (newRoute) => {
+    const user_id = {_id: newRoute._id}
     const update = {
+      started: false,
       start_address: newRoute.start_address,
       start_lat: newRoute.start_lat,
       start_lng: newRoute.start_lng,
@@ -39,8 +40,33 @@ module.exports = {
       end_lat: newRoute.end_lat,
       end_lng: newRoute.end_lng,
       time: newRoute.time,
-      default: newRoute.default
+      default: newRoute.default,
+      driver_id: newRoute.driver_id
     }
-      return User.findOneAndUpdate(id, {rider_route: update}).then((result) => console.log('Updated user record with new route')).catch(err => console.log('Error updating record'));
+    try {
+      // Update rider_router
+      await User.findOneAndUpdate(user_id, {rider_route: update})
+      // Add rider id to the driver's rider list
+      await module.exports.addIdToRiderListOfDriver(newRoute.driver_id, newRoute._id)
+      console.log('Updated user record with new rider route');
+    } catch (err) {
+      console.log('Error updating rider route: ', err);
+    }
+  },
+
+  addIdToRiderListOfDriver: (driverId, newRiderId) => {
+    const driver_id = {_id: driverId};
+    User.updateOne(driver_id, {$push: {"driver_route.riders": newRiderId}})
+      .then (() => console.log('Successfully added rider id to driver\'s rider list '))
+      .catch((err) => {
+        console.log('Error adding rider id to driver\'s rider list: ', err)})
+  },
+
+  removeIdOffRiderListOfDriver: (driverId, riderId) => {
+    const driver_id = {_id: driverId};
+    User.updateOne(driver_id, {$pull: {"driver_route.riders": riderId}})
+      .then (() => console.log('Successfully removed rider id off driver\'s rider list '))
+      .catch((err) => {
+        console.log('Error removing rider id off driver\'s rider list: ', err)})
   }
 }

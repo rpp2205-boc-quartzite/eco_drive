@@ -5,7 +5,7 @@ import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import DriverConfirmation from './DriverConfirmation.jsx'
 import BookingSuccessMessage from './BookingSuccessMessage.jsx'
 
-const DriverCard = ({driverInfo, startDistance, endDistance, updateRiderOnGoingRoute}) => {
+const DriverCard = ({driverInfo, userRouteInfo, startDistance, endDistance, updateRiderOnGoingRoute}) => {
 
   const [driverConfirmationOn, setDriverConfirmation] = useState(false);
   const [successMessageOn, setSuccessMessage] = useState(false);
@@ -18,7 +18,7 @@ const DriverCard = ({driverInfo, startDistance, endDistance, updateRiderOnGoingR
     setSuccessMessage(!successMessageOn)
   }
 
-  const [favoriteDriver, setFavoriteDriver] = useState(driverInfo.favorites.includes(driverInfo._id))
+  const [favoriteDriver, setFavoriteDriver] = useState((driverInfo.favorites || []).includes(driverInfo._id))
 
   const toggleFavoriteDriver = () => {
     setFavoriteDriver(!favoriteDriver)
@@ -31,6 +31,7 @@ const DriverCard = ({driverInfo, startDistance, endDistance, updateRiderOnGoingR
         driverConfirmationOn &&
         <DriverConfirmation
           driverInfo={driverInfo}
+          userRouteInfo={userRouteInfo}
           toggleDriverConfirmation={toggleDriverConfirmation}
           toggleSuccessMessage={toggleSuccessMessage}
           updateRiderOnGoingRoute={updateRiderOnGoingRoute}
