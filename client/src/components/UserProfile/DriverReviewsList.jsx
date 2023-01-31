@@ -10,12 +10,12 @@ class DriverReviewsList extends React.Component {
 
 
   render() {
-    console.log('asdf', this.props.rider_reviews)
+    console.log('asdf', this.props.driver_reviews)
       return (
         <div>
           <div className='profileReviewContainer'>
             <div>
-              {this.props.rider_reviews.map((review) =>
+              {this.props.driver_reviews.map((review) =>
                 <DriverReviewTile
                 id={review._id}
                 review={review.review_text}

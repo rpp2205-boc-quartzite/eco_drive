@@ -12,7 +12,7 @@ class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d36ee5cd478f26557c4a38', //hardcoded for now
+      userId: '63d36e8fcd478f26557c4a37', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
@@ -21,11 +21,15 @@ class DriverProfile extends React.Component {
       total_seats: '',
       avatar: '',
       drive_license: '',
-      rider_reviews: [],
-      recent_drivers: [],
-      rating: 4
+      driver_reviews: [],
+      recent_riders: [],
+      rating: 4,
       //hardcoded rating ^ for now
+      driver_trips: [],
+      editProfile: false
     };
+    this.editProfileOrClose = this.editProfileOrClose.bind(this);
+
   }
 
   componentDidMount () {
@@ -41,12 +45,21 @@ class DriverProfile extends React.Component {
         time: result.data[0].driver_route.time,
         avatar: result.data[0].avatar,
         drive_license: result.data[0].drive_license,
-        rider_reviews: result.data[0].rider_reviews,
+        driver_reviews: result.data[0].driver_reviews,
         recent_drivers: result.data[0].recent_drivers
       })
     })
     .catch(err => console.log(err))
   }
+
+  editProfileOrClose() {
+    if (this.state.editProfile === true) {
+      this.setState({editProfile: false})
+    } else {
+      this.setState({editProfile: true})
+    }
+  }
+
 
   render () {
     return (
@@ -54,12 +67,15 @@ class DriverProfile extends React.Component {
       {/* TOP BUTTONS */}
         <span className='profileToggle'>Driver</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
-        <span className='profileLogoutButton'><MdLogout /></span>
-        <Link to="/driverview"><span className='profileHomeButton'><AiFillHome/></span></Link>
+        <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
+        <Link to="/riderview"><span className='profileHomeButton'><AiFillHome/></span></Link>
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
-          <img className='profilePhoto' src={this.state.avatar} alt="drive image"/>
+          {!this.state.avatar ?
+          <img className='profilePhoto' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
+          <img className='profilePhoto' src={this.state.avatar} alt="profile avatar"/>
+          }
         </div>
         <div className='profileName'>
          {this.state.full_name} <span className='profileOnline'>&#183;</span>
@@ -91,14 +107,26 @@ class DriverProfile extends React.Component {
       {/* REVIEWS */}
         <div className='profileReviewDiv'>
           <span className='profileTitle'>Reviews</span>
-          <DriverReviewsList rider_reviews={this.state.rider_reviews} />
+          {this.state.driver_reviews.length === 0 ?
+          <div className='profilePlaceholder'>No reviews yet &#129485;</div>
+          :
+          <DriverReviewsList driver_reviews={this.state.driver_reviews} />
+          }
         </div>
 
       {/* RECENT RIDERS */}
         <div>
           <span className='profileTitle'>Recent riders</span>
           <div className='profileRecentDriverContainer'>
-          <Link to="/ratings_reviews"><div><img className='profileRecentDriver' src={this.state.avatar} alt="drive image"/></div></Link>
+          {this.state.recent_riders.length === 0 ?
+          <div className='profilePlaceholder2'>None yet &#129485;</div>
+          :
+          <Link to="/ratings_reviews">
+          {!this.state.avatar ?
+          <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
+          <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/>
+          }</Link>
+          }
           </div>
         </div>
 
@@ -119,6 +147,9 @@ class DriverProfile extends React.Component {
       {/* PREVIOUS ROUTE */}
         <div>
           <span className='profileTitle'>Previous routes</span>
+          {this.state.driver_trips.length === 0 ?
+          <div className='profilePlaceholder2'>None yet &#129485;</div>
+          :
           <div className='profileCurrentRoute'>
             <div className='profileCurrentRouteTitle'>From:</div>
             <div className='profileCurrentRouteInfo'>{this.state.start_address}</div>
@@ -126,18 +157,19 @@ class DriverProfile extends React.Component {
             <div className='profileCurrentRouteInfo'>{this.state.end_address}</div>
             <div className='profileCurrentRouteTitle'>Time:</div>
             <div className='profileCurrentRouteInfo'>{this.state.time}</div>
-
           </div>
+          }
+
         </div>
 
       {/* SAVINGS THIS MONTH */}
       <div>
           <span className='profileTitle'>Your savings this month</span>
           <div className='profileSavings'>
-            <div className='profileSavingsTitle'>You saved</div>
-            <div className='profileCurrentRouteInfo'>2.5 trees &#127794; <div>or</div> 30 minutes of driving &#128663;</div>
+            <div className='profileSavingsTitle'>You saved the equivalent of</div>
+            <div className='profileCurrentRouteInfo'>{(this.state.driver_trips.length + 1) * .05} trees &#127794; <div>or</div> {(this.state.driver_trips.length + 1)* 10} minutes of driving &#128663;</div>
             <div className='profileSavingsTitle'>This translates to</div>
-            <div className='profileCurrentRouteInfo'>$40.49 you saved on gas &#9981;</div>
+            <div className='profileCurrentRouteInfo'>${(this.state.driver_trips.length + 1)* 5.35} you saved on gas &#9981;</div>
           </div>
           <span className='profileTitle'>Fact of the day</span>
           <div className='profileCurrentRoute'>

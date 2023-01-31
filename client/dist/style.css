@@ -538,5 +538,28 @@ button.form-field:disabled {
   padding: 5px;
 }
 
+.profilePlaceholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #97AAB0;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profilePlaceholder2 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #97AAB0;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 21px;
+}
+
 
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */
