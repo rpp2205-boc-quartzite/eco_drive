@@ -43,6 +43,51 @@ h1 {
 /* -------- BECCA CSS END -------- */
 
 /* -------- BLAKE Authentication CSS -------- */
+
+/* .first-view {
+  position: relative;
+  width: 375px;
+  height: 812px;
+  background: #FCFCFC;
+}
+
+.title-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 20px;
+
+  position: absolute;
+  width: 269.39px;
+  height: 183.33px;
+  left: 52.67px;
+  top: 232px;
+}
+
+.logo-title {
+  width: 219.29px;
+  height: 139.33px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+} */
+
+.link-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 40px 16px;
+  gap: 16px;
+  
+  position: absolute;
+  height: 161px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
 .signup-form-container {
   display: flex;
   flex-direction: column;
@@ -60,6 +105,104 @@ h1 {
   flex-direction: column;
   position: absolute;
 }
+
+/* .eco-title {
+  position: absolute;
+  left: 11.8%;
+  right: 11.8%;
+  top: 83.44%;
+  bottom: 0%;
+  color: #338F24;
+}
+
+.eco-subtitle {
+  /* Think globally, carpool locally */
+  width: 269.39px;
+  height: 24px;
+
+  /* Body */
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Gray/gray5 */
+
+  color: #76858A;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.signup-btn {
+  width: 54px;
+height: 21px;
+
+/* Button */
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 21px;
+/* identical to box height */
+
+text-transform: capitalize;
+
+/* Gray/gray1 */
+
+color: #FCFCFC;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  width: 343px;
+  height: 41px;
+  background: #338F24;
+  border-radius: 50px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.login-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+  
+  width: 343px;
+  height: 24px;
+  
+  border-radius: 5px;
+  
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+} */
+
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */

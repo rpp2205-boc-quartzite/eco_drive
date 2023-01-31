@@ -12,14 +12,19 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>EcoDrive</h1>
-        <Link to='/register'>
-          <button>Sign Up</button>
-        </Link>
-        <Link to='/login'>
-          <button>Login</button>
-        </Link>
+      <div className='first-view'>
+        <div className='title-frame'>
+          <h1 className='eco-title'>EcoDrive</h1>
+          <h2 className='eco-subtitle'>Think globally, carpool locally</h2>
+        </div>
+        <div className='link-frame'>
+          <Link to='/register'>
+            <button className='signup-btn'>Sign Up</button>
+          </Link>
+          <Link to='/login'>
+            <button className='login-btn'>Login</button>
+          </Link>
+        </div>
       </div>
     )}
 };
