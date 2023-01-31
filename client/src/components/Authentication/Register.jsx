@@ -11,12 +11,12 @@ export default function Register(props) {
   const [confirmPass, setConfirmPass] = useState('');
   const [drivers_license, setDl] = useState('');
   const [license_plate, setlicensePlate] = useState('');
-  const [driverCheck, setDriverCheck] = useState('');
+  const [driverCheck, setDriverCheck] = useState(false);
   const navigate=useNavigate();
 
   const handleNext = (event) => {
     event.preventDefault();
-
+    setDriverCheck(true);
   }
 
   const handleSubmit = (event) => {
@@ -48,31 +48,38 @@ export default function Register(props) {
 
   return (
     <div className='signup-form-container'>
-        <form className='sign-form' onSubmit={handleSubmit}>
-          <div className='inner-fields'>
-            <h2 className='signup-title'>Sign Up</h2>
-            <label htmlFor='name'>Your Name</label>
-            <input value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
-            <label htmlFor='email' className='signup-label'>Email</label>
-              <input value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
-            <label htmlFor='dob' className='signup-label'>Date of Birth</label>
-              <input  value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
-            {/* <label htmlFor='dl'>Driver's License #</label>
-              <input  value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
-            <label htmlFor='licensePlate'>License Plate #</label>
-              <input  value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>                             */}
-            <label htmlFor='password' className='signup-label'>Password</label>
-              <input value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
-            <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
-              <input value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
-          </div>
+      {driverCheck === false && 
+        <div>
+          <form className='sign-form' onSubmit={handleSubmit}>
+            <div className='inner-fields'>
+              <h2 className='signup-title'>Sign Up</h2>
+              <label htmlFor='name'>Your Name</label>
+                <input value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
+              <label htmlFor='email' className='signup-label'>Email</label>
+                <input value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
+              <label htmlFor='dob' className='signup-label'>Date of Birth</label>
+                <input  value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
+              <label htmlFor='password' className='signup-label'>Password</label>
+                <input value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
+              <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
+                <input value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
+            </div>
             <input type="checkbox" id="checkbox" required/>
               <label htmlFor="checkbox">I agree to Terms of Service </label>
-      </form>
-      <button type='submit' onClick={handleSubmit}>Next</button> 
-      <Link to='/login'>
-        <button className='link-btn'>Already have an account? Login here.</button> 
-      </Link>  
+            </form>
+          <button type='submit' onClick={handleNext}>Next</button> 
+          <Link to='/login'>
+            <button className='link-btn'>Already have an account? Login here.</button> 
+          </Link> 
+        </div>}
+      {driverCheck === true &&
+        <form>
+          <label htmlFor='dl'>Driver's License #</label>
+            <input  value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
+          <label htmlFor='licensePlate'>License Plate #</label>
+            <input  value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>
+            <button type='submit' onClick={handleSubmit}>Submit</button>
+        </form>} 
   </div>
   )
 };
