@@ -110,8 +110,10 @@ class DriverProfile extends React.Component {
           </div>
           {this.state.editProfile ?
           <div className='editProfileForm'>
-            <button onClick={this.editProfileOrClose}>Cancel</button>
-            <button>Submit</button>
+            <div className='profileButtons'>
+              <button className='profileCancelButton' onClick={this.editProfileOrClose}><span className='profileCancelButtonText'></span>Cancel</button>
+              <button className='profileSubmitButton'><span className='profileSubmitButtonText'>Submit</span></button>
+            </div>
           </div>
           : null
           }

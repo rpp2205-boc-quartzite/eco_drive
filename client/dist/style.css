@@ -575,4 +575,50 @@ button.form-field:disabled {
   box-shadow: 0 0 0 99999px rgb(0 0 0 / 50%);
 }
 
+.profileCancelButton {
+  background-color: #CAD6DD;
+  border: 0px;
+  border-radius: 100px;
+  color: var(--gray6);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  width: 147.5px;
+  height: 41px;
+}
+
+.profileCancelButtonText {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #262929;
+}
+
+.profileSubmitButton {
+  border: 0px;
+  color: var(--gray1);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  gap: 12px;
+  width: 147.5px;
+  height: 41px;
+  background: #338F24;
+  border-radius: 50px;
+}
+
+.profileSubmitButtonText {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+}
+
+.profileButtons{
+  position: fixed
+}
+
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */
