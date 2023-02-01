@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FiveStars extends React.Component {
+class OverallRating extends React.Component {
   constructor(props) {
     super(props);
     this.state = {stars: [0, 0, 0, 0, 0]};
@@ -64,4 +64,4 @@ class FiveStars extends React.Component {
   }
 }
 
-export default FiveStars;
+export default OverallRating;

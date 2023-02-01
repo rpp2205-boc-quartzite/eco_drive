@@ -11,6 +11,7 @@ import Ratings from 'react-ratings-declarative';
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props)
     this.state = {
       userId: '63d9a742ec1bec755c7b4c17', //hardcoded for now
       full_name: '',
@@ -37,6 +38,7 @@ class DriverProfile extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
+    // console.log('driver props', props;
     axios.get('/getDriverView', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)

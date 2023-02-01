@@ -50,8 +50,8 @@ function App() {
         <Route path='/register' element={<Register authCheck={authenticate}/>} />
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
         <Route path="/driverview" element={<DriverView userId={userId}/>} />
+        <Route path="/ratings-reviews" element={<Reviews />} />
         <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute}/>} />
-        <Route path="/ratings_reviews" element={<Reviews />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />
         <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
