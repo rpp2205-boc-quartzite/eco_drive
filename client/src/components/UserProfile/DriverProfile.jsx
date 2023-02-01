@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import { FaPen } from 'react-icons/fa';
-// import Reviews from '../RatingsReviews/Reviews.jsx';
+import { FaPen, FaCheckCircle} from 'react-icons/fa';
+import DriverReviewsList from './DriverReviewsList.jsx';
+import Ratings from 'react-ratings-declarative';
 
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props)
     this.state = {
-      userId: '63d36d62cd478f26557c4a33', //hardcoded for now
+      userId: '63d9a742ec1bec755c7b4c17', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
@@ -20,9 +21,19 @@ class DriverProfile extends React.Component {
       time: '',
       total_seats: '',
       avatar: '',
-      drive_license: '',
-      rider_reviews: []
+      drivers_license: '',
+      driver_reviews: [],
+      recent_riders: [],
+      rating: 4,
+      //hardcoded rating ^ for now
+      driver_trips: [],
+      editProfile: false,
+      infoChangedSuccess: false
     };
+    this.editProfileOrClose = this.editProfileOrClose.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSuccessClosure = this.handleSuccessClosure.bind(this);
   }
 
   componentDidMount () {
@@ -38,11 +49,52 @@ class DriverProfile extends React.Component {
         end_address: result.data[0].driver_route.end_address,
         time: result.data[0].driver_route.time,
         avatar: result.data[0].avatar,
-        drive_license: result.data[0].drive_license,
-        rider_reviews: result.data[0].rider_reviews
+        drivers_license: result.data[0].drivers_license,
+        driver_reviews: result.data[0].driver_reviews,
+        recent_drivers: result.data[0].recent_drivers
       })
     })
     .catch(err => console.log(err))
+  }
+
+  editProfileOrClose() {
+    if (this.state.editProfile === true) {
+      this.setState({editProfile: false})
+      console.log('SET TO FALSE', this.state.editProfile)
+    } else {
+      this.setState({editProfile: true})
+      console.log('SET TO TRUE', this.state.editProfile)
+    }
+  }
+
+  handleFormChange(event) {
+    console.log(event.target.name)
+    this.setState({[event.target.name]: event.target.value})
+  }
+
+  handleSuccessClosure() {
+    this.setState({infoChangedSuccess: false})
+  }
+
+  handleSubmit(event){
+    event.preventDefault()
+    console.log('submitted!')
+    var editedInfo = {
+      userId: this.state.userId,
+      full_name: this.state.full_name,
+      email: this.state.email,
+      drivers_license: this.state.drivers_license
+    }
+    axios.post('/updateDriverProfile', editedInfo)
+      .then((submit) => {
+        console.log('successfully submitted changes!', submit, this.state.full_name)
+        this.setState({editProfile: false})
+        this.setState({infoChangedSuccess: true})
+        // console.log(this.state.full_name)
+      })
+      .catch((err)=> {
+        console.log('error submitting changes', err)
+      })
   }
 
   render () {
@@ -51,12 +103,15 @@ class DriverProfile extends React.Component {
       {/* TOP BUTTONS */}
         <span className='profileToggle'>Driver</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
-        <span className='profileLogoutButton'><MdLogout /></span>
+        <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
         <Link to="/driverview"><span className='profileHomeButton'><AiFillHome/></span></Link>
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
-          <img className='profilePhoto' src={this.state.avatar} alt="drive profile pic"/>
+          {!this.state.avatar ?
+          <img className='profilePhoto' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
+          <img className='profilePhoto' src={this.state.avatar} alt="profile avatar"/>
+          }
         </div>
         <div className='profileName'>
          {this.state.full_name} <span className='profileOnline'>&#183;</span>
@@ -64,56 +119,86 @@ class DriverProfile extends React.Component {
 
       {/* RATING STARS */}
         <div className='profileRatingStars'>
-          &#9733; &#9733; &#9733; &#9733; &#9733;
+        <Ratings
+              rating={this.state.rating}
+              widgetRatedColors="#FFB629"
+              widgetDimensions="18px"
+              widgetSpacings="1px"
+            >
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+            </Ratings>
         </div>
 
       {/* UPDATE PROFILE */}
-        <div className='profileButton'> <button className='profileUpdateButton'>
-          Update Profile <FaPen
-            size="10px"
-            color="green" />
-        </button></div>
+        <div>
+          <div className='profileButton'> <button className='profileUpdateButton' onClick={this.editProfileOrClose}>
+            Update Profile <FaPen
+              size="10px"
+              color="green" />
+          </button>
+          </div>
+          {this.state.editProfile ?
+          <div className='editProfileForm'>
+            <div className='editProfileTitle'>Update Profile</div>
+
+            <div className='editProfileSubTitle'>Name</div>
+            <div className='editProfileInputDiv'><input name='full_name' onChange={this.handleFormChange} className='editProfileInput' placeholder={this.state.full_name}/></div>
+
+            <div className='editProfileSubTitle'>Email</div>
+            <div className='editProfileInputDiv'><input name='email' onChange={this.handleFormChange} className='editProfileInput' placeholder={this.state.email}/></div>
+
+            <div className='editProfileSubTitle'>Drivers License #</div>
+            <div className='editProfileInputDiv'><input name='drivers_license' onChange={this.handleFormChange} className='editProfileInput' placeholder={this.state.drivers_license}/></div>
+
+            <div className='profileButtons'>
+              <button className='profileCancelButton' onClick={this.editProfileOrClose}><span className='profileCancelButtonText'></span>Cancel</button>
+              <button className='profileSubmitButton'><span onClick={this.handleSubmit} className='profileSubmitButtonText'>Submit</span></button>
+            </div>
+          </div>
+          : null
+          }
+        </div>
+
+      {/* UPDATE PROFILE SUCCESS MESSAGE */}
+
+      {this.state.infoChangedSuccess ?
+      <div className='profileInfoChangeSuccess' onClick={this.handleSuccessClosure}>
+        <div className='profileCheck'><FaCheckCircle size="40px"/></div>
+        <div className='profileSuccessText'>Your profile is successfully updated!</div>
+        </div>
+      : null}
+
 
       {/* REVIEWS */}
         <div className='profileReviewDiv'>
           <span className='profileTitle'>Reviews</span>
-          <div className='profileReviewContainer'>
-            <div className='profileReviewBox'>
-              <div className='profileReviewerName'>Amy Johnson</div>
-              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-              <div className='profileReviewDate'>1/26/23</div>
-            </div>
-
-            <div className='profileReviewBox'>
-              <div className='profileReviewerName'>Mike Tree</div>
-              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-              <div className='profileReviewDate'>1/26/23</div>
-            </div>
-
-            <div className='profileReviewBox'>
-              <div className='profileReviewerName'>Steve Apple</div>
-              <div>&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-              <div className='profileReviewText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-              <div className='profileReviewDate'>1/26/23</div>
-            </div>
-
-          </div>
+          {this.state.driver_reviews.length === 0 ?
+          <div className='profilePlaceholder'>No reviews yet &#129485;</div>
+          :
+          <DriverReviewsList driver_reviews={this.state.driver_reviews} />
+          }
         </div>
 
-      {/* RECENT DRIVERS */}
+      {/* RECENT RIDERS */}
         <div>
-          <span className='profileTitle'>Recent drivers</span>
+          <span className='profileTitle'>Recent riders</span>
           <div className='profileRecentDriverContainer'>
-            <div>
-              {/* <img className='profileRecentDriver' src={this.state.avatar} alt="drive image"/> */}
-              <Link to="/ratings-reviews" state={{ from: "driverprofile" }}><img className='profileRecentDriver' src={this.state.avatar} alt="driver profile pic"/></Link>
-            </div>
-            {/* <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1xQppZAiV12AkQ55WdO8CWhgv-Y5Xtl3t" alt="drive image"/></div>
-            <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1BOoSYj1tACcqgXSAMj2iSDMhqApwcLJK" alt="drive image"/></div> */}
+          {this.state.recent_riders.length === 0 ?
+          <div className='profilePlaceholder2'>None yet &#129485;</div>
+          :
+          <Link to="/ratings_reviews">
+          {!this.state.avatar ?
+          <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
+          <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/>
+          }</Link>
+          }
           </div>
         </div>
+
       {/* CURRENT ROUTE */}
         <div>
           <span className='profileTitle'>Current route</span>
@@ -131,11 +216,35 @@ class DriverProfile extends React.Component {
       {/* PREVIOUS ROUTE */}
         <div>
           <span className='profileTitle'>Previous routes</span>
+          {this.state.driver_trips.length === 0 ?
+          <div className='profilePlaceholder2'>None yet &#129485;</div>
+          :
+          <div className='profileCurrentRoute'>
+            <div className='profileCurrentRouteTitle'>From:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.start_address}</div>
+            <div className='profileCurrentRouteTitle'>To:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.end_address}</div>
+            <div className='profileCurrentRouteTitle'>Time:</div>
+            <div className='profileCurrentRouteInfo'>{this.state.time}</div>
+          </div>
+          }
+
         </div>
 
       {/* SAVINGS THIS MONTH */}
       <div>
           <span className='profileTitle'>Your savings this month</span>
+          <div className='profileSavings'>
+            <div className='profileSavingsTitle'>You saved the equivalent of</div>
+            <div className='profileCurrentRouteInfo'>{(this.state.driver_trips.length + 1) * .05} trees &#127794; <div>or</div> {(this.state.driver_trips.length + 1)* 10} minutes of driving &#128663;</div>
+            <div className='profileSavingsTitle'>This translates to</div>
+            <div className='profileCurrentRouteInfo'>${(this.state.driver_trips.length + 1)* 5.35} you saved on gas &#9981;</div>
+          </div>
+          <span className='profileTitle'>Fact of the day</span>
+          <div className='profileCurrentRoute'>
+            <div className='profileCurrentRouteTitle'>Did you know? &#128173;</div>
+            <div className='profileCurrentRouteInfo'>Los Angeles, Long Beach & Riverside are the number 1 cities in CA with highest levels of transportation related pollution</div>
+          </div>
         </div>
 
       </div>

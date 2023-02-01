@@ -25,22 +25,42 @@ h1 {
 
 /* -------- BECCA CSS -------- */
 
+.allDefaultView {
+  height: 100%;
+  width: 100%;
+}
+
 .defaultViewHeader {
   display: inline-block;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 .headerToggleView {
-  float: left;
+  display: inline-block;
+  flex-direction: row;
   padding-right: 120px;
-  padding-top: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .headerAvatar {
-  float: right;
+  display: inline-block;
+  flex-direction: row;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.headerLogout {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
 }
 .welcome {
   margin: 10px;
   float: left;
-  /* display: 'inline-block' */
-
 }
 /* -------- BECCA CSS END -------- */
 
@@ -715,6 +735,14 @@ input.review-summary {
   color: #97AAB0;
 }
 
+.profileSavingsTitle {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: #338F24;
+}
+
 .profileCurrentRouteInfo {
   font-style: normal;
   font-weight: 400;
@@ -732,6 +760,15 @@ input.review-summary {
 
 /* .profileReviewBox {
   height: 20rem;
+.profileSavings {
+  border: solid 1px #338F24;
+  padding: 9px;
+  border-radius: 9px;
+  margin: 8px;
+  text-align: center;
+}
+
+.profileReviewBox {
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -766,6 +803,10 @@ input.review-summary {
   align-content: center;
   justify-items: center;
   vertical-align: bottom;
+  /* word-wrap: break-word;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  position: relative; */
 }
 
 /* .profileReviewerName {
@@ -816,12 +857,15 @@ input.review-summary {
   line-height: 18px;
   text-align: right;
   color: #76858A;
+  bottom: 10px;
+  height: 30px;
+  width: 100%;
+  position: absolute;
+  bottom: -4px;
+  left: -9px;
 }
 
 .profileReviewContainer {
-  /* display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden; */
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -838,6 +882,7 @@ input.review-summary {
   object-fit: cover;
   flex: 33.33%;
   padding: 5px;
+  margin-left: 3px;
 }
 .secondprofileRecentDriver {
   width: 40px;
@@ -848,5 +893,160 @@ input.review-summary {
   padding: 5px;
 }
 
+.profilePlaceholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #97AAB0;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profilePlaceholder2 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #97AAB0;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 21px;
+}
+
+.editProfileForm {
+  z-index: 100;
+  position: absolute;
+  width: 343px;
+  height: 425px;
+  left: 4.5%;
+  top: 19%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 0 0 99999px rgb(0 0 0 / 50%);
+}
+
+.profileCancelButton {
+  background-color: #CAD6DD;
+  border: 0px;
+  border-radius: 100px;
+  color: var(--gray6);
+  font-size: 16px;
+  font-weight: 500;
+  width: 147.5px;
+  height: 41px;
+}
+
+.profileCancelButtonText {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #262929;
+}
+
+.profileSubmitButton {
+  border: 0px;
+  color: var(--gray1);
+  font-size: 16px;
+  font-weight: 500;
+  gap: 12px;
+  width: 147.5px;
+  height: 41px;
+  background: #338F24;
+  border-radius: 50px;
+  margin-left: 15px;
+}
+
+.profileSubmitButtonText {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+}
+
+.profileButtons{
+  bottom: 30px;
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+
+.editProfileTitle {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #262929;
+  padding-top: 24px;
+}
+
+.editProfileSubTitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #262929;
+  padding-left: 15px;
+  padding-top: 18px;
+}
+
+.editProfileInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 8px;
+  isolation: isolate;
+  width: 311px;
+  height: 50px;
+  background: #FCFCFC;
+  border: 1.5px solid #CAD6DD;
+  border-radius: 5px;
+}
+
+.editProfileInputDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileInfoChangeSuccess {
+  z-index: 100;
+  position: absolute;
+  width: 343px;
+  height: 152px;
+  left: 4.5%;
+  top: 36%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 0 0 99999px rgb(0 0 0 / 50%);
+}
+
+.profileCheck {
+  color: #338F24;
+  margin-left: 45%;
+  padding-top: 40px;
+  padding-bottom: 10px;
+}
+
+.profileSuccessText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #338F24;
+  text-align: center;
+}
 
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */
