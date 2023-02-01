@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/Md';
-import { HiOutlineRefresh } from 'react-icons/Hi';
+import { MdLogout } from 'react-icons/md';
+import { HiOutlineRefresh } from 'react-icons/hi';
 import DefaultRoute from './DefaultRoute.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import { format } from "date-fns";
@@ -157,6 +157,7 @@ function DriverView ({ userId }) {
                 apiKey={key}
                 style={{ width: "90%" }}
                 placeholder="Starting point"
+                ref={pickUpRef}
                 onPlaceSelected={(place) => {
                   let lat = place.geometry.location.lat();
                   let lng = place.geometry.location.lng();
@@ -174,6 +175,7 @@ function DriverView ({ userId }) {
                 apiKey={key}
                 style={{ width: "90%" }}
                 placeholder="Destination"
+                ref={dropOffRef}
                 onPlaceSelected={(place) => {
                   let lat = place.geometry.location.lat();
                   let lng = place.geometry.location.lng();

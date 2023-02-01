@@ -3,7 +3,7 @@ import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/Hi';
+import { HiOutlineRefresh } from 'react-icons/hi';
 import DefaultRoute from './DefaultRoute.jsx';
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
