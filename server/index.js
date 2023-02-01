@@ -97,10 +97,9 @@ app.post('/postDriverRoute', function(req, res) {
 
 app.post('/postRiderRoute', function(req, res) {
   //console.log(req.body.data)
-  var data = req.body.data;
-  postRiderRoute(data)
-  .then(result => res.end())
-  .catch(err => console.log(err))
+  postRiderRoute(req.body)
+  .then(() => res.status(201).send('Successfully post rider route'))
+  .catch((err) => res.status(400).send(err))
 
 });
 // ---- Ratings and Reviews routes  ---- //

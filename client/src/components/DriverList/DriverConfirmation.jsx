@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DriverConfirmation = ({driverInfo, toggleDriverConfirmation, toggleSuccessMessage, updateRiderOnGoingRoute}) => {
+const DriverConfirmation = ({driverInfo, userRouteInfo, toggleDriverConfirmation, toggleSuccessMessage, updateRiderOnGoingRoute}) => {
 
   return (
     <div className='modal trans-bg display-block'>
@@ -24,7 +24,7 @@ const DriverConfirmation = ({driverInfo, toggleDriverConfirmation, toggleSuccess
               toggleSuccessMessage();
               const timeoutId = setTimeout(()=>{
                 toggleSuccessMessage();
-                updateRiderOnGoingRoute(driverInfo);
+                updateRiderOnGoingRoute(driverInfo, userRouteInfo);
               }, 1500)
               return () => clearTimeout(timeoutId);
             }}>Book Driver</button>
