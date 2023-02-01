@@ -45,7 +45,6 @@ function DriverView ({ userId }) {
 
   useEffect(() => {
     if (loading) {
-
       async function CalculateRoute() {
 
         if (pickUpRef.current.value === '' || dropOffRef.current.value === '') {

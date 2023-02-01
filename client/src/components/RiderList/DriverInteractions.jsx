@@ -9,6 +9,15 @@ import { useLocation } from "react-router-dom";
 
 const api = ApiKey;
 
+const loadingScreen = () => {
+  return (
+    <div className='loading-screen'>
+        <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
+        <p>Finding drivers...</p>
+      </div>
+  )
+}
+
 const containerStyle = {
   width: '370px',
   height: '275px'
