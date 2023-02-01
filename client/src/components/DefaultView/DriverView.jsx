@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
-import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/md';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import { MdLogout } from 'react-icons/Md';
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -22,7 +21,64 @@ function DriverView ({ userId }) {
   const [def, setDef] = useState(false);
   const [avatar, setAvatar] = useState('');
   const [default_route, setDefaultRoute] = useState({});
-  const navigate = useNavigate();
+
+
+
+  //*****************************************************//
+  //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
+  //*****************************************************//
+  const [directionsResponse, setDirectionsResponse] = useState('not updated');
+  const [pickUp, setPickUp] = useState(null);
+  const [dropOff, setDropOff] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const pickUpRef = React.useRef();
+  const dropOffRef = React.useRef();
+
+  useEffect(() => {
+    if (pickUp && dropOff) {
+      setLoading(true);
+      console.log('Loaded!')
+    }
+  }, [pickUp, dropOff])
+
+
+  useEffect(() => {
+    if (loading) {
+      async function CalculateRoute() {
+
+        if (pickUpRef.current.value === '' || dropOffRef.current.value === '') {
+          return
+        };
+
+        const directionsService = new google.maps.DirectionsService();
+
+        const results = await directionsService.route({
+          origin: pickUpRef.current.value,
+          destination: dropOffRef.current.value,
+          travelMode: google.maps.TravelMode.DRIVING
+        });
+
+        setDirectionsResponse({json: JSON.stringify(results)});
+        console.log('FINISHED');
+        setLoading(false);
+      }
+
+      CalculateRoute()
+    }
+  }, [loading])
+
+  useEffect(() => {
+    if (typeof directionsResponse !== 'string') {
+      console.log(directionsResponse)
+    }
+  }, [directionsResponse])
+
+
+
+    //*****************************************************//
+    //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
+    //*****************************************************//
 
   const route = {
     id: userId,
@@ -104,10 +160,12 @@ function DriverView ({ userId }) {
             apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
             style={{ width: "90%" }}
             placeholder="Starting point"
+            ref={pickUpRef}
             onPlaceSelected={(place) => {
               let lat = place.geometry.location.lat();
               let lng = place.geometry.location.lng();
               setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng})
+              setPickUp(place.formatted_address);
               console.log(place);
             }}
             options={{
@@ -119,10 +177,12 @@ function DriverView ({ userId }) {
             apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
             style={{ width: "90%" }}
             placeholder="Destination"
+            ref={dropOffRef}
             onPlaceSelected={(place) => {
               let lat = place.geometry.location.lat();
               let lng = place.geometry.location.lng();
               setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng})
+              setDropOff(place.formatted_address);
               console.log(place);
             }}
             options={{
@@ -135,7 +195,7 @@ function DriverView ({ userId }) {
             <input type="text" name="AvailableSeats" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/> <br/>
             <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setDef(true)} /> Set as default route <br/>
           {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input> */}
-          <Link to="/rider-list" state={{route: route}}>
+          <Link to="/rider-list" state={directionsResponse}>
             <button>Find Riders</button>
           </Link>
         </div>

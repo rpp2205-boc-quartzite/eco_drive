@@ -5,8 +5,18 @@ import React, { useEffect } from "react";
 import RiderList from "./RiderList.jsx"
 import { GoogleMap, useJsApiLoader, useLoadScript, LoadScript, Marker, InfoWindow, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
 import { Circles } from 'react-loader-spinner';
+import { useLocation } from "react-router-dom";
 
 const api = ApiKey;
+
+const loadingScreen = () => {
+  return (
+    <div className='loading-screen'>
+        <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
+        <p>Finding drivers...</p>
+      </div>
+  )
+}
 
 const containerStyle = {
   width: '370px',
@@ -24,25 +34,58 @@ const options = {
   zoomControl: true,
 }
 
+
 const libraries = ["places"];
 
 const DriverInteractions = function(props) {
+
+  const location = useLocation();
+
+  const data = location.state.json
+
+  const directions = JSON.parse(data)
+
 
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: api,
     libraries
   });
 
+  const[loaded, setLoaded] = React.useState(false);
   const [directionsResponse, setDirectionsResponse] = React.useState(null);
   const [distance, setDistance] = React.useState('');
   const [duration, setDuration] = React.useState('');
+  const [ridersArray, setRidersArray] = React.useState([
+    {
+      name: "Suzy Thompson",
+      pic: "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
+      from: .25,
+      to: .10,
+      time: "9:00am",
+    },
+    {
+      name: "Mark Manchin",
+      pic: "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
+      from: .62,
+      to: .05,
+      time: "9:00am",
+    },
+    {
+      name: "Trouble Maker",
+      pic: "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
+      from: .02,
+      to: .02,
+      time: "9:00am",
+    }
+  ]);
 
   useEffect(() => {
-        setDirectionsResponse(props.directions);
-        setDistance(props.directions.routes[0].legs[0].distance.text);
-        setDuration(props.directions.routes[0].legs[0].duration.text);
-        console.log(props.directions);
-  }, [props]);
+    if (!loaded)
+        setDirectionsResponse(directions);
+        setDistance(directions.routes[0].legs[0].distance.text);
+        setDuration(directions.routes[0].legs[0].duration.text);
+        setLoaded(true)
+  }, [loaded, directions]);
 
 
   const mapRef = React.useRef();
@@ -55,7 +98,7 @@ const DriverInteractions = function(props) {
   if (!isLoaded) return <Circles />
 
   const mapCheck = function() {
-    if (!directionsResponse) {
+    if (!Object.keys(directionsResponse).length) {
       return <Circles />
     } else {
       return (
@@ -105,7 +148,7 @@ const DriverInteractions = function(props) {
         <div className="rider-list" data="DriverInteractions">
           <button className="back-button" type="submit">back arrow</button>
           <br></br>
-          <RiderList riders={props.riders}/>
+          <RiderList riders={ridersArray}/>
         </div>
         <br></br>
         <div>
