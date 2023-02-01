@@ -188,3 +188,18 @@ app.listen(port, () => {
 });
 
 //module.exports = server;
+
+// ---- User Profile Routes ---- //
+
+app.post('/updateDriverProfile', function(req, res) {
+  console.log('DATA IN INDEX.JS SERVER', req.body)
+  var data = req.body;
+  updateDriverProfile(data)
+  .then(result => {
+    console.log('result in index.js server', result)
+    res.end()
+  })
+  .catch(err => console.log(err))
+})
+
+// ---- User Profile Routes End ---- //
