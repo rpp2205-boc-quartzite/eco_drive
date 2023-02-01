@@ -582,7 +582,6 @@ button.form-field:disabled {
   color: var(--gray6);
   font-size: 16px;
   font-weight: 500;
-  padding: 10px 20px;
   width: 147.5px;
   height: 41px;
 }
@@ -600,12 +599,12 @@ button.form-field:disabled {
   color: var(--gray1);
   font-size: 16px;
   font-weight: 500;
-  padding: 10px 20px;
   gap: 12px;
   width: 147.5px;
   height: 41px;
   background: #338F24;
   border-radius: 50px;
+  margin-left: 15px;
 }
 
 .profileSubmitButtonText {
@@ -618,7 +617,51 @@ button.form-field:disabled {
 }
 
 .profileButtons{
-  position: fixed
+  bottom: 30px;
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+
+.editProfileTitle {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #262929;
+  padding-top: 24px;
+}
+
+.editProfileSubTitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #262929;
+  padding-left: 15px;
+  padding-top: 18px;
+}
+
+.editProfileInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 8px;
+  isolation: isolate;
+  width: 311px;
+  height: 50px;
+  background: #FCFCFC;
+  border: 1.5px solid #CAD6DD;
+  border-radius: 5px;
+}
+
+.editProfileInputDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */

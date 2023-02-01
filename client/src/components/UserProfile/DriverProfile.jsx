@@ -12,7 +12,7 @@ class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d36e8fcd478f26557c4a37', //hardcoded for now
+      userId: '63d9a742ec1bec755c7b4c17', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
@@ -20,7 +20,7 @@ class DriverProfile extends React.Component {
       time: '',
       total_seats: '',
       avatar: '',
-      drive_license: '',
+      drivers_license: '',
       driver_reviews: [],
       recent_riders: [],
       rating: 4,
@@ -29,7 +29,7 @@ class DriverProfile extends React.Component {
       editProfile: false
     };
     this.editProfileOrClose = this.editProfileOrClose.bind(this);
-
+    this.handleFormChange = this.handleFormChange.bind(this);
   }
 
   componentDidMount () {
@@ -44,7 +44,7 @@ class DriverProfile extends React.Component {
         end_address: result.data[0].driver_route.end_address,
         time: result.data[0].driver_route.time,
         avatar: result.data[0].avatar,
-        drive_license: result.data[0].drive_license,
+        drivers_license: result.data[0].drivers_license,
         driver_reviews: result.data[0].driver_reviews,
         recent_drivers: result.data[0].recent_drivers
       })
@@ -62,7 +62,10 @@ class DriverProfile extends React.Component {
     }
   }
 
-
+  handleFormChange(event) {
+    console.log(event.target.name)
+    this.setState({[event.target.name]: event.target.value})
+  }
 
   render () {
     return (
@@ -71,7 +74,7 @@ class DriverProfile extends React.Component {
         <span className='profileToggle'>Driver</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
         <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
-        <Link to="/riderview"><span className='profileHomeButton'><AiFillHome/></span></Link>
+        <Link to="/driverview"><span className='profileHomeButton'><AiFillHome/></span></Link>
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
@@ -110,6 +113,17 @@ class DriverProfile extends React.Component {
           </div>
           {this.state.editProfile ?
           <div className='editProfileForm'>
+            <div className='editProfileTitle'>Update Profile</div>
+
+            <div className='editProfileSubTitle'>Name</div>
+            <div className='editProfileInputDiv'><input name='full_name' onChange={this.handleFormChange} className='editProfileInput' placeholder={this.state.full_name}/></div>
+
+            <div className='editProfileSubTitle'>Email</div>
+            <div className='editProfileInputDiv'><input name='email' onChange={this.handleFormChange} className='editProfileInput' placeholder={this.state.email}/></div>
+
+            <div className='editProfileSubTitle'>Drivers License #</div>
+            <div className='editProfileInputDiv'><input name='drivers_license' onChange={this.handleFormChange} className='editProfileInput' placeholder={this.state.drivers_license}/></div>
+
             <div className='profileButtons'>
               <button className='profileCancelButton' onClick={this.editProfileOrClose}><span className='profileCancelButtonText'></span>Cancel</button>
               <button className='profileSubmitButton'><span className='profileSubmitButtonText'>Submit</span></button>
