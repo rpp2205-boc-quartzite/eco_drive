@@ -6,7 +6,6 @@ import { MdLogout } from 'react-icons/Md';
 import { HiOutlineRefresh } from 'react-icons/Hi';
 import { useNavigate } from "react-router-dom";
 import DefaultRoute from './DefaultRoute.jsx';
-import UpcomingTrip from './UpcomingTrip.jsx';
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({

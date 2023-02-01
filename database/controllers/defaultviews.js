@@ -42,5 +42,14 @@ module.exports = {
       default: newRoute.default
     }
       return User.findOneAndUpdate(id, {rider_route: update}).then((result) => console.log('Updated user record with new route')).catch(err => console.log('Error updating record'));
+  },
+
+  postDriverLicense: (data) => {
+    const id = {_id: data._id}
+    const update = {
+      drivers_license: data.drivers_license,
+      license_plate: data.license_plate
+    }
+    return User.findOneAndUpdate(id, update).then((result) => console.log('Updated user record with license info')).catch(err => console.log('Error updating user record'));
   }
 }

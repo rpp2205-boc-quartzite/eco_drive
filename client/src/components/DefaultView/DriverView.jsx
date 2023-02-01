@@ -6,6 +6,7 @@ import { MdLogout } from 'react-icons/Md';
 import { HiOutlineRefresh } from 'react-icons/Hi';
 import { useNavigate } from "react-router-dom";
 import DefaultRoute from './DefaultRoute.jsx';
+import DriverPrompt from './DriverPromptModal.jsx';
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -24,6 +25,7 @@ function DriverView ({ userId }) {
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
+  const [showPrompt, setPrompt] = useState(false)
   const navigate = useNavigate();
 
   const route = {
@@ -41,14 +43,21 @@ function DriverView ({ userId }) {
   }
 
   useEffect(() => {
-    axios.get('/getriderview', { params: {userId} })
+    axios.get('/getdriverview', { params: {userId} })
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
       setUpcoming(result.data[0].driver_route)
+      if (!result.data[0].drivers_license) {
+        setPrompt(true)
+      }
     })
     .catch(err => console.log(err))
   }, [])
+
+  const closeModal = () => {
+    setPrompt(!showPrompt)
+  }
 
   return (
     <div className="allDefaultView">
@@ -75,6 +84,8 @@ function DriverView ({ userId }) {
       <div>
       <h2>Welcome {name},</h2>
       </div>
+
+      {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
 
       <h3>Find your nearest drivers</h3>
         <form>
