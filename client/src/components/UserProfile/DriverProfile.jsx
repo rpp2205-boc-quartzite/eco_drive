@@ -26,10 +26,12 @@ class DriverProfile extends React.Component {
       rating: 4,
       //hardcoded rating ^ for now
       driver_trips: [],
-      editProfile: false
+      editProfile: false,
+      infoChanged: false
     };
     this.editProfileOrClose = this.editProfileOrClose.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount () {
@@ -65,6 +67,25 @@ class DriverProfile extends React.Component {
   handleFormChange(event) {
     console.log(event.target.name)
     this.setState({[event.target.name]: event.target.value})
+  }
+
+  handleSubmit(event){
+    event.preventDefault()
+    console.log('submitted!')
+    var editedInfo = {
+      full_name: this.state.full_name,
+      email: this.state.email,
+      drivers_license: this.state.drivers_license
+    }
+    axios.post('/updateProfile', editedInfo)
+      .then((submit) => {
+        console.log('successfully submitted changes!', submit)
+        this.setState({infoChanged: true})
+        console.log(this.state.infoChanged)
+      })
+      .catch((err)=> {
+        console.log('error submitting changes', err)
+      })
   }
 
   render () {
