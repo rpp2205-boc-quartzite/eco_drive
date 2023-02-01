@@ -1,13 +1,13 @@
 import "./RiderList.css";
 import mapStyles from "./mapStyles.js"
-import ApiKey from "./apiKey.js";
+// import ApiKey from "./apiKey.js";
 import React, { useEffect } from "react";
 import RiderList from "./RiderList.jsx"
 import { GoogleMap, useJsApiLoader, useLoadScript, LoadScript, Marker, InfoWindow, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
 import { Circles } from 'react-loader-spinner';
 import { useLocation } from "react-router-dom";
 
-const api = ApiKey;
+const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
 
 const loadingScreen = () => {
   return (
@@ -47,7 +47,7 @@ const DriverInteractions = function(props) {
 
 
   const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: api,
+    googleMapsApiKey: API_KEY,
     libraries
   });
 
