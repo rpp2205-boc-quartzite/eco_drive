@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import { FaPen } from 'react-icons/fa';
+import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';
 
@@ -27,11 +27,12 @@ class DriverProfile extends React.Component {
       //hardcoded rating ^ for now
       driver_trips: [],
       editProfile: false,
-      infoChanged: false
+      infoChangedSuccess: false
     };
     this.editProfileOrClose = this.editProfileOrClose.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSuccessClosure = this.handleSuccessClosure.bind(this);
   }
 
   componentDidMount () {
@@ -69,6 +70,10 @@ class DriverProfile extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  handleSuccessClosure() {
+    this.setState({infoChangedSuccess: false})
+  }
+
   handleSubmit(event){
     event.preventDefault()
     console.log('submitted!')
@@ -82,6 +87,7 @@ class DriverProfile extends React.Component {
       .then((submit) => {
         console.log('successfully submitted changes!', submit, this.state.full_name)
         this.setState({editProfile: false})
+        this.setState({infoChangedSuccess: true})
         // console.log(this.state.full_name)
       })
       .catch((err)=> {
@@ -154,6 +160,16 @@ class DriverProfile extends React.Component {
           : null
           }
         </div>
+
+      {/* UPDATE PROFILE SUCCESS MESSAGE */}
+
+      {this.state.infoChangedSuccess ?
+      <div className='profileInfoChangeSuccess' onClick={this.handleSuccessClosure}>
+        <div className='profileCheck'><FaCheckCircle size="40px"/></div>
+        <div className='profileSuccessText'>Your profile is successfully updated!</div>
+        </div>
+      : null}
+
 
       {/* REVIEWS */}
         <div className='profileReviewDiv'>

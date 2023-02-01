@@ -684,4 +684,34 @@ button.form-field:disabled {
   align-items: center;
 }
 
+.profileInfoChangeSuccess {
+  z-index: 100;
+  position: absolute;
+  width: 343px;
+  height: 152px;
+  left: 4.5%;
+  top: 36%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 0 0 99999px rgb(0 0 0 / 50%);
+}
+
+.profileCheck {
+  color: #338F24;
+  margin-left: 45%;
+  padding-top: 40px;
+  padding-bottom: 10px;
+}
+
+.profileSuccessText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #338F24;
+  text-align: center;
+}
+
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */
