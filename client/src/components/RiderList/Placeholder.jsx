@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, Suspense} from 'react';
 import DriverInteractions from './DriverInteractions.jsx'
 import { Circles } from 'react-loader-spinner';
 import "./RiderList.css";
-import mapStyles from "./mapStyles.js"
 import ApiKey from "./apiKey.js";
-import ReactDOM from "react-dom";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
 import { GoogleMap, useJsApiLoader, useLoadScript, LoadScript, Marker, InfoWindow, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
 
 
@@ -14,7 +12,16 @@ const api = ApiKey;
 const libraries = ["places"];
 
 
-export default function Placeholder() {
+export default function Placeholder(props) {
+
+  const location = useLocation();
+
+  const data = location;
+
+  console.log('This is what I\'m getting: ', data)
+
+
+
   const [ridersArray, setRidersArray] = useState([
     {
       name: "Suzy Thompson",
