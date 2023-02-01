@@ -4,8 +4,10 @@ import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/Md';
 import { HiOutlineRefresh } from 'react-icons/Hi';
-import { useNavigate } from "react-router-dom";
 import DefaultRoute from './DefaultRoute.jsx';
+import { format } from "date-fns";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({
@@ -20,10 +22,10 @@ function RiderView ({ userId }) {
   })
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
-  const navigate = useNavigate();
 
   const route = {
     id: userId,
@@ -77,39 +79,48 @@ function RiderView ({ userId }) {
         <form>
         <div>
           <Autocomplete
-            apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
-            style={{ width: "90%" }}
-            placeholder="Starting point"
-            onPlaceSelected={(place) => {
-              let lat = place.geometry.location.lat();
-              let lng = place.geometry.location.lng();
-              setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng})
-              console.log(place);
-            }}
-            options={{
-              types: ["address"],
-              componentRestrictions: { country: "us" },
-            }}
+              apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
+              style={{ width: "90%" }}
+              placeholder="Starting point"
+              onPlaceSelected={(place) => {
+                let lat = place.geometry.location.lat();
+                let lng = place.geometry.location.lng();
+                setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng})
+                console.log(place);
+              }}
+              options={{
+                types: ["address"],
+                componentRestrictions: { country: "us" },
+              }}
           />
           <Autocomplete
-            apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
-            style={{ width: "90%" }}
-            placeholder="Destination"
-            onPlaceSelected={(place) => {
-              let lat = place.geometry.location.lat();
-              let lng = place.geometry.location.lng();
-              setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng})
-              console.log(place);
-            }}
-            options={{
-              types: ["address"],
-              componentRestrictions: { country: "us" },
-            }}
+              apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
+              style={{ width: "90%" }}
+              placeholder="Destination"
+              onPlaceSelected={(place) => {
+                let lat = place.geometry.location.lat();
+                let lng = place.geometry.location.lng();
+                setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng})
+                console.log(place);
+              }}
+              options={{
+                types: ["address"],
+                componentRestrictions: { country: "us" },
+              }}
           />
-          {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
-          <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => setTime(e.target.value)}/> <br/>
+          <DatePicker
+                selected={displayTime}
+                onChange={(date) => {
+                  setTime(format(displayTime, 'hh:mm aa'));
+                  setDisplayTime(new Date(date));
+                }}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+              />
           <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setIsDefault(true)} /> Set as default route <br/>
-          {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input> */}
           <Link to="/driver-list" state={{route: route}}>
             <button className="primary-btn">Find Drivers</button>
           </Link>

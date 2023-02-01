@@ -4,9 +4,11 @@ import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/Md';
 import { HiOutlineRefresh } from 'react-icons/Hi';
-import { useNavigate } from "react-router-dom";
 import DefaultRoute from './DefaultRoute.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
+import { format } from "date-fns";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -22,11 +24,11 @@ function DriverView ({ userId }) {
   const [seats, setSeats] = useState('');
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [showPrompt, setPrompt] = useState(false)
-  const navigate = useNavigate();
 
   const route = {
     id: userId,
@@ -120,11 +122,20 @@ function DriverView ({ userId }) {
               componentRestrictions: { country: "us" },
             }}
           />
-          {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
-          <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => setTime(e.target.value)}/> <br/>
-            <input type="text" name="AvailableSeats" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/> <br/>
-            <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setIsDefault(true)} /> Set as default route <br/>
-          {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input> */}
+          <DatePicker
+                selected={displayTime}
+                onChange={(date) => {
+                  setTime(format(displayTime, 'hh:mm aa'));
+                  setDisplayTime(new Date(date));
+                }}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+              />
+          <input type="text" name="AvailableSeats" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/> <br/>
+          <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setIsDefault(true)} /> Set as default route <br/>
           <Link to="/rider-list" state={{route: route}}>
             <button className="primary-btn">Find Riders</button>
           </Link>
