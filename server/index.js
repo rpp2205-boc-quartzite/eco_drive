@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { getDriverView, getRiderView, postDriverRoute, postRiderRoute } = require('../database/controllers/defaultviews.js')
+const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
@@ -70,7 +70,7 @@ app.post('/login', login);
 
 // ---- Default Driver view routes  ---- //
 app.get('/getdriverview', function(req, res) {
-  let userid = req.query.id;
+  let userid = req.query.userId;
   getDriverView(userid)
   .then((result) => {
     console.log(result)
@@ -98,12 +98,20 @@ app.post('/postDriverRoute', function(req, res) {
 })
 
 app.post('/postRiderRoute', function(req, res) {
-  //console.log(req.body.data)
   postRiderRoute(req.body)
   .then(() => res.status(201).send('Successfully post rider route'))
   .catch((err) => res.status(400).send(err))
-
 });
+
+app.post('/postDriverLicense', function(req, res) {
+  console.log('here is license', req.body.licenseInfo)
+  var data = req.body.licenseInfo;
+  postDriverLicense(data)
+  .then(result => res.end())
+  .catch(err => console.log(err))
+})
+
+
 // ---- Ratings and Reviews routes  ---- //
 app.get('/getreviews', function(req, res) {
   let userid = req.query.id;
