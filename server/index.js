@@ -6,7 +6,7 @@ const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
 const { getDriverView, getRiderView, postDriverRoute, postRiderRoute } = require('../database/controllers/defaultviews.js');
-const { updateDriverProfile} = require('../database/controllers/userProfile.js')
+const { updateDriverProfile, updateRiderProfile } = require('../database/controllers/userProfile.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 //const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
@@ -202,6 +202,18 @@ app.post('/updateDriverProfile', function(req, res) {
     res.end()
   })
   .catch(err => console.log(err))
-})
+});
+
+app.post('/updateRiderProfile', function(req, res) {
+  console.log('DATA IN INDEX.JS RIDER SERVER', req.body)
+  var data = req.body;
+  updateRiderProfile(data)
+  .then(result => {
+    console.log('result in index.js server', result)
+    res.end()
+  })
+  .catch(err => console.log(err))
+});
+
 
 // ---- User Profile Routes End ---- //

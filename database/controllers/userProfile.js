@@ -11,5 +11,12 @@ module.exports = {
     return User.findByIdAndUpdate(id, {"full_name": updatedInfo.full_name, "email": updatedInfo.email, "drivers_license": updatedInfo.drivers_license})
     .then((result) => console.log('SUCCESS updating driver user profile', result))
     .catch(err => console.log('ERR updating driver user profile', err));
+  },
+
+  updateRiderProfile: (updatedRider) => {
+    const id = {_id: updatedRider.userId}
+    return User.findByIdAndUpdate(id, {"full_name": updatedRider.full_name, "email": updatedRider.email})
+    .then((result) => console.log('SUCCESS updating rider user profile', result))
+    .catch(err => console.log('ERR updating rider user profile', err));
   }
 }
