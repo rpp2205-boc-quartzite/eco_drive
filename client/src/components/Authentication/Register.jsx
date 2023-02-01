@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import AvatarSelect from './AvatarSelect.jsx';
 
 export default function Register(props) {
   const [email, setEmail] = useState('');
@@ -12,11 +13,19 @@ export default function Register(props) {
   const [drivers_license, setDl] = useState('');
   const [license_plate, setlicensePlate] = useState('');
   const [driverCheck, setDriverCheck] = useState(false);
+  const [avatarCheck, setAvatar] = useState(false);
+  const [avatar, setAvatarValue] = useState('');
   const navigate=useNavigate();
 
   const handleNext = (event) => {
     event.preventDefault();
     setDriverCheck(true);
+  }
+
+  const handleAvatar = (event) => {
+    event.preventDefault();
+    setDriverCheck(null);
+    setAvatar(true);
   }
 
   const handleSubmit = (event) => {
@@ -28,7 +37,7 @@ export default function Register(props) {
     }
 
     if (drivers_license === '') {
-      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, is_driver: false})
+      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false})
         .then((result) => {
           props.authCheck(email, password);
         })
@@ -36,7 +45,7 @@ export default function Register(props) {
           alert('Email already in use.');
         })
     } else {
-      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, is_driver: true})
+      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: true})
         .then((result) => {
           props.authCheck(email, password);
         })
@@ -50,7 +59,7 @@ export default function Register(props) {
     <div className='signup-form-container'>
       {driverCheck === false && 
         <div>
-          <form className='sign-form' onSubmit={handleSubmit}>
+          <form className='sign-form' onSubmit={handleNext}>
             <div className='inner-fields'>
               <h2 className='signup-title'>Sign Up</h2>
               <label htmlFor='name'>Your Name</label>
@@ -75,13 +84,16 @@ export default function Register(props) {
       {driverCheck === true &&
         <form className='sign-form'>
           <div className='inner-fields'>
+            <h2 className='signup-title'>Sign Up</h2>
             <label htmlFor='dl'>Driver's License #</label>
               <input  value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
             <label htmlFor='licensePlate'>License Plate #</label>
               <input  value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>
-            <button type='submit' onClick={handleSubmit}>Submit</button>
+            <button type='submit' onClick={handleAvatar}>Next</button>
           </div>
         </form>} 
+        {avatarCheck === true && 
+          <AvatarSelect state={avatar} setState={setAvatarValue} handleSubmit={handleSubmit}/>}
   </div>
   )
 };
