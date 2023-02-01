@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link, useNavigate } from 'react-router-dom';
-import { MdLogout } from 'react-icons/Md';
+import { MdLogout } from 'react-icons/md';
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
