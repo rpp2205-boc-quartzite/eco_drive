@@ -36,6 +36,10 @@ export default function Register(props) {
       return alert('Password does not match!');
     }
 
+    if (avatar === '') {
+      return alert('Please select a photo.');
+    }
+
     if (drivers_license === '') {
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false})
         .then((result) => {

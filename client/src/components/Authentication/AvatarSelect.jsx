@@ -27,13 +27,14 @@ export default function AvatarSelect(props) {
   }
 
   return (
-    <div>
+    <div className='avatar-view'>
       <h2>Sign Up</h2>
       <h3>Select a profile picture</h3>
-      {photos ? <div>
+      {photos ? <div className='avatar-container'>
         {photos.map((photo, index) => (
-          <div className='avatar-container' key={index}>
+          <div className='inner-avatar-container' key={index}>
             <img 
+              className='avatar-photo'
               alt='avatar select' 
               src={photo.urls.small}
               id={photo.urls.small}
