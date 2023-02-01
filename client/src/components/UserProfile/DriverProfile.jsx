@@ -73,15 +73,16 @@ class DriverProfile extends React.Component {
     event.preventDefault()
     console.log('submitted!')
     var editedInfo = {
+      userId: this.state.userId,
       full_name: this.state.full_name,
       email: this.state.email,
       drivers_license: this.state.drivers_license
     }
-    axios.post('/updateProfile', editedInfo)
+    axios.post('/updateDriverProfile', editedInfo)
       .then((submit) => {
-        console.log('successfully submitted changes!', submit)
-        this.setState({infoChanged: true})
-        console.log(this.state.infoChanged)
+        console.log('successfully submitted changes!', submit, this.state.full_name)
+        this.setState({editProfile: false})
+        // console.log(this.state.full_name)
       })
       .catch((err)=> {
         console.log('error submitting changes', err)
@@ -147,7 +148,7 @@ class DriverProfile extends React.Component {
 
             <div className='profileButtons'>
               <button className='profileCancelButton' onClick={this.editProfileOrClose}><span className='profileCancelButtonText'></span>Cancel</button>
-              <button className='profileSubmitButton'><span className='profileSubmitButtonText'>Submit</span></button>
+              <button className='profileSubmitButton'><span onClick={this.handleSubmit} className='profileSubmitButtonText'>Submit</span></button>
             </div>
           </div>
           : null
