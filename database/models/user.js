@@ -142,7 +142,8 @@ const userSchema = mongoose.Schema({
 
   favorites: {
     type: [mongoose.SchemaTypes.ObjectId],
-    ref: 'User'
+    ref: 'User',
+    default: []
   }
 
 }, { collection: 'user' });
