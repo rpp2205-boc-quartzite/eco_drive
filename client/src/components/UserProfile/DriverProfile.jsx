@@ -5,10 +5,12 @@ import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { FaPen } from 'react-icons/fa';
+// import Reviews from '../RatingsReviews/Reviews.jsx';
 
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props)
     this.state = {
       userId: '63d36d62cd478f26557c4a33', //hardcoded for now
       full_name: '',
@@ -25,6 +27,7 @@ class DriverProfile extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
+    // console.log('driver props', props;
     axios.get('/getDriverView', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)
@@ -53,7 +56,7 @@ class DriverProfile extends React.Component {
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
-          <img className='profilePhoto' src={this.state.avatar} alt="drive image"/>
+          <img className='profilePhoto' src={this.state.avatar} alt="drive profile pic"/>
         </div>
         <div className='profileName'>
          {this.state.full_name} <span className='profileOnline'>&#183;</span>
@@ -103,13 +106,14 @@ class DriverProfile extends React.Component {
         <div>
           <span className='profileTitle'>Recent drivers</span>
           <div className='profileRecentDriverContainer'>
-            <div><img className='profileRecentDriver' src={this.state.avatar} alt="drive image"/></div>
+            <div>
+              {/* <img className='profileRecentDriver' src={this.state.avatar} alt="drive image"/> */}
+              <Link to="/ratings-reviews" state={{ from: "driverprofile" }}><img className='profileRecentDriver' src={this.state.avatar} alt="driver profile pic"/></Link>
+            </div>
             {/* <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1xQppZAiV12AkQ55WdO8CWhgv-Y5Xtl3t" alt="drive image"/></div>
             <div><img className='secondprofileRecentDriver' src="https://drive.google.com/thumbnail?id=1BOoSYj1tACcqgXSAMj2iSDMhqApwcLJK" alt="drive image"/></div> */}
           </div>
-
         </div>
-        <Link to="/ratings_reviews"><button>Go to Ratings and Reviews</button></Link>
       {/* CURRENT ROUTE */}
         <div>
           <span className='profileTitle'>Current route</span>

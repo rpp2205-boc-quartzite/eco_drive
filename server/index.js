@@ -7,6 +7,7 @@ const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
+const { postReportHandler } = require('../database/controllers/report.js');
 const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 const { getDriverList } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
@@ -88,7 +89,7 @@ app.get('/getriderview', function(req, res) {
 });
 
 // ---- Ratings and Reviews routes  ---- //
-app.get('/ratings_reviews', function(req, res) {
+app.get('/getreviews', function(req, res) {
   let userid = req.query.id;
   getRiderView(userid)
   .then((result) => {
@@ -100,7 +101,7 @@ app.get('/ratings_reviews', function(req, res) {
 
 //app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
 
-app.post('/ratings_reviews', (req, res) => {
+app.post('/newreview', (req, res) => {
   let review = req.body;
   console.log('this is a test', req);
   postReviewHandler(review)
@@ -113,6 +114,20 @@ app.post('/ratings_reviews', (req, res) => {
   })
 });
 
+app.post('/reviews/:user_id/report', (req, res) => {
+  let report = req.body;
+  report.user_id = req.params.user_id;
+  console.log('this is a test', req);
+  console.log('this is a report', report);
+  postReportHandler(report)
+  .then((response) => {
+    console.log('review', response);
+    res.status(201).send(response);
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
+});
 
 // app.put('/reviews/:review_id/report', updateReportForReview);
 // app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);

@@ -39,7 +39,7 @@ function App() {
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
         <Route path="/driverview" element={<DriverView userId={userId}/>} />
         <Route path="/riderview" element={<RiderView userId={userId}/>} />
-        <Route path="/ratings_reviews" element={<Reviews />} />
+        <Route path="/ratings-reviews" element={<Reviews />} />
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />
         <Route path="/driver-list" element={<DriverList />} />

@@ -104,6 +104,8 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0,
       },
+      review_summary: String,
+      helpfulness: Number,
       review_text:  String
     }
   ],
@@ -118,13 +120,15 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0,
       },
+      review_summary: String,
+      helpfulness: Number,
       review_text: String
     }
   ],
 
   reported: [
     {
-      reviewer_user_id: {
+      reporter_user_id: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'User'
       },
