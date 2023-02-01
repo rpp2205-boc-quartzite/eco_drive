@@ -53,88 +53,97 @@ function RiderView ({ userId }) {
   return (
     <div className="allDefaultView">
       <div className="defaultViewHeader">
-      <div className="headerToggleView">
-        <Link to="/driverview">
-          <div className="viewToggle">Driver</div>
-          <HiOutlineRefresh className="viewToggleButton" size={25}/>
-        </Link> </div>
-
-      <div className="headerAvatar">
-        <Link to="/riderprofile">
-        <button>Avatar</button>
-        </Link> </div>
-
-      <div className="headerLogout">
-        <Link to="/">
-        <MdLogout size={20}/>
-        </Link>
-      </div>
-    </div>
-
-      <div>
-      <h2>Welcome {name},</h2>
-      </div>
-
-      <h3>Find your nearest drivers</h3>
-        <form>
-        <div>
-          <Autocomplete
-              apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
-              style={{ width: "90%" }}
-              placeholder="Starting point"
-              onPlaceSelected={(place) => {
-                let lat = place.geometry.location.lat();
-                let lng = place.geometry.location.lng();
-                setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng})
-                console.log(place);
-              }}
-              options={{
-                types: ["address"],
-                componentRestrictions: { country: "us" },
-              }}
-          />
-          <Autocomplete
-              apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
-              style={{ width: "90%" }}
-              placeholder="Destination"
-              onPlaceSelected={(place) => {
-                let lat = place.geometry.location.lat();
-                let lng = place.geometry.location.lng();
-                setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng})
-                console.log(place);
-              }}
-              options={{
-                types: ["address"],
-                componentRestrictions: { country: "us" },
-              }}
-          />
-          <DatePicker
-                selected={displayTime}
-                onChange={(date) => {
-                  setTime(format(displayTime, 'hh:mm aa'));
-                  setDisplayTime(new Date(date));
-                }}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="h:mm aa"
-              />
-          <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setIsDefault(true)} /> Set as default route <br/>
-          <Link to="/driver-list" state={{route: route}}>
-            <button className="primary-btn">Find Drivers</button>
+        <div className="headerToggleView">
+          <Link to="/driverview">
+            <div className="viewToggle">Driver</div>
+            <HiOutlineRefresh className="viewToggleButton" size={25}/>
           </Link>
         </div>
+        <div className="headerAvatarLogout">
+          <div className="headerAvatar">
+            <Link to="/riderprofile">
+            <button>Avatar</button>
+            </Link> </div>
+
+          <div className="headerLogout">
+            <Link to="/">
+            <MdLogout className="logout" size={20}/>
+            </Link></div>
+        </div>
+      </div>
+
+      <div className="welcomeCont">
+        <div className="welcomeMsg">Welcome {name},</div>
+      </div>
+
+      <div className="findNearestDrivers">Find your nearest drivers</div>
+        <form>
+          <div className="inputFieldsCont">
+            <div className="inputFields">
+              <Autocomplete
+                  className="inputField1"
+                  apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
+                  style={{ width: "90%" }}
+                  placeholder="Starting point"
+                  onPlaceSelected={(place) => {
+                    let lat = place.geometry.location.lat();
+                    let lng = place.geometry.location.lng();
+                    setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng})
+                    console.log(place);
+                  }}
+                  options={{
+                    types: ["address"],
+                    componentRestrictions: { country: "us" },
+                  }}
+                />
+                <Autocomplete
+                    className="inputField2"
+                    apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
+                    style={{ width: "90%" }}
+                    placeholder="Destination"
+                    onPlaceSelected={(place) => {
+                      let lat = place.geometry.location.lat();
+                      let lng = place.geometry.location.lng();
+                      setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng})
+                      console.log(place);
+                    }}
+                    options={{
+                      types: ["address"],
+                      componentRestrictions: { country: "us" },
+                    }}
+                  />
+                  <DatePicker
+                      className="inputField3"
+                      selected={displayTime}
+                      onChange={(date) => {
+                        setTime(format(displayTime, 'hh:mm aa'));
+                        setDisplayTime(new Date(date));
+                      }}
+                      showTimeSelect
+                      showTimeSelectOnly
+                      timeIntervals={15}
+                      timeCaption="Time"
+                      dateFormat="h:mm aa"
+                    />
+              <div className="defaultRadioCont">
+                <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
+              </div>
+            </div>
+
+            <Link to="/driver-list" state={{route: route}}>
+              <button className="primary-btn-find">Find Drivers</button>
+            </Link>
+          </div>
         </form>
 
-      <div>
+      {/* <div>
         ______________________________ <br/>
         Ongoing Trip
       </div>
       <div>
         ______________________________ <br/>
         UpcomingTrip
-      </div>
+      </div> */}
       <div>
         < DefaultRoute userId={userId} upcoming={upcoming} />
       </div>
