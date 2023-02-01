@@ -5,7 +5,8 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { getDriverView, getRiderView, postDriverRoute, postRiderRoute } = require('../database/controllers/defaultviews.js')
+const { getDriverView, getRiderView, postDriverRoute, postRiderRoute } = require('../database/controllers/defaultviews.js');
+const { updateDriverProfile} = require('../database/controllers/userProfile.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 //const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
@@ -23,6 +24,7 @@ const db = require('../database/index.js');
 
 // db controllers
 const User = require('../database/controllers/user.js');
+const { createResponseComposition } = require('msw');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
