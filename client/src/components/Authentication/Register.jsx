@@ -19,6 +19,16 @@ export default function Register(props) {
 
   const handleNext = (event) => {
     event.preventDefault();
+    if (email === '' || full_name === '' || dob === '') {
+      return alert('Please complete form');
+    };
+
+    if (password !== confirmPass) {
+      setPass('');
+      setConfirmPass('');
+      return alert('Password does not match!');
+    }
+
     setDriverCheck(true);
   }
 
@@ -30,12 +40,6 @@ export default function Register(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (password !== confirmPass) {
-      setPass('');
-      setConfirmPass('');
-      return alert('Password does not match!');
-    }
-
     if (avatar === '') {
       return alert('Please select a photo.');
     }
@@ -80,7 +84,7 @@ export default function Register(props) {
             <input type="checkbox" id="checkbox" required/>
               <label htmlFor="checkbox">I agree to Terms of Service </label>
             </form>
-          <button type='submit' onClick={handleNext}>Next</button> 
+            <button type='submit' onClick={handleNext}>Next</button> 
           <Link to='/login'>
             <button className='link-btn'>Already have an account? Login here.</button> 
           </Link> 
