@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/Md';
+import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/Hi';
 import DefaultRoute from './DefaultRoute.jsx';
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ApiKey from './apikey.js';
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({
@@ -26,9 +27,10 @@ function RiderView ({ userId }) {
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
+  const key = ApiKey;
 
   const route = {
-    id: userId,
+    _id: userId,
     full_name: name,
     start_address: start.start_address,
     start_lat: start.start_lat,
@@ -82,7 +84,7 @@ function RiderView ({ userId }) {
             <div className="inputFields">
               <Autocomplete
                   className="inputField1"
-                  apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
+                  apiKey={key}
                   style={{ width: "90%" }}
                   placeholder="Starting point"
                   onPlaceSelected={(place) => {
@@ -98,7 +100,7 @@ function RiderView ({ userId }) {
                 />
                 <Autocomplete
                     className="inputField2"
-                    apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
+                    apiKey={key}
                     style={{ width: "90%" }}
                     placeholder="Destination"
                     onPlaceSelected={(place) => {

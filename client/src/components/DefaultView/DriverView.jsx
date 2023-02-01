@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import DriverPrompt from './DriverPromptModal.jsx';
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ApiKey from './apikey.js';
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -29,6 +30,64 @@ function DriverView ({ userId }) {
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [showPrompt, setPrompt] = useState(false)
+  const key = ApiKey;
+
+
+  //*****************************************************//
+  //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
+  //*****************************************************//
+  const [directionsResponse, setDirectionsResponse] = useState('not updated');
+  const [pickUp, setPickUp] = useState(null);
+  const [dropOff, setDropOff] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const pickUpRef = React.useRef();
+  const dropOffRef = React.useRef();
+
+  useEffect(() => {
+    if (pickUp && dropOff) {
+      setLoading(true);
+      console.log('Loaded!')
+    }
+  }, [pickUp, dropOff])
+
+
+  useEffect(() => {
+    if (loading) {
+      async function CalculateRoute() {
+
+        if (pickUpRef.current.value === '' || dropOffRef.current.value === '') {
+          return
+        };
+
+        const directionsService = new google.maps.DirectionsService();
+
+        const results = await directionsService.route({
+          origin: pickUpRef.current.value,
+          destination: dropOffRef.current.value,
+          travelMode: google.maps.TravelMode.DRIVING
+        });
+
+        setDirectionsResponse({json: JSON.stringify(results)});
+        console.log('FINISHED');
+        setLoading(false);
+      }
+
+      CalculateRoute()
+    }
+  }, [loading])
+
+  useEffect(() => {
+    if (typeof directionsResponse !== 'string') {
+      console.log(directionsResponse)
+    }
+  }, [directionsResponse])
+
+
+
+    //*****************************************************//
+    //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
+    //*****************************************************//
 
   const route = {
     id: userId,
@@ -95,13 +154,14 @@ function DriverView ({ userId }) {
             <div className="inputFields">
               <Autocomplete
                 className="inputField1"
-                apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
+                apiKey={key}
                 style={{ width: "90%" }}
                 placeholder="Starting point"
                 onPlaceSelected={(place) => {
                   let lat = place.geometry.location.lat();
                   let lng = place.geometry.location.lng();
-                  setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng})
+                  setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng});
+                  setPickUp(place.formatted_address);
                   console.log(place);
                 }}
                 options={{
@@ -111,13 +171,14 @@ function DriverView ({ userId }) {
               />
               <Autocomplete
                 className="inputField2"
-                apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
+                apiKey={key}
                 style={{ width: "90%" }}
                 placeholder="Destination"
                 onPlaceSelected={(place) => {
                   let lat = place.geometry.location.lat();
                   let lng = place.geometry.location.lng();
-                  setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng})
+                  setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng});
+                  setDropOff(place.formatted_address);
                   console.log(place);
                 }}
                 options={{
@@ -144,7 +205,7 @@ function DriverView ({ userId }) {
               </div>
             </div>
 
-            <Link to="/rider-list" state={{route: route}}>
+            <Link to="/rider-list" state={directionsResponse}>
               <button className="primary-btn-find">Find Riders</button>
             </Link>
           </div>
