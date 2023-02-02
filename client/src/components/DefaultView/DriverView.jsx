@@ -10,6 +10,8 @@ import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import OngoingTrip from './OngoingTrip.jsx';
+
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
     start_address: '',
@@ -221,7 +223,8 @@ function DriverView ({ userId }) {
         Upcoming Trip
       </div> */}
       <div>
-      < DefaultRoute userId={userId} upcoming={upcoming} />
+        <DefaultRoute userId={userId} upcoming={upcoming} />
+        <OngoingTrip />
       </div>
 
     </div>

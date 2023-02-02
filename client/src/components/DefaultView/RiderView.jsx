@@ -146,7 +146,8 @@ function RiderView ({ userId }) {
         UpcomingTrip
       </div> */}
       <div>
-        < DefaultRoute userId={userId} upcoming={upcoming} />
+        <DefaultRoute userId={userId} upcoming={upcoming} />
+        <OngoingTrip />
       </div>
     </div>
   )

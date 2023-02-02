@@ -13,6 +13,7 @@ import RiderProfile from './components/UserProfile/RiderProfile.jsx';
 import DriverList from './components/DriverList/DriverList.jsx';
 //import Placeholder from './components/RiderList/Placeholder.jsx';
 import DriverInteractions from './components/RiderList/DriverInteractions.jsx'
+import TripComplete from './components/TripComplete/TripComplete.jsx';
 
 function App() {
   const [userId, setUserId] = useState('');
@@ -56,6 +57,7 @@ function App() {
         <Route path="/riderprofile" element={<RiderProfile />} />
         <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
         <Route path="/rider-list" element={<DriverInteractions updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
+        <Route path="/trip-complete" element={<TripComplete />} />
       </Routes>
     {/* <HelloWorld /> */}
     {/* <DriverView /> */}

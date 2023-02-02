@@ -1,0 +1,26 @@
+.ongoing-trip-container {
+  width: 350px;
+}
+
+.card {
+  border: 1px solid var(--gray4);
+  border-radius: 5px;
+  padding: 16px 16px;
+  margin: 0;
+}
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+}
+.detail {
+  padding-top: 3px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.end-button {
+  width: 100px;
+}
