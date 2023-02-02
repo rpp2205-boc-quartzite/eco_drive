@@ -6,7 +6,7 @@ import React from 'react';
 const Analytics = () => {
   return (
     <div>
-      <p> You saved so much money man </p>
+      <p>Your Savings</p>
     </div>
   )
 }

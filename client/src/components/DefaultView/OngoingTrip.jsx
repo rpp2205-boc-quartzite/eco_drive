@@ -11,7 +11,7 @@ const OngoingTrip = () => {
       <div className="card">
 
         <div className="profile">
-          <span>Profile Photo</span>
+          <span>Photo</span>
           <span>Name</span>
           <span>Heart</span>
           <span>Info</span>

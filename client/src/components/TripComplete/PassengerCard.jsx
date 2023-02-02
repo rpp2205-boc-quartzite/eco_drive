@@ -2,14 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PassengerCard = () => {
-
-  <div className="ended-card">
-    <span> Profile Photo </span>
-    <span> Rider 1 </span>
-    <Link to='/ratings_reviews'>
-      <button type='submit' className="end-button">Review</button>
-    </Link>
-  </div>
+  return (
+    <div className="passenger-card">
+      <span> Photo </span>
+      <span> Name </span>
+      <span> Heart </span>
+      <Link to='/ratings_reviews'>
+        <span> Info </span>
+      </Link>
+    </div>
+  )
 
 }
 

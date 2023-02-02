@@ -19,5 +19,5 @@
 
 .passenger-card {
   display: grid;
-  grid-template-columns: repeat(1fr, 4);
+  grid-template-columns: 1fr 3fr 1fr 1fr;
 }
