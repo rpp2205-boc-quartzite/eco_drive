@@ -45,6 +45,7 @@ const DriverInteractions = function(props) {
   const [directionsResponse, setDirectionsResponse] = React.useState(null);
   const [distance, setDistance] = React.useState('');
   const [duration, setDuration] = React.useState('');
+  const [tripStatus, setTripStatus] = React.useState('START');
   const [ridersArray, setRidersArray] = React.useState([
     {
       name: "Suzy Thompson",
@@ -76,6 +77,8 @@ const DriverInteractions = function(props) {
         setDuration(directions.routes[0].legs[0].duration.text);
         setLoaded(true)
   }, [loaded, directions]);
+
+
 
 
   const mapRef = React.useRef();
@@ -117,14 +120,30 @@ const DriverInteractions = function(props) {
     }
   }
 
+  const tripCheck = function() {
+    if (tripStatus === 'START') {
+      return (
+        <button className="start-trip"type="submit" onClick={tripChange}>Start Trip</button>
+      )
+    } else {
+      return (
+        <Link to="/trip-complete" >
+        <button className="end-trip" type="submit" >End Trip</button>
+      </Link>
+      )
+    }
+  };
+
+  const tripChange = function() {
+    setTripStatus('END');
+  };
+
 
   return (
     <div>
-      {/* {console.log("KEY ", process.env.REACT_APP_APIKEY, "and Key ", ApiKey )} */}
       <div>
-        <div className="top-area">
+        <div className="test-top">
           <div className="setting">Driver</div>
-
           <div className="profile-pic-padd">
             <img className="profile-picture" alt="lady from FEC" src="https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"/>
           </div>
@@ -140,21 +159,16 @@ const DriverInteractions = function(props) {
       <br></br>
       <div className="MapData">
         <div className="route">
-          <h3>Total Distance: {distance}</h3>
-          <h3>Expected Duration: {duration}</h3>
+          <h1>Total Distance: {distance}, Expected Duration: {duration}</h1>
         </div>
       </div>
         <br></br>
-        <div className="rider-list" data="DriverInteractions">
-          <Link to="/driverview" >
-            <button className="return-main" type="submit">return</button>
-          </Link>
-          <br></br>
-          <RiderList riders={ridersArray}/>
+        <div className="start-trip-place">
+          {tripCheck()}
         </div>
         <br></br>
-        <div>
-          <button className="start-trip" type="submit">Start Trip</button>
+        <div className="rider-list" data="DriverInteractions">
+          <RiderList riders={ridersArray}/>
         </div>
     </div>
   )

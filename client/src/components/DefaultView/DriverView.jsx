@@ -9,7 +9,6 @@ import DriverPrompt from './DriverPromptModal.jsx';
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import OngoingTrip from './OngoingTrip.jsx';
 
 function DriverView ({ userId }) {
