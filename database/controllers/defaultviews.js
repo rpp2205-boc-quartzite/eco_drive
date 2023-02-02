@@ -54,6 +54,15 @@ module.exports = {
     }
   },
 
+  postDriverLicense: (data) => {
+    const id = {_id: data._id}
+    const update = {
+      drivers_license: data.drivers_license,
+      license_plate: data.license_plate
+    }
+    return User.findOneAndUpdate(id, update).then((result) => console.log('Updated user record with license info')).catch(err => console.log('Error updating user record'));
+  },
+
   addIdToRiderListOfDriver: (driverId, newRiderId) => {
     const driver_id = {_id: driverId};
     User.updateOne(driver_id, {$push: {"driver_route.riders": newRiderId}})

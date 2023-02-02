@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
+import { HiOutlineRefresh } from 'react-icons/hi';
+import DefaultRoute from './DefaultRoute.jsx';
+import DriverPrompt from './DriverPromptModal.jsx';
+import { format } from "date-fns";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -17,11 +23,13 @@ function DriverView ({ userId }) {
   })
   const [seats, setSeats] = useState('');
   const [name, setName] = useState('');
-  const [time, setTime] = useState('');
-  const [def, setDef] = useState(false);
   const [avatar, setAvatar] = useState('');
-  const [default_route, setDefaultRoute] = useState({});
-
+  const [displayTime, setDisplayTime] = useState(new Date());
+  const [time, setTime] = useState('');
+  const [isDefault, setIsDefault] = useState(false);
+  const [upcoming, setUpcoming] = useState({});
+  const [showPrompt, setPrompt] = useState(false)
+  const key = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
 
 
   //*****************************************************//
@@ -90,133 +98,132 @@ function DriverView ({ userId }) {
     end_lat: end.end_lat,
     end_lng: end.end_lng,
     time: time,
-    default: def
+    default: isDefault,
+    total_seats: seats
   }
 
   useEffect(() => {
-    axios.get('/getriderview', { params: {userId} })
+    axios.get('/getdriverview', { params: {userId} })
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
-      if (result.data[0].rider_route.default) {
-        setDefaultRoute(result.data[0].rider_route)
+      setUpcoming(result.data[0].driver_route)
+      if (!result.data[0].drivers_license) {
+        setPrompt(true)
       }
     })
     .catch(err => console.log(err))
   }, [])
 
-  const handleSubmit = (e) => {
-    const route = {
-      id: userId,
-      full_name: name,
-      start_address: start.start_address,
-      start_lat: start.start_lat,
-      start_lng: start.start_lng,
-      end_address: end.end_address,
-      end_lat: end.end_lat,
-      end_lng: end.end_lng,
-      time: time,
-      default: def,
-      total_seats: seats
-    }
-    console.log(route)
-    e.preventDefault()
-    e.stopPropagation();
-    // navigate('/rider-list', { state: route });
-    // axios.post('/postRiderRoute', { data: submitRoute })
-    // .then((result) => {
-    //   console.log('posted updated route')
-    // })
-    // .catch((err) => {
-    //   alert('There was an error finding drivers');
-    // })
+  const closeModal = () => {
+    setPrompt(!showPrompt)
   }
 
   return (
     <div className="allDefaultView">
       <div className="defaultViewHeader">
-      <div className="headerToggleView">
-        <Link to="/riderview">
-        <button>Switch to rider view</button>
-        </Link></div>
-
-      <div className="headerAvatar">
-        <Link to="/driverprofile">
-        <button>Avatar</button>
-        </Link>
-      </div>
-
-      <div className="headerLogout"><MdLogout size={25}/></div>
-    </div>
-
-      <div>
-      <h2>Welcome {name},</h2>
-      </div>
-
-      <h3>Find your nearest drivers</h3>
-        <form>
-        <div>
-          <Autocomplete
-            apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
-            style={{ width: "90%" }}
-            placeholder="Starting point"
-            ref={pickUpRef}
-            onPlaceSelected={(place) => {
-              let lat = place.geometry.location.lat();
-              let lng = place.geometry.location.lng();
-              setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng})
-              setPickUp(place.formatted_address);
-              console.log(place);
-            }}
-            options={{
-              types: ["address"],
-              componentRestrictions: { country: "us" },
-            }}
-          />
-          <Autocomplete
-            apiKey={'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac'}
-            style={{ width: "90%" }}
-            placeholder="Destination"
-            ref={dropOffRef}
-            onPlaceSelected={(place) => {
-              let lat = place.geometry.location.lat();
-              let lng = place.geometry.location.lng();
-              setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng})
-              setDropOff(place.formatted_address);
-              console.log(place);
-            }}
-            options={{
-              types: ["address"],
-              componentRestrictions: { country: "us" },
-            }}
-          />
-          {/* <TimePicker onChange={(e) => this.handleChange(e, 'start_time')} value={'10:00'} /> */}
-          <input type="text" name="StartTime" style={{ width: "90%" }} placeholder="Start time" onChange={(e) => setTime(e.target.value)}/> <br/>
-            <input type="text" name="AvailableSeats" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/> <br/>
-            <input type="radio" value="SaveDefaultRoute"  name="default" onChange={(e) => setDef(true)} /> Set as default route <br/>
-          {/* <input type="button" className="findDrivers" value="Find drivers" onClick={(e) => handleSubmit(e)}></input> */}
-          <Link to="/rider-list" state={directionsResponse}>
-            <button>Find Riders</button>
+        <div className="headerToggleView">
+          <Link to="/riderview">
+            <div className="viewToggle">Rider</div>
+            <HiOutlineRefresh className="viewToggleButton" size={25} />
           </Link>
         </div>
+        <div className="headerAvatarLogout">
+          <div className="headerAvatar">
+            <Link to="/driverprofile">
+            <button>Avatar</button>
+            </Link></div>
+
+          <div className="headerLogout">
+            <Link to="/">
+            <MdLogout className="logout" size={20}/>
+            </Link></div>
+        </div>
+      </div>
+
+      <div className="welcomeCont">
+        <div className="welcomeMsg">Welcome {name},</div>
+      </div>
+
+      {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
+
+      <div className="findNearestDrivers">Find your nearest riders</div>
+        <form>
+          <div className="inputFieldsCont">
+            <div className="inputFields">
+              <Autocomplete
+                className="inputField1"
+                apiKey={key}
+                style={{ width: "90%" }}
+                placeholder="Starting point"
+                ref={pickUpRef}
+                onPlaceSelected={(place) => {
+                  let lat = place.geometry.location.lat();
+                  let lng = place.geometry.location.lng();
+                  setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng});
+                  setPickUp(place.formatted_address);
+                  console.log(place);
+                }}
+                options={{
+                  types: ["address"],
+                  componentRestrictions: { country: "us" },
+                }}
+              />
+              <Autocomplete
+                className="inputField2"
+                apiKey={key}
+                style={{ width: "90%" }}
+                placeholder="Destination"
+                ref={dropOffRef}
+                onPlaceSelected={(place) => {
+                  let lat = place.geometry.location.lat();
+                  let lng = place.geometry.location.lng();
+                  setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng});
+                  setDropOff(place.formatted_address);
+                  console.log(place);
+                }}
+                options={{
+                  types: ["address"],
+                  componentRestrictions: { country: "us" },
+                }}
+              />
+              <DatePicker
+                    className="inputField3"
+                    selected={displayTime}
+                    onChange={(date) => {
+                      setTime(format(displayTime, 'hh:mm aa'));
+                      setDisplayTime(new Date(date));
+                    }}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
+                  />
+              <input type="text" className="inputField4" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/>
+              <div className="defaultRadioCont">
+                <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
+              </div>
+            </div>
+
+            <Link to="/rider-list" state={directionsResponse}>
+              <button className="primary-btn-find">Find Riders</button>
+            </Link>
+          </div>
         </form>
-      {/* below all temporary placeholders */}
-      <div>
+
+      {/* <div>
         ______________________________ <br/>
         Ongoing Trip
       </div>
       <div>
         ______________________________ <br/>
         Upcoming Trip
-      </div>
+      </div> */}
       <div>
-        ______________________________ <br/>
-        Default route <br />
-        From: {default_route.start_address} <br />
-        To: {default_route.end_address} <br />
-        Time: {default_route.time} <br />
-
+      < DefaultRoute userId={userId} upcoming={upcoming} />
       </div>
+
     </div>
   )
 }

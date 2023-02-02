@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 import { GoogleMap, useJsApiLoader, useLoadScript, LoadScript, Marker, InfoWindow, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
 
 
-// const api = ApiKey;
 const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
 
 const libraries = ["places"];
