@@ -12,7 +12,7 @@ class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d9a742ec1bec755c7b4c17', //hardcoded for now
+      userId: '63d57101ef485e2d3166c413', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
@@ -99,8 +99,9 @@ class DriverProfile extends React.Component {
     return (
       <div>
       {/* TOP BUTTONS */}
-        <span className='profileToggle'>Driver</span>
+        <Link to="/riderprofile"><span className='profileToggle'>Driver</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
+        </Link>
         <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
         <Link to="/driverview"><span className='profileHomeButton'><AiFillHome/></span></Link>
 

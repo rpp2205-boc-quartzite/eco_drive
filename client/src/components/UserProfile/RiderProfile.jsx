@@ -12,7 +12,7 @@ class RiderProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d56db1ec9e04942bf024ad', //hardcoded for now
+      userId: '63d57101ef485e2d3166c413', //hardcoded for now
       full_name: '',
       email: '',
       start_address: '',
@@ -20,6 +20,7 @@ class RiderProfile extends React.Component {
       time: '',
       total_seats: '',
       avatar: '',
+      drivers_license: '',
       rider_reviews: [],
       recent_drivers: [],
       rating: 4,
@@ -46,6 +47,7 @@ class RiderProfile extends React.Component {
         end_address: result.data[0].rider_route.end_address,
         time: result.data[0].rider_route.time,
         avatar: result.data[0].avatar,
+        drivers_license: result.data[0].drivers_license,
         rider_reviews: result.data[0].rider_reviews,
         recent_riders: result.data[0].recent_riders
       })
@@ -96,8 +98,15 @@ class RiderProfile extends React.Component {
     return (
       <div>
       {/* TOP BUTTONS */}
+        {this.state.drivers_license ?
+        <Link to="/driverprofile">
         <span className='profileToggle'>Rider</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
+        </Link> : <span>
+        <span className='profileToggle'>Rider</span>
+        <span className='profileToggleButton'><HiOutlineRefresh/></span></span>
+        }
+
         <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
         <Link to="/riderview"><span className='profileHomeButton'><AiFillHome/></span></Link>
 
