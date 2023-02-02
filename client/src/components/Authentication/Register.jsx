@@ -19,9 +19,9 @@ export default function Register(props) {
 
   const handleNext = (event) => {
     event.preventDefault();
-    if (email === '' || full_name === '' || dob === '') {
-      return alert('Please complete form');
-    };
+    // if (email === '' || full_name === '' || dob === '') {
+    //   return alert('Please complete form');
+    // };
 
     if (password !== confirmPass) {
       setPass('');
@@ -112,23 +112,37 @@ export default function Register(props) {
                 <label htmlFor="checkbox">I agree to Terms of Service </label>
             </div> */}
             <div className='signup-btn-wrapper'>
-              <button type='submit' onClick={handleNext}>Next</button> 
-            <Link to='/login'>
-              <button className='link-btn'>Already have an account? Login here.</button> 
+              <button className='next-btn' type='submit' onClick={handleNext}><span className='next-text'>Next</span></button> 
+            <Link to='/'>
+              <button className='back-btn'><span className='back-text'>Go Back</span></button> 
             </Link> 
             </div>
         </div>}
       {driverCheck === true &&
-        <form className='sign-form'>
+        <form className='sign-form-dl'>
           <div className='inner-fields'>
             <h2 className='signup-title'>Sign Up</h2>
-            <label htmlFor='dl'>Driver's License #</label>
-              <input  value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
-            <label htmlFor='licensePlate'>License Plate #</label>
-              <input  value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>
-            <button type='submit' onClick={handleAvatar}>Next</button>
+            <div className='label-container'>
+              <div className='label-title-container'>
+                <label className='signup-label'htmlFor='dl'>Driver's License #</label>
+              </div>
+              <input className='input-field' value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
+            </div>
+            <div className='label-container'>
+              <div className='label-title-container-2'>
+                <label className='signup-label' htmlFor='licensePlate'>License Plate #</label>
+              </div>
+              <input className='input-field' value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>
+            </div>
+              <p className='driver-skip'>* If you are not a driver, press Next to skip.</p>
+              <div className='signup-btn-wrapper'>
+                <button className='next-btn' type='submit' onClick={handleAvatar}><span className='next-text'>Next</span></button>
+                <button className='back-btn'><span className='back-text'>Go Back</span></button>
+              </div>
+
           </div>
-        </form>} 
+        </form>
+        } 
         {avatarCheck === true && 
           <AvatarSelect state={avatar} setState={setAvatarValue} handleSubmit={handleSubmit}/>}
   </div>

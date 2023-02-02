@@ -679,6 +679,97 @@ h1 {
   right: 0px;
   bottom: 0px;
 }
+
+.next-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  width: 343px;
+  height: 41px;
+  background: #338F24;
+  border-radius: 50px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.next-text {
+  width: 31px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.back-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+  width: 343px;
+  height: 24px;
+  border-radius: 5px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.back-text {
+  width: 67px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  color: #338F24;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.sign-form-dl {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  position: relative;
+  width: 375px;
+  height: 667px;
+  top: 24px;
+  background: #FCFCFC;
+}
+
+.driver-skip {
+  width: 246px;
+  height: 18px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  color: #262929;
+  flex: none;
+  order: 4;
+  flex-grow: 0;
+}
+
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */
