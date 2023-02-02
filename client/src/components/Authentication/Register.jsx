@@ -72,21 +72,39 @@ export default function Register(props) {
               <h2 className='signup-title'>Sign Up</h2>
               <div className='label-container'>
                 <div className='label-title-container'>
-                  <label htmlFor='name' className='label-title'>Your Name</label>
+                  <label htmlFor='name' className='label-title'>Name</label>
                   <div className='valid-check'>*</div>
                 </div>
-              
-                <input value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
+                <input className='input-field' value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
               </div>
-
-              <label htmlFor='email' className='signup-label'>Email</label>
-                <input value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
-              <label htmlFor='dob' className='signup-label'>Date of Birth</label>
-                <input  value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
-              <label htmlFor='password' className='signup-label'>Password</label>
-                <input value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
-              <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
-                <input value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
+              <div className='label-container-2'>
+                <div className='label-title-container'>
+                  <label htmlFor='email' className='label-title'>Email</label>
+                  <div className='valid-check'>*</div>
+                </div>
+                <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
+              </div>
+              <div className='label-container-3'>
+                <div className='label-title-container'>
+                  <label htmlFor='dob' className='label-title'>Date of Birth</label>
+                  <div className='valid-check'>*</div>
+                </div>
+                <input className='input-field' value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
+              </div>
+              <div className='label-container-4'>
+                <div className='label-title-container'>
+                  <label htmlFor='password' className='label-title'>Password</label>
+                  <div className='valid-check'>*</div>
+                </div>
+                <input className='input-field' value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
+              </div>
+              <div className='label-container-5'>
+                <div className='label-title-container'>
+                  <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
+                  <div className='valid-check'>*</div>
+                </div>
+                <input className='input-field' value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
+              </div>
             </div>
             </form>
             <input type="checkbox" id="checkbox" required/>
