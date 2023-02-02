@@ -1,6 +1,6 @@
 import "./RiderList.css";
 import mapStyles from "./mapStyles.js"
-import ApiKey from "./apiKey.js";
+import ApiKey from "../DefaultView/apiKey.js";
 import React, { useEffect } from "react";
 import RiderList from "./RiderList.jsx"
 import { GoogleMap, useJsApiLoader, useLoadScript, LoadScript, Marker, InfoWindow, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';

@@ -1,0 +1,23 @@
+/* Trip ended review */
+
+/* Auto layout */
+
+.trip-complete {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+
+  position: relative;
+  width: 375px;
+  height: 834px;
+
+  background: #FCFCFC;
+
+}
+
+.passenger-card {
+  display: grid;
+  grid-template-columns: repeat(1fr, 4);
+}

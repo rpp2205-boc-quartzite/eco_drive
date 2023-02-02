@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ApiKey from './apikey.js';
+import OngoingTrip from './OngoingTrip.jsx';
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({
@@ -147,7 +148,8 @@ function RiderView ({ userId }) {
         UpcomingTrip
       </div> */}
       <div>
-        < DefaultRoute userId={userId} upcoming={upcoming} />
+        <DefaultRoute userId={userId} upcoming={upcoming} />
+        <OngoingTrip />
       </div>
     </div>
   )
