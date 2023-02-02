@@ -468,6 +468,76 @@ h1 {
   order: 1;
   flex-grow: 0;
 }
+
+.signup-form-container {
+  position: relative;
+  width: 375px;
+  height: 644px;
+  background: #FCFCFC;
+}
+
+.sign-form {
+  position: absolute;
+  width: 375px;
+  height: 592px;
+  left: 0px;
+  top: 64px;
+  overflow-y: scroll;
+}
+
+.inner-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 12px;
+  width: 375px;
+  height: 496px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.sign-up-title {
+  width: 93px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.label-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 343px;
+  height: 80px;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.label-title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 4px;
+  width: 343px;
+  height: 30px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */

@@ -70,8 +70,15 @@ export default function Register(props) {
           <form className='sign-form' onSubmit={handleNext}>
             <div className='inner-fields'>
               <h2 className='signup-title'>Sign Up</h2>
-              <label htmlFor='name'>Your Name</label>
+              <div className='label-container'>
+                <div className='label-title-container'>
+                  <label htmlFor='name' className='label-title'>Your Name</label>
+                  <div className='valid-check'>*</div>
+                </div>
+              
                 <input value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
+              </div>
+
               <label htmlFor='email' className='signup-label'>Email</label>
                 <input value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
               <label htmlFor='dob' className='signup-label'>Date of Birth</label>
@@ -81,9 +88,9 @@ export default function Register(props) {
               <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
                 <input value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
             </div>
+            </form>
             <input type="checkbox" id="checkbox" required/>
               <label htmlFor="checkbox">I agree to Terms of Service </label>
-            </form>
             <button type='submit' onClick={handleNext}>Next</button> 
           <Link to='/login'>
             <button className='link-btn'>Already have an account? Login here.</button> 
