@@ -9,12 +9,14 @@ const headers = {
 export default function AvatarSelect(props) {
 
   const [photos, setPhotos] = useState(null);
+  const [photos2, setPhotos2] = useState(null);
 
   useEffect(() => {
     axios.get('https://api.unsplash.com/photos', {headers: headers})
     .then((response) => {
       console.log(response)
       setPhotos(response.data.slice(2,5));
+      setPhotos2(response.data.slice(6,9));
     })
     .catch(function (error) {
       console.log(error);
@@ -34,6 +36,17 @@ export default function AvatarSelect(props) {
         {photos ? <div className='avatar-container'>
           <div className='inner-avatar-wrapper'>
             {photos.map((photo, index) => (
+              <div key={index}>
+                <img 
+                  className='avatar-photo'
+                  alt='avatar select' 
+                  src={photo.urls.small}
+                  id={photo.urls.small}
+                  onClick={onClick}/>
+              </div>))}
+          </div>
+          <div className='inner-avatar-wrapper'>
+            {photos2.map((photo, index) => (
               <div key={index}>
                 <img 
                   className='avatar-photo'
