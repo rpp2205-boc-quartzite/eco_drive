@@ -29,7 +29,7 @@ function DriverView ({ userId }) {
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [showPrompt, setPrompt] = useState(false)
-  const key = process.env.GOOGLE_MAP_API_KEY_VIEWS;
+  const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
 
 
   //*****************************************************//
@@ -153,7 +153,7 @@ function DriverView ({ userId }) {
             <div className="inputFields">
               <Autocomplete
                 className="inputField1"
-                apiKey={key}
+                apiKey={API_KEY}
                 style={{ width: "90%" }}
                 placeholder="Starting point"
                 ref={pickUpRef}
@@ -171,7 +171,7 @@ function DriverView ({ userId }) {
               />
               <Autocomplete
                 className="inputField2"
-                apiKey={key}
+                apiKey={API_KEY}
                 style={{ width: "90%" }}
                 placeholder="Destination"
                 ref={dropOffRef}
