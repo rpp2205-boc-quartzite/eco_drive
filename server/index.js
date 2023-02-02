@@ -5,12 +5,14 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { getDriverView, getRiderView, postDriverRoute, postRiderRoute } = require('../database/controllers/defaultviews.js');
 const { updateDriverProfile, updateRiderProfile } = require('../database/controllers/userProfile.js')
+const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
+const { postReportHandler } = require('../database/controllers/report.js');
+//*****const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 //const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
-const { getDriverList } = require('../database/controllers/driverList.js')
+const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
@@ -70,7 +72,7 @@ app.post('/login', login);
 
 // ---- Default Driver view routes  ---- //
 app.get('/getdriverview', function(req, res) {
-  let userid = req.query.id;
+  let userid = req.query.userId;
   getDriverView(userid)
   .then((result) => {
     console.log(result)
@@ -98,14 +100,22 @@ app.post('/postDriverRoute', function(req, res) {
 })
 
 app.post('/postRiderRoute', function(req, res) {
-  //console.log(req.body.data)
   postRiderRoute(req.body)
   .then(() => res.status(201).send('Successfully post rider route'))
   .catch((err) => res.status(400).send(err))
-
 });
+
+app.post('/postDriverLicense', function(req, res) {
+  console.log('here is license', req.body.licenseInfo)
+  var data = req.body.licenseInfo;
+  postDriverLicense(data)
+  .then(result => res.end())
+  .catch(err => console.log(err))
+})
+
+
 // ---- Ratings and Reviews routes  ---- //
-app.get('/ratings_reviews', function(req, res) {
+app.get('/getreviews', function(req, res) {
   let userid = req.query.id;
   getRiderView(userid)
   .then((result) => {
@@ -117,7 +127,7 @@ app.get('/ratings_reviews', function(req, res) {
 
 //app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
 
-app.post('/ratings_reviews', (req, res) => {
+app.post('/newreview', (req, res) => {
   let review = req.body;
   console.log('this is a test', req);
   postReviewHandler(review)
@@ -130,11 +140,28 @@ app.post('/ratings_reviews', (req, res) => {
   })
 });
 
+app.post('/reviews/:user_id/report', (req, res) => {
+  let report = req.body;
+  report.user_id = req.params.user_id;
+  console.log('this is a test', req);
+  console.log('this is a report', report);
+  postReportHandler(report)
+  .then((response) => {
+    console.log('review', response);
+    res.status(201).send(response);
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
+});
 
 // app.put('/reviews/:review_id/report', updateReportForReview);
 // app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
 
-// ---- Driver List Routes ---- //
+
+// ------------------------------------------------------------------------------------------ //
+// ----------------------------------- Driver List Routes ----------------------------------- //
+// ------------------------------------------------------------------------------------------ //
 app.post('/driver-list', async (req, res) => {
   const rider =  {
     id: req.body.userId,
@@ -165,6 +192,23 @@ app.post('/driver-list', async (req, res) => {
   } catch (err) {
     console.log('Get driver list server err: ', err)
     res.status(404).send(err)
+  }
+})
+
+// Add/remove driver to/off user's favorites list
+app.put('/driver-list', async (req, res) => {
+  console.log(req.query.action);
+  try {
+    if (req.query.action === 'add-favorite') {
+      await addFavorite(req.query.userId, req.query.driverId)
+      res.status(204).send('Successfully favorite driver')
+    } else if (req.query.action === 'remove-favorite') {
+      await removeFavorite(req.query.userId, req.query.driverId)
+      res.status(204).send('Successfully unfavorite driver')
+    }
+  } catch (err) {
+    console.log('Error add or remove favorite driver: ', err);
+    res.status(400).send(err)
   }
 })
 

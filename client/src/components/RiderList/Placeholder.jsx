@@ -1,13 +1,12 @@
 import React, {useState, Suspense} from 'react';
-import DriverInteractions from './DriverInteractions.jsx'
+import DriverInteractions from './DriverInteractions.jsx';
 import { Circles } from 'react-loader-spinner';
 import "./RiderList.css";
-import ApiKey from "./apiKey.js";
 import { useLocation } from "react-router-dom";
 import { GoogleMap, useJsApiLoader, useLoadScript, LoadScript, Marker, InfoWindow, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
 
 
-const api = ApiKey;
+const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
 
 const libraries = ["places"];
 
@@ -48,7 +47,7 @@ export default function Placeholder(props) {
 
 
   const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: api,
+    googleMapsApiKey: API_KEY,
     libraries
   });
 

@@ -1,9 +1,9 @@
 const User = require('../models/user.js').User;
 
 module.exports = {
-  postReviewHandler: (object) => {
-    console.log('object', object);
-    return User.findOneAndUpdate({_id: object.userid}, {$push: {"rider_reviews": object}}, {new: true})
+  postReviewHandler: (report) => {
+    console.log('object - report', report);
+    return User.findOneAndUpdate({_id: report.userId}, {$push: {"driver_reviews": report}}, {new: true})
     .then(response => {
       return response;
     })

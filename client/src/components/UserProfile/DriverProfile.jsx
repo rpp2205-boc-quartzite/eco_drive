@@ -11,6 +11,7 @@ import { useLocation, useParams, Link } from "react-router-dom";
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props)
     this.state = {
       userId: this.props.location.state.id,
       full_name: '',
@@ -37,6 +38,7 @@ class DriverProfile extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
+    // console.log('driver props', props;
     axios.get('/getDriverView', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)

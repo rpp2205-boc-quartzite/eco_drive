@@ -1,22 +1,12 @@
 import "./RiderList.css";
-import mapStyles from "./mapStyles.js"
-import ApiKey from "./apiKey.js";
+import mapStyles from "./mapStyles.js";
 import React, { useEffect } from "react";
+import { Link } from 'react-router-dom';
 import RiderList from "./RiderList.jsx"
 import { GoogleMap, useJsApiLoader, useLoadScript, LoadScript, Marker, InfoWindow, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
-import { Circles } from 'react-loader-spinner';
 import { useLocation } from "react-router-dom";
 
-const api = ApiKey;
-
-const loadingScreen = () => {
-  return (
-    <div className='loading-screen'>
-        <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
-        <p>Finding drivers...</p>
-      </div>
-  )
-}
+const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
 
 const containerStyle = {
   width: '370px',
@@ -47,7 +37,7 @@ const DriverInteractions = function(props) {
 
 
   const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: api,
+    googleMapsApiKey: API_KEY,
     libraries
   });
 
@@ -95,11 +85,22 @@ const DriverInteractions = function(props) {
 
 
   if (loadError) return "Error Loading Maps";
-  if (!isLoaded) return <Circles />
+  if (!isLoaded) return (
+    <div className='loading-screen'>
+      <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
+      <p>Finding drivers...</p>
+   </div>
+  )
 
   const mapCheck = function() {
     if (!Object.keys(directionsResponse).length) {
-      return <Circles />
+      return (
+          <div className='loading-screen'>
+            <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
+            <p>Finding drivers...</p>
+        </div>
+        )
+
     } else {
       return (
       <GoogleMap
@@ -124,13 +125,12 @@ const DriverInteractions = function(props) {
         <div className="top-area">
           <div className="setting">Driver</div>
 
-          <button className="toggle-rider" type="submit">circle</button>
-
           <div className="profile-pic-padd">
             <img className="profile-picture" alt="lady from FEC" src="https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"/>
           </div>
-
-          <button className="return-main" type="submit">return</button>
+          <Link to="/driverview" >
+            <button className="return-main" type="submit">return</button>
+          </Link>
         </div>
       </div>
       <br></br>
@@ -146,7 +146,9 @@ const DriverInteractions = function(props) {
       </div>
         <br></br>
         <div className="rider-list" data="DriverInteractions">
-          <button className="back-button" type="submit">back arrow</button>
+          <Link to="/driverview" >
+            <button className="return-main" type="submit">return</button>
+          </Link>
           <br></br>
           <RiderList riders={ridersArray}/>
         </div>
