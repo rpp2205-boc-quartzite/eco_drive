@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import DefaultRoute from './DefaultRoute.jsx';
 import { format } from "date-fns";
+import Autocomplete from "react-google-autocomplete";
 import DatePicker from "react-datepicker";
+import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-import ApiKey from './apikey.js';
+
+import DefaultRoute from './DefaultRoute.jsx';
 import OngoingTrip from './OngoingTrip.jsx';
+import ApiKey from './apikey.js';
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({

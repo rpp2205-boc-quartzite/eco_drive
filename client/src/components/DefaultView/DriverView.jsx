@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import DefaultRoute from './DefaultRoute.jsx';
-import DriverPrompt from './DriverPromptModal.jsx';
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
+import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-import ApiKey from './apikey.js';
 
+import Autocomplete from "react-google-autocomplete";
+import DefaultRoute from './DefaultRoute.jsx';
+import DriverPrompt from './DriverPromptModal.jsx';
 import OngoingTrip from './OngoingTrip.jsx';
+import ApiKey from './apikey.js';
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -215,14 +215,6 @@ function DriverView ({ userId }) {
           </div>
         </form>
 
-      {/* <div>
-        ______________________________ <br/>
-        Ongoing Trip
-      </div>
-      <div>
-        ______________________________ <br/>
-        Upcoming Trip
-      </div> */}
       <div>
         <DefaultRoute userId={userId} upcoming={upcoming} />
         <OngoingTrip />
