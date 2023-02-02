@@ -916,9 +916,25 @@ h1 {
 .avatar-photo {
   width: 100px;
   height: 100px;
+  border-radius: 5px;
   flex-direction: row;
   align-items: flex-start;
   order: 0;
+  flex-grow: 0;
+}
+
+.sign-up-text {
+  width: 54px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
   flex-grow: 0;
 }
 
