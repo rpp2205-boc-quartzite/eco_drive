@@ -29,7 +29,7 @@ function DriverView ({ userId }) {
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [showPrompt, setPrompt] = useState(false)
-  const key = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
+  const key = process.env.GOOGLE_MAP_API_KEY_VIEWS;
 
 
   //*****************************************************//
