@@ -72,28 +72,28 @@ export default function Register(props) {
               <h2 className='signup-title'>Sign Up</h2>
               <div className='label-container'>
                 <div className='label-title-container'>
-                  <label htmlFor='name' className='label-title'>Name</label>
+                  <label htmlFor='name' className='label-title-2'>Name</label>
                   <div className='valid-check'>*</div>
                 </div>
                 <input className='input-field' value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
               </div>
               <div className='label-container-2'>
                 <div className='label-title-container'>
-                  <label htmlFor='email' className='label-title'>Email</label>
+                  <label htmlFor='email' className='label-title-3'>Email</label>
                   <div className='valid-check'>*</div>
                 </div>
                 <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
               </div>
               <div className='label-container-3'>
                 <div className='label-title-container'>
-                  <label htmlFor='dob' className='label-title'>Date of Birth</label>
+                  <label htmlFor='dob' className='label-title-4'>Date of Birth</label>
                   <div className='valid-check'>*</div>
                 </div>
                 <input className='input-field' value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
               </div>
               <div className='label-container-4'>
                 <div className='label-title-container'>
-                  <label htmlFor='password' className='label-title'>Password</label>
+                  <label htmlFor='password' className='label-title-5'>Password</label>
                   <div className='valid-check'>*</div>
                 </div>
                 <input className='input-field' value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
@@ -119,7 +119,7 @@ export default function Register(props) {
             </div>
         </div>}
       {driverCheck === true &&
-        <form className='sign-form-dl'>
+        <form className='sign-up-wrappers'>
           <div className='inner-fields'>
             <h2 className='signup-title'>Sign Up</h2>
             <div className='label-container'>
@@ -139,7 +139,6 @@ export default function Register(props) {
                 <button className='next-btn' type='submit' onClick={handleAvatar}><span className='next-text'>Next</span></button>
                 <button className='back-btn'><span className='back-text'>Go Back</span></button>
               </div>
-
           </div>
         </form>
         } 
