@@ -10,5 +10,13 @@ module.exports = {
         console.log('Get drivers error: ', err)
         throw err;
       })
+  },
+
+  addFavorite: (userId, driverId) => {
+
+  },
+
+  removeFavorite: (userId, driverId) => {
+
   }
 }
