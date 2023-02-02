@@ -66,7 +66,7 @@ export default function Register(props) {
   return (
     <div className='signup-form-container'>
       {driverCheck === false && 
-        <div>
+        <div className='signup-wrappers'>
           <form className='sign-form' onSubmit={handleNext}>
             <div className='inner-fields'>
               <h2 className='signup-title'>Sign Up</h2>
@@ -107,12 +107,16 @@ export default function Register(props) {
               </div>
             </div>
             </form>
-            <input type="checkbox" id="checkbox" required/>
-              <label htmlFor="checkbox">I agree to Terms of Service </label>
-            <button type='submit' onClick={handleNext}>Next</button> 
-          <Link to='/login'>
-            <button className='link-btn'>Already have an account? Login here.</button> 
-          </Link> 
+            {/* <div className='tos-wrapper'>
+              <input type="checkbox" id="checkbox" required/>
+                <label htmlFor="checkbox">I agree to Terms of Service </label>
+            </div> */}
+            <div className='signup-btn-wrapper'>
+              <button type='submit' onClick={handleNext}>Next</button> 
+            <Link to='/login'>
+              <button className='link-btn'>Already have an account? Login here.</button> 
+            </Link> 
+            </div>
         </div>}
       {driverCheck === true &&
         <form className='sign-form'>

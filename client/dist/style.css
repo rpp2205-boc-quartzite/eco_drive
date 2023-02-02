@@ -472,7 +472,7 @@ h1 {
 .signup-form-container {
   position: relative;
   width: 375px;
-  height: 644px;
+  height: 667px;
   background: #FCFCFC;
 }
 
@@ -481,7 +481,7 @@ h1 {
   width: 375px;
   height: 592px;
   left: 0px;
-  top: 64px;
+  top: 24px;
   overflow-y: scroll;
 }
 
@@ -638,6 +638,46 @@ h1 {
   order: 6;
   align-self: stretch;
   flex-grow: 0;
+}
+
+.tos-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px 16px;
+  gap: 17px;
+  width: 375px;
+  height: 36px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.signup-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+  position: absolute;
+  width: 375px;
+  height: 556px;
+  left: 0px;
+  top: 0px;
+}
+
+.signup-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px 16px 40px;
+  gap: 16px;
+  position: absolute;
+  height: 121px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 /* -------- Authentication CSS END -------- */
 
