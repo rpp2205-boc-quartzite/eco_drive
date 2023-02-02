@@ -1,10 +1,27 @@
-import React, {useState} from 'react';
+import React, {useState, Suspense} from 'react';
 import DriverInteractions from './DriverInteractions.jsx'
 import { Circles } from 'react-loader-spinner';
+import "./RiderList.css";
+import ApiKey from "./apiKey.js";
+import { useLocation } from "react-router-dom";
+import { GoogleMap, useJsApiLoader, useLoadScript, LoadScript, Marker, InfoWindow, Autocomplete, DirectionsRenderer } from '@react-google-maps/api';
+
+
+const api = ApiKey;
+
+const libraries = ["places"];
+
+
+export default function Placeholder(props) {
+
+  const location = useLocation();
+
+  const data = location;
+
+  console.log('This is what I\'m getting: ', data)
 
 
 
-export default function Placeholder() {
   const [ridersArray, setRidersArray] = useState([
     {
       name: "Suzy Thompson",
@@ -27,57 +44,62 @@ export default function Placeholder() {
       to: .02,
       time: "9:00am",
     }
-  ])
+  ]);
 
-  const route = {
-    avatar: "",
-    end_address: "Los Angeles, CA, USA",
-    end_lat: 37.890053,
-    end_lng: -122.2716059,
-    full_name: "Eco Friendly Driver",
-    start_address: "Los Angeles River Bike Path, Los Angeles, CA, USA",
-    start_lat: 34.1318486,
-    start_lng: -118.2745054,
-    time: "9:00am",
-    total_seats: "2",
-    userId: "63d244c024407b7b0ddb7ed0",
+
+  const {isLoaded, loadError} = useLoadScript({
+    googleMapsApiKey: api,
+    libraries
+  });
+
+  const [directionsResponse, setDirectionsResponse] = React.useState({});
+
+
+  const pickUpRef = React.useRef();
+  const dropOffRef = React.useRef();
+
+
+
+  if (loadError) return "Error Loading Maps";
+  if (!isLoaded) return <Circles />
+
+  async function calculateRoute() {
+    if (pickUpRef.current.value === '' || dropOffRef.current.value === '') {
+      return
+    }
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route({
+      origin: pickUpRef.current.value,
+      destination: dropOffRef.current.value,
+      travelMode: google.maps.TravelMode.DRIVING
+    })
+
+    setDirectionsResponse(results);
+    console.log('Results', results);
+    console.log('TEST LENGTH', Object.keys(directionsResponse).length)
   }
 
-  const [directions, setDirections] = useState(null);
 
+  if (!Object.keys(directionsResponse).length) {
+    return (
+          <div className="App">
+             {console.log(Object.keys(directionsResponse).length)};
+            <div className="route">
+              <h3>Input Your Route</h3>
+              <Autocomplete>
+                <input type="text" name="pickUp" placeholder="Pick-Up Location" ref={pickUpRef}/>
+              </Autocomplete>
+              <Autocomplete>
+                <input type="text" name="dropOff" placeholder="Drop-Off Location" ref={dropOffRef}/>
+              </Autocomplete>
+              <button type="submit" onClick={calculateRoute}>Create Route</button>
+            </div>
+          </div>
+          )
+  } else {
+    return (
+      <DriverInteractions directions={directionsResponse} riders={ridersArray}/>
+    )
+  }
 
-
-    React.useEffect( ()=> {
-      async function calculateRoute() {
-        const directionsService = new google.maps.DirectionsService();
-        const results = await directionsService.route({
-          origin: route.start_address,
-          destination: route.end_address,
-          travelMode: google.maps.TravelMode.DRIVING
-        })
-
-        if (results.status === 'OK') {
-          setDirections({
-            direction: results,
-            distance: results.routes[0].legs[0].distance.text,
-            duration: results.routes[0].legs[0].duration.text
-          });
-          console.log(results);
-        } else {
-          console.log("Error: ", results.status)
-        }
-      }
-      calculateRoute();
-    }, [route])
-
-
-    if (!directions) {
-      return (
-        <Circles />
-      )
-    } else {
-      return (
-        <DriverInteractions riders={ridersArray} route={route} directions={directions}/>
-      )
-    }
 }
