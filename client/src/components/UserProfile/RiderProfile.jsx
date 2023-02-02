@@ -12,7 +12,7 @@ class RiderProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: "63d9a742ec1bec755c7b4c17",
+      userId: this.props.location.state.id,
       full_name: '',
       email: '',
       start_address: '',
