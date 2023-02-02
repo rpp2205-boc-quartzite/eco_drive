@@ -28,5 +28,3 @@ yarn-error.log*
 green-earth.pem
 
 client/dist/main.js
-client/src/components/RiderList/apiKey.js
-apikey.js
