@@ -21,10 +21,10 @@ class Dashboard extends React.Component {
         </div>
         <div className='link-frame'>
           <Link to='/register'>
-            <button className='signup-btn'><span className='sign-up-link'>Sign Up</span></button>
+            <button className='signup-btn'><span className='signup-link'>Sign Up</span></button>
           </Link>
           <Link to='/login'>
-            <button className='login-btn' type='link'><span className='login-btn-link'>Login</span></button>
+            <button className='login-btn'><span className='login-btn-link'>Login</span></button>
           </Link>
         </div>
       </div>

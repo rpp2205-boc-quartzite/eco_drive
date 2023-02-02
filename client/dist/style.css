@@ -373,6 +373,10 @@ h1 {
   flex-grow: 0;
 }
 
+.eco-title {
+  position: absolute;
+  text-align: center;
+}
 .eco-subtitle {
   width: 269.39px;
   height: 24px;
@@ -402,7 +406,7 @@ h1 {
   bottom: 0px;
 }
 
-.sign-up-btn {
+.signup-btn {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -419,6 +423,51 @@ h1 {
   flex-grow: 0;
 }
 
+.signup-link {
+  width: 54px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.login-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+  width: 343px;
+  height: 24px;
+  border-radius: 5px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.login-btn-link {
+  width: 47px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  color: #338F24;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */
