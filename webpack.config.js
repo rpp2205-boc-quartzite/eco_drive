@@ -4,7 +4,7 @@ const path = require('path');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const TerserPlugin = require('terser-webpack-plugin');
-
+const Dotenv = require('dotenv-webpack');
 
 const stylesHandler = 'style-loader';
 
@@ -23,6 +23,10 @@ const config = {
         maxEntrypointSize: 512000,
         maxAssetSize: 512000
     },
+
+    plugins: [
+      new Dotenv()
+    ],
 
     module: {
         rules: [
