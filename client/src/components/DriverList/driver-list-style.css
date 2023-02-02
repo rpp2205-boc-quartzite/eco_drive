@@ -17,8 +17,6 @@
   margin: 0
 }
 
-div
-
 .card {
   width: 100%;
   display: flex;
@@ -71,7 +69,6 @@ div
   font-size: 16px;
   font-weight: 500;
   padding: 10px 20px;
-  width: 100%;
 }
 
 .primary-btn:hover {
