@@ -1,18 +1,18 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';
+import { useLocation, useParams, Link } from "react-router-dom";
 
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '63d57101ef485e2d3166c413', //hardcoded for now
+      userId: this.props.location.state.id,
       full_name: '',
       email: '',
       start_address: '',
@@ -96,6 +96,7 @@ class DriverProfile extends React.Component {
   }
 
   render () {
+    console.log('CHECKING DRIVER PROPS', this.props.location.state)
     return (
       <div>
       {/* TOP BUTTONS */}
@@ -251,4 +252,6 @@ class DriverProfile extends React.Component {
   }
 }
 
-export default DriverProfile;
+export default () => (
+  <DriverProfile params={useParams()} location={useLocation()} />
+);
