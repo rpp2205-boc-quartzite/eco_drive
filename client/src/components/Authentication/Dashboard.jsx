@@ -14,7 +14,9 @@ class Dashboard extends React.Component {
     return (
       <div className='first-view'>
         <div className='title-frame'>
-          <h1 className='eco-title'>EcoDrive</h1>
+          <div className='logo-frame'>
+            <h1 className='eco-title'>EcoDrive</h1>
+          </div>
           <h2 className='eco-subtitle'>Think globally, carpool locally</h2>
         </div>
         <div className='link-frame'>

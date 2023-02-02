@@ -348,7 +348,7 @@ h1 {
 .first-view {
   position: relative;
   width: 375px;
-  height: 812px;
+  height: 667px;
   background: #FCFCFC;
 }
 
@@ -363,6 +363,14 @@ h1 {
   height: 183.33px;
   left: 52.67px;
   top: 232px;
+}
+
+.logo-frame {
+  width: 219.29px;
+  height: 139.33px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
 
 .eco-subtitle {
@@ -394,7 +402,7 @@ h1 {
   bottom: 0px;
 }
 
-.signup-btn {
+.sign-up-btn {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -411,111 +419,6 @@ h1 {
   flex-grow: 0;
 }
 
-.sign-up-link {
-  width: 54px;
-  height: 21px;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 21px;
-  text-transform: capitalize;
-  color: #FCFCFC;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-}
-
-.login-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 12px;
-  width: 343px;
-  height: 24px;
-  border-radius: 5px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-}
-
-.login-btn-link {
-  width: 47px;
-  height: 24px;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  text-decoration-line: underline;
-  color: #338F24;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-}
-
-.inner-fields {
-  display: flex;
-  flex-direction: column;
-}
-
-.avatar-view {
-  display: flex;
-flex-direction: column;
-align-items: center;
-padding: 108px 30px 0px;
-gap: 40px;
-
-width: 375px;
-height: 644px;
-
-background: #FFFFFF;
-flex: none;
-order: 1;
-align-self: stretch;
-flex-grow: 1;
-}
-
-.avatar-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-  width: 316px;
-  height: 208px;
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-}
-
-.avatar-photo {
-  width: 100px;
-height: 100px;
-
-
-/* Inside auto layout */
-
-flex: none;
-order: 0;
-flex-grow: 0;
-}
-
-.inner-avatar-container {
-  display: flex;
-flex-direction: row;
-align-items: flex-start;
-padding: 0px;
-gap: 8px;
-width: 316px;
-height: 100px;
-flex: none;
-order: 0;
-flex-grow: 0;
-}
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */
