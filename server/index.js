@@ -11,7 +11,7 @@ const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
 //*****const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 //const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
-const { getDriverList } = require('../database/controllers/driverList.js')
+const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
@@ -156,7 +156,10 @@ app.post('/reviews/:user_id/report', (req, res) => {
 // app.put('/reviews/:review_id/report', updateReportForReview);
 // app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
 
-// ---- Driver List Routes ---- //
+
+// ------------------------------------------------------------------------------------------ //
+// ----------------------------------- Driver List Routes ----------------------------------- //
+// ------------------------------------------------------------------------------------------ //
 app.post('/driver-list', async (req, res) => {
   const rider =  {
     id: req.body.userId,
@@ -187,6 +190,23 @@ app.post('/driver-list', async (req, res) => {
   } catch (err) {
     console.log('Get driver list server err: ', err)
     res.status(404).send(err)
+  }
+})
+
+// Add/remove driver to/off user's favorites list
+app.put('/driver-list', async (req, res) => {
+  console.log(req.query.action);
+  try {
+    if (req.query.action === 'add-favorite') {
+      await addFavorite(req.query.userId, req.query.driverId)
+      res.status(204).send('Successfully favorite driver')
+    } else if (req.query.action === 'remove-favorite') {
+      await removeFavorite(req.query.userId, req.query.driverId)
+      res.status(204).send('Successfully unfavorite driver')
+    }
+  } catch (err) {
+    console.log('Error add or remove favorite driver: ', err);
+    res.status(400).send(err)
   }
 })
 
