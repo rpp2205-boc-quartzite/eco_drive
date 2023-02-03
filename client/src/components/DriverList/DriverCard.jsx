@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { FiInfo } from "react-icons/fi";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 
@@ -21,7 +22,30 @@ const DriverCard = ({driverInfo, userRouteInfo, startDistance, endDistance, upda
   const [favoriteDriver, setFavoriteDriver] = useState((driverInfo.favorites || []).includes(driverInfo._id))
 
   const toggleFavoriteDriver = () => {
-    setFavoriteDriver(!favoriteDriver)
+    if (favoriteDriver) {
+      removeDriverOffFavorites()
+        .then(() => {
+          setFavoriteDriver(!favoriteDriver)
+          console.log('Successfully unfavorite driver ', driverInfo.full_name)
+        })
+        .catch(() => console.log('Unable to unfavorite driver'))
+    } else {
+      addDriverToFavorites()
+        .then(() => {
+          setFavoriteDriver(!favoriteDriver)
+          console.log('Successfully favorite driver ', driverInfo.full_name)
+        })
+        .catch(() => console.log('Unable to favorite driver'))
+    }
+
+  }
+
+  const addDriverToFavorites = () => {
+    return axios.put(`/driver-list/?action=add-favorite&driverId=${driverInfo._id}&userId=${userRouteInfo._id}`, {});
+  }
+
+  const removeDriverOffFavorites = () => {
+    return axios.put(`/driver-list/?action=remove-favorite&driverId=${driverInfo._id}&userId=${userRouteInfo._id}`, {});
   }
 
   return (

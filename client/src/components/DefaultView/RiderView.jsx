@@ -11,7 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DefaultRoute from './DefaultRoute.jsx';
 import OngoingTrip from './OngoingTrip.jsx';
 import UpcomingTrip from './UpcomingTrip.jsx';
-import ApiKey from './apikey.js';
+
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({
@@ -30,7 +30,7 @@ function RiderView ({ userId }) {
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
-  const key = ApiKey;
+  const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
 
   const route = {
     _id: userId,
@@ -87,7 +87,7 @@ function RiderView ({ userId }) {
             <div className="inputFields">
               <Autocomplete
                   className="inputField1"
-                  apiKey={key}
+                  apiKey={API_KEY}
                   style={{ width: "90%" }}
                   placeholder="Starting point"
                   onPlaceSelected={(place) => {
@@ -103,7 +103,7 @@ function RiderView ({ userId }) {
                 />
                 <Autocomplete
                     className="inputField2"
-                    apiKey={key}
+                    apiKey={API_KEY}
                     style={{ width: "90%" }}
                     placeholder="Destination"
                     onPlaceSelected={(place) => {

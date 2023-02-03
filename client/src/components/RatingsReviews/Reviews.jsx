@@ -27,6 +27,7 @@ export default function Reviews(props) {
     driversLicense: ''
   });
 
+  // console.log('testing .env', process.env.GOOGLE_MAP_API_KEY_RIDER_LIST);
   console.log('props', props);
   console.log('location.state', location.state);
 

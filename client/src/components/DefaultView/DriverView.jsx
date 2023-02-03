@@ -12,7 +12,7 @@ import DefaultRoute from './DefaultRoute.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import OngoingTrip from './OngoingTrip.jsx';
 import UpcomingTrip from './UpcomingTrip.jsx';
-import ApiKey from './apikey.js';
+// import ApiKey from './apikey.js';
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -33,7 +33,7 @@ function DriverView ({ userId }) {
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [showPrompt, setPrompt] = useState(false)
-  const key = ApiKey;
+  const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
 
 
   //*****************************************************//
@@ -46,6 +46,7 @@ function DriverView ({ userId }) {
 
   const pickUpRef = React.useRef();
   const dropOffRef = React.useRef();
+
 
   useEffect(() => {
     if (pickUp && dropOff) {
@@ -72,7 +73,7 @@ function DriverView ({ userId }) {
         });
 
         setDirectionsResponse({json: JSON.stringify(results)});
-        console.log('FINISHED');
+        // console.log('FINISHED');
         setLoading(false);
       }
 
@@ -157,7 +158,7 @@ function DriverView ({ userId }) {
             <div className="inputFields">
               <Autocomplete
                 className="inputField1"
-                apiKey={key}
+                apiKey={API_KEY}
                 style={{ width: "90%" }}
                 placeholder="Starting point"
                 ref={pickUpRef}
@@ -166,7 +167,7 @@ function DriverView ({ userId }) {
                   let lng = place.geometry.location.lng();
                   setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng});
                   setPickUp(place.formatted_address);
-                  console.log(place);
+                  // console.log(place);
                 }}
                 options={{
                   types: ["address"],
@@ -175,7 +176,7 @@ function DriverView ({ userId }) {
               />
               <Autocomplete
                 className="inputField2"
-                apiKey={key}
+                apiKey={API_KEY}
                 style={{ width: "90%" }}
                 placeholder="Destination"
                 ref={dropOffRef}
@@ -184,7 +185,7 @@ function DriverView ({ userId }) {
                   let lng = place.geometry.location.lng();
                   setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng});
                   setDropOff(place.formatted_address);
-                  console.log(place);
+                  // console.log(place);
                 }}
                 options={{
                   types: ["address"],
@@ -210,7 +211,7 @@ function DriverView ({ userId }) {
               </div>
             </div>
 
-            <Link to="/rider-list" state={directionsResponse}>
+            <Link to="/rider-list" state={{dir: directionsResponse, route: route}}>
               <button className="primary-btn-find">Find Riders</button>
             </Link>
           </div>
