@@ -10,6 +10,7 @@ export default function AvatarSelect(props) {
 
   const [photos, setPhotos] = useState(null);
   const [photos2, setPhotos2] = useState(null);
+  const [selected, setSelected] = useState('');
 
   useEffect(() => {
     axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
@@ -25,6 +26,7 @@ export default function AvatarSelect(props) {
   const onClick = (event) => {
     event.preventDefault();
     props.setState(event.target.id);
+    setSelected(event.target.id);
   }
 
   const goBack = (event) => {
@@ -43,7 +45,7 @@ export default function AvatarSelect(props) {
             {photos.map((photo, index) => (
               <div key={index}>
                 <img 
-                  className='avatar-photo'
+                  className={selected === photo.urls.small ? 'selected' : 'avatar-photo'}
                   alt='avatar select' 
                   src={photo.urls.small}
                   id={photo.urls.small}
@@ -54,7 +56,7 @@ export default function AvatarSelect(props) {
             {photos2.map((photo, index) => (
               <div key={index}>
                 <img 
-                  className='avatar-photo'
+                  className={props.state === photo.urls.small ? 'selected' : 'avatar-photo'}
                   alt='avatar select' 
                   src={photo.urls.small}
                   id={photo.urls.small}

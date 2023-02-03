@@ -946,6 +946,17 @@ h1 {
   flex-grow: 0;
 }
 
+.selected {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  border: solid 5px #338F24;
+  flex-direction: row;
+  align-items: flex-start;
+  order: 1;
+  flex-grow: 0;
+}
+
 .sign-up-text {
   width: 54px;
   height: 21px;
