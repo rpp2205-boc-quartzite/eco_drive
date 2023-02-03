@@ -1609,6 +1609,14 @@ input.review-summary {
   color: #97AAB0;
 }
 
+.profileSavings {
+  border: solid 1px #338F24;
+  padding: 9px;
+  border-radius: 9px;
+  margin: 8px;
+  text-align: center;
+}
+
 .profileSavingsTitle {
   font-style: normal;
   font-weight: 600;
