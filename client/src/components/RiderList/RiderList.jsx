@@ -1,31 +1,15 @@
 import React from "react";
 import "./RiderList.css";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const RiderList = function(props) {
 
-  // console.log('Driver Data', props.driver)
-  // console.log('Rider Data', props.riders)
   const [riders, setRiders] = React.useState([]);
   const [totalRiders, setTotalRiders] = React.useState([]);
+  const [acceptedRiders, setAcceptedRiders] = React.useState({})
   const [declined, setDeclined] = React.useState({});
-
-  const startLocal = function() {
-    if (typeof window !== 'undefined') {
-      if (localStorage['declined'] === undefined) {
-        var data = JSON.stringify(declined)
-        localStorage.setItem('declined', data)
-      }
-    }
-  }
-
-  const checkLocal = function(){
-    var check = localStorage.getItem('declined');
-    var converted = JSON.parse(check)
-    setDeclined({converted})
-     //localStorage.removeItem('declined');
-  }
-
+  const [passedDriver, setPassedDriver] = React.useState(props.driverData);
 
   if (!riders.length) {
     setRiders(props.riders)
@@ -33,9 +17,12 @@ const RiderList = function(props) {
 
   if (!totalRiders.length) {
     var ridersArray = [];
+    var accepted = [];
     for (var i = 0; i < props.seats.total; i++) {
       ridersArray.push(props.riders[i]);
+      accepted.push(props.riders[i].rider._id)
     }
+    setAcceptedRiders(accepted)
     setTotalRiders(ridersArray);
   };
 
@@ -45,28 +32,30 @@ const RiderList = function(props) {
 
 
   const removeRider = (e) => {
-    startLocal();
-    checkLocal();
     const container = declined;
     container[e.target.name] = true;
     var newRiders = []
+    var newAccepted = [];
     for (var i = 0; i < props.riders.length; i++) {
-      console.log(`RIDERS after ${i}`, props.riders)
-      console.log('EMAIL ', props.riders[i].rider.email)
       if (container[props.riders[i].rider.email] === undefined) {
         newRiders.push(props.riders[i]);
+        newAccepted.push(props.riders[i].rider._id)
       }
     }
     var newTotal = newRiders.slice(0, props.seats.total)
     setDeclined(container);
+    setAcceptedRiders(newAccepted);
     setTotalRiders(newTotal);
   };
 
-  const postCurrentRoutes = function(driver, ridersArray) {
-    //get final rider data from next page
-    // create one button to "accept Riders"
-    //post dats to DB
-    // move Accept Riders button to rider List?
+  const postCurrentRoutes = function() {
+    return axios.post('/add-current-routes', {
+      driver: props.driver,
+      riderIDs: acceptedRiders
+    })
+      .then((results) => {
+        console.log(results.data);
+      })
   }
 
   if (!riders || !riders.length) {
@@ -79,8 +68,9 @@ const RiderList = function(props) {
   } else {
     return (
       <div>
-        <Link to="/driverview" >
-        <button className="start-trip"type="submit">Start Trip</button>
+        <br></br>
+        <Link to="/driverview" state={{driverData: passedDriver, riderData: totalRiders}}>
+        <button className="start-trip"type="submit" onClick={postCurrentRoutes}>Accept Riders</button>
         </Link>
         <br></br>
         <div className="rider-card-list">
