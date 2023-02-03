@@ -137,7 +137,7 @@ export default function Register(props) {
               <p className='driver-skip'>* If you are not a driver, press Next to skip.</p>
               <div className='signup-btn-wrapper'>
                 <button className='next-btn' type='submit' onClick={handleAvatar}><span className='next-text'>Next</span></button>
-                <button className='back-btn'><span className='back-text'>Go Back</span></button>
+                <button className='back-btn' onClick={(event) => setDriverCheck(false)}><span className='back-text'>Go Back</span></button>
               </div>
           </div>
         </form>

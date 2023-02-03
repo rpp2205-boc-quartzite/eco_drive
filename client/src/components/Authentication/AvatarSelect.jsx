@@ -12,9 +12,8 @@ export default function AvatarSelect(props) {
   const [photos2, setPhotos2] = useState(null);
 
   useEffect(() => {
-    axios.get('https://api.unsplash.com/photos', {headers: headers})
+    axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
     .then((response) => {
-      console.log(response)
       setPhotos(response.data.slice(2,5));
       setPhotos2(response.data.slice(6,9));
     })
