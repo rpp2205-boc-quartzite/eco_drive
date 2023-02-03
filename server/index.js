@@ -13,6 +13,7 @@ const { postReportHandler } = require('../database/controllers/report.js');
 //const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
+const { getRiderArray } = require ('../database/controllers/riderList.js');
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
@@ -207,6 +208,51 @@ app.put('/driver-list', async (req, res) => {
   } catch (err) {
     console.log('Error add or remove favorite driver: ', err);
     res.status(400).send(err)
+  }
+})
+
+
+// ###################################################################################//
+// ----------------------------------- Rider List ----------------------------------- //
+// ###################################################################################//
+
+app.post('/rider-list', async (req, res) => {
+  console.log('REQ.BODY: ', req.body)
+  const driver =  {
+    id: req.body.userId,
+    start_address: req.body.start_address,
+    start_lat: req.body.start_lat,
+    start_lng: req.body.start_lng,
+    end_address: req.body.end_address,
+    end_lat: req.body.end_lat,
+    end_lng: req.body.end_lng,
+    time: req.body.time,
+    total_seats: req.body.total_seats,
+    default: req.body.default
+  }
+
+  const riderArray = [];
+  const seats = {total: driver.total_seats};
+
+  try {
+    const unassignedRiders = await getRiderArray();
+    // console.log("Unassigned Riders", unassignedRiders)
+    for (let rider of unassignedRiders) {
+      const startDistance = await calculateDistance(driver.start_lat, driver.start_lng, rider.rider_route.start_lat, rider.rider_route.start_lng);
+      const endDistance = await calculateDistance(driver.start_lat, driver.start_lng, rider.rider_route.start_lat, rider.rider_route.start_lng);
+      if (startDistance !== undefined && endDistance !== undefined) {
+        riderArray.push({rider, startDistance, endDistance, seats})
+      }
+      console.log(riderArray)
+      riderArray.sort((a, b) => {
+        return a.startDistance.value - b.startDistance.value
+      })
+    }
+    res.status(200).send(riderArray)
+  }
+  catch (err) {
+    console.log('The Following Error Occured When Attempting to Capture Riders: ', err)
+    res.status(404).send(err)
   }
 })
 
