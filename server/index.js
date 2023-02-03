@@ -217,7 +217,6 @@ app.put('/driver-list', async (req, res) => {
 // ###################################################################################//
 
 app.post('/rider-list', async (req, res) => {
-  console.log('REQ.BODY: ', req.body)
   const driver =  {
     id: req.body.userId,
     start_address: req.body.start_address,
@@ -243,7 +242,6 @@ app.post('/rider-list', async (req, res) => {
       if (startDistance !== undefined && endDistance !== undefined) {
         riderArray.push({rider, startDistance, endDistance, seats})
       }
-      console.log(riderArray)
       riderArray.sort((a, b) => {
         return a.startDistance.value - b.startDistance.value
       })
