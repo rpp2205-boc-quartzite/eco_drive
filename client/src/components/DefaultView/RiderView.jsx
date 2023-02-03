@@ -90,7 +90,6 @@ function RiderView ({ userId }) {
               <Autocomplete
                   className="inputField1"
                   apiKey={key}
-                  style={{ width: "90%" }}
                   placeholder="Starting point"
                   onPlaceSelected={(place) => {
                     let lat = place.geometry.location.lat();
@@ -106,7 +105,6 @@ function RiderView ({ userId }) {
                 <Autocomplete
                     className="inputField2"
                     apiKey={key}
-                    style={{ width: "90%" }}
                     placeholder="Destination"
                     onPlaceSelected={(place) => {
                       let lat = place.geometry.location.lat();

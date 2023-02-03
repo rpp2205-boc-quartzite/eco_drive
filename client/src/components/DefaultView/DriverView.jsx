@@ -140,7 +140,6 @@ function DriverView ({ userId }) {
               <Autocomplete
                 className="inputField1"
                 apiKey={key}
-                style={{ width: "90%" }}
                 placeholder="Starting point"
                 ref={pickUpRef}
                 onPlaceSelected={(place) => {
@@ -158,7 +157,6 @@ function DriverView ({ userId }) {
               <Autocomplete
                 className="inputField2"
                 apiKey={key}
-                style={{ width: "90%" }}
                 placeholder="Destination"
                 ref={dropOffRef}
                 onPlaceSelected={(place) => {
@@ -186,7 +184,7 @@ function DriverView ({ userId }) {
                     timeCaption="Time"
                     dateFormat="h:mm aa"
                   />
-              <input type="text" className="inputField4" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/>
+              <input type="text" className="inputField4" placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/>
               <div className="defaultRadioCont">
                 <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>

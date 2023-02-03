@@ -85,6 +85,7 @@ h1 {
   order: 1;
   flex-grow: 0;
   position: absolute;
+  color: #262929;
 }
 
 .headerAvatarLogout {
@@ -114,6 +115,7 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 0;
+  color: #262929;
 }
 .welcomeCont {
   display: flex;
@@ -227,7 +229,7 @@ h1 {
   padding: 16px 24px;
   gap: 8px;
   isolation: isolate;
-  width: 308.7px;
+  width: 343px;
   height: 50px;
   background: #FCFCFC;
   border: 1.5px solid #CAD6DD;
@@ -340,11 +342,61 @@ h1 {
 
 .licenseModalContent {
   padding-top: 200px;
-  border: 1px solid black;
+  padding-left: 12px;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 343px;
+  align-self: stretch;
+  flex-grow: 0;
+  flex: none;
+  order: -2;
+  flex-grow: 0;
+}
+
+.licenseModalTitle {
+  width: 343px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262929;
+  flex: none;
+  order: -1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.licenseModalInput1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 343px;
+  height: 50px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.licenseModalInput2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 343px;
+  height: 50px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
 }
 
 .defaultRouteCont {
