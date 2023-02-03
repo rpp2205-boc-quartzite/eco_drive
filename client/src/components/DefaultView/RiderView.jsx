@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ApiKey from './apikey.js';
+import { useNavigate } from 'react-router-dom';
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({
@@ -27,7 +28,9 @@ function RiderView ({ userId }) {
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
+  const [favorites, setFavorites] = useState({});
   const key = ApiKey;
+  const navigate = useNavigate()
 
   const route = {
     _id: userId,
@@ -39,7 +42,8 @@ function RiderView ({ userId }) {
     end_lat: end.end_lat,
     end_lng: end.end_lng,
     time: time,
-    default: isDefault
+    default: isDefault,
+    userFavorites: favorites
   }
 
   useEffect(() => {
@@ -48,6 +52,7 @@ function RiderView ({ userId }) {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
       setUpcoming(result.data[0].rider_route)
+      setFavorites(result.data[0].favorites)
     })
     .catch(err => console.log(err))
   }, [])
@@ -63,7 +68,7 @@ function RiderView ({ userId }) {
         </div>
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
-            <Link to="/riderprofile">
+            <Link to="/riderprofile" state={{id: userId}} >
             <button>Avatar</button>
             </Link> </div>
 
@@ -133,19 +138,10 @@ function RiderView ({ userId }) {
             </div>
 
             <Link to="/driver-list" state={{route: route}}>
-              <button className="primary-btn-find">Find Drivers</button>
+              <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers</button>
             </Link>
           </div>
         </form>
-
-      {/* <div>
-        ______________________________ <br/>
-        Ongoing Trip
-      </div>
-      <div>
-        ______________________________ <br/>
-        UpcomingTrip
-      </div> */}
       <div>
         < DefaultRoute userId={userId} upcoming={upcoming} />
       </div>

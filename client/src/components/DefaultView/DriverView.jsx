@@ -32,7 +32,6 @@ function DriverView ({ userId }) {
   const [showPrompt, setPrompt] = useState(false)
   const key = ApiKey;
 
-
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
   //*****************************************************//
@@ -88,20 +87,6 @@ function DriverView ({ userId }) {
     //*****************************************************//
     //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
     //*****************************************************//
-
-  const route = {
-    id: userId,
-    full_name: name,
-    start_address: start.start_address,
-    start_lat: start.start_lat,
-    start_lng: start.start_lng,
-    end_address: end.end_address,
-    end_lat: end.end_lat,
-    end_lng: end.end_lng,
-    time: time,
-    default: isDefault,
-    total_seats: seats
-  }
 
   useEffect(() => {
     axios.get('/getdriverview', { params: {userId} })
@@ -208,19 +193,10 @@ function DriverView ({ userId }) {
             </div>
 
             <Link to="/rider-list" state={directionsResponse}>
-              <button className="primary-btn-find">Find Riders</button>
+              <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders</button>
             </Link>
           </div>
         </form>
-
-      {/* <div>
-        ______________________________ <br/>
-        Ongoing Trip
-      </div>
-      <div>
-        ______________________________ <br/>
-        Upcoming Trip
-      </div> */}
       <div>
       < DefaultRoute userId={userId} upcoming={upcoming} />
       </div>
