@@ -12,19 +12,33 @@ export default function Login(props) {
 
     return (
         <div className='auth-form-container'>
-          <form className='login-form' onSubmit={handleSubmit}>
-            <div className='inner-fields'>
-              <h2>Login</h2>
-                <label htmlFor='email'>Email</label>
-                  <input value={email} onChange={(event) => setEmail(event.target.value)}type='email' placeholder='Enter Email' id='email' name='email' />
-                <label htmlFor='password'>Password</label>
-                  <input value={pass} onChange={(event) => setPass(event.target.value)} type='password' placeholder='Enter Password' id='password' name='password' />
-                  <button type='submit'>Log In</button>
-              <Link to='/register'>
-                <button className='link-btn'>Don't have an account? Sign Up here.</button>
-              </Link>  
-            </div>
-          </form>
+          <div className='login-wrapper'>
+            <form className='login-form' onSubmit={handleSubmit}>
+              <div className='inner-fields'>
+                <h2 className='login-title'>Login</h2>
+                <div className='label-container'>
+                  <div className='label-title-container'>
+                    <label className='label-title-3' htmlFor='email'>Email</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />                  
+                </div>
+                <div className='label-container-2'>
+                  <div className='label-title-container'>
+                    <label className='label-title-5' htmlFor='password'>Password</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={pass} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div className='signup-btn-wrapper'>
+            <button className='next-btn' type='submit' onClick={handleSubmit}><span className='login-text'>Log In</span></button>
+            <Link to='/'>
+              <button className='back-btn'><span className='back-text'>Go Back</span></button> 
+            </Link> 
+          </div>
         </div>
     )
 }
