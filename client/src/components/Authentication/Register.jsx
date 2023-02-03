@@ -119,28 +119,30 @@ export default function Register(props) {
             </div>
         </div>}
       {driverCheck === true &&
-        <form className='sign-up-wrappers-2'>
+        <div className='sign-up-wrappers'>
+        <form className='sign-form'>
           <div className='inner-fields'>
             <h2 className='signup-title'>Sign Up</h2>
             <div className='label-container'>
               <div className='label-title-container'>
-                <label className='signup-label'htmlFor='dl'>Driver's License #</label>
+                <label className='signup-label' htmlFor='dl'>Driver's License #</label>
               </div>
-              <input className='input-field' value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl'/>
+              <input className='input-field' value={drivers_license} onChange={(event) => setDl(event.target.value)} type='text' id='dl' name='dl' />
             </div>
             <div className='label-container'>
               <div className='label-title-container-2'>
                 <label className='signup-label' htmlFor='licensePlate'>License Plate #</label>
               </div>
-              <input className='input-field' value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate'/>
+              <input className='input-field' value={license_plate} onChange={(event) => setlicensePlate(event.target.value)} type='text' id='licensePlate' name='licensePlate' />
             </div>
-              <p className='driver-skip'>* If you are not a driver, press Next to skip.</p>
-              <div className='signup-btn-wrapper'>
-                <button className='next-btn' type='submit' onClick={handleAvatar}><span className='next-text'>Next</span></button>
-                <button className='back-btn' onClick={(event) => setDriverCheck(false)}><span className='back-text'>Go Back</span></button>
-              </div>
+            <p className='driver-skip'>* If you are not a driver, press Next to skip.</p>
           </div>
         </form>
+        <div className='signup-btn-wrapper'>
+          <button className='next-btn' type='submit' onClick={handleAvatar}><span className='next-text'>Next</span></button>
+          <button className='back-btn' onClick={(event) => setDriverCheck(false)}><span className='back-text'>Go Back</span></button>
+        </div>
+      </div>
         } 
         {avatarCheck === true && 
           <AvatarSelect state={avatar} setState={setAvatarValue} setAvatar ={setAvatar} setDriverCheck={setDriverCheck} handleSubmit={handleSubmit}/>}

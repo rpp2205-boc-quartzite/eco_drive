@@ -506,6 +506,20 @@ h1 {
   overflow-y: scroll;
 }
 
+.sign-form-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 180px 16px 0px;
+  gap: 24px;
+  width: 375px;
+  height: 592px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
 .inner-fields {
   display: flex;
   flex-direction: column;
@@ -748,6 +762,22 @@ h1 {
   top: 25px;
 }
 
+.signup-title {
+  width: 343px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  color: #262929;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
 .sign-up-wrappers-2 {
   display: flex;
   flex-direction: column;
@@ -774,6 +804,20 @@ h1 {
   left: 0px;
   right: 0px;
   bottom: 0px;
+}
+
+.signup-btn-wrapper-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px 16px 40px;
+  gap: 16px;
+  position: absolute;
+  height: 121px;
+  left: 0px;
+  right: 0px;
+  bottom: -20px;
 }
 
 .next-btn {
@@ -898,8 +942,8 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 108px 30px 0px;
-  gap: 40px;
+  padding: 50px 50px 0px;
+  gap: 30px;
   width: 375px;
   height: 644px;
   background: #FFFFFF;
