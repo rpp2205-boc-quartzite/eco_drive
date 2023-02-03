@@ -42,8 +42,8 @@ class Dashboard extends React.Component {
           <h2 className='eco-subtitle'>Think globally, carpool locally</h2>
         </div>
         <div className='link-frame'>
-          <Link to='/register'>
-            <button className='signup-btn'><span className='signup-link'>Sign Up</span></button>
+          <Link to='/register' style={{ textDecoration: 'none' }}>
+            <button className='next-btn' type='submit'><span className='sign-up-text'>Sign Up</span></button>
           </Link>
           <Link to='/login'>
             <button className='login-btn'><span className='login-btn-link'>Login</span></button>

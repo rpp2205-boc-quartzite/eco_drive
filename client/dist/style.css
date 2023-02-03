@@ -402,7 +402,7 @@ h1 {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 4px;
+  line-height: 0px;
   text-align: center;
   color: #76858A;
   flex: none;
@@ -454,6 +454,7 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 0;
+  text-decoration: none;
 }
 
 .login-btn {
@@ -470,6 +471,8 @@ h1 {
   order: 1;
   align-self: stretch;
   flex-grow: 0;
+  background: none;
+  border: none;
 }
 
 .login-btn-link {
@@ -805,6 +808,8 @@ h1 {
   order: 1;
   align-self: stretch;
   flex-grow: 0;
+  background: none;
+  border: none;
 }
 
 .back-text {

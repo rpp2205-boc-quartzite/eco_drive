@@ -143,7 +143,7 @@ export default function Register(props) {
         </form>
         } 
         {avatarCheck === true && 
-          <AvatarSelect state={avatar} setState={setAvatarValue} handleSubmit={handleSubmit}/>}
+          <AvatarSelect state={avatar} setState={setAvatarValue} setAvatar ={setAvatar} setDriverCheck={setDriverCheck} handleSubmit={handleSubmit}/>}
   </div>
   )
 };

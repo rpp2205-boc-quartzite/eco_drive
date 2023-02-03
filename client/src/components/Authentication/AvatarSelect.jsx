@@ -27,6 +27,12 @@ export default function AvatarSelect(props) {
     props.setState(event.target.id);
   }
 
+  const goBack = (event) => {
+    event.preventDefault();
+    props.setAvatar(false);
+    props.setDriverCheck(true);
+  }
+
   return (
     <div className='avatar-view'>
       <div className='avatar-inner-container'>
@@ -58,7 +64,8 @@ export default function AvatarSelect(props) {
         </div> : <p>Loading...</p>}
       </div>
       <div className='signup-btn-wrapper'>
-        <button className='signup-btn' onClick={props.handleSubmit}><span className='sign-up-text'>Sign Up</span></button>    
+        <button className='signup-btn' onClick={props.handleSubmit}><span className='sign-up-text'>Sign Up</span></button>
+        <button className='back-btn' onClick={goBack}><span className='back-text'>Go Back</span></button>    
       </div>
     </div>
   );
