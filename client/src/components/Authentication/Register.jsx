@@ -119,7 +119,7 @@ export default function Register(props) {
             </div>
         </div>}
       {driverCheck === true &&
-        <form className='sign-up-wrappers'>
+        <form className='sign-up-wrappers-2'>
           <div className='inner-fields'>
             <h2 className='signup-title'>Sign Up</h2>
             <div className='label-container'>

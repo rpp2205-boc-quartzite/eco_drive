@@ -745,7 +745,21 @@ h1 {
   width: 375px;
   height: 556px;
   left: 0px;
-  top: 0px;
+  top: 25px;
+}
+
+.sign-up-wrappers-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 180px 16px 0px;
+  gap: 24px;
+  width: 375px;
+  height: 644px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
 }
 
 .signup-btn-wrapper {
@@ -781,6 +795,21 @@ h1 {
 
 .next-text {
   width: 31px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.login-text {
+  width: 61px;
   height: 21px;
   font-family: 'Poppins';
   font-style: normal;
@@ -972,6 +1001,39 @@ h1 {
   flex-grow: 0;
 }
 
+.auth-form-container {
+  position: relative;
+  width: 375px;
+  height: 667px;
+  background: #FCFCFC;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 12px;
+  position: absolute;
+  width: 375px;
+  height: 256px;
+  left: 0px;
+  top: 192px;
+}
+
+.login-title {
+  width: 72px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */
