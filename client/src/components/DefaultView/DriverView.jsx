@@ -110,7 +110,7 @@ function DriverView ({ userId }) {
       <div className="defaultViewHeader">
         <div className="headerToggleView">
           <Link to="/riderview">
-            <div className="viewToggle">Rider</div>
+            <div className="viewToggle">Driver</div>
             <HiOutlineRefresh className="viewToggleButton" size={25} />
           </Link>
         </div>

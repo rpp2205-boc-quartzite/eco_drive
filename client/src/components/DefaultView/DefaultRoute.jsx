@@ -4,12 +4,26 @@ const DefaultRoute = ({ userId, upcoming }) => {
 
   if (upcoming.default) {
     return (
-      <div>
-        _______________________________ <br></br>
-        <div>Default Route</div>
-        From: {upcoming.start_address} <br />
-        To: {upcoming.end_address} <br />
-        Time: {upcoming.time} <br />
+      <div className="defaultRouteCont">
+        <div className="defaultRouteTitle">Default Route</div>
+          <div className="defaultRouteContent">
+            <div className="routeCard">
+              <div className="defaultFrom">
+              <div className="defaultRouteCardTitle">From: </div>
+              <div className="defaultRouteCardInfo"> {upcoming.start_address} </div>
+              </div>
+
+              <div className="defaultTo">
+              <div className="defaultRouteCardTitle">To: </div>
+              <div className="defaultRouteCardInfo"> {upcoming.end_address} </div>
+              </div>
+
+              <div className="defaultTime">
+              <div className="defaultRouteCardTitle">Time: </div>
+              <div className="defaultRouteCardInfo"> {upcoming.time} </div>
+              </div>
+            </div>
+          </div>
       </div>
     )
   }
