@@ -20,6 +20,10 @@ function App() {
   const navigate=useNavigate();
 
   const authenticate = (email, pass) => {
+    if (email === '' || pass === '') {
+      return alert('Please enter an email and/or password');
+    }
+
     axios.post('/login', {email, pass})
     .then((result) => {
       setUserId(result.data.user);

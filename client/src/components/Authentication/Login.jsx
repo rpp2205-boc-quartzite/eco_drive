@@ -14,8 +14,8 @@ export default function Login(props) {
         <div className='auth-form-container'>
           <div className='login-wrapper'>
             <form className='login-form' onSubmit={handleSubmit}>
-              <div className='inner-fields'>
-                <h2 className='login-title'>Login</h2>
+              <h2 className='login-title'>Login</h2>
+              <div className='inner-fields-2'>
                 <div className='label-container'>
                   <div className='label-title-container'>
                     <label className='label-title-3' htmlFor='email'>Email</label>
@@ -30,6 +30,7 @@ export default function Login(props) {
                   </div>
                   <input className='input-field' value={pass} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' />
                 </div>
+                <button className='forgot-btn'><span className='forgot-text'>Forgot Password?</span></button>  
               </div>
             </form>
           </div>
@@ -38,6 +39,7 @@ export default function Login(props) {
             <Link to='/'>
               <button className='back-btn'><span className='back-text'>Go Back</span></button> 
             </Link> 
+            
           </div>
         </div>
     )
