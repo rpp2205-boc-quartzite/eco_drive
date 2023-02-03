@@ -44,6 +44,7 @@ function DriverView ({ userId }) {
   const pickUpRef = React.useRef();
   const dropOffRef = React.useRef();
 
+
   useEffect(() => {
     if (pickUp && dropOff) {
       setLoading(true);
@@ -69,7 +70,7 @@ function DriverView ({ userId }) {
         });
 
         setDirectionsResponse({json: JSON.stringify(results)});
-        console.log('FINISHED');
+        // console.log('FINISHED');
         setLoading(false);
       }
 
@@ -163,7 +164,7 @@ function DriverView ({ userId }) {
                   let lng = place.geometry.location.lng();
                   setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng});
                   setPickUp(place.formatted_address);
-                  console.log(place);
+                  // console.log(place);
                 }}
                 options={{
                   types: ["address"],
@@ -181,7 +182,7 @@ function DriverView ({ userId }) {
                   let lng = place.geometry.location.lng();
                   setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng});
                   setDropOff(place.formatted_address);
-                  console.log(place);
+                  // console.log(place);
                 }}
                 options={{
                   types: ["address"],
@@ -207,7 +208,7 @@ function DriverView ({ userId }) {
               </div>
             </div>
 
-            <Link to="/rider-list" state={directionsResponse}>
+            <Link to="/rider-list" state={{dir: directionsResponse, route: route}}>
               <button className="primary-btn-find">Find Riders</button>
             </Link>
           </div>
