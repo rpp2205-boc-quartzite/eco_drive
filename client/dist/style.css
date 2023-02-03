@@ -361,6 +361,8 @@ h1 {
 }
 
 .defaultRouteTitle {
+  padding-top: 20px;
+  padding-bottom: 25px;
   width: 343px;
   height: 24px;
   font-family: 'Poppins';
@@ -373,6 +375,7 @@ h1 {
   order: 0;
   align-self: stretch;
   flex-grow: 0;
+  border-top: 1px solid #97AAB0;
 }
 
 .defaultRoute {
