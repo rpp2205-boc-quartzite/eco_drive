@@ -13,7 +13,8 @@ class DriverProfile extends React.Component {
     super(props);
     console.log(this.props)
     this.state = {
-      userId: this.props.location.state.id,
+      //userId: this.props.location.state.id,
+      userId: '63d56db1ec9e04942bf024ad',
       full_name: '',
       email: '',
       start_address: '',
@@ -38,8 +39,9 @@ class DriverProfile extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
-    // console.log('driver props', props;
-    axios.get('/getDriverView', { params: {id} })
+    //console.log('driver props', props)
+    console.log('IDDDD', id)
+    axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)
       this.setState({
@@ -98,7 +100,7 @@ class DriverProfile extends React.Component {
   }
 
   render () {
-    console.log('CHECKING DRIVER PROPS', this.props.location.state)
+    //console.log('CHECKING DRIVER PROPS', this.props.location.state)
     return (
       <div>
       {/* TOP BUTTONS */}
@@ -254,6 +256,7 @@ class DriverProfile extends React.Component {
   }
 }
 
-export default () => (
-  <DriverProfile params={useParams()} location={useLocation()} />
-);
+export default DriverProfile;
+// export default () => (
+//   <DriverProfile params={useParams()} location={useLocation()} />
+// );

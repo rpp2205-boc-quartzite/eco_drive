@@ -132,7 +132,7 @@ function DriverView ({ userId }) {
         </div>
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
-            <Link to="/driverprofile">
+            <Link to="/driverprofile" state={{id: userId}}>
             <button>Avatar</button>
             </Link></div>
 

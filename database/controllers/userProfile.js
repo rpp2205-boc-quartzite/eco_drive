@@ -1,6 +1,12 @@
 const User = require('../models/user.js').User;
 
 module.exports = {
+  getUserInfo: (user) => {
+    console.log('ID in controllers', user)
+    let id = {_id: user};
+    return User.find(id).then((user) => {return user}).catch(err => console.log(err))
+  },
+
   updateDriverProfile: (updatedInfo) => {
     const id = {_id: updatedInfo.userId}
     // const update = {

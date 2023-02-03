@@ -63,7 +63,7 @@ function RiderView ({ userId }) {
         </div>
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
-            <Link to="/riderprofile">
+            <Link to="/riderprofile" state={{id: userId}}>
             <button>Avatar</button>
             </Link> </div>
 

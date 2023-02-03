@@ -12,7 +12,8 @@ class RiderProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.location.state.id,
+      //userId: this.props.location.state.id,
+      userId: '63d56db1ec9e04942bf024ad',
       full_name: '',
       email: '',
       start_address: '',
@@ -37,7 +38,7 @@ class RiderProfile extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
-    axios.get('/getDriverView', { params: {id} })
+    axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
       console.log('got da rider', result)
       this.setState({

@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const auth = require('./auth.js');
 const { register, login } = require('../database/controllers/authentication.js');
-const { updateDriverProfile, updateRiderProfile } = require('../database/controllers/userProfile.js')
+const { updateDriverProfile, updateRiderProfile, getUserInfo } = require('../database/controllers/userProfile.js')
 const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
@@ -212,30 +212,18 @@ app.put('/driver-list', async (req, res) => {
   }
 })
 
-// ---- Catch all for routing ---- //
-
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-});
-// ---- Set Port and Listen For Requests ---- //
-
-// const server = app.listen(port, () => {
-//   console.log(`listening on port ${port}`);
-// });
-
-const port = 8080;
-
-app.listen(port, () => {
-  console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
-});
-
-//module.exports = server;
-
 // ---- User Profile Routes ---- //
+
+app.get('/getuserinfo', function(req, res) {
+  let userid = req.query.id;
+  console.log('USERID in INDEXJS server', req.query.id)
+  getUserInfo(userid)
+  .then((result) => {
+    console.log(result)
+    res.send(result)
+  })
+  .catch(err => console.log(err))
+});
 
 app.post('/updateDriverProfile', function(req, res) {
   console.log('DATA IN INDEX.JS SERVER', req.body)
@@ -261,3 +249,26 @@ app.post('/updateRiderProfile', function(req, res) {
 
 
 // ---- User Profile Routes End ---- //
+
+// ---- Catch all for routing ---- //
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
+// ---- Set Port and Listen For Requests ---- //
+
+// const server = app.listen(port, () => {
+//   console.log(`listening on port ${port}`);
+// });
+
+const port = 8080;
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
+});
+
+//module.exports = server;
