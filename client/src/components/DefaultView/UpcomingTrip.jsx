@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
-const OngoingTrip = (props) => {
+const UpcomingTrip = (props) => {
 
   const [avatar, setAvatar] = useState('avatar');
   const [name, setName] = useState('name');
@@ -31,7 +31,7 @@ const OngoingTrip = (props) => {
   return (
       <div className="ongoing-trip-container">
 
-        <div className="ongoing-title">Ongoing Trip</div>
+        <div className="ongoing-title">Upcoming Trip</div>
 
         <div className="card">
 
@@ -49,7 +49,7 @@ const OngoingTrip = (props) => {
           <div className="buttons">
             <button className="end-button">Cancel</button>
             <Link to='/trip-complete'>
-              <button type='submit' className="end-button">End Trip</button>
+              <button type='submit' className="end-button">Start Trip</button>
             </Link>
           </div>
 
@@ -58,4 +58,4 @@ const OngoingTrip = (props) => {
   )
 }
 
-export default OngoingTrip;
+export default UpcomingTrip;

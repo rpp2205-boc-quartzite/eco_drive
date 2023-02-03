@@ -13,6 +13,13 @@ module.exports = {
 
   clearUsers: async () => {
     await User.deleteMany( {} );
+  },
+
+  getUser: async (userId) => {
+    console.log('ID', userId)
+    let id = {_id: userId};
+    let user = await User.find(id).catch(err => console.log('ERR FINDING: ', err))
+    return user;
   }
 
 };

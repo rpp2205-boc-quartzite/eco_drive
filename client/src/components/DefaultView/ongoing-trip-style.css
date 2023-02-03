@@ -1,5 +1,6 @@
 .ongoing-trip-container {
   width: 350px;
+  margin-bottom: 22px;
 }
 
 .card {
@@ -7,6 +8,7 @@
   border-radius: 5px;
   padding: 16px 16px;
   margin: 0;
+  margin-bottom: 16px;
 }
 .profile {
   display: grid;
@@ -23,4 +25,29 @@
 
 .end-button {
   width: 100px;
+}
+
+#end-trip-button {
+  background-color: red;
+}
+
+#start-trip-button {
+  background-color: green;
+}
+
+.ongoing-title {
+  width: 343px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262929;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  padding-left: 17px;
+  padding-bottom: 10px;
 }

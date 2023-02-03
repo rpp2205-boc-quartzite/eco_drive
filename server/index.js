@@ -24,7 +24,7 @@ app.use(bodyParser.json())
 const db = require('../database/index.js');
 
 // db controllers
-const User = require('../database/controllers/user.js');
+const tripCompletion = require('../database/controllers/tripCompletion.js');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -54,6 +54,27 @@ app.post('/database', async (req, res) => {
   await User.addExampleUser()
   res.send('complete')
 })
+
+app.get('/user', (req, res) => {
+  console.log('here', req.query.userId)
+  let userid = req.query.userId;
+  tripCompletion.getUser(req.query.userId)
+  .then((result) => {
+    console.log('GOT USER: ', result)
+    res.send(result)
+  })
+  .catch(err => console.log(err))
+});
+
+// trip: needs userId and info about trip
+app.post('/endTrip', async (req, res) => {
+  let trip = req.query.trip;
+  console.log('ending trip: ', trip);
+  let result = await tripCompletion.endTrip(trip)
+  res.send('complete: ', result);
+})
+
+
 
 // ---- Authentication  ---- //
 

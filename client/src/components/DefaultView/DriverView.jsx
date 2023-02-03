@@ -11,6 +11,7 @@ import Autocomplete from "react-google-autocomplete";
 import DefaultRoute from './DefaultRoute.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import OngoingTrip from './OngoingTrip.jsx';
+import UpcomingTrip from './UpcomingTrip.jsx';
 import ApiKey from './apikey.js';
 
 function DriverView ({ userId }) {
@@ -217,7 +218,8 @@ function DriverView ({ userId }) {
 
       <div>
         <DefaultRoute userId={userId} upcoming={upcoming} />
-        <OngoingTrip />
+        <OngoingTrip user = {userId} />
+        <UpcomingTrip user = {userId} />
       </div>
 
     </div>

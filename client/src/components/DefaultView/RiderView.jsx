@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import DefaultRoute from './DefaultRoute.jsx';
 import OngoingTrip from './OngoingTrip.jsx';
+import UpcomingTrip from './UpcomingTrip.jsx';
 import ApiKey from './apikey.js';
 
 function RiderView ({ userId }) {
@@ -140,17 +141,10 @@ function RiderView ({ userId }) {
           </div>
         </form>
 
-      {/* <div>
-        ______________________________ <br/>
-        Ongoing Trip
-      </div>
-      <div>
-        ______________________________ <br/>
-        UpcomingTrip
-      </div> */}
       <div>
         <DefaultRoute userId={userId} upcoming={upcoming} />
-        <OngoingTrip />
+        <OngoingTrip user={ userId } />
+        <UpcomingTrip user={ userId } />
       </div>
     </div>
   )
