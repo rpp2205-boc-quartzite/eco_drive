@@ -30,7 +30,7 @@ const TripComplete = () => {
             </Link></div> */}
         {/* </div> */}
       </div>
-      <h1>Trip Complete!</h1>
+      <h1 className="title">Trip Complete!</h1>
       <PassengerList/>
       <Analytics/>
       <Link to='/riderview'>

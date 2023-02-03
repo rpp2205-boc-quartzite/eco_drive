@@ -59,7 +59,7 @@ const userSchema = mongoose.Schema({
     end_lat:        Number,
     end_lng:        Number,
     time:           String,
-    default: Boolean,
+    default:        Boolean,
     driver_id: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User'

@@ -33,7 +33,11 @@ const OngoingTrip = (props) => {
 
   getUser(props.user)
 
-  if (started) {
+  const endTrip = () => {
+    console.log('Ended!');
+  }
+
+  if (!started) {
     return (
         <div className="ongoing-trip-container">
 
@@ -55,7 +59,7 @@ const OngoingTrip = (props) => {
             <div className="buttons">
               <button className="end-button">Cancel</button>
               <Link to='/trip-complete'>
-                <button type='submit' className="end-button">End Trip</button>
+                <button type='submit' onClick={endTrip} className="end-button" id="end-trip-button">End Trip</button>
               </Link>
             </div>
 

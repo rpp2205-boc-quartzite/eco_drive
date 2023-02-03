@@ -13,7 +13,7 @@ import OngoingTrip from './OngoingTrip.jsx';
 import UpcomingTrip from './UpcomingTrip.jsx';
 
 
-function RiderView ({ userId }) {
+function RiderView ({ userId, riderOnGoingRoute }) {
   const [start, setStart] = useState({
     start_address: '',
     start_lat: '',
@@ -143,8 +143,8 @@ function RiderView ({ userId }) {
 
       <div>
         <DefaultRoute userId={userId} upcoming={upcoming} />
-        <OngoingTrip user={ userId } />
-        <UpcomingTrip user={ userId } />
+        <OngoingTrip user={userId} />
+        <UpcomingTrip user={userId} route={riderOnGoingRoute} />
       </div>
     </div>
   )
