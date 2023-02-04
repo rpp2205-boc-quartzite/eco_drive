@@ -1691,16 +1691,16 @@ input.review-summary {
   position: relative; */
 }
 
-/* .profileReviewerName {
+.profileReviewerName {
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   color: #262929;
-} */
+}
 
 
-.profileReviewerName {
+/* .profileReviewerName {
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -1710,15 +1710,15 @@ input.review-summary {
   position: relative;
   top: -20%;
   right: 0%;
-}
+} */
 
-/* .profileReviewText {
+.profileReviewText {
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
   color: #262929
-} */
+}
 
 .profileReviewText {
   font-style: normal;
