@@ -35,11 +35,18 @@ const UpcomingTrip = (props) => {
 
   getUser(props.user)
 
-  const startTrip = () => {
+  const startTrip = (userId) => {
     console.log('started!');
+    axios.put('/start-trip', { params: {userId} })
+      .then(result => {
+        console.log('RESULT:', result);
+      })
+      .catch(err => {
+        console.log('ERROR HERE:', err);
+      })
   }
 
-  if (!hasRoute) {
+  if (hasRoute) {
     return (
       <div className="ongoing-trip-container">
 
@@ -60,7 +67,7 @@ const UpcomingTrip = (props) => {
 
           <div className="buttons">
             <button className="end-button">Cancel</button>
-            <button type='submit' onClick={startTrip} className="end-button" id="start-trip-button">Start Trip</button>
+            <button type='submit' onClick={() => startTrip(props.user)} className="end-button" id="start-trip-button">Start Trip</button>
           </div>
 
         </div>

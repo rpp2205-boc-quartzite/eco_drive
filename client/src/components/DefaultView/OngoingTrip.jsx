@@ -37,7 +37,7 @@ const OngoingTrip = (props) => {
     console.log('Ended!');
   }
 
-  if (!started) {
+  if (started) {
     return (
         <div className="ongoing-trip-container">
 

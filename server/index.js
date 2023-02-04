@@ -50,30 +50,28 @@ app.get('/goodbye', (req, res) => {
 
 // ---- Trip Completion  ---- //
 
+// test database user insertion
 app.post('/database', async (req, res) => {
   console.log('server/index.js - app.post - /database - here');
-  await User.addExampleUser()
+  await tripCompletion.addExampleUser()
   res.send('complete')
 })
 
-app.get('/user', (req, res) => {
-  console.log('here', req.query.userId)
+// start the trip
+app.put('/start-trip', async (req, res) => {
   let userid = req.query.userId;
-  tripCompletion.getUser(req.query.userId)
-  .then((result) => {
-    console.log('GOT USER: ', result)
-    res.send(result)
-  })
-  .catch(err => console.log(err))
-});
-
-// trip: needs userId and info about trip
-app.post('/endTrip', async (req, res) => {
-  let trip = req.query.trip;
-  console.log('ending trip: ', trip);
-  let result = await tripCompletion.endTrip(trip)
-  res.send('complete: ', result);
+  console.log('made it here');
+  let result = await tripCompletion.startTrip(userid)
+  res.send(result);
 })
+
+// end the trip
+app.put('/end-trip', async (req, res) => {
+
+})
+
+// favorite a user
+
 
 
 
