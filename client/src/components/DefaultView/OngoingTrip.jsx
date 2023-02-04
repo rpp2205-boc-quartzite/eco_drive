@@ -3,138 +3,124 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
-const OngoingTrip = (props) => {
 
-  const [avatar, setAvatar] = useState('avatar');
-  const [name, setName] = useState('name');
-  const [pickup, setPickUp] = useState('pickup');
-  const [plate, setPlate] = useState('plate');
-  const [time, setTime] = useState('time');
-  const [started, setStarted] = useState(false);
-  const [isDriver, setDriver] = useState(false);
-
-  const [value, setValue] = useState(0); // integer state
-
-  // forceUpdate hook
-  const forceUpdate = () => {
-    setValue(value + 1); // update state to force render
-    // A function that increment 👆🏻 the previous state like here
-    // is better than directly setting `setValue(value + 1)`
+class OngoingTrip extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: null,
+      driver: null
+    }
   }
 
-
-  const getUser = (userId) => {
-    axios.get('/getdriverview',  { params: {userId} })
+  componentDidMount () {
+    axios.get('/getdriverview',  { params: {userId: this.props.user} })
       .then(result => {
-        // console.log('RESULTT: ', result)
-        let user = result.data[0]; // set the user object
-        // if the route is marked "started" set it
-        if (user.driver_route.started) {
-          setStarted(true);
-          setAvatar('avatar'); // user avatar
-          setName(user.full_name);
-          setPickUp('1234 My Lane') // user.rider_route address (or driver)
-          setPlate(user.license_plate);
-          setTime('6:00 PM') // user.rider_route time (or driver)
-        }
+        let user = result.data[0];
+        // console.log('USSSSEERRR:', user);
+        this.setState( { user } ); // set the user profile
 
-        // rider route ongoing
-        if (user.rider_route.started) {
+        if (user.rider_route.started) { // started route as a rider, get the driver
           let driverId = user.rider_route.driver_id;
           axios.get('/getdriverview', { params: {userId: driverId}})
             .then(result => {
-              // console.log('THISONE')
               let driver = result.data[0];
-              // console.log('DRIVEERRRR2:', driver);
-              setStarted(true);
-              setAvatar(driver.avatar);  // driver avatar link
-              setName(driver.full_name); // driver name
-              setPickUp(user.rider_route.start_address); // trip start address
-              setPlate(driver.license_plate); // driver license plate
-              setTime(user.rider_route.time) // trip start time
+              // console.log('DRIVEERRRR:', driver);
+              this.setState( {driver} ); // set the driver profile
             })
             .catch(err => {
               console.log('Failed');
             })
-
-        // driver route ongoing
-        } else if (user.driver_route.started) {
-          // console.log('THISONEHEREEE')
-          setStarted(true);
-          setDriver(true);
-          setAvatar(user.avatar);  // user avatar (user is driver)
-          setName(user.full_name); // user name
-          setPickUp(user.driver_route.start_address); // driver route start address
-          setPlate(user.license_plate); // user's license plate
-          setTime(user.driver_route.time) // trip start time
         }
+
       })
       .catch(err => console.log('ERR: ', err))
   }
 
-  getUser(props.user)
-
-  const endTrip = () => {
-    // console.log('USERRRR:', props.user);
-    axios.put(`/end-trip/${props.user}`)
+  endTrip () {
+    if (hasDriverRoute) { // end route as driver
+      axios.put(`/end-driver-route/${this.state.user._id}`)
       .then(result => {
         console.log('RESULT:', result);
-        forceUpdate();
+        this.setState(hasDriverRoute: false);
       })
       .catch(err => {
         console.log('ERROR HERE:', err);
       })
+
+    } else if (hasRiderRoute) { // end route as rider
+      axios.put(`/end-rider-route/${this.state.user._id}`)
+      .then(result => {
+        console.log('RESULT:', result);
+        this.setState(hasRiderRoute: false);
+      })
+      .catch(err => {
+        console.log('ERROR HERE:', err);
+      })
+    }
   }
 
-  if (started) {
-    return (
+  render () {
+    // ongoing route as driver
+    if (this.state.user.driver_route.started) {
+      return (
         <div className="ongoing-trip-container">
-
           <div className="ongoing-title">Ongoing Trip</div>
-
           <div className="card">
-
             <div>
               <div >
-                <img src={avatar} alt="avatar" className='profilePhoto'/>
+                <img src={this.state.user.avatar} alt="avatar" className='profilePhoto'/>
               </div>
-              <span>{name}</span>
+              <span>{this.state.user.full_name}</span>
               <span>Heart</span>
               <span>Info</span>
             </div>
-
-            <div className="detail"> {pickup} </div>
-            <div className="detail"> {plate} </div>
-            <div className="detail"> {time} </div>
-
+            <div className="detail"> {this.state.user.driver_route.start_address} </div>
+            <div className="detail"> {this.state.user.license_plate} </div>
+            <div className="detail"> {this.state.user.driver_route.time} </div>
             <div className="buttons">
               <button className="end-button">Cancel</button>
-              <Link to='/trip-complete' state={{ isDriver, user: props.user}}>
-                <button type='submit' onClick={endTrip} className="end-button" id="end-trip-button">End Trip</button>
-              </Link>
+              <button type='submit' onClick={this.endTrip.bind(this)} className="end-button" id="end-trip-button">End Trip</button>
             </div>
-
           </div>
-
         </div>
-    )
-
-  } else {
-    return (
-      <div className="ongoing-trip-container">
-
-        <div className="ongoing-title">Ongoing Trip</div>
-
+      )
+    // ongoing route as rider
+    } else if (this.state.user.rider_route.started) {
+      return (
+        <div className="ongoing-trip-container">
+          <div className="ongoing-title">Ongoing Trip</div>
           <div className="card">
-
-            <p> No Active Routes </p>
-
+            <div>
+              <div >
+                <img src={this.state.driver.avatar} alt="avatar" className='profilePhoto'/>
+              </div>
+              <span>{this.state.driver.full_name}</span>
+              <span>Heart</span>
+              <span>Info</span>
+            </div>
+            <div className="detail"> {this.state.user.rider_route.start_address} </div>
+            <div className="detail"> {this.state.driver.license_plate} </div>
+            <div className="detail"> {this.state.user.rider_route.time} </div>
+            <div className="buttons">
+              <button className="end-button">Cancel</button>
+              <button type='submit' onClick={this.endTrip.bind(this)} className="end-button" id="end-trip-button">End Trip</button>
+            </div>
           </div>
-
-      </div>
-    )
+        </div>
+      )
+    // no ongoing routes
+    } else {
+      return (
+        <div className="ongoing-trip-container">
+          <div className="ongoing-title">Onogoing Trip</div>
+            <div className="card">
+              <p> No Active Routes </p>
+            </div>
+        </div>
+      )
+    }
   }
-
 }
 
-export default OngoingTrip;
+export default UpcomingTrip;
