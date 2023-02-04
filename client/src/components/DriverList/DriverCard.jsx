@@ -57,6 +57,8 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, startDistance, endDist
         <DriverConfirmation
           driverInfo={driverInfo}
           userRouteInfo={userRouteInfo}
+          startDistance={startDistance}
+          endDistance={endDistance}
           toggleDriverConfirmation={toggleDriverConfirmation}
           toggleSuccessMessage={toggleSuccessMessage}
           updateRiderOnGoingRoute={updateRiderOnGoingRoute}
