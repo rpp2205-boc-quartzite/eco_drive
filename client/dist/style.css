@@ -101,6 +101,7 @@ h1 {
   order: 1;
   flex-grow: 0;
   position: absolute;
+  color: #262929;
 }
 
 .headerAvatarLogout {
@@ -130,6 +131,7 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 0;
+  color: #262929;
 }
 .welcomeCont {
   display: flex;
@@ -243,7 +245,7 @@ h1 {
   padding: 16px 24px;
   gap: 8px;
   isolation: isolate;
-  width: 308.7px;
+  width: 343px;
   height: 50px;
   background: #FCFCFC;
   border: 1.5px solid #CAD6DD;
@@ -1042,6 +1044,203 @@ h1 {
   flex-grow: 0;
 }
 
+.licenseModalContent {
+  padding-top: 200px;
+  padding-left: 12px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 343px;
+  align-self: stretch;
+  flex-grow: 0;
+  flex: none;
+  order: -2;
+  flex-grow: 0;
+}
+
+.licenseModalTitle {
+  width: 343px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262929;
+  flex: none;
+  order: -1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.licenseModalInput1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 343px;
+  height: 50px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.licenseModalInput2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 343px;
+  height: 50px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.defaultRouteCont {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 8px;
+  width: 375px;
+  height: 232px;
+  flex: none;
+  order: 7;
+  flex-grow: 0;
+}
+
+.defaultRouteTitle {
+  padding-top: 20px;
+  padding-bottom: 25px;
+  width: 343px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262929;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  border-top: 1px solid #97AAB0;
+}
+
+.defaultRoute {
+  border: 1px solid black;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.defaultRouteContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  width: 343px;
+  height: 168px;
+  background: #FCFCFC;
+  border: 1px solid #97AAB0;
+  border-radius: 5px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.routeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 16px;
+  gap: 12px;
+  width: 287px;
+  height: 168px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.defaultFrom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+  width: 255px;
+  height: 40px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.defaultTo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+  width: 255px;
+  height: 40px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.defaultTime {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+  width: 255px;
+  height: 40px;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.defaultRouteCardTitle {
+  width: 34px;
+  height: 18px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #97AAB0;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.defaultRouteCardInfo {
+  width: 300px;
+  height: 18px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #262929;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
 .inner-avatar-wrapper {
   display: flex;
   flex-direction: row;
