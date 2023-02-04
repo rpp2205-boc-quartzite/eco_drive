@@ -42,7 +42,7 @@ class RiderProfile extends React.Component {
     var id = this.state.userId;
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
-      //console.log('got da rider', result)
+      console.log('got da rider', result.data[0])
       this.setState({
         full_name: result.data[0].full_name,
         email: result.data[0].email,
@@ -98,7 +98,7 @@ class RiderProfile extends React.Component {
   }
 
   render () {
-    //console.log('CHECKING RIDER PROPS', this.props.location.state.id)
+    console.log('CHECKING RIDER PROPS', this.props.location.state.id)
     return (
       <div>
       {/* TOP BUTTONS */}

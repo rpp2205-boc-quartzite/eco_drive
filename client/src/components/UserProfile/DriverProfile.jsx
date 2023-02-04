@@ -44,11 +44,11 @@ class DriverProfile extends React.Component {
     console.log('IDDDD', id)
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
-      //console.log('got da driver', result)
+      console.log('got da driver', result)
       this.setState({
         full_name: result.data[0].full_name,
         email: result.data[0].email,
-        // start_address: result.data[0].driver_route.start_address,
+        start_address: result.data[0].driver_route.start_address,
         end_address: result.data[0].driver_route.end_address,
         time: result.data[0].driver_route.time,
         avatar: result.data[0].avatar,
@@ -101,7 +101,7 @@ class DriverProfile extends React.Component {
   }
 
   render () {
-    //console.log('CHECKING DRIVER PROPS', this.props)
+    console.log('CHECKING DRIVER PROPS', this.props.location.state.id)
     return (
       <div>
       {/* TOP BUTTONS */}
