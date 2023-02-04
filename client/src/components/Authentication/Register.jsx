@@ -15,18 +15,38 @@ export default function Register(props) {
   const [driverCheck, setDriverCheck] = useState(false);
   const [avatarCheck, setAvatar] = useState(false);
   const [avatar, setAvatarValue] = useState('');
+  const [tosCheck, setTosCheck] = useState(false);
+
   const navigate=useNavigate();
+
+  const calculateAge = (date) => {
+    const now = new Date();
+    const diff = Math.abs(now - date );
+    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
+
+    return age
+  }  
 
   const handleNext = (event) => {
     event.preventDefault();
     if (email === '' || full_name === '' || dob === '') {
-      return alert('Please complete form');
+      return alert('Please complete empty fields');
     };
+
+    const ageDate = new Date(dob);
+
+    if (calculateAge(ageDate) < 21) {
+      return alert('You must be over 21 to use this application.');
+    }
 
     if (password !== confirmPass) {
       setPass('');
       setConfirmPass('');
       return alert('Password does not match!');
+    }
+
+    if (tosCheck === false) {
+      return alert('Please agree to Terms of Service so we can harvest your data.');
     }
 
     setDriverCheck(true);
@@ -45,7 +65,7 @@ export default function Register(props) {
     }
 
     if (drivers_license === '') {
-      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false})
+      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false, is_rider: true})
         .then((result) => {
           props.authCheck(email, password);
         })
@@ -53,7 +73,7 @@ export default function Register(props) {
           alert('Email already in use.');
         })
     } else {
-      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: true})
+      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: true, is_rider: false})
         .then((result) => {
           props.authCheck(email, password);
         })
@@ -108,7 +128,7 @@ export default function Register(props) {
             </div>
             </form>
             <div className='tos-wrapper'>
-              <input className='tos-checkbox' type="checkbox" id="checkbox" required/>
+              <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
                 <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
             </div>
             <div className='signup-btn-wrapper'>
