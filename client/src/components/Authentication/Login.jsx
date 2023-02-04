@@ -30,7 +30,11 @@ export default function Login(props) {
                   </div>
                   <input className='input-field' value={pass} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' />
                 </div>
-                <button className='forgot-btn'><span className='forgot-text'>Forgot Password?</span></button>  
+                <div className='forgot-btn'>
+                  <Link to='/password-reset'>
+                    <button className='forgot-btn'><span className='forgot-text'>Forgot Password?</span></button>  
+                  </Link>
+                </div>
               </div>
             </form>
           </div>

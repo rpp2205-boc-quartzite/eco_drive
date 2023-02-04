@@ -7,6 +7,7 @@ import RiderView from './components/DefaultView/RiderView.jsx';
 import Dashboard from './components/Authentication/Dashboard.jsx';
 import Login from './components/Authentication/Login.jsx';
 import Register from './components/Authentication/Register.jsx';
+import PasswordReset from './components/Authentication/PasswordReset.jsx';
 import Reviews from './components/RatingsReviews/Reviews.jsx';
 import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
@@ -72,6 +73,7 @@ function App() {
         <Route exact path="/" element={<Dashboard />} />
         <Route path='/register' element={<Register authCheck={authenticate}/>} />
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
+        <Route path='/password-reset' element={<PasswordReset />} />
         <Route path="/driverview" element={<DriverView userId={userId}/>} />
         <Route path="/ratings-reviews" element={<Reviews />} />
         <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute}/>} />
