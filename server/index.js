@@ -6,6 +6,7 @@ const app = express();
 const dotenv = require('dotenv');
 const auth = require('./auth.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
+const { updateDriverProfile, updateRiderProfile, getUserInfo } = require('../database/controllers/userProfile.js')
 const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
@@ -26,7 +27,7 @@ app.use(bodyParser.json())
 const db = require('../database/index.js');
 
 // db controllers
-const tripCompletion = require('../database/controllers/tripCompletion.js');
+const User = require('../database/controllers/user.js');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -240,39 +241,6 @@ app.put('/driver-list', async (req, res) => {
     res.status(400).send(err)
   }
 })
-
-
-// ###################################################################################//
-// ----------------------------------- Rider List ----------------------------------- //
-// ###################################################################################//
-
-app.post('/rider-list', async (req, res) => {
-  const driver =  {
-    id: req.body.userId,
-    start_address: req.body.start_address,
-    start_lat: req.body.start_lat,
-    start_lng: req.body.start_lng,
-    end_address: req.body.end_address,
-    end_lat: req.body.end_lat,
-    end_lng: req.body.end_lng,
-    time: req.body.time,
-  }
-  const driverID = req.body.userId
-  const seats = req.body.total_seats;
-
-  try {
-    const assignedRiders = await getRiderArray(driverID);
-    Promise.all(assignedRiders)
-      .then((riders) => {
-        res.status(200).send({riders: riders, seats: seats});
-      })
-  }
-  catch (err) {
-    console.log('The Following Error Occured When Attempting to Capture Riders: ', err)
-    res.status(404).send(err)
-  }
-})
-
 
 // ---- Catch all for routing ---- //
 

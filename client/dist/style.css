@@ -2128,6 +2128,7 @@ input.review-summary {
   padding-bottom: 21px;
 }
 
+
 .profileReviewTitle{
   font-style: normal;
   font-weight: 600;
@@ -2154,6 +2155,14 @@ input.review-summary {
   color: #97AAB0;
 }
 
+.profileSavings {
+  border: solid 1px #338F24;
+  padding: 9px;
+  border-radius: 9px;
+  margin: 8px;
+  text-align: center;
+}
+
 .profileSavingsTitle {
   font-style: normal;
   font-weight: 600;
@@ -2177,16 +2186,6 @@ input.review-summary {
   margin: 8px;
 }
 
-/* .profileReviewBox {
-  height: 20rem;
-.profileSavings {
-  border: solid 1px #338F24;
-  padding: 9px;
-  border-radius: 9px;
-  margin: 8px;
-  text-align: center;
-}
-
 .profileReviewBox {
   align-items: center;
   justify-content: center;
@@ -2202,71 +2201,26 @@ input.review-summary {
   display: inline-block;
   white-space: pre-wrap;
   border-radius: 10px;
-} */
-
-.profileReviewBox {
-  height: 20rem;
-  align-items: end;
-  justify-content: end;
-  flex-direction: column;
-  padding: 12px 16px;
-  width: 237px;
-  height: 190px;
-  background: #E3F1F5;
-  margin-top: 6px;
-  margin-right: 8px;
-  margin-left: 8px;
-  white-space: pre-wrap;
-  display: inline-block;
-  border-radius: 10px;
-  align-content: center;
-  justify-items: center;
-  vertical-align: bottom;
-  /* word-wrap: break-word;
+  word-wrap: break-word;
   overflow-x: scroll;
   overflow-y: hidden;
-  position: relative; */
+  position: relative;
 }
 
-/* .profileReviewerName {
+.profileReviewerName {
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   color: #262929;
-} */
-
-
-.profileReviewerName {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  text-align: right;
-  color: #76858A;
-  position: relative;
-  top: -20%;
-  right: 0%;
 }
-
-/* .profileReviewText {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  color: #262929
-} */
 
 .profileReviewText {
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
-  color: #262929;
-  position: relative;
-  top: -15px;
-  overflow: hidden;
-  overflow-wrap: break-word;
+  color: #262929
 }
 
 .profileReviewDate {
