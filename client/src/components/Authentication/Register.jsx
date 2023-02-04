@@ -15,6 +15,8 @@ export default function Register(props) {
   const [driverCheck, setDriverCheck] = useState(false);
   const [avatarCheck, setAvatar] = useState(false);
   const [avatar, setAvatarValue] = useState('');
+  const [tosCheck, setTosCheck] = useState(false);
+
   const navigate=useNavigate();
 
   const calculateAge = (date) => {
@@ -41,6 +43,10 @@ export default function Register(props) {
       setPass('');
       setConfirmPass('');
       return alert('Password does not match!');
+    }
+
+    if (tosCheck === false) {
+      return alert('Please agree to Terms of Service so we can harvest your data.');
     }
 
     setDriverCheck(true);
@@ -122,7 +128,7 @@ export default function Register(props) {
             </div>
             </form>
             <div className='tos-wrapper'>
-              <input className='tos-checkbox' type="checkbox" id="checkbox" required/>
+              <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
                 <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
             </div>
             <div className='signup-btn-wrapper'>
