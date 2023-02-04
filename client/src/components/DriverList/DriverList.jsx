@@ -11,7 +11,7 @@ const DriverList = (props) => {
   const [userRouteInfo, setUserRouteInfo] = useState({})
 
   const info = useLocation()
-  const {route} = info.state
+  const {route, userInfo} = info.state
 
   const findDrivers = () => {
     const rider = {

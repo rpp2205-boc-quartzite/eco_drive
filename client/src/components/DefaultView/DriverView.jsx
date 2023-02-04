@@ -9,7 +9,7 @@ import DriverPrompt from './DriverPromptModal.jsx';
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import ApiKey from './apikey.js';
+import OngoingTrip from './OngoingTrip.jsx';
 
 function DriverView ({ userId }) {
   const [start, setStart] = useState({
@@ -31,7 +31,7 @@ function DriverView ({ userId }) {
   const [upcoming, setUpcoming] = useState({});
   const [showPrompt, setPrompt] = useState(false);
   const [favorites, setFavorites] = useState({});
-  const key = ApiKey;
+  const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
 
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
@@ -43,6 +43,7 @@ function DriverView ({ userId }) {
 
   const pickUpRef = React.useRef();
   const dropOffRef = React.useRef();
+
 
   useEffect(() => {
     if (pickUp && dropOff) {
@@ -69,7 +70,7 @@ function DriverView ({ userId }) {
         });
 
         setDirectionsResponse({json: JSON.stringify(results)});
-        console.log('FINISHED');
+        // console.log('FINISHED');
         setLoading(false);
       }
 
@@ -88,6 +89,20 @@ function DriverView ({ userId }) {
     //*****************************************************//
     //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
     //*****************************************************//
+
+  const route = {
+    id: userId,
+    full_name: name,
+    start_address: start.start_address,
+    start_lat: start.start_lat,
+    start_lng: start.start_lng,
+    end_address: end.end_address,
+    end_lat: end.end_lat,
+    end_lng: end.end_lng,
+    time: time,
+    default: isDefault,
+    total_seats: seats
+  }
 
   useEffect(() => {
     axios.get('/getdriverview', { params: {userId} })
@@ -141,7 +156,7 @@ function DriverView ({ userId }) {
             <div className="inputFields">
               <Autocomplete
                 className="inputField1"
-                apiKey={key}
+                apiKey={API_KEY}
                 placeholder="Starting point"
                 ref={pickUpRef}
                 onPlaceSelected={(place) => {
@@ -149,7 +164,6 @@ function DriverView ({ userId }) {
                   let lng = place.geometry.location.lng();
                   setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng});
                   setPickUp(place.formatted_address);
-                  console.log(place);
                 }}
                 options={{
                   types: ["address"],
@@ -158,7 +172,7 @@ function DriverView ({ userId }) {
               />
               <Autocomplete
                 className="inputField2"
-                apiKey={key}
+                apiKey={API_KEY}
                 placeholder="Destination"
                 ref={dropOffRef}
                 onPlaceSelected={(place) => {
@@ -166,7 +180,6 @@ function DriverView ({ userId }) {
                   let lng = place.geometry.location.lng();
                   setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng});
                   setDropOff(place.formatted_address);
-                  console.log(place);
                 }}
                 options={{
                   types: ["address"],
@@ -191,14 +204,14 @@ function DriverView ({ userId }) {
                 <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-
-            <Link to="/rider-list" state={directionsResponse}>
-              <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders</button>
+            <Link to="/rider-list" state={{dir: directionsResponse, route: route}}>
+            <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders</button>
             </Link>
           </div>
         </form>
       <div>
-      < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/>
+        < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/>
+        <OngoingTrip />
       </div>
 
     </div>

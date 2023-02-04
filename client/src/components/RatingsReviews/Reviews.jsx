@@ -8,6 +8,14 @@ import OverallRating from './OverallRating.jsx';
 import { FaPen } from 'react-icons/fa';
 import AllReviews from './AllReviews.jsx';
 import { useLocation } from 'react-router-dom'
+import { MdLogout } from 'react-icons/md';
+import { HiOutlineRefresh } from 'react-icons/hi';
+import { BiArrowBack } from 'react-icons/bi';
+import { AiFillHome } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
+// const { addFavorite, removeFavorite } = require('../database/controllers/driverList.js');
+//const { addFavorite, removeFavorite } = require('../../../../database/controllers/driverList.js');
 
 export default function Reviews(props) {
   const [showModal, setShowModal] = useState(false);
@@ -24,9 +32,11 @@ export default function Reviews(props) {
     driverReviews: [],
     driverSortedReviews: [],
     riderSortedReviews: [],
-    driversLicense: ''
+    driversLicense: '',
+    favorited: false,
   });
 
+  // console.log('testing .env', process.env.GOOGLE_MAP_API_KEY_RIDER_LIST);
   console.log('props', props);
   console.log('location.state', location.state);
 
@@ -70,6 +80,27 @@ export default function Reviews(props) {
     });
   }
 
+  const favorite = () => {
+    console.log('favorite - test');
+
+    if (!values.favorited) {
+      setValues((values) => ({
+        ...values,
+        favorited: true
+      }));
+    } else {
+      setValues((values) => ({
+        ...values,
+        favorited: false
+      }));
+    }
+    // if (!values.favorited) {
+    //   addFavorite(userId, driverId);
+    // } else {
+    //   removeFavorite(userId, driverId);
+    // }
+  }
+
   const calculateRating = () => {
     let count = 0;
     let sum = 0;
@@ -102,8 +133,34 @@ export default function Reviews(props) {
 
   if (values.name.length > 0) {
     sort();
+    console.log('driver reviews: ', values.driverReviews);
+    console.log('submitted: ', submitted);
     return (
       <div>
+        <div className="reviewHeader">
+          <div className="reviewHeaderBackButton">
+            <Link to="/driverprofile">
+              <BiArrowBack className="backButton" size={20} />
+            </Link>
+          </div>
+          <div className="reviewHeaderLogout">
+            <Link to="/">
+              <MdLogout className="logout" size={20} />
+            </Link>
+          </div>
+          <div className="reviewHeaderHome">
+            <Link to="/driverview">
+              <AiFillHome size={20} />
+            </Link>
+          </div>
+        </div>
+        <div className="reviewFavorite">
+          {
+            values.favorited
+            ? <AiFillHeart className="unfavorite" color="red" size={25} onClick={favorite} />
+            : <AiOutlineHeart className="favorite" size={25} onClick={favorite} />
+          }
+        </div>
         <div className="profilePhotoDiv">
           <img className="review-photo" alt="" src={values.avatar}/>
         </div>
@@ -115,6 +172,7 @@ export default function Reviews(props) {
         </div>
         <div className='writeReviewButton'>
           <button
+            disabled={submitted === true}
             className='btn-write-review'
             onClick={() =>
               {
@@ -129,6 +187,7 @@ export default function Reviews(props) {
         </div>
         <div className='reportButton'>
           <button
+            disabled={submitted === true}
             className='btn-report-review'
             onClick={() =>
               {
@@ -141,8 +200,9 @@ export default function Reviews(props) {
           </button>
         </div>
         <div className='profileReviewDiv'>
-          <span className='profileTitle'>Reviews as a Driver</span>
-          <button className="btn-select-all-reviews" onClick={() => setAllDriverReviews(true)}>See All</button>
+          <span className='profileTitle'>Reviews from Drivers</span>
+          <Link className="btn-select-all-reviews" state={{ text: "all-driver-reviews" }} to="/all-reviews">See All</Link>
+          {/* <button className="btn-select-all-reviews" onClick={() => setAllDriverReviews(true)}>See All</button> */}
           <div className='profileReviewContainer'>
             {values.sortedDriverReviews.slice(0, 6).map(review => {
               return (
@@ -152,8 +212,9 @@ export default function Reviews(props) {
           </div>
         </div>
         <div className='profileReviewDiv'>
-          <span className='profileTitle'>Reviews as a Rider</span>
-          <button className="btn-select-all-reviews" onClick={() => setAllRiderReviews(true)}>See All</button>
+          <span className='profileTitle'>Reviews from Riders</span>
+          <Link className="btn-select-all-reviews" state={{ text: "all-rider-reviews" }} to="/all-reviews">See All</Link>
+          {/* <button className="btn-select-all-reviews" onClick={() => setAllRiderReviews(true)}>See All</button> */}
           <div className='profileReviewContainer'>
             {values.sortedRiderReviews.slice(0, 6).map(review => {
               return (
@@ -162,7 +223,7 @@ export default function Reviews(props) {
             })}
           </div>
         </div>
-        <ReviewModal show={showModal} reported={reported} userid={values.userId} submit={() => setSubmitted()} close={() => setShowModal(false)} />
+        <ReviewModal show={showModal} reported={reported} userid={values.userId} submit={() => setSubmitted(true)} close={() => setShowModal(false)} />
       </div>
     )
   } else {
@@ -171,3 +232,5 @@ export default function Reviews(props) {
     )
   }
 }
+
+{/* <span className='profileHomeButton'></span> */}

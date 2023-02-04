@@ -8,8 +8,7 @@ import DefaultRoute from './DefaultRoute.jsx';
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import ApiKey from './apikey.js';
-import { useNavigate } from 'react-router-dom';
+import OngoingTrip from './OngoingTrip.jsx';
 
 function RiderView ({ userId }) {
   const [start, setStart] = useState({
@@ -24,12 +23,13 @@ function RiderView ({ userId }) {
   })
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [userInfo, setUserInfo] = useState({})
   const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [favorites, setFavorites] = useState({});
-  const key = ApiKey;
+  const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
 
   const route = {
     _id: userId,
@@ -45,7 +45,7 @@ function RiderView ({ userId }) {
     userFavorites: favorites
   }
 
-  console.log(upcoming)
+  console.log(route)
 
   useEffect(() => {
     axios.get('/getriderview', { params: {userId} })
@@ -54,6 +54,7 @@ function RiderView ({ userId }) {
       setName(result.data[0].full_name)
       setUpcoming(result.data[0].rider_route)
       setFavorites(result.data[0].favorites)
+      setUserInfo(result.data[0])
     })
     .catch(err => console.log(err))
   }, [])
@@ -90,7 +91,7 @@ function RiderView ({ userId }) {
             <div className="inputFields">
               <Autocomplete
                   className="inputField1"
-                  apiKey={key}
+                  apiKey={API_KEY}
                   placeholder="Starting point"
                   onPlaceSelected={(place) => {
                     let lat = place.geometry.location.lat();
@@ -105,7 +106,7 @@ function RiderView ({ userId }) {
                 />
                 <Autocomplete
                     className="inputField2"
-                    apiKey={key}
+                    apiKey={API_KEY}
                     placeholder="Destination"
                     onPlaceSelected={(place) => {
                       let lat = place.geometry.location.lat();
@@ -142,7 +143,8 @@ function RiderView ({ userId }) {
           </div>
         </form>
       <div>
-        < DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
+        <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
+        <OngoingTrip />
       </div>
     </div>
   )
