@@ -84,7 +84,6 @@ const DriverInteractions = function(props) {
 
   //     setDriver(driver);
 
-<<<<<<< HEAD
   //     setUserRouteInfo(driver);
   //     return axios.post('/rider-list', driver)
   //       .then((res) => {
@@ -96,18 +95,6 @@ const DriverInteractions = function(props) {
   //   }
   //   findRiders();
   // }, [route])
-=======
-      setUserRouteInfo(driver);
-      return axios.post('/rider-list', driver)
-        .then((res) => {
-          setSeating(res.data.seats);
-          return setRiders(res.data.riders);
-        })
-        .catch((err) => console.log('Find drivers error: ', err))
-    }
-    findRiders();
-  }, [route])
->>>>>>> main
 
 
   useEffect(() => {
