@@ -14,7 +14,9 @@ import PassengerList from './PassengerList.jsx';
 // which user is the one logged in / clicked the button
 // starting and ending address
 
-const TripComplete = () => {
+// props: driver_id, riders
+
+const TripComplete = (props) => {
   return (
     <div className="trip-complete">
       <div className="defaultViewHeader">
@@ -30,7 +32,7 @@ const TripComplete = () => {
             </Link></div> */}
         {/* </div> */}
       </div>
-      <h1>Trip Complete!</h1>
+      <h1 className="title">Trip Complete!</h1>
       <PassengerList/>
       <Analytics/>
       <Link to='/riderview'>

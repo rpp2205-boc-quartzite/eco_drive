@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import DefaultRoute from './DefaultRoute.jsx';
 import { format } from "date-fns";
+import Autocomplete from "react-google-autocomplete";
 import DatePicker from "react-datepicker";
+import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-import OngoingTrip from './OngoingTrip.jsx';
 
-function RiderView ({ userId }) {
+import DefaultRoute from './DefaultRoute.jsx';
+import OngoingTrip from './OngoingTrip.jsx';
+import UpcomingTrip from './UpcomingTrip.jsx';
+
+
+function RiderView ({ userId, riderOnGoingRoute }) {
   const [start, setStart] = useState({
     start_address: '',
     start_lat: '',
@@ -140,17 +143,10 @@ function RiderView ({ userId }) {
           </div>
         </form>
 
-      {/* <div>
-        ______________________________ <br/>
-        Ongoing Trip
-      </div>
-      <div>
-        ______________________________ <br/>
-        UpcomingTrip
-      </div> */}
       <div>
         <DefaultRoute userId={userId} upcoming={upcoming} />
-        <OngoingTrip />
+        <OngoingTrip user={userId} />
+        <UpcomingTrip user={userId} route={riderOnGoingRoute} />
       </div>
     </div>
   )
