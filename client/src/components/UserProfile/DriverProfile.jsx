@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import { TbRefresh } from "react-icons/tb";
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';
@@ -102,7 +102,7 @@ class DriverProfile extends React.Component {
       <div>
       {/* TOP BUTTONS */}
         <span className='profileToggle'>Driver</span>
-        <span className='profileToggleButton'><HiOutlineRefresh/></span>
+        <span className='profileToggleButton'><TbRefresh/></span>
         <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
         <Link to="/driverview"><span className='profileHomeButton'><AiFillHome/></span></Link>
 

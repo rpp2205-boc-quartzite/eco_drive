@@ -84,6 +84,7 @@ const DriverInteractions = function(props) {
 
   //     setDriver(driver);
 
+<<<<<<< HEAD
   //     setUserRouteInfo(driver);
   //     return axios.post('/rider-list', driver)
   //       .then((res) => {
@@ -95,34 +96,27 @@ const DriverInteractions = function(props) {
   //   }
   //   findRiders();
   // }, [route])
-
-
-  useEffect(() => {
-    const findRiders = () => {
-      const driver = {
-        userId: route.id,
-        start_address: route.start_address,
-        start_lat: route.start_lat,
-        start_lng: route.start_lng,
-        end_address: route.end_address,
-        end_lat: route.end_lat,
-        end_lng: route.end_lng,
-        time: route.time,
-        total_seats: route.total_seats,
-        default: route.default,
-      }
-
+=======
       setUserRouteInfo(driver);
       return axios.post('/rider-list', driver)
         .then((res) => {
-          // console.log(res.data)
-          return setRiders(res.data);
+          setSeating(res.data.seats);
+          return setRiders(res.data.riders);
         })
         .catch((err) => console.log('Find drivers error: ', err))
     }
-
     findRiders();
   }, [route])
+>>>>>>> main
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(time + 1)
+      console.log('Test #', time)
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (!loaded)
@@ -142,6 +136,7 @@ const DriverInteractions = function(props) {
   if (loadError) return "Error Loading Maps";
   if (!riders.length) return (
     <div className='loading-screen'>
+        {console.log('RIDERS', riders)}
     <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
     <p>Finding Riders...</p>
  </div>
@@ -228,7 +223,7 @@ const DriverInteractions = function(props) {
         </div> */}
         <br></br>
         <div className="rider-list" data="DriverInteractions">
-          <RiderList driver={driverData} riders={riders} seats={seats} />
+          <RiderList driver={driverData} riders={riders} seats={seats}/>
         </div>
     </div>
   )

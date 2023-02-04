@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const RiderList = function(props) {
-
+  console.log('FIRST RIDER', props.riders[0])
 
   const [riders, setRiders] = React.useState([]);
   const [totalRiders, setTotalRiders] = React.useState([]);
@@ -18,12 +18,9 @@ const RiderList = function(props) {
 
   if (!totalRiders.length) {
     var ridersArray = [];
-    var accepted = [];
-    for (var i = 0; i < props.seats.total; i++) {
+    for (var i = 0; i < props.seats; i++) {
       ridersArray.push(props.riders[i]);
-      accepted.push(props.riders[i].rider._id)
     }
-    setAcceptedRiders(accepted)
     setTotalRiders(ridersArray);
   };
 
@@ -36,28 +33,25 @@ const RiderList = function(props) {
     const container = declined;
     container[e.target.name] = true;
     var newRiders = []
-    var newAccepted = [];
     for (var i = 0; i < props.riders.length; i++) {
-      if (container[props.riders[i].rider.email] === undefined) {
+      if (container[props.riders[i].email] === undefined) {
         newRiders.push(props.riders[i]);
-        newAccepted.push(props.riders[i].rider._id)
       }
     }
-    var newTotal = newRiders.slice(0, props.seats.total)
+    var newTotal = newRiders.slice(0, props.seats)
     setDeclined(container);
-    setAcceptedRiders(newAccepted);
     setTotalRiders(newTotal);
   };
 
-  const postCurrentRoutes = function() {
-    return axios.post('/add-current-routes', {
-      driver: props.driver,
-      riderIDs: acceptedRiders
-    })
-      .then((results) => {
-        console.log(results.data);
-      })
-  }
+  // const postCurrentRoutes = function() {
+  //   return axios.post('/add-current-routes', {
+  //     driver: props.driver,
+  //     riderIDs: acceptedRiders
+  //   })
+  //     .then((results) => {
+  //       console.log(results.data);
+  //     })
+  // }
 
 
   if (!riders || !riders.length) {
@@ -81,14 +75,14 @@ const RiderList = function(props) {
         <div className="rider-card-list">
           {totalRiders.map((rider) => {
             return (
-              <div className="rider-card" key={rider.rider.email}>
+              <div className="rider-card" key={rider.email}>
                 <button className="info-icon" type="submit">insert info icon here</button>
-                <div className="rider-name">{rider.rider.full_name}</div>
+                <div className="rider-name">{rider.full_name}</div>
                 {/* <div><img alt="specific user profile" className="rider-pic" src={rider.pic} /></div> */}
-                <div className="rider-from">{rider.startDistance.text} Miles from Your Pick-Up Location</div>
-                <div className="rider-to">{rider.endDistance.text} Miles to go from Drop-Off Location</div>
+                {/* <div className="rider-from">{rider.startDistance.text} Miles from Your Pick-Up Location</div>
+                <div className="rider-to">{rider.endDistance.text} Miles to go from Drop-Off Location</div> */}
                 {/* <div className="rider-time">{rider.time}</div> */}
-                <button className="remove-rider" name={rider.rider.email} onClick={removeRider} type="submit">decline this rider</button>
+                <button className="remove-rider" name={rider.email} onClick={removeRider} type="submit">decline this rider</button>
               </div>
             )
           })}

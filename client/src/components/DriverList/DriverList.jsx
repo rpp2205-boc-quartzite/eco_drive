@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './driver-list-style.css'
 import { useLocation } from 'react-router-dom'
+
+import { BiArrowBack } from 'react-icons/bi';
+import { TbRefresh } from "react-icons/tb";
+import { MdLogout } from 'react-icons/md';
+
 
 import DriverCard from './DriverCard.jsx'
 
@@ -11,7 +17,7 @@ const DriverList = (props) => {
   const [userRouteInfo, setUserRouteInfo] = useState({})
 
   const info = useLocation()
-  const {route} = info.state
+  const {route, userInfo} = info.state
 
   const findDrivers = () => {
     const rider = {
@@ -38,7 +44,7 @@ const DriverList = (props) => {
     setUserRouteInfo(rider);
     return axios.post('/driver-list', rider)
       .then((res) => {
-        console.log(res.data)
+        console.log('Driver list: ', res.data)
         return setDrivers(res.data);
       })
       .catch((err) => console.log('Find drivers error: ', err))
@@ -49,14 +55,60 @@ const DriverList = (props) => {
 
 
   if (drivers.length > 0) {
+    const favoritesDrivers = [];
+    const nonFavoritesDrivers = [];
+    for (let i = 0; i < drivers.length; i++) {
+      if ((userInfo.favorites || []).includes(drivers[i].driverInfo._id)) {
+        favoritesDrivers.push(drivers[i])
+      } else {
+        nonFavoritesDrivers.push(drivers[i])
+      }
+    }
     return (
       <div>
-        <div className='top-bar'></div>
+        <div className='top-bar'>
+          <div className='top-bar-left'>
+            <p>Rider</p>
+            <Link to="/driverview">
+              <TbRefresh className='top-bar-icons' />
+            </Link>
+          </div>
+          <div className='top-bar-right'>
+            <Link to="/riderprofile">
+              <img className='avatar' src={userInfo.avatar} alt="" />
+            </Link>
+            <Link to="/">
+              <MdLogout className='top-bar-icons' />
+            </Link>
+          </div>
+        </div>
+        <div className='title-bar'>
+          <Link to="/riderview">
+            <BiArrowBack className='driver-list-back-icon' />
+          </Link>
+          <p>Your nearest drivers</p>
+        </div>
         <div className='driver-list'>
-          {drivers.map((driver) => (
+          <p className='subheader-driver'>Favorite drivers</p>
+          {favoritesDrivers.map((driver) => (
             <DriverCard
               key={driver.driverInfo._id}
               driverInfo={driver.driverInfo}
+              userInfo={userInfo}
+              userRouteInfo={userRouteInfo}
+              startDistance={driver.startDistance}
+              endDistance={driver.endDistance}
+              updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
+            />
+          ))}
+        </div>
+        <div className='driver-list'>
+          <p className='subheader-driver'>Non-favorite drivers</p>
+          {nonFavoritesDrivers.map((driver) => (
+            <DriverCard
+              key={driver.driverInfo._id}
+              driverInfo={driver.driverInfo}
+              userInfo={userInfo}
               userRouteInfo={userRouteInfo}
               startDistance={driver.startDistance}
               endDistance={driver.endDistance}
