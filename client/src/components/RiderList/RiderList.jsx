@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const RiderList = function(props) {
 
+
   const [riders, setRiders] = React.useState([]);
   const [totalRiders, setTotalRiders] = React.useState([]);
   const [acceptedRiders, setAcceptedRiders] = React.useState({})
@@ -58,6 +59,7 @@ const RiderList = function(props) {
       })
   }
 
+
   if (!riders || !riders.length) {
     return (
       <div className='loading-screen'>
@@ -67,6 +69,7 @@ const RiderList = function(props) {
     )
   } else {
     return (
+
       <div>
         <br></br>
         {/* to be added when refactored */}

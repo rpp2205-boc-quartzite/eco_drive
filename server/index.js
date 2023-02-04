@@ -254,6 +254,7 @@ app.post('/rider-list', async (req, res) => {
   }
 })
 
+
 app.post('/add-current-routes', async (req, res) => {
   const driver =  {
     userId: req.body.driver.userId,
@@ -282,6 +283,7 @@ app.post('/add-current-routes', async (req, res) => {
     res.status(400).send(err)
   }
 })
+
 
 // ---- Catch all for routing ---- //
 
