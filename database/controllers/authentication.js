@@ -101,7 +101,6 @@ module.exports = {
   },
 
   sendMail: (req, res) => {
-    console.log(req)
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -113,8 +112,8 @@ module.exports = {
     var mailOptions = {
       from: 'ecodrivecare@gmail.com',
       to: req.body.email,
-      subject: 'Sending Email using Node.js',
-      text: 'That was easy!'
+      subject: 'Verification Code',
+      text: `Your verification code is: ${req.body.code}`
     };
     
     transporter.sendMail(mailOptions, function(error, data){
