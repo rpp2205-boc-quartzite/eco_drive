@@ -48,7 +48,7 @@ class DriverProfile extends React.Component {
       this.setState({
         full_name: result.data[0].full_name,
         email: result.data[0].email,
-        // start_address: result.data[0].driver_route.start_address,
+        start_address: result.data[0].driver_route.start_address,
         end_address: result.data[0].driver_route.end_address,
         time: result.data[0].driver_route.time,
         avatar: result.data[0].avatar,

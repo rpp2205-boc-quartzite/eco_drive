@@ -27,7 +27,7 @@ app.use(bodyParser.json())
 const db = require('../database/index.js');
 
 // db controllers
-const User = require('../database/controllers/user.js');
+// const User = require('../database/controllers/user.js');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
