@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HelloWorld from './components/helloWorld.jsx';
@@ -19,6 +19,23 @@ function App() {
   const [userId, setUserId] = useState('');
   const navigate=useNavigate();
 
+  useEffect(() => {
+    // console.log(document.cookie)
+    // axios.get('/validate', {token: document.cookie})
+    // .then((result) => {
+    //   console.log(result)
+    //   setUserId(result.data.user);
+    //   if (result.is_driver) {
+    //     navigate('/driverview');
+    //   } else {
+    //     navigate('/riderview');
+    //   }
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
+  });
+
   const authenticate = (email, pass) => {
     if (email === '' || pass === '') {
       return alert('Please enter an email and/or password');
@@ -27,6 +44,7 @@ function App() {
     axios.post('/login', {email, pass})
     .then((result) => {
       setUserId(result.data.user);
+      document.cookie = result.token;
       if (result.is_driver) {
         navigate('/driverview');
       } else {

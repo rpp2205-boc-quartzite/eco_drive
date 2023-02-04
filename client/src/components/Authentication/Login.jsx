@@ -39,7 +39,6 @@ export default function Login(props) {
             <Link to='/'>
               <button className='back-btn'><span className='back-text'>Go Back</span></button> 
             </Link> 
-            
           </div>
         </div>
     )
