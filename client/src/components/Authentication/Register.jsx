@@ -17,11 +17,25 @@ export default function Register(props) {
   const [avatar, setAvatarValue] = useState('');
   const navigate=useNavigate();
 
+  const calculateAge = (date) => {
+    const now = new Date();
+    const diff = Math.abs(now - date );
+    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
+
+    return age
+  }  
+
   const handleNext = (event) => {
     event.preventDefault();
     if (email === '' || full_name === '' || dob === '') {
       return alert('Please complete form');
     };
+
+    const ageDate = new Date(dob);
+
+    if (calculateAge(ageDate) < 21) {
+      return alert('You must be over 21 to use this application.');
+    }
 
     if (password !== confirmPass) {
       setPass('');
