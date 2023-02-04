@@ -12,6 +12,15 @@ const UpcomingTrip = (props) => {
   const [time, setTime] = useState('time');
   const [hasRoute, setRoute] = useState(false);
 
+  const [value, setValue] = useState(0); // integer state
+
+// forceUpdate hook
+const forceUpdate = () => {
+  setValue(value + 1); // update state to force render
+  // A function that increment 👆🏻 the previous state like here
+  // is better than directly setting `setValue(value + 1)`
+}
+
 
   // on component load, check user routes in DB
 
@@ -57,11 +66,12 @@ const UpcomingTrip = (props) => {
 
   getUser(props.user)
 
-  const startTrip = (userId) => {
-    console.log('started!');
-    axios.put('/start-trip', { params: {userId} })
+  const startTrip = () => {
+    console.log('USERRRR:', props.user);
+    axios.put(`/start-trip/${props.user}`)
       .then(result => {
         console.log('RESULT:', result);
+        forceUpdate();
       })
       .catch(err => {
         console.log('ERROR HERE:', err);
@@ -91,7 +101,7 @@ const UpcomingTrip = (props) => {
 
           <div className="buttons">
             <button className="end-button">Cancel</button>
-            <button type='submit' onClick={() => startTrip(props.user)} className="end-button" id="start-trip-button">Start Trip</button>
+            <button type='submit' onClick={startTrip} className="end-button" id="start-trip-button">Start Trip</button>
           </div>
 
         </div>

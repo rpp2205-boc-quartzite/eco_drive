@@ -58,20 +58,25 @@ app.post('/database', async (req, res) => {
 })
 
 // start the trip
-app.put('/start-trip', async (req, res) => {
-  let userid = req.query.userId;
-  console.log('made it here');
-  let result = await tripCompletion.startTrip(userid)
+app.put('/start-trip/:_id', async (req, res) => {
+  console.log('made it here', req.params._id);
+  let result = await tripCompletion.startTrip(req.params._id)
   res.send(result);
 })
 
 // end the trip
-app.put('/end-trip', async (req, res) => {
-
+app.put('/end-trip/:_id', async (req, res) => {
+  console.log('made it here2', req.params._id);
+  let result = await tripCompletion.endTrip(req.params._id)
+  res.send(result);
 })
 
 // favorite a user
-
+app.put('/favorite/:user_id/:favorite_user_id', async (req, res) => {
+  console.log('favorite time', req.params.user_id, req.params.favorite_user_id);
+  let result = await tripCompletion.endTrip(req.params._id)
+  res.send(result);
+})
 
 
 
