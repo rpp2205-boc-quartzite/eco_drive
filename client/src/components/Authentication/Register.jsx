@@ -30,7 +30,7 @@ export default function Register(props) {
   const handleNext = (event) => {
     event.preventDefault();
     if (email === '' || full_name === '' || dob === '') {
-      return alert('Please complete form');
+      return alert('Please complete empty fields');
     };
 
     const ageDate = new Date(dob);
