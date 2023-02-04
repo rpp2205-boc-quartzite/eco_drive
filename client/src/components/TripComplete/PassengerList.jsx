@@ -1,16 +1,14 @@
 import React from 'react';
 import PassengerCard from './PassengerCard.jsx';
 
-const PassengerList = () => {
-
-  const passengerList = [{name: 'me'}, {name: 'i'}, {name: 'him'}];
+const PassengerList = (props) => {
 
   return (
     <div className="passengerList">
 
-      <p className="riders">Riders</p>
+      <p className="riders">Write Your Review</p>
 
-      { passengerList.map( (passenger) => <PassengerCard key={passenger.name} />) }
+      { props.passengers.map( (passenger) => <PassengerCard pId={passenger} key={passenger} />) }
 
     </div>
   )

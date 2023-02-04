@@ -11,6 +11,7 @@ const OngoingTrip = (props) => {
   const [plate, setPlate] = useState('plate');
   const [time, setTime] = useState('time');
   const [started, setStarted] = useState(false);
+  const [isDriver, setDriver] = useState(false);
 
   const [value, setValue] = useState(0); // integer state
 
@@ -60,6 +61,7 @@ const OngoingTrip = (props) => {
         } else if (user.driver_route.started) {
           // console.log('THISONEHEREEE')
           setStarted(true);
+          setDriver(true);
           setAvatar(user.avatar);  // user avatar (user is driver)
           setName(user.full_name); // user name
           setPickUp(user.driver_route.start_address); // driver route start address
@@ -107,7 +109,7 @@ const OngoingTrip = (props) => {
 
             <div className="buttons">
               <button className="end-button">Cancel</button>
-              <Link to='/trip-complete'>
+              <Link to='/trip-complete' state={{ isDriver, user: props.user}}>
                 <button type='submit' onClick={endTrip} className="end-button" id="end-trip-button">End Trip</button>
               </Link>
             </div>
