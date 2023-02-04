@@ -29,7 +29,8 @@ function DriverView ({ userId }) {
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
-  const [showPrompt, setPrompt] = useState(false)
+  const [showPrompt, setPrompt] = useState(false);
+  const [favorites, setFavorites] = useState({});
   const key = ApiKey;
 
   //*****************************************************//
@@ -94,6 +95,7 @@ function DriverView ({ userId }) {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
       setUpcoming(result.data[0].driver_route)
+      setFavorites(result.data[0].favorites)
       if (!result.data[0].drivers_license) {
         setPrompt(true)
       }
@@ -196,7 +198,7 @@ function DriverView ({ userId }) {
           </div>
         </form>
       <div>
-      < DefaultRoute userId={userId} upcoming={upcoming} />
+      < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/>
       </div>
 
     </div>

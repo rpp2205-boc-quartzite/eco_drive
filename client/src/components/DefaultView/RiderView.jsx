@@ -30,7 +30,6 @@ function RiderView ({ userId }) {
   const [upcoming, setUpcoming] = useState({});
   const [favorites, setFavorites] = useState({});
   const key = ApiKey;
-  const navigate = useNavigate()
 
   const route = {
     _id: userId,
@@ -45,6 +44,8 @@ function RiderView ({ userId }) {
     default: isDefault,
     userFavorites: favorites
   }
+
+  console.log(upcoming)
 
   useEffect(() => {
     axios.get('/getriderview', { params: {userId} })
@@ -141,7 +142,7 @@ function RiderView ({ userId }) {
           </div>
         </form>
       <div>
-        < DefaultRoute userId={userId} upcoming={upcoming} />
+        < DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
       </div>
     </div>
   )
