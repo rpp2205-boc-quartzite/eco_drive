@@ -42,9 +42,9 @@ const OngoingTrip = (props) => {
           let driverId = user.rider_route.driver_id;
           axios.get('/getdriverview', { params: {userId: driverId}})
             .then(result => {
-              console.log('THISONE')
+              // console.log('THISONE')
               let driver = result.data[0];
-              console.log('DRIVEERRRR2:', driver);
+              // console.log('DRIVEERRRR2:', driver);
               setStarted(true);
               setAvatar(driver.avatar);  // driver avatar link
               setName(driver.full_name); // driver name
@@ -58,7 +58,7 @@ const OngoingTrip = (props) => {
 
         // driver route ongoing
         } else if (user.driver_route.started) {
-          console.log('THISONEHEREEE')
+          // console.log('THISONEHEREEE')
           setStarted(true);
           setAvatar(user.avatar);  // user avatar (user is driver)
           setName(user.full_name); // user name
@@ -73,7 +73,7 @@ const OngoingTrip = (props) => {
   getUser(props.user)
 
   const endTrip = () => {
-    console.log('USERRRR:', props.user);
+    // console.log('USERRRR:', props.user);
     axios.put(`/end-trip/${props.user}`)
       .then(result => {
         console.log('RESULT:', result);

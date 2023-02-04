@@ -12,15 +12,6 @@ const UpcomingTrip = (props) => {
   const [time, setTime] = useState('time');
   const [hasRoute, setRoute] = useState(false);
 
-  const [value, setValue] = useState(0); // integer state
-
-// forceUpdate hook
-const forceUpdate = () => {
-  setValue(value + 1); // update state to force render
-  // A function that increment 👆🏻 the previous state like here
-  // is better than directly setting `setValue(value + 1)`
-}
-
 
   // on component load, check user routes in DB
 
@@ -29,16 +20,16 @@ const forceUpdate = () => {
       .then(result => {
 
         let user = result.data[0];
-        console.log('USSSSEERRR:', user);
+        // console.log('USSSSEERRR:', user);
 
         // rider route upcoming
         if (!user.rider_route.started && user.rider_route.driver_id) {
           let driverId = user.rider_route.driver_id;
           axios.get('/getdriverview', { params: {userId: driverId}})
             .then(result => {
-              console.log('NOHERE')
+              // console.log('NOHERE')
               let driver = result.data[0];
-              console.log('DRIVEERRRR:', driver);
+              // console.log('DRIVEERRRR:', driver);
               setRoute(true);
               setAvatar(driver.avatar);  // driver avatar link
               setName(driver.full_name); // driver name
@@ -52,7 +43,7 @@ const forceUpdate = () => {
 
         // driver route upcoming
         } else if (!user.driver_route.started && user.driver_route.riders.length > 0) {
-          console.log('THISONE')
+          // console.log('THISONE')
           setRoute(true);
           setAvatar(user.avatar);  // user avatar (user is driver)
           setName(user.full_name); // user name
@@ -67,11 +58,11 @@ const forceUpdate = () => {
   getUser(props.user)
 
   const startTrip = () => {
-    console.log('USERRRR:', props.user);
+    // console.log('USERRRR:', props.user);
     axios.put(`/start-trip/${props.user}`)
       .then(result => {
         console.log('RESULT:', result);
-        forceUpdate();
+        setRoute(false);
       })
       .catch(err => {
         console.log('ERROR HERE:', err);

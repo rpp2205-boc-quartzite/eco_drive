@@ -18,7 +18,7 @@ module.exports = {
 
   // get one user by ID
   getUser: async (userId) => {
-    console.log('ID', userId)
+    // console.log('ID', userId)
     let id = {_id: userId};
     let user = await User.find(id).catch(err => console.log('ERR FINDING: ', err))
     return user;
@@ -29,19 +29,19 @@ module.exports = {
     console.log('Here we are ID', _id);
     let users = await User.find( { _id } ).catch(err => console.log('ERR FINDING: ', err))
     let user = users[0];
-    console.log('USER:', user);
+    // console.log('USER:', user);
     user.rider_route.started = true;
     await user.save()
-    console.log('USER2:', user);
+    // console.log('USER2:', user);
     return 'started trip';
   },
 
   // end user's trip (rider or driver)
   endTrip: async (_id) => {
-    console.log('Lets Do This: ', _id);
+    // console.log('Lets Do This: ', _id);
     let users = await User.find( { _id } ).catch(err => console.log('ERR FINDING: ', err))
     let user = users[0];
-    console.log('USER:', user);
+    // console.log('USER:', user);
 
     // end route as a rider
     if (user.rider_route.started) {
@@ -82,7 +82,7 @@ module.exports = {
 
   // add a favorite to a user's list
   addFavorite: async (user_id, favorite_user_id) => {
-    console.log('Lets Do This: ', user_id, favorite_user_id);
+    // console.log('Lets Do This: ', user_id, favorite_user_id);
     let users = await User.find( { _id: user_id } ).catch(err => console.log('ERR FINDING: ', err))
     let user = users[0];
     console.log('USER:', user);

@@ -52,21 +52,21 @@ app.get('/goodbye', (req, res) => {
 
 // test database user insertion
 app.post('/database', async (req, res) => {
-  console.log('server/index.js - app.post - /database - here');
+  // console.log('server/index.js - app.post - /database - here');
   await tripCompletion.addExampleUser()
   res.send('complete')
 })
 
 // start the trip
 app.put('/start-trip/:_id', async (req, res) => {
-  console.log('made it here', req.params._id);
+  // console.log('made it here', req.params._id);
   let result = await tripCompletion.startTrip(req.params._id)
   res.send(result);
 })
 
 // end the trip
 app.put('/end-trip/:_id', async (req, res) => {
-  console.log('made it here2', req.params._id);
+  // console.log('made it here2', req.params._id);
   let result = await tripCompletion.endTrip(req.params._id)
   res.send(result);
 })
