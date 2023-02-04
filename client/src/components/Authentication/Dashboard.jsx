@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
       <div className='first-view'>
         <div className='title-frame'>
           <div className='logo-frame'>
-            <svg width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="180" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_716_2155)">
             <path d="M113.797 3.69999L110.497 0.399994C109.997 -0.100006 109.297 -0.100006 108.797 0.399994L105.497 3.69999C104.997 4.19999 104.997 4.89999 105.497 5.39999L108.797 8.69999C109.297 9.19999 109.997 9.19999 110.497 8.69999L113.797 5.39999C114.297 4.89999 114.297 4.09999 113.797 3.69999Z" fill="#338F24"/>
             <path d="M123.297 13.1L119.997 9.8C119.497 9.3 118.797 9.3 118.297 9.8L110.797 17.3C110.297 17.8 109.597 17.8 109.097 17.3L101.297 9.5C100.797 9 100.097 9 99.5974 9.5L96.2974 12.8C95.7974 13.3 95.7974 14 96.2974 14.5L109.097 27.4C109.597 27.9 110.297 27.9 110.797 27.4L123.297 14.9C123.797 14.4 123.797 13.6 123.297 13.1Z" fill="#338F24"/>
@@ -42,8 +42,8 @@ class Dashboard extends React.Component {
           <h2 className='eco-subtitle'>Think globally, carpool locally</h2>
         </div>
         <div className='link-frame'>
-          <Link to='/register'>
-            <button className='signup-btn'><span className='signup-link'>Sign Up</span></button>
+          <Link to='/register' style={{ textDecoration: 'none' }}>
+            <button className='next-btn' type='submit'><span className='sign-up-text'>Sign Up</span></button>
           </Link>
           <Link to='/login'>
             <button className='login-btn'><span className='login-btn-link'>Login</span></button>

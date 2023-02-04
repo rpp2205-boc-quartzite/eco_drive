@@ -13,6 +13,7 @@ const { postReportHandler } = require('../database/controllers/report.js');
 //const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
+const { getRiderArray, updateCurrentDriverRoute, updateCurrentRiderRoute, updateAllRiderRoutes } = require ('../database/controllers/riderList.js');
 //const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
@@ -209,6 +210,80 @@ app.put('/driver-list', async (req, res) => {
     res.status(400).send(err)
   }
 })
+
+
+// ###################################################################################//
+// ----------------------------------- Rider List ----------------------------------- //
+// ###################################################################################//
+
+app.post('/rider-list', async (req, res) => {
+  const driver =  {
+    id: req.body.userId,
+    start_address: req.body.start_address,
+    start_lat: req.body.start_lat,
+    start_lng: req.body.start_lng,
+    end_address: req.body.end_address,
+    end_lat: req.body.end_lat,
+    end_lng: req.body.end_lng,
+    time: req.body.time,
+    total_seats: req.body.total_seats,
+    default: req.body.default
+  }
+
+  const riderArray = [];
+  const seats = {total: driver.total_seats};
+
+  try {
+    const unassignedRiders = await getRiderArray();
+    // console.log("Unassigned Riders", unassignedRiders)
+    for (let rider of unassignedRiders) {
+      const startDistance = await calculateDistance(driver.start_lat, driver.start_lng, rider.rider_route.start_lat, rider.rider_route.start_lng);
+      const endDistance = await calculateDistance(driver.start_lat, driver.start_lng, rider.rider_route.start_lat, rider.rider_route.start_lng);
+      if (startDistance !== undefined && endDistance !== undefined) {
+        riderArray.push({rider, startDistance, endDistance, seats})
+      }
+      riderArray.sort((a, b) => {
+        return a.startDistance.value - b.startDistance.value
+      })
+    }
+    res.status(200).send(riderArray)
+  }
+  catch (err) {
+    console.log('The Following Error Occured When Attempting to Capture Riders: ', err)
+    res.status(404).send(err)
+  }
+})
+
+
+app.post('/add-current-routes', async (req, res) => {
+  const driver =  {
+    userId: req.body.driver.userId,
+    start_address: req.body.driver.start_address,
+    start_lat: req.body.driver.start_lat,
+    start_lng: req.body.driver.start_lng,
+    end_address: req.body.driver.end_address,
+    end_lat: req.body.driver.end_lat,
+    end_lng: req.body.driver.end_lng,
+    time: req.body.driver.time,
+    total_seats: req.body.driver.total_seats,
+    default: req.body.driver.default,
+    riders: req.body.riderIDs
+  }
+
+  const riders = req.body.riderIDs;
+
+  try {
+    const updatedDriver = await updateCurrentDriverRoute(driver, riders)
+    const updateRiders = await updateAllRiderRoutes(riders, driver)
+    res.status(200).send({driver: driver, riders: riders})
+
+  }
+  catch(err) {
+    console.log('Updating Driver/Rider Routes: ', err);
+    res.status(400).send(err)
+  }
+})
+
 
 // ---- Catch all for routing ---- //
 
