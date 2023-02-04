@@ -3,6 +3,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const dotenv = require('dotenv');
 const auth = require('./auth.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
 const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
