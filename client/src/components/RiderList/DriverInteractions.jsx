@@ -57,9 +57,17 @@ const DriverInteractions = function(props) {
   const [tripStatus, setTripStatus] = React.useState('START');
   const [seats, setSeating] = React.useState(1)
   const [driverData, setDriver] = React.useState({});
+  const [time, setSeconds] = React.useState(0);
 
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(time + 1)
+      console.log('Test #', time)
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+  
     const findRiders = () => {
       const driver = {
         userId: route.id,
@@ -85,7 +93,6 @@ const DriverInteractions = function(props) {
         })
         .catch((err) => console.log('Find drivers error: ', err))
     }
-
     findRiders();
   }, [route])
 
