@@ -107,10 +107,10 @@ export default function Register(props) {
               </div>
             </div>
             </form>
-            {/* <div className='tos-wrapper'>
-              <input type="checkbox" id="checkbox" required/>
-                <label htmlFor="checkbox">I agree to Terms of Service </label>
-            </div> */}
+            <div className='tos-wrapper'>
+              <input className='tos-checkbox' type="checkbox" id="checkbox" required/>
+                <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
+            </div>
             <div className='signup-btn-wrapper'>
               <button className='next-btn' type='submit' onClick={handleNext}><span className='next-text'>Next</span></button> 
             <Link to='/'>

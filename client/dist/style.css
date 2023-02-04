@@ -509,12 +509,16 @@ h1 {
 }
 
 .sign-form {
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 12px;
   width: 375px;
-  height: 592px;
-  left: 0px;
-  top: 24px;
-  overflow-y: scroll;
+  height: 496px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
 
 .sign-form-2 {
@@ -536,7 +540,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   padding: 0px 16px;
-  gap: 12px;
+  gap: 6px;
   width: 375px;
   height: 496px;
   flex: none;
@@ -760,17 +764,45 @@ h1 {
   flex-grow: 0;
 }
 
+/* .tos-checkbox {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background: #FCFCFC;
+  border: 2px solid #97AAB0;
+  border-radius: 5px;
+} */
+
+.tos-text {
+  width: 302px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #262929;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+
 .signup-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 24px;
+  gap: 28px;
   position: absolute;
   width: 375px;
   height: 556px;
   left: 0px;
-  top: 25px;
+  top: 0px;
 }
 
 .signup-title {
