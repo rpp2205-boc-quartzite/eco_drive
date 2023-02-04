@@ -764,17 +764,18 @@ h1 {
   flex-grow: 0;
 }
 
-/* .tos-checkbox {
+.tos-checkbox {
   box-sizing: border-box;
   position: absolute;
-  left: 0%;
+  /* left: 0%;
   right: 0%;
   top: 0%;
-  bottom: 0%;
+  bottom: 0%; */
   background: #FCFCFC;
   border: 2px solid #97AAB0;
   border-radius: 5px;
-} */
+  padding-left: 10px;
+}
 
 .tos-text {
   width: 302px;
@@ -790,6 +791,8 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 1;
+  padding-left: 25px;
+  padding-bottom: 20px;
 }
 
 .signup-wrapper {

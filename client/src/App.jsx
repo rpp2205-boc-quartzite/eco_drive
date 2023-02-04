@@ -46,7 +46,7 @@ function App() {
     axios.post('/login', {email, pass})
     .then((result) => {
       setUserId(result.data.user);
-      document.cookie = result.token;
+      document.cookie = result.data.token;
       if (result.is_driver) {
         navigate('/driverview');
       } else {
