@@ -45,7 +45,7 @@ export default function Register(props) {
     }
 
     if (drivers_license === '') {
-      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false})
+      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false, is_rider: true})
         .then((result) => {
           props.authCheck(email, password);
         })
@@ -53,7 +53,7 @@ export default function Register(props) {
           alert('Email already in use.');
         })
     } else {
-      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: true})
+      axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: true, is_rider: false})
         .then((result) => {
           props.authCheck(email, password);
         })
