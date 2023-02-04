@@ -4,7 +4,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const auth = require('./auth.js');
-const { register, login, validate, sendMail } = require('../database/controllers/authentication.js');
+const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
 const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
@@ -71,6 +71,8 @@ app.post('/login', login);
 app.get('/validate', validate);
 
 app.post('/sendMail', sendMail);
+
+app.put('/change-password', changePassword);
 
 // ---- Default Driver view routes  ---- //
 app.get('/getdriverview', function(req, res) {

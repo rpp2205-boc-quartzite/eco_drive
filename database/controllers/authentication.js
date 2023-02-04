@@ -124,6 +124,26 @@ module.exports = {
         res.json({ status: "Email sent" });
       }
     });
+  },
+
+  changePassword: (req, res) => {
+    bcrypt
+    .hash(req.body.password, 10)
+    .then((hashedPassword) => {
+      User.updateOne({email: req.body.email}, {password: hashedPassword})
+      .then((result) => {
+        res.status(200).send('Password Changed!');
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: 'Password was not hashed successfully',
+        error: error,
+      });
+    });
   }
 };
 

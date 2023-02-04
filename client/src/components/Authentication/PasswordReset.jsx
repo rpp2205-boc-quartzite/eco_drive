@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function PasswordReset(props) {
@@ -10,6 +10,7 @@ export default function PasswordReset(props) {
   const [request, setRequest] = useState(false);
   const [verifyToken, setVerifyToken] = useState('');
   const [inputToken, setInputToken] = useState('');
+  const navigate = useNavigate();
 
   const generateOTP = () => {
     var string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -23,6 +24,7 @@ export default function PasswordReset(props) {
 }
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (email === '') {
       return alert('Please enter valid email.');
     }
@@ -30,6 +32,7 @@ export default function PasswordReset(props) {
 
     axios.post('/sendMail', {email: email, code: code})
       .then((result) => {
+        setVerifyToken(code);
         setRequest(true);
       })
       .catch((err) => {
@@ -37,6 +40,27 @@ export default function PasswordReset(props) {
         console.log(err);
       })
   };
+
+  const submitReset = (event) => {
+    event.preventDefault();
+
+    if (password !== confirmPass) {
+      return alert('Password does not match!');
+    }
+    if (verifyToken !== inputToken) {
+      return alert('Verification code does not match!');
+    }
+
+    axios.put('/change-password', {email: email, password: password})
+      .then((result) => {
+        navigate('/');
+        navigate('/login');
+      })
+      .catch((err) => {
+        alert('Something went wrong!');
+        console.log(err);
+      })
+  }
 
   return (
     <div className='auth-form-container'>
@@ -75,7 +99,7 @@ export default function PasswordReset(props) {
                     <label className='verify-code-title'>Verification Code</label>
                     <div className='valid-check-pass'>*</div>
                   </div>
-                  <input className='input-field' value={inputToken} onChange={(event) => setEmail(event.target.value)}type='text' id='inputToken' name='inputToken' />  
+                  <input className='input-field' value={inputToken} onChange={(event) => setInputToken(event.target.value)}type='text' id='inputToken' name='inputToken' />  
                 </div>
                 <div className='label-container-reset'>
                   <div className='label-title-container-pass'>
@@ -95,7 +119,7 @@ export default function PasswordReset(props) {
             </form>
           </div>
           <div className='signup-btn-wrapper'>
-            <button className='reset-pass-btn'><span className='reset-pass-text'>Reset Password</span></button>
+            <button className='reset-pass-btn' onClick={submitReset}><span className='reset-pass-text'>Reset Password</span></button>
             <button className='back-btn' onClick={(event) => setRequest(false)}><span className='back-text'>Go Back</span></button> 
           </div>
         </div>
