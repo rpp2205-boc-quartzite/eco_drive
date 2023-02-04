@@ -55,32 +55,50 @@ const DriverInteractions = function(props) {
   const [distance, setDistance] = React.useState('');
   const [duration, setDuration] = React.useState('');
   const [tripStatus, setTripStatus] = React.useState('START');
-  const [ridersArray, setRidersArray] = React.useState([
-    {
-      name: "Suzy Thompson",
-      pic: "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
-      from: .25,
-      to: .10,
-      time: "9:00am",
-    },
-    {
-      name: "Mark Manchin",
-      pic: "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
-      from: .62,
-      to: .05,
-      time: "9:00am",
-    },
-    {
-      name: "Trouble Maker",
-      pic: "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
-      from: .02,
-      to: .02,
-      time: "9:00am",
-    }
-  ]);
+  const [seats, setSeating] = React.useState(1)
+  const [driverData, setDriver] = React.useState({});
+  const [time, setSeconds] = React.useState(0);
 
 
   useEffect(() => {
+    const findRiders = () => {
+      const driver = {
+        userId: route.id,
+        start_address: route.start_address,
+        start_lat: route.start_lat,
+        start_lng: route.start_lng,
+        end_address: route.end_address,
+        end_lat: route.end_lat,
+        end_lng: route.end_lng,
+        time: route.time,
+        total_seats: route.total_seats,
+        default: route.default,
+      }
+
+      setDriver(driver);
+
+      setUserRouteInfo(driver);
+      return axios.post('/rider-list', driver)
+        .then((res) => {
+          // console.log(res.data)
+          setSeating(res.data[0].seats)
+          return setRiders(res.data);
+        })
+        .catch((err) => console.log('Find drivers error: ', err))
+    }
+    findRiders();
+  }, [route])
+
+
+  useEffect(() => {
+<<<<<<< HEAD
+    const interval = setInterval(() => {
+      setSeconds(time + 1)
+      console.log('Test #', time)
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+=======
     const findRiders = () => {
       const driver = {
         userId: route.id,
@@ -106,6 +124,7 @@ const DriverInteractions = function(props) {
 
     findRiders();
   }, [route])
+>>>>>>> main
 
   useEffect(() => {
     if (!loaded)
@@ -114,8 +133,6 @@ const DriverInteractions = function(props) {
         setDuration(directions.routes[0].legs[0].duration.text);
         setLoaded(true)
   }, [loaded, directions]);
-
-
 
 
   const mapRef = React.useRef();
@@ -163,23 +180,23 @@ const DriverInteractions = function(props) {
     }
   }
 
-  const tripCheck = function() {
-    if (tripStatus === 'START') {
-      return (
-        <button className="start-trip"type="submit" onClick={tripChange}>Start Trip</button>
-      )
-    } else {
-      return (
-        <Link to="/trip-complete" >
-        <button className="end-trip" type="submit" >End Trip</button>
-      </Link>
-      )
-    }
-  };
+  // const tripCheck = function() {
+  //   if (tripStatus === 'START') {
+  //     return (
+  //       <button className="start-trip"type="submit" onClick={tripChange}>Start Trip</button>
+  //     )
+  //   } else {
+  //     return (
+  //       <Link to="/trip-complete" >
+  //       <button className="end-trip" type="submit" >End Trip</button>
+  //     </Link>
+  //     )
+  //   }
+  // };
 
-  const tripChange = function() {
-    setTripStatus('END');
-  };
+  // const tripChange = function() {
+  //   setTripStatus('END');
+  // };
 
 
   return (
@@ -203,16 +220,17 @@ const DriverInteractions = function(props) {
       <br></br>
       <div className="MapData">
         <div className="route">
-          <h1>Total Distance: {distance}, Expected Duration: {duration}</h1>
+          <h1>Total Distance: {distance}</h1>
+          <h1>Expected Duration: {duration}</h1>
         </div>
       </div>
-        <br></br>
+        {/* <br></br>
         <div className="start-trip-place">
           {tripCheck()}
-        </div>
+        </div> */}
         <br></br>
         <div className="rider-list" data="DriverInteractions">
-          <RiderList riders={riders}/>
+          <RiderList driver={driverData} riders={riders} seats={seats} />
         </div>
     </div>
   )

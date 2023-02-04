@@ -3,12 +3,12 @@ import OverallRating from './OverallRating.jsx';
 
 export default function ReviewTile(props) {
 
-  console.log('props', props);
+  // console.log('props', props);
 
-  const [values, setValues] = useState({
-   bodyTextLength: 55,
-   expanded: false
-  });
+  // const [values, setValues] = useState({
+  //  bodyTextLength: 300,
+  //  expanded: false
+  // });
 
   const changeDateFormat = () => {
     let timestamp = props.review._id.toString().substring(0, 8);
@@ -20,23 +20,23 @@ export default function ReviewTile(props) {
     return myDate.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: '2-digit' });
   }
 
-  const show = () => {
-    if (values.bodyTextLength < props.review.review_text.length) {
-      setValues((values) => ({
-        ...values,
-        bodyTextLength: 80,
-        expanded: true
-      }))
-    } else if (values.expanded === true) {
-      setValues((values) => ({
-        ...values,
-        bodyTextLength: 55,
-        expanded: false
-      }))
-    }
-  }
+  // const show = () => {
+  //   if (values.bodyTextLength < props.review.review_text.length) {
+  //     setValues((values) => ({
+  //       ...values,
+  //       bodyTextLength: 3000,
+  //       expanded: true
+  //     }))
+  //   } else if (values.expanded === true) {
+  //     setValues((values) => ({
+  //       ...values,
+  //       bodyTextLength: 300,
+  //       expanded: false
+  //     }))
+  //   }
+  // }
 
-  console.log(props);
+  // console.log(props);
 
   return (
     // <div className='profileReviewBox'>
@@ -47,9 +47,9 @@ export default function ReviewTile(props) {
       <div className='profileReviewerName'>Steve Apple</div>
       <div className='dateOfReview'>{changeDateFormat()}</div>
       <div className= 'profileReviewText'>
-        {props.review.review_text.slice(0, values.bodyTextLength)}
+        {props.review.review_text}
       </div>
-      <div>
+      {/* <div>
         {values.bodyTextLength >= props.review.review_text.length ? (
           <div></div>
         ) : (
@@ -64,7 +64,7 @@ export default function ReviewTile(props) {
             </a>
           </p>
         )}
-      </div>
+      </div> */}
     </div>
   )
 }

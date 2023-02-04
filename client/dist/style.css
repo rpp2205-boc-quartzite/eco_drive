@@ -1555,7 +1555,7 @@ textarea {
   border: 2px solid #ffa4a4;
 }
 
-button.form-field-submit {
+.form-field-submit {
   margin: 10px 0 10px 0;
   padding: 15px;
   font-size: 16px;
@@ -1566,7 +1566,7 @@ button.form-field-submit {
   cursor: pointer;
 }
 
-button.form-field-report {
+.form-field-report {
   margin: 10px 0 10px 0;
   padding: 15px;
   font-size: 16px;
@@ -1853,11 +1853,22 @@ button.form-field-report:disabled {
   cursor: pointer;
 }
 
-input.review-summary {
+/* input.review-summary {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
+} */
+
+
+input.review-summary {
+  margin: 10px 0px 10px 0px;
+  padding: 15px;
+  font-size: 16px;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+  height: 5px;
+  width: 310px;
 }
 
 /* Ratings Breakdown */
@@ -1900,22 +1911,99 @@ input.review-summary {
 }
 
 .progress {
-  margin:5px 5px;
+  margin: 5px 5px;
   float: left;
-  padding:0;
-  width:75%;
-  height:10px;
-  overflow-y:hidden;
-  background:#e5e5e5;
-  border-radius:6px;
+  padding: 0;
+  width: 474%;
+  height: 10px;
+  overflow-y: hidden;
+  background: #e5e5e5;
+  border-radius: 6px;
 }
 
 .bar {
 	position:relative;
   float:left;
-  min-width:1%;
+  min-width:0%;
   height:100%;
   background:rgb(25, 247, 66);
+}
+
+.disabledCursor {
+  cursor: default;
+}
+
+.all-reviews-total {
+  font-size: medium;
+}
+
+.reviewHeaderLogout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  /* width: 88px; */
+  height: 40px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+}
+
+.reviewHeaderHome {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  padding-left: 70%;
+  gap: 24px;
+  /* width: 88px; */
+  height: 40px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.reviewHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  gap: 24px;
+  width: 375px;
+  height: 72px;
+  /* background: #FCFCFC; */
+  flex: none;
+  order: -1;
+  flex-grow: 0;
+}
+
+.reviewFavorite {
+  display: flex;
+  /* flex-direction: row; */
+  /* float: right; */
+  align-items: center;
+  padding: 3px;
+  position: absolute;
+  /* gap: 32px; */
+  /* width: 14%; */
+  height: 16%;
+  right: 32px;
+  /* justify-content: end; */
+  flex: none;
+  /* order: 3; */
+  flex-grow: 0;
+}
+
+#review-modal {
+  margin-left: 22%;
+}
+
+#report-modal {
+  margin-left: 6%;
+  text-align: center;
+  font-size: 21px;
 }
 
 /* -------- BRANDON CSS END -------- */
