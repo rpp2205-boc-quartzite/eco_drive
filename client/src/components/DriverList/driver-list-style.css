@@ -1,3 +1,19 @@
+.title-bar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 16px 40px 16px 16px;
+}
+
+.title-bar p {
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray6);
+}
+
 .driver-list {
   max-width: 400px;
   width: 100%;
@@ -11,6 +27,13 @@
 
 .driver-list p {
   margin: 0;
+}
+
+.subheader-driver {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--gray4);
+  width: 100%;
 }
 
 .card p {
@@ -57,6 +80,36 @@
   align-items: center;
   font-size: 18px;
   font-weight: 600;
+}
+
+/* ------------- Top bar --------------------------- */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.top-bar-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-bar-left p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--green3);
+}
+
+.top-bar-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
 }
 
 /* ------------- Buttons --------------------------- */
@@ -236,4 +289,14 @@
   gap: 16px;
   justify-content: flex-end;
   align-items: center;
+}
+
+.driver-list-back-icon {
+  font-size: 24px;
+  color: var(--gray6);
+}
+
+.top-bar-icons {
+  font-size: 24px;
+  color: var(--gray6);
 }
