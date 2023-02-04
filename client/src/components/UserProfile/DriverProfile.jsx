@@ -1,19 +1,21 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
-import { TbRefresh } from "react-icons/tb";
+import {HiOutlineRefresh} from 'react-icons/hi'
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';
+import { useLocation, useParams, Link } from "react-router-dom";
+import {randomFacts} from './RandomFacts.jsx';
 
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
+    console.log( 'DRIVER PROFILE PROPS', this.props)
     this.state = {
-      userId: '63d9a742ec1bec755c7b4c17', //hardcoded for now
+      userId: this.props.location.state.id,
+      //userId: '63d36ee5cd478f26557c4a38',
       full_name: '',
       email: '',
       start_address: '',
@@ -38,14 +40,15 @@ class DriverProfile extends React.Component {
 
   componentDidMount () {
     var id = this.state.userId;
-    // console.log('driver props', props;
-    axios.get('/getDriverView', { params: {id} })
+    //console.log('driver props', props)
+    console.log('IDDDD', id)
+    axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
-      console.log('got da driver', result)
+      //console.log('got da driver', result)
       this.setState({
         full_name: result.data[0].full_name,
         email: result.data[0].email,
-        start_address: result.data[0].driver_route.start_address,
+        // start_address: result.data[0].driver_route.start_address,
         end_address: result.data[0].driver_route.end_address,
         time: result.data[0].driver_route.time,
         avatar: result.data[0].avatar,
@@ -98,11 +101,17 @@ class DriverProfile extends React.Component {
   }
 
   render () {
+    //console.log('CHECKING DRIVER PROPS', this.props)
     return (
       <div>
       {/* TOP BUTTONS */}
+        {/* <Link to="/riderprofile" > */}
+        <Link
+      to="/riderprofile"
+      state={{id: this.state.userId}}>
         <span className='profileToggle'>Driver</span>
-        <span className='profileToggleButton'><TbRefresh/></span>
+        <span className='profileToggleButton'><HiOutlineRefresh/></span>
+        </Link>
         <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
         <Link to="/driverview"><span className='profileHomeButton'><AiFillHome/></span></Link>
 
@@ -243,7 +252,7 @@ class DriverProfile extends React.Component {
           <span className='profileTitle'>Fact of the day</span>
           <div className='profileCurrentRoute'>
             <div className='profileCurrentRouteTitle'>Did you know? &#128173;</div>
-            <div className='profileCurrentRouteInfo'>Los Angeles, Long Beach & Riverside are the number 1 cities in CA with highest levels of transportation related pollution</div>
+            <div className='profileCurrentRouteInfo'>{randomFacts[Math.floor(Math.random() * 16)]}</div>
           </div>
         </div>
 
@@ -252,4 +261,7 @@ class DriverProfile extends React.Component {
   }
 }
 
-export default DriverProfile;
+//export default DriverProfile;
+export default () => (
+  <DriverProfile params={useParams()} location={useLocation()} />
+);
