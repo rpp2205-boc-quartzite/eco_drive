@@ -12,22 +12,44 @@ const UpcomingTrip = (props) => {
   const [time, setTime] = useState('time');
   const [hasRoute, setRoute] = useState(false);
 
-  console.log('Route: ', props);
 
+  // on component load, check user routes in DB
 
   const getUser = (userId) => {
     axios.get('/getdriverview',  { params: {userId} })
       .then(result => {
-        // console.log('RESULTT: ', result)
+
         let user = result.data[0];
-        // if the driver route is NOT started && has passengers, show it in upcoming
-        if (!user.driver_route.started && user.driver_route.riders.length > 0) {
+        console.log('USSSSEERRR:', user);
+
+        // rider route upcoming
+        if (!user.rider_route.started && user.rider_route.driver_id) {
+          let driverId = user.rider_route.driver_id;
+          axios.get('/getdriverview', { params: {userId: driverId}})
+            .then(result => {
+              console.log('NOHERE')
+              let driver = result.data[0];
+              console.log('DRIVEERRRR:', driver);
+              setRoute(true);
+              setAvatar(driver.avatar);  // driver avatar link
+              setName(driver.full_name); // driver name
+              setPickUp(user.rider_route.start_address); // trip start address
+              setPlate(driver.license_plate); // driver license plate
+              setTime(user.rider_route.time) // trip start time
+            })
+            .catch(err => {
+              console.log('Failed');
+            })
+
+        // driver route upcoming
+        } else if (!user.driver_route.started && user.driver_route.riders.length > 0) {
+          console.log('THISONE')
           setRoute(true);
-          setAvatar('avatar');  // user avatar
-          setName(user.full_name);
-          setPickUp('pickup') // user.rider_route address (or driver)
-          setPlate(user.license_plate);
-          setTime('time') // user.rider_route time (or driver)
+          setAvatar(user.avatar);  // user avatar (user is driver)
+          setName(user.full_name); // user name
+          setPickUp(user.driver_route.start_address); // driver route start address
+          setPlate(user.license_plate); // user's license plate
+          setTime(user.driver_route.time) // trip start time
         }
       })
       .catch(err => console.log('ERR: ', err))
@@ -55,7 +77,9 @@ const UpcomingTrip = (props) => {
         <div className="card">
 
           <div className="profile">
-            <span>{avatar}</span>
+            <div >
+              <img src={avatar} alt="avatar" className='profilePhoto'/>
+            </div>
             <span>{name}</span>
             <span>Heart</span>
             <span>Info</span>
