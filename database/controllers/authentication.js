@@ -110,7 +110,7 @@ module.exports = {
     });
     
     var mailOptions = {
-      from: 'ecodrivecare@gmail.com',
+      from: process.env.EMAIL,
       to: req.body.email,
       subject: 'Verification Code',
       text: `Your verification code is: ${req.body.code}`
