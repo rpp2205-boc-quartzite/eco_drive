@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.js').User;
+const nodemailer = require('nodemailer');
+require("dotenv").config();
 
 module.exports = {
   register: (req, res) => {
@@ -95,6 +97,33 @@ module.exports = {
         return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
       }
       res.status(200).send(decoded);
+    });
+  },
+
+  sendMail: (req, res) => {
+    console.log(req)
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.WORD
+      }
+    });
+    
+    var mailOptions = {
+      from: 'ecodrivecare@gmail.com',
+      to: req.body.email,
+      subject: 'Sending Email using Node.js',
+      text: 'That was easy!'
+    };
+    
+    transporter.sendMail(mailOptions, function(error, data){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent successfully");
+        res.json({ status: "Email sent" });
+      }
     });
   }
 };

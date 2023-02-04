@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function PasswordReset(props) {
   const [email, setEmail] = useState('');
@@ -10,12 +11,31 @@ export default function PasswordReset(props) {
   const [verifyToken, setVerifyToken] = useState('');
   const [inputToken, setInputToken] = useState('');
 
+  const generateOTP = () => {
+    var string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let OTP = '';
+
+    var len = string.length;
+    for (let i = 0; i < 6; i++ ) {
+        OTP += string[Math.floor(Math.random() * len)];
+    }
+    return OTP;
+}
+
   const handleSubmit = (event) => {
     if (email === '') {
       return alert('Please enter valid email.');
     }
-    setRequest(true);
+    var code = generateOTP();
 
+    axios.post('/sendMail', {email: email, code: code})
+      .then((result) => {
+        setRequest(true);
+      })
+      .catch((err) => {
+        alert('Something went wrong!');
+        console.log(err);
+      })
   };
 
   return (
