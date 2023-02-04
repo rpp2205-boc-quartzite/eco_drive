@@ -475,6 +475,17 @@ h1 {
   border: none;
 }
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 375px;
+  height: 496px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
 .login-btn-link {
   width: 47px;
   height: 24px;
@@ -498,12 +509,16 @@ h1 {
 }
 
 .sign-form {
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 12px;
   width: 375px;
-  height: 592px;
-  left: 0px;
-  top: 24px;
-  overflow-y: scroll;
+  height: 496px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
 
 .sign-form-2 {
@@ -525,7 +540,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   padding: 0px 16px;
-  gap: 12px;
+  gap: 6px;
   width: 375px;
   height: 496px;
   flex: none;
@@ -749,17 +764,45 @@ h1 {
   flex-grow: 0;
 }
 
+/* .tos-checkbox {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background: #FCFCFC;
+  border: 2px solid #97AAB0;
+  border-radius: 5px;
+} */
+
+.tos-text {
+  width: 302px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #262929;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+
 .signup-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 24px;
+  gap: 28px;
   position: absolute;
   width: 375px;
   height: 556px;
   left: 0px;
-  top: 25px;
+  top: 0px;
 }
 
 .signup-title {
@@ -1062,7 +1105,7 @@ h1 {
   width: 375px;
   height: 256px;
   left: 0px;
-  top: 192px;
+  top: 162px;
 }
 
 .login-title {
@@ -1078,6 +1121,295 @@ h1 {
   order: 0;
   flex-grow: 0;
 }
+
+.forgot-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 0px;
+  width: 143px;
+  height: 24px;
+  border-radius: 5px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+  background: none;
+  border: none;
+}
+
+.forgot-text {
+  width: 143px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  color: #353633;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.inner-fields-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 343px;
+  height: 208px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.forgot-pass-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 24px;
+  position: absolute;
+  width: 375px;
+  height: 200px;
+  left: 0px;
+  top: 168px;
+}
+
+.forgot-pass-title {
+  width: 208px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.forgot-pass-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 343px;
+  height: 80px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.label-container-pass {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 343px;
+  height: 80px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.label-title-container-pass {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 4px;
+  width: 343px;
+  height: 30px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.label-title-8 {
+  width: 130px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.valid-check-pass {
+  width: 9px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #D63434;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.pass-note {
+  width: 343px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #262929;
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.pass-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 40px 16px;
+  gap: 16px;
+  position: absolute;
+  height: 161px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.verification-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  width: 343px;
+  height: 41px;
+  background: #338F24;
+  border-radius: 50px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.verification-text {
+  width: 162px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.reset-pass-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 12px;
+  position: absolute;
+  width: 375px;
+  height: 312px;
+  left: 0px;
+  top: 142px;
+}
+
+.reset-pass-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 343px;
+  height: 264px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.label-container-reset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 343px;
+  height: 80px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.verify-code-title {
+  width: 140px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.reset-pass-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  width: 343px;
+  height: 41px;
+  background: #338F24;
+  border-radius: 50px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.reset-pass-text {
+  width: 111px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */

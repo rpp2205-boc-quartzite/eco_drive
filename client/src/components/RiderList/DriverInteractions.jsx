@@ -61,6 +61,13 @@ const DriverInteractions = function(props) {
 
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(time + 1)
+      console.log('Test #', time)
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+  
     const findRiders = () => {
       const driver = {
         userId: route.id,
