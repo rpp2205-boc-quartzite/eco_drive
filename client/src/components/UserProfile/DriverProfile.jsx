@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
-import { TbRefresh } from "react-icons/tb";
+import {HiOutlineRefresh} from 'react-icons/hi'
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';
@@ -14,8 +14,8 @@ class DriverProfile extends React.Component {
     super(props);
     console.log( 'DRIVER PROFILE PROPS', this.props)
     this.state = {
-      //userId: this.props.location.state.id,
-      userId: '63d36e8fcd478f26557c4a37',
+      userId: this.props.location.state.id,
+      //userId: '63d36ee5cd478f26557c4a38',
       full_name: '',
       email: '',
       start_address: '',
@@ -41,14 +41,14 @@ class DriverProfile extends React.Component {
   componentDidMount () {
     var id = this.state.userId;
     //console.log('driver props', props)
-    //console.log('IDDDD', id)
+    console.log('IDDDD', id)
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
       //console.log('got da driver', result)
       this.setState({
         full_name: result.data[0].full_name,
         email: result.data[0].email,
-        start_address: result.data[0].driver_route.start_address,
+        // start_address: result.data[0].driver_route.start_address,
         end_address: result.data[0].driver_route.end_address,
         time: result.data[0].driver_route.time,
         avatar: result.data[0].avatar,
@@ -101,7 +101,7 @@ class DriverProfile extends React.Component {
   }
 
   render () {
-    console.log('CHECKING DRIVER PROPS', this.props)
+    //console.log('CHECKING DRIVER PROPS', this.props)
     return (
       <div>
       {/* TOP BUTTONS */}

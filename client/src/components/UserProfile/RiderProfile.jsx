@@ -15,7 +15,7 @@ class RiderProfile extends React.Component {
     console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
       userId: this.props.location.state.id,
-      //userId: '63d36f099d38b4ed1dba8f3a',
+      //userId: '63d36ee5cd478f26557c4a38',
       full_name: '',
       email: '',
       start_address: '',
@@ -98,7 +98,7 @@ class RiderProfile extends React.Component {
   }
 
   render () {
-    console.log('CHECKING RIDER PROPS', this.props.location.state.id)
+    //console.log('CHECKING RIDER PROPS', this.props.location.state.id)
     return (
       <div>
       {/* TOP BUTTONS */}
