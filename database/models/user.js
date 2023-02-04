@@ -44,10 +44,16 @@ const userSchema = mongoose.Schema({
     time:           String,
     total_seats:    Number,
     default:        Boolean,
-    riders: {
-      type: [mongoose.SchemaTypes.ObjectId],
-      ref: 'User'
-    }
+    riders: [
+      {
+        rider_id: {
+          type: mongoose.SchemaTypes.ObjectId,
+          ref: 'User'
+        },
+        starting_distance: String,
+        end_distance: String,
+      }
+    ]
   },
 
   rider_route: {
