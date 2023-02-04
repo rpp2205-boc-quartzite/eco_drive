@@ -89,6 +89,34 @@ const DriverInteractions = function(props) {
     findRiders();
   }, [route])
 
+
+  useEffect(() => {
+    const findRiders = () => {
+      const driver = {
+        userId: route.id,
+        start_address: route.start_address,
+        start_lat: route.start_lat,
+        start_lng: route.start_lng,
+        end_address: route.end_address,
+        end_lat: route.end_lat,
+        end_lng: route.end_lng,
+        time: route.time,
+        total_seats: route.total_seats,
+        default: route.default,
+      }
+
+      setUserRouteInfo(driver);
+      return axios.post('/rider-list', driver)
+        .then((res) => {
+          // console.log(res.data)
+          return setRiders(res.data);
+        })
+        .catch((err) => console.log('Find drivers error: ', err))
+    }
+
+    findRiders();
+  }, [route])
+
   useEffect(() => {
     if (!loaded)
         setDirectionsResponse(directions);
