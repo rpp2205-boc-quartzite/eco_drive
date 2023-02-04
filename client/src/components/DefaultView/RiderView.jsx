@@ -23,6 +23,7 @@ function RiderView ({ userId }) {
   })
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [userInfo, setUserInfo] = useState({})
   const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
@@ -47,6 +48,7 @@ function RiderView ({ userId }) {
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
+      setUserInfo(result.data[0])
       setUpcoming(result.data[0].rider_route)
     })
     .catch(err => console.log(err))
@@ -132,7 +134,7 @@ function RiderView ({ userId }) {
               </div>
             </div>
 
-            <Link to="/driver-list" state={{route: route}}>
+            <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
               <button className="primary-btn-find">Find Drivers</button>
             </Link>
           </div>
