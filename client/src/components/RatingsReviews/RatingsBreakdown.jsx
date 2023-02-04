@@ -5,12 +5,19 @@ class RatingsBreakdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fiveStarReviews: '',
-      fourStarReviews: '',
-      threeStarReviews: '',
-      twoStarReviews: '',
-      oneStarReviews: '',
-      isToggled: [0,0,0,0,0],
+      reviews: {
+        '5': [],
+        '4': [],
+        '3': [],
+        '2': [],
+        '1': []
+      },
+      // fiveStarReviews: '',
+      // fourStarReviews: '',
+      // threeStarReviews: '',
+      // twoStarReviews: '',
+      // oneStarReviews: '',
+      isToggled: this.props.isToggled,
       filterNotifications: [],
       filteredReviews: [],
     };
@@ -32,13 +39,15 @@ class RatingsBreakdown extends React.Component {
       '4': [],
       '3': [],
       '2': [],
-      '1': []
+      '1': [],
+      '0': []
     };
 
     console.log('ratings:', ratings);
     console.log('allRatings: ', this.props.allRatings);
 
     this.props.allRatings.forEach(rating => {
+      console.log('rating', rating);
       ratings[rating].push(rating);
     })
 
@@ -49,12 +58,23 @@ class RatingsBreakdown extends React.Component {
       ratings[key] = percentageOfTotalSpecificRatings;
     }
 
+    // this.setState({
+    //   fiveStarReviews: ratings[5],
+    //   fourStarReviews: ratings[4],
+    //   threeStarReviews: ratings[3],
+    //   twoStarReviews: ratings[2],
+    //   oneStarReviews: ratings[1]
+    // }, () => {console.log('state:', this.state)})
+
     this.setState({
-      fiveStarReviews: ratings[5],
-      fourStarReviews: ratings[4],
-      threeStarReviews: ratings[3],
-      twoStarReviews: ratings[2],
-      oneStarReviews: ratings[1]
+      reviews: {
+        ...this.state.reviews,
+        '5': ratings[5],
+        '4': ratings[4],
+        '3': ratings[3],
+        '2': ratings[2],
+        '1': ratings[1]
+      }
     }, () => {console.log('state:', this.state)})
   }
 
@@ -63,7 +83,8 @@ class RatingsBreakdown extends React.Component {
     let value = parseInt(event.target.innerText[0]);
     console.log('value: ', value);
     let reviews = this.props.allReviews;
-    console.log('reviews: ', reviews);
+    console.log('reviews testing: ', reviews);
+    console.log('this.props.isToggled', this.props.isToggled);
 
     let results = reviews.filter(review => {
       return review.rating === value;
@@ -89,13 +110,17 @@ class RatingsBreakdown extends React.Component {
         isToggled: isToggled,
         filteredReviews: results,
         filterNotifications: filterNotifications
-      }, () => {this.props.changeToggles(this.state.isToggled);});
+      }, () => {this.props.changeToggles([...this.state.isToggled]);});
 
     } else if (this.state.filteredReviews.length > 0 ) {
       results = this.state.filteredReviews.concat(results);
+      console.log('results 2345', results);
       let filterNotifications = [];
       let isToggled = this.state.isToggled;
       isToggled[value - 1] = 1;
+      console.log('isToggled 2345', isToggled);
+      console.log('isToggled 6789', [...this.state.isToggled]);
+      console.log('isToggled 4567', ...this.state.isToggled);
       for (var i = isToggled.length - 1; i > -1; i--) {
         if (isToggled[i] === 1) {
           filterNotifications.push(`${i + 1} stars`);
@@ -105,11 +130,12 @@ class RatingsBreakdown extends React.Component {
         isToggled: isToggled,
         filteredReviews: results,
         filterNotifications: filterNotifications
-      }, () => {this.props.changeToggles(this.state.isToggled)});
+      }, () => {this.props.changeToggles([...this.state.isToggled])});
     } else {
       let filterNotifications = [];
       let isToggled = this.state.isToggled;
       isToggled[value - 1] = 1;
+      console.log('testing 12345 12345');
       for (var i = isToggled.length - 1; i > -1; i--) {
         if (isToggled[i] === 1) {
           filterNotifications.push(`${i + 1} stars`);
@@ -119,7 +145,7 @@ class RatingsBreakdown extends React.Component {
         isToggled: isToggled,
         filteredReviews: results,
         filterNotifications: filterNotifications
-      }, () => {this.props.changeToggles(this.state.isToggled)});
+      }, () => {console.log('this is a test123456', this.state.isToggled); this.props.changeToggles([...this.state.isToggled]);});
     }
   }
 
@@ -128,38 +154,50 @@ class RatingsBreakdown extends React.Component {
       filteredReviews: [],
       isToggled: [0,0,0,0,0],
       filterNotifications: [],
-    }, () => {this.props.changeToggles(this.state.isToggled)});
+    }, () => {console.log('this is a test12345678', this.state.isToggled); this.props.changeToggles([...this.state.isToggled]);});
   }
 
   render() {
     return (
       <div className="ratings_breakdown">
-        {this.props.className.includes('driver') ? (
+        {/* {this.props.className.includes('driver') ? (
           <strong>Ratings and Reviews from Drivers</strong>
           ) : (
           <strong>Ratings and Reviews from Riders</strong>
-        )}
+        )} */}
         <div className="star_rating">
           <div className="star_rating_text">{this.props.overallRating.toFixed(2)}</div>
           <div className="star_output"><OverallRating rating={this.props.overallRating}/></div>
         </div>
-        <div>Total Ratings: {this.props.allRatings.length}</div>
+        {/* {this.props.className.includes('driver') ? (
+          <strong className="all-reviews-total">Total number of reviews from other Drivers: {this.props.allRatings.length}</strong>
+          ) : (
+          <strong className="all-reviews-total">Total number of reviews from other Riders: {this.props.allRatings.length}</strong>
+        )} */}
+        {/* <div>Total Ratings: {this.props.allRatings.length}</div> */}
         <div className="filter_ratings_message">
-          {this.state.filterNotifications.length > 0 ? (<div>Filtered By: </div>) : (<div></div>)}
+          {this.state.filterNotifications.length > 0 ? (<div>Filtered By: </div>) : (null)}
           {this.state.filterNotifications.map((notification, index) => {return <div key={index}>{notification}</div>})}
         </div>
-        {this.state.filterNotifications.length > 0 ? (<div><button onClick={() => {this.clearFilter();}}>Clear Filter</button></div>) : (<div></div>)}
+        {this.state.filterNotifications.length > 0 ? (<div><button onClick={() => {this.clearFilter();}}>Clear Filter</button></div>) : (null)}
         <div className="progress_bars">
           {[...Array(5)].map((element, index) =>
             <div key={index}>
-              <a className="ratings_bar" style={{float:'left'}} onClick={(e) => {this.filterReviews(e)}}>{index + 1} Stars</a>
-              <div className="progress">
-                {index + 1 === 5 ? (<div className="bar" style={{width:`${this.state.fiveStarReviews}`}}></div>) : (<div></div>)}
-                {index + 1 === 4 ? (<div className="bar" style={{width:`${this.state.fourStarReviews}`}}></div>) : (<div></div>)}
-                {index + 1 === 3 ? (<div className="bar" style={{width:`${this.state.threeStarReviews}`}}></div>) : (<div></div>)}
-                {index + 1 === 2 ? (<div className="bar" style={{width:`${this.state.twoStarReviews}`}}></div>) : (<div></div>)}
-                {index + 1 === 1 ? (<div className="bar" style={{width:`${this.state.oneStarReviews}`}}></div>) : (<div></div>)}
-              </div>
+              {
+                this.state.reviews[index + 1] === '0%'
+                ?  <div>
+                     <a className="ratings_bar disabledCursor" style={{float:'left'}} onClick={ (event) => event.preventDefault() }>{index + 1} Stars</a>
+                     <div className="progress">
+                       <div className="bar" style={{width:`${this.state.reviews[index + 1]}`}}></div>
+                     </div>
+                   </div>
+                :  <div>
+                     <a className="ratings_bar" style={{float:'left'}} onClick={(e) => {this.filterReviews(e)}}>{index + 1} Stars</a>
+                       <div className="progress">
+                         <div className="bar" style={{width:`${this.state.reviews[index + 1]}`}}></div>
+                      </div>
+                   </div>
+              }
             </div>
           )}
         </div>

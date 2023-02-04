@@ -380,11 +380,11 @@ h1 {
   width: 269.39px;
   height: 183.33px;
   left: 52.67px;
-  top: 232px;
+  top: 185px;
 }
 
 .logo-frame {
-  width: 219.29px;
+  width: 179.29px;
   height: 139.33px;
   flex: none;
   order: 0;
@@ -402,7 +402,7 @@ h1 {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 0px;
   text-align: center;
   color: #76858A;
   flex: none;
@@ -454,6 +454,7 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 0;
+  text-decoration: none;
 }
 
 .login-btn {
@@ -470,6 +471,8 @@ h1 {
   order: 1;
   align-self: stretch;
   flex-grow: 0;
+  background: none;
+  border: none;
 }
 
 .login-btn-link {
@@ -501,6 +504,20 @@ h1 {
   left: 0px;
   top: 24px;
   overflow-y: scroll;
+}
+
+.sign-form-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 180px 16px 0px;
+  gap: 24px;
+  width: 375px;
+  height: 592px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
 }
 
 .inner-fields {
@@ -742,7 +759,37 @@ h1 {
   width: 375px;
   height: 556px;
   left: 0px;
-  top: 0px;
+  top: 25px;
+}
+
+.signup-title {
+  width: 343px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  color: #262929;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.sign-up-wrappers-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 180px 16px 0px;
+  gap: 24px;
+  width: 375px;
+  height: 644px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
 }
 
 .signup-btn-wrapper {
@@ -757,6 +804,20 @@ h1 {
   left: 0px;
   right: 0px;
   bottom: 0px;
+}
+
+.signup-btn-wrapper-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px 16px 40px;
+  gap: 16px;
+  position: absolute;
+  height: 121px;
+  left: 0px;
+  right: 0px;
+  bottom: -20px;
 }
 
 .next-btn {
@@ -791,6 +852,21 @@ h1 {
   flex-grow: 0;
 }
 
+.login-text {
+  width: 61px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
 .back-btn {
   display: flex;
   flex-direction: row;
@@ -805,6 +881,8 @@ h1 {
   order: 1;
   align-self: stretch;
   flex-grow: 0;
+  background: none;
+  border: none;
 }
 
 .back-text {
@@ -864,8 +942,8 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 108px 30px 0px;
-  gap: 40px;
+  padding: 50px 50px 0px;
+  gap: 35px;
   width: 375px;
   height: 644px;
   background: #FFFFFF;
@@ -941,6 +1019,17 @@ h1 {
   flex-grow: 0;
 }
 
+.selected {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  border: solid 5px #338F24;
+  flex-direction: row;
+  align-items: flex-start;
+  order: 1;
+  flex-grow: 0;
+}
+
 .sign-up-text {
   width: 54px;
   height: 21px;
@@ -956,6 +1045,39 @@ h1 {
   flex-grow: 0;
 }
 
+.auth-form-container {
+  position: relative;
+  width: 375px;
+  height: 667px;
+  background: #FCFCFC;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 12px;
+  position: absolute;
+  width: 375px;
+  height: 256px;
+  left: 0px;
+  top: 192px;
+}
+
+.login-title {
+  width: 72px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */
@@ -1133,7 +1255,7 @@ textarea {
   border: 2px solid #ffa4a4;
 }
 
-button.form-field-submit {
+.form-field-submit {
   margin: 10px 0 10px 0;
   padding: 15px;
   font-size: 16px;
@@ -1144,7 +1266,7 @@ button.form-field-submit {
   cursor: pointer;
 }
 
-button.form-field-report {
+.form-field-report {
   margin: 10px 0 10px 0;
   padding: 15px;
   font-size: 16px;
@@ -1431,11 +1553,22 @@ button.form-field-report:disabled {
   cursor: pointer;
 }
 
-input.review-summary {
+/* input.review-summary {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
+} */
+
+
+input.review-summary {
+  margin: 10px 0px 10px 0px;
+  padding: 15px;
+  font-size: 16px;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+  height: 5px;
+  width: 310px;
 }
 
 /* Ratings Breakdown */
@@ -1478,22 +1611,99 @@ input.review-summary {
 }
 
 .progress {
-  margin:5px 5px;
+  margin: 5px 5px;
   float: left;
-  padding:0;
-  width:75%;
-  height:10px;
-  overflow-y:hidden;
-  background:#e5e5e5;
-  border-radius:6px;
+  padding: 0;
+  width: 474%;
+  height: 10px;
+  overflow-y: hidden;
+  background: #e5e5e5;
+  border-radius: 6px;
 }
 
 .bar {
 	position:relative;
   float:left;
-  min-width:1%;
+  min-width:0%;
   height:100%;
   background:rgb(25, 247, 66);
+}
+
+.disabledCursor {
+  cursor: default;
+}
+
+.all-reviews-total {
+  font-size: medium;
+}
+
+.reviewHeaderLogout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  /* width: 88px; */
+  height: 40px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+}
+
+.reviewHeaderHome {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  padding-left: 70%;
+  gap: 24px;
+  /* width: 88px; */
+  height: 40px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.reviewHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  gap: 24px;
+  width: 375px;
+  height: 72px;
+  /* background: #FCFCFC; */
+  flex: none;
+  order: -1;
+  flex-grow: 0;
+}
+
+.reviewFavorite {
+  display: flex;
+  /* flex-direction: row; */
+  /* float: right; */
+  align-items: center;
+  padding: 3px;
+  position: absolute;
+  /* gap: 32px; */
+  /* width: 14%; */
+  height: 16%;
+  right: 32px;
+  /* justify-content: end; */
+  flex: none;
+  /* order: 3; */
+  flex-grow: 0;
+}
+
+#review-modal {
+  margin-left: 22%;
+}
+
+#report-modal {
+  margin-left: 6%;
+  text-align: center;
+  font-size: 21px;
 }
 
 /* -------- BRANDON CSS END -------- */

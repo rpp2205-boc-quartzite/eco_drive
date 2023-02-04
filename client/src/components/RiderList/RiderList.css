@@ -165,16 +165,11 @@ flex-grow: 0;
 }
 
 .MapData {
-  height: 100px;
+  height: 20px;
   width: 370px;
   margin: auto;
-  border-radius: 5px;
-  border-color: #338F24;
-  border-width: thin;
-  border-style: solid;
   justify-content: center;
   text-align: center;
-  font-size: small;
 }
 
 .Gmap {
@@ -192,6 +187,7 @@ flex-grow: 0;
 }
 
 h1 {
-  font-size: small;
   font-family: 'Courier New', Courier, monospace;
+  color: black;
+  font-size: medium;
 }

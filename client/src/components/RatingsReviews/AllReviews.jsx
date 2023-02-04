@@ -2,8 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { BiArrowBack } from 'react-icons/bi';
 import ReviewTile from './ReviewTile.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
+import Reviews from './Reviews.jsx';
+import { useLocation } from 'react-router-dom';
 
 const calculateRidersOverallRating = (riderRatings) => {
   let count = 0;
@@ -62,6 +65,8 @@ const retriveAllRiderRatings = (riderReviews) => {
 export default function AllReviews(props) {
   // const [allReviews, setAllReviews] = useState(true);
   // const [hasRendered, setHasRendered] = useState(false);
+  const location = useLocation();
+  console.log('location: ', location.state.text);
   const [isToggled, setToggles] = useState([0,0,0,0,0]);
   const [values, setValues] = useState({
     name: '',
@@ -80,7 +85,7 @@ export default function AllReviews(props) {
   });
 
   let id = '63d36e8fcd478f26557c4a37';
-  console.log('props: ', props);
+  // console.log('props: ', props);
 
   useEffect(() => {
     var id = '63d36e8fcd478f26557c4a37';
@@ -109,45 +114,90 @@ export default function AllReviews(props) {
   }, []);
 
   useEffect(() => {
-    if (props.className.includes('driver')) {
-      console.log('this is a test for filters', isToggled);
-      // let results = reviews.filter(review => {
-      //   return review.rating === value;
-      // });
-      let filteredDriverReviews = [];
+
+    let filter = (reviews, allReviews) => {
+      let filteredReviews = [];
       isToggled.forEach((element, index) => {
         if (element === 1) {
-          values.driverReviews.forEach(review => {
+          allReviews.forEach(review => {
             if (review.rating === index + 1) {
-              filteredDriverReviews.push(review);
+              filteredReviews.push(review);
             }
           })
         }
       })
 
-      let allOriginalDriverReviews = values.allOriginalDriverReviews;
-      console.log('filteredDriverReviews', filteredDriverReviews);
-      console.log('allOriginalDriverReviews', allOriginalDriverReviews);
+      console.log('filteredReviews: ', filteredReviews);
 
-      if (filteredDriverReviews.length === 0) {
-        setValues((values) => ({
-          ...values,
-          driverReviews: allOriginalDriverReviews
-        }));
+      if (location.state.text.includes('driver')) {
+        if (filteredReviews.length === 0) {
+          setValues((values) => ({
+            ...values,
+            driverReviews: allReviews
+          }));
+        } else {
+          setValues((values) => ({
+            ...values,
+            driverReviews: filteredReviews
+          }));
+        }
       } else {
-      // let driverRatings = retrieveAllDriverRatings(isToggled);
-      // let driverOverallRating = calculateRidersOverallRating(driverRatings);
-        setValues((values) => ({
-          ...values,
-          driverReviews: filteredDriverReviews
-        }));
+        if (filteredReviews.length === 0) {
+          setValues((values) => ({
+            ...values,
+            riderReviews: allReviews
+          }));
+        } else {
+          setValues((values) => ({
+            ...values,
+            riderReviews: filteredReviews
+          }));
+        }
       }
     }
+    // if (location.state.text.includes('driver')) {
+    //   console.log('this is a test for filters', isToggled);
+    //   // let results = reviews.filter(review => {
+    //   //   return review.rating === value;
+    //   // });
+    //   let filteredDriverReviews = [];
+    //   isToggled.forEach((element, index) => {
+    //     if (element === 1) {
+    //       values.driverReviews.forEach(review => {
+    //         if (review.rating === index + 1) {
+    //           filteredDriverReviews.push(review);
+    //         }
+    //       })
+    //     }
+    //   })
+
+    //   let allOriginalDriverReviews = values.allOriginalDriverReviews;
+    //   console.log('filteredDriverReviews', filteredDriverReviews);
+    //   console.log('allOriginalDriverReviews', allOriginalDriverReviews);
+
+    //   if (filteredDriverReviews.length === 0) {
+    //     setValues((values) => ({
+    //       ...values,
+    //       driverReviews: allOriginalDriverReviews
+    //     }));
+    //   } else {
+    //     setValues((values) => ({
+    //       ...values,
+    //       driverReviews: filteredDriverReviews
+    //     }));
+    //   }
+    // }
+    if (location.state.text.includes('driver')) {
+      filter(values.driverReviews, values.allOriginalDriverReviews);
+    } else {
+      filter (values.riderReviews, values.allOriginalRiderReviews);
+    }
+
   }, [isToggled]);
 
   const sort = (event) => {
     if (event === values.sortedOption) {
-      if (props.className.includes('driver')) {
+      if (location.state.text.includes('driver')) {
         values.driverReviews.forEach(review => {
           let timestamp = review._id.toString().substring(0, 8);
           let date = new Date( parseInt( timestamp, 16 ) * 1000 );
@@ -174,7 +224,7 @@ export default function AllReviews(props) {
       event.persist();
       event = event.target.value;
       if (event === 'newest') {
-        if (props.className.includes('driver')) {
+        if (location.state.text.includes('driver')) {
           values.driverReviews.forEach(review => {
             let timestamp = review._id.toString().substring(0, 8);
             let date = new Date( parseInt( timestamp, 16 ) * 1000 );
@@ -251,15 +301,22 @@ export default function AllReviews(props) {
 
   return (
     <div>
+      <div className="reviewHeader">
+      <div className="reviewHeaderBackButton">
+        <Link to="/ratings-reviews">
+          <BiArrowBack className="backButton" size={20} />
+        </Link>
+      </div>
+      </div>
       <div>
-        {props.className.includes('driver') ? (
-          <RatingsBreakdown className={props.className} overallRating={values.driverOverallRating} allReviews={values.driverReviews} allRatings={values.driverRatings} changeToggles={setToggles} />
+        {location.state.text.includes('driver') ? (
+          <RatingsBreakdown className={location.state.text} overallRating={values.driverOverallRating} allReviews={values.allOriginalDriverReviews} allRatings={values.driverRatings} changeToggles={setToggles} isToggled={isToggled} />
           ) : (
-          <RatingsBreakdown className={props.className} overallRating={values.riderOverallRating} allReviews={values.riderReviews} allRatings={values.riderRatings} changeToggles={setToggles} />
+          <RatingsBreakdown className={location.state.text} overallRating={values.riderOverallRating} allReviews={values.allOriginalRiderReviews} allRatings={values.riderRatings} changeToggles={setToggles} isToggled={isToggled} />
         )}
       </div>
-      <div className="sort-options">
-        {props.className.includes('driver') ? (
+      {/* <div className="sort-options">
+        {location.state.text.includes('driver') ? (
           <strong>{values.driverReviews.length} reviews, sorted by</strong>
           ) : (
           <strong>{values.riderReviews.length} reviews, sorted by</strong>
@@ -269,14 +326,14 @@ export default function AllReviews(props) {
           <option value="newest">newest</option>
           <option value="helpful">helpful</option>
         </select>
-      </div>
+      </div> */}
       <div>
-        {props.className.includes('driver') ? (
+        {location.state.text.includes('driver') ? (
             sort(values.sortedOption),
             values.sortedReviews.map(review =>
               {
                 return (
-                  <ReviewTile className={props.className} review={review} key={review._id} />
+                  <ReviewTile className={location.state.text} review={review} key={review._id} />
                 )
               }
             )
@@ -285,7 +342,7 @@ export default function AllReviews(props) {
             values.sortedReviews.map(review =>
               {
                 return (
-                  <ReviewTile className={props.className} review={review} key={review._id} />
+                  <ReviewTile className={location.state.text} review={review} key={review._id} />
                 )
               }
             )

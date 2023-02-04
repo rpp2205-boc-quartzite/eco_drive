@@ -11,6 +11,7 @@ import Reviews from './components/RatingsReviews/Reviews.jsx';
 import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
 import DriverList from './components/DriverList/DriverList.jsx';
+import AllReviews from './components/RatingsReviews/AllReviews.jsx';
 //import Placeholder from './components/RiderList/Placeholder.jsx';
 import DriverInteractions from './components/RiderList/DriverInteractions.jsx'
 import TripComplete from './components/TripComplete/TripComplete.jsx';
@@ -52,6 +53,7 @@ function App() {
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
         <Route path="/driverview" element={<DriverView userId={userId}/>} />
         <Route path="/ratings-reviews" element={<Reviews />} />
+        <Route path="/all-reviews" element={<AllReviews />} />
         <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute}/>} />
         <Route path="/driverprofile" element={<DriverProfile />} />
         <Route path="/riderprofile" element={<RiderProfile />} />

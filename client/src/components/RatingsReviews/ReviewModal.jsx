@@ -12,27 +12,30 @@ const ReviewModal = (props) => {
     email: '',
     text: '',
     summary: '',
-    characterCount: 50
+    characterCount: 25
   });
 
-  useEffect(() => {
-    var id = '63d36e8fcd478f26557c4a37';
-    axios.get('/getreviews', { params: {id} })
-    .then((result) => {
-      setValues((values) => ({
-        ...values,
-        name: result.data[0].full_name,
-        avatar: result.data[0].avatar,
-        riderReviews: result.data[0].rider_reviews,
-        driverReviews: result.data[0].driver_reviews
-      }));
-    })
-    .catch(err => console.log(err))
-  }, [submitted]);
+  // useEffect(() => {
+  //   var id = '63d36e8fcd478f26557c4a37';
+  //   axios.get('/getreviews', { params: {id} })
+  //   .then((result) => {
+  //     setValues((values) => ({
+  //       ...values,
+  //       name: result.data[0].full_name,
+  //       avatar: result.data[0].avatar,
+  //       riderReviews: result.data[0].rider_reviews,
+  //       driverReviews: result.data[0].driver_reviews
+  //     }));
+  //   })
+  //   .catch(err => console.log(err))
+  // }, [submitted]);
 
   const handleTextInputChange = (event) => {
     event.persist();
-    let length = 50 - event.target.value.length;
+    let length = 25 - event.target.value.length;
+    if (values.characterCount < 0) {
+      console.log('testing characterCount', values.characterCount);
+    }
     setValues((values) => ({
       ...values,
       text: event.target.value,
@@ -71,6 +74,7 @@ const ReviewModal = (props) => {
       axios.post(`/reviews/63d36e8fcd478f26557c4a37/report`, report)
       .then((response) => {
         setSubmitted(true);
+        props.submit();
         setTimeout(
           () => closeModal(),
           2000
@@ -117,17 +121,19 @@ const ReviewModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            {props.reported ? (
-              <div>Are you sure you want to report this driver?</div>
+          {props.reported ? (
+            <Modal.Title id="report-modal">
+              <div>Are You Sure You Want to Report this Driver?</div>
+            </Modal.Title>
             ) : (
+            <Modal.Title id="review-modal">
               <div>Write Your Review</div>
-            )}
-          </Modal.Title>
+            </Modal.Title>
+          )}
         </Modal.Header>
         <Modal.Body>
           <div className="form-container">
-            <form id="review-form">
+            <form id="review-form" onSubmit={handleSubmit}>
               <label className="rf-label">
                 {props.reported ? (
                   <div></div>
@@ -135,7 +141,7 @@ const ReviewModal = (props) => {
                   <div>
                     <h3 className="rf-header">Overall Rating</h3>
                     <div id="star-ranks">
-                      <StarRating click={handleClick}/>
+                        <StarRating click={handleClick}/>
                     </div>
                   </div>
                 )}
@@ -144,22 +150,24 @@ const ReviewModal = (props) => {
                 {props.reported ? (
                   <div>
                     <h4 className="rf-header">Write your comment</h4>
-                    <textarea value={values.text} className="form-field" required minLength="50" maxLength="1000" placeholder=""  onChange={handleTextInputChange}/>
+                    <textarea value={values.text} className="form-field" required minLength="25" maxLength="180" placeholder=""  onChange={handleTextInputChange}/>
                   </div>
                 ) : (
                   <div>
                     <h4 className="rf-header">Add a written review</h4>
                     <h5 className="rf-header">Add a headline</h5>
                     <input type="text" value={values.summary} className="review-summary" required maxLength="30" placeholder="" onChange={handleSummaryInputChange}/>
-                    <textarea value={values.text} className="form-field" required minLength="50" maxLength="1000" placeholder="How was your experience?"  onChange={handleTextInputChange}/>
+                    <textarea value={values.text} className="form-field" required minLength="25" maxLength="180" placeholder="How was your experience?"  onChange={handleTextInputChange}/>
                   </div>
                 )}
                 {values.characterCount > 0 ? <div>Minimum required characters left: [{values.characterCount}]</div> :<div>Minimum reached</div>}
               </label>
                 {props.reported ? (
-                  <button className="form-field-report" type="submit" onClick={handleSubmit}>Report</button>
+                  // <button className="form-field-report" type="submit" onClick={handleSubmit}>Report</button>
+                  <input className="form-field-report" disabled={values.characterCount > 0} type="submit" value="Report"/>
                 ) : (
-                  <button className="form-field-submit" type="submit" onClick={handleSubmit}>Submit</button>
+                  // <button className="form-field-submit" disabled={values.characterCount > 0} type="submit" onClick={handleSubmit}>Submit</button>
+                  <input className="form-field-submit" disabled={values.characterCount > 0} type="submit" value="Submit"/>
                 )}
             </form>
               {props.reported ? (
