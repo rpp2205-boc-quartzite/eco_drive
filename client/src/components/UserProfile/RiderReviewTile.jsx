@@ -5,10 +5,22 @@ class RiderReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      full_name: ''
     }
   }
 
+  componentDidMount () {
+    var id = this.props.id;
+    //console.log('IDDDD', id)
+    axios.get('/getUserInfo', { params: {id} })
+    .then((result) => {
+      //console.log('ID!!!', result)
+      this.setState({
+        full_name: result.data[0].full_name
+      })
+    })
+    .catch(err => console.log(err))
+  }
 
   render() {
     return (
