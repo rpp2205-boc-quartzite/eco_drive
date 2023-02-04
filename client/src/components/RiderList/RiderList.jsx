@@ -72,8 +72,10 @@ const RiderList = function(props) {
 
       <div>
         <br></br>
+        {/* to be added when refactored */}
+        {/* onClick={postCurrentRoutes} */}
         <Link to="/driverview" state={{driverData: passedDriver, riderData: totalRiders}}>
-        <button className="start-trip"type="submit" onClick={postCurrentRoutes}>Accept Riders</button>
+        <button className="start-trip"type="submit" >Accept Riders</button>
         </Link>
         <br></br>
         <div className="rider-card-list">
@@ -91,21 +93,6 @@ const RiderList = function(props) {
             )
           })}
         </div>
-      <div className="rider-card-list">
-        {riders.map((rider) => {
-          return (
-            <div className="rider-card" key={rider.rider.email}>
-              <button className="info-icon" type="submit">insert info icon here</button>
-              <div className="rider-name">{rider.rider.full_name}</div>
-              {/* <div><img alt="specific user profile" className="rider-pic" src={rider.pic} /></div> */}
-              <div className="rider-from">{rider.startDistance.text} Miles from Your Pick-Up Location</div>
-              <div className="rider-to">{rider.endDistance.text} Miles to go from Drop-Off Location</div>
-              {/* <div className="rider-time">{rider.time}</div> */}
-              <button className="remove-rider" name={rider.rider.email} onClick={removeRider} type="submit">decline this rider</button>
-            </div>
-          )
-        })}
-
       </div>
     )
   }
