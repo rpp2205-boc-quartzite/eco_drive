@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import HelloWorld from './components/helloWorld.jsx';
@@ -7,6 +7,7 @@ import RiderView from './components/DefaultView/RiderView.jsx';
 import Dashboard from './components/Authentication/Dashboard.jsx';
 import Login from './components/Authentication/Login.jsx';
 import Register from './components/Authentication/Register.jsx';
+import PasswordReset from './components/Authentication/PasswordReset.jsx';
 import Reviews from './components/RatingsReviews/Reviews.jsx';
 import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
@@ -20,10 +21,32 @@ function App() {
   const [userId, setUserId] = useState('');
   const navigate=useNavigate();
 
+  useEffect(() => {
+    // console.log(document.cookie)
+    // axios.get('/validate', {token: document.cookie})
+    // .then((result) => {
+    //   console.log(result)
+    //   setUserId(result.data.user);
+    //   if (result.is_driver) {
+    //     navigate('/driverview');
+    //   } else {
+    //     navigate('/riderview');
+    //   }
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
+  });
+
   const authenticate = (email, pass) => {
+    if (email === '' || pass === '') {
+      return alert('Please enter an email and/or password');
+    }
+
     axios.post('/login', {email, pass})
     .then((result) => {
       setUserId(result.data.user);
+      document.cookie = result.data.token;
       if (result.is_driver) {
         navigate('/driverview');
       } else {
@@ -51,6 +74,7 @@ function App() {
         <Route exact path="/" element={<Dashboard />} />
         <Route path='/register' element={<Register authCheck={authenticate}/>} />
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
+        <Route path='/password-reset' element={<PasswordReset authCheck={authenticate}/>} />
         <Route path="/driverview" element={<DriverView userId={userId}/>} />
         <Route path="/ratings-reviews" element={<Reviews />} />
         <Route path="/all-reviews" element={<AllReviews />} />

@@ -59,6 +59,7 @@ const DriverInteractions = function(props) {
   const [driverData, setDriver] = React.useState({});
   const [time, setSeconds] = React.useState(0);
 
+
 useEffect(() => {
   const findRiders = () => {
     const driver = {
