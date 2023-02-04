@@ -92,7 +92,7 @@ const OngoingTrip = (props) => {
 
           <div className="card">
 
-            <div className="profile">
+            <div>
               <div >
                 <img src={avatar} alt="avatar" className='profilePhoto'/>
               </div>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -77,7 +76,7 @@ const UpcomingTrip = (props) => {
 
         <div className="card">
 
-          <div className="profile">
+          <div>
             <div >
               <img src={avatar} alt="avatar" className='profilePhoto'/>
             </div>
