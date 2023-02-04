@@ -27,7 +27,7 @@ app.use(bodyParser.json())
 const db = require('../database/index.js');
 
 // db controllers
-const User = require('../database/controllers/user.js');
+const User = require('../database/models/user.js');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -88,16 +88,10 @@ app.get('/auth-endpoint', auth, (request, response) => {
   response.json({ message: 'You are authorized to access me' });
 });
 
-// Register Endpoint
 app.post('/register', register);
-
-// Login Endpoint
 app.post('/login', login);
-
 app.get('/validate', validate);
-
 app.post('/sendMail', sendMail);
-
 app.put('/change-password', changePassword);
 
 // ---- Default Driver view routes  ---- //
