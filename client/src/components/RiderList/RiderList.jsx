@@ -69,8 +69,10 @@ const RiderList = function(props) {
     return (
       <div>
         <br></br>
+        {/* to be added when refactored */}
+        {/* onClick={postCurrentRoutes} */}
         <Link to="/driverview" state={{driverData: passedDriver, riderData: totalRiders}}>
-        <button className="start-trip"type="submit" onClick={postCurrentRoutes}>Accept Riders</button>
+        <button className="start-trip"type="submit" >Accept Riders</button>
         </Link>
         <br></br>
         <div className="rider-card-list">
