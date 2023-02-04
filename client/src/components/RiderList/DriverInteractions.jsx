@@ -61,6 +61,13 @@ const DriverInteractions = function(props) {
 
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(time + 1)
+      console.log('Test #', time)
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+  
     const findRiders = () => {
       const driver = {
         userId: route.id,
@@ -91,14 +98,6 @@ const DriverInteractions = function(props) {
 
 
   useEffect(() => {
-<<<<<<< HEAD
-    const interval = setInterval(() => {
-      setSeconds(time + 1)
-      console.log('Test #', time)
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-=======
     const findRiders = () => {
       const driver = {
         userId: route.id,
@@ -124,7 +123,6 @@ const DriverInteractions = function(props) {
 
     findRiders();
   }, [route])
->>>>>>> main
 
   useEffect(() => {
     if (!loaded)
