@@ -236,6 +236,41 @@ app.put('/driver-list', async (req, res) => {
   }
 })
 
+// ---- User Profile Routes ---- //
+
+app.get('/getuserinfo', function(req, res) {
+  let userid = req.query.id;
+  console.log('USERID in INDEXJS server', req.query.id)
+  getUserInfo(userid)
+  .then((result) => {
+    console.log(result)
+    res.send(result)
+  })
+  .catch(err => console.log(err))
+});
+
+app.post('/updateDriverProfile', function(req, res) {
+  console.log('DATA IN INDEX.JS SERVER', req.body)
+  var data = req.body;
+  updateDriverProfile(data)
+  .then(result => {
+    console.log('result in index.js server', result)
+    res.end()
+  })
+  .catch(err => console.log(err))
+});
+app.post('/updateRiderProfile', function(req, res) {
+  console.log('DATA IN INDEX.JS RIDER SERVER', req.body)
+  var data = req.body;
+  updateRiderProfile(data)
+  .then(result => {
+    console.log('result in index.js server', result)
+    res.end()
+  })
+  .catch(err => console.log(err))
+});
+//---- User Profile Routes End ---- //
+
 // ---- Catch all for routing ---- //
 
 app.get('*', function(req, res) {
