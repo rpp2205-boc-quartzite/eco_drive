@@ -1073,7 +1073,7 @@ h1 {
   width: 375px;
   height: 256px;
   left: 0px;
-  top: 192px;
+  top: 162px;
 }
 
 .login-title {
@@ -1145,7 +1145,7 @@ h1 {
   width: 375px;
   height: 200px;
   left: 0px;
-  top: 201px;
+  top: 168px;
 }
 
 .forgot-pass-title {
@@ -1291,6 +1291,93 @@ h1 {
   order: 1;
   flex-grow: 0;
 }
+
+.reset-pass-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 12px;
+  position: absolute;
+  width: 375px;
+  height: 312px;
+  left: 0px;
+  top: 142px;
+}
+
+.reset-pass-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 343px;
+  height: 264px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.label-container-reset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 343px;
+  height: 80px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.verify-code-title {
+  width: 140px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.reset-pass-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  width: 343px;
+  height: 41px;
+  background: #338F24;
+  border-radius: 50px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.reset-pass-text {
+  width: 111px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
 /* -------- Authentication CSS END -------- */
 
 /* -------- BRANDON CSS -------- */
