@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import { TbRefresh } from "react-icons/tb";
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';

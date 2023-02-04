@@ -40,6 +40,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.7.5",
     "msw": "^0.47.4",
+    "nodemailer": "^6.9.1",
     "nodemon": "^2.0.20",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import DefaultRoute from './DefaultRoute.jsx';
 import { format } from "date-fns";
+import Autocomplete from "react-google-autocomplete";
 import DatePicker from "react-datepicker";
+import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-import OngoingTrip from './OngoingTrip.jsx'
 
-function RiderView ({ userId }) {
+import DefaultRoute from './DefaultRoute.jsx';
+import OngoingTrip from './OngoingTrip.jsx';
+import UpcomingTrip from './UpcomingTrip.jsx';
+
+
+function RiderView ({ userId, riderOnGoingRoute }) {
   const [start, setStart] = useState({
     start_address: '',
     start_lat: '',
@@ -23,6 +26,7 @@ function RiderView ({ userId }) {
   })
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [userInfo, setUserInfo] = useState({})
   const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
@@ -47,6 +51,7 @@ function RiderView ({ userId }) {
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
+      setUserInfo(result.data[0])
       setUpcoming(result.data[0].rider_route)
     })
     .catch(err => console.log(err))
@@ -132,23 +137,16 @@ function RiderView ({ userId }) {
               </div>
             </div>
 
-            <Link to="/driver-list" state={{route: route}}>
+            <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
               <button className="primary-btn-find">Find Drivers</button>
             </Link>
           </div>
         </form>
 
-      {/* <div>
-        ______________________________ <br/>
-        Ongoing Trip
-      </div>
-      <div>
-        ______________________________ <br/>
-        UpcomingTrip
-      </div> */}
       <div>
         <DefaultRoute userId={userId} upcoming={upcoming} />
-        <OngoingTrip />
+        <OngoingTrip user={userId} />
+        <UpcomingTrip user={userId} route={riderOnGoingRoute} />
       </div>
     </div>
   )

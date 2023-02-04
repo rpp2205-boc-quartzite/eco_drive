@@ -1,1 +1,0 @@
-module.exports="AIzaSyAdZQXhvyRtuU-5MvHLDeAPfRV9-d9W61g"

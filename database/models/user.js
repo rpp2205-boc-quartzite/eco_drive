@@ -14,7 +14,10 @@ const userSchema = mongoose.Schema({
   drivers_license:  String,
   license_plate:    String,
   dob:              String,
-  avatar:           String,
+  avatar: {
+    type: String,
+    default: 'https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg'
+  },
   is_driver:        Boolean,
   is_rider:         Boolean,
 
@@ -52,14 +55,14 @@ const userSchema = mongoose.Schema({
       type: Boolean,
       default: false,
     },
-    start_address: String,
-    end_address:  String,
+    start_address:  String,
+    end_address:    String,
     start_lat:      Number,
     start_lng:      Number,
     end_lat:        Number,
     end_lng:        Number,
-    time:  String,
-    default: Boolean,
+    time:           String,
+    default:        Boolean,
     driver_id: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User'

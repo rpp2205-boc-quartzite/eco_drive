@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.js').User;
+const nodemailer = require('nodemailer');
+require("dotenv").config();
 
 module.exports = {
   register: (req, res) => {
@@ -78,6 +80,67 @@ module.exports = {
     .catch((error) => {
       res.status(404).send({
         message: 'Email Not Found',
+        error: error,
+      });
+    });
+  },
+
+  validate: (req, res) => {
+    const token = req.body.token;
+    console.log(token)
+    if (!token) {
+      return res.status(401).send({ auth: false, message: 'No token provided.' });
+    }
+  
+    jwt.verify(token, 'RANDOM-TOKEN', (err, decoded) => {
+      if (err) {
+        return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+      }
+      res.status(200).send(decoded);
+    });
+  },
+
+  sendMail: (req, res) => {
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.WORD
+      }
+    });
+    
+    var mailOptions = {
+      from: process.env.EMAIL,
+      to: req.body.email,
+      subject: 'Verification Code',
+      text: `Your verification code is: ${req.body.code}`
+    };
+    
+    transporter.sendMail(mailOptions, function(error, data){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent successfully");
+        res.json({ status: "Email sent" });
+      }
+    });
+  },
+
+  changePassword: (req, res) => {
+    bcrypt
+    .hash(req.body.password, 10)
+    .then((hashedPassword) => {
+      User.updateOne({email: req.body.email}, {password: hashedPassword})
+      .then((result) => {
+        res.status(200).send('Password Changed!');
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: 'Password was not hashed successfully',
         error: error,
       });
     });

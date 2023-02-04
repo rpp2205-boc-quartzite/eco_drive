@@ -7,17 +7,57 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px;
+  padding: 40px 16px;
+  gap: 32px;
 
-  position: relative;
   width: 375px;
-  height: 834px;
+  height: 554px;
+  overflow-y: scroll;
 
-  background: #FCFCFC;
+  background: #FFFFFF;
+
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 1;
 
 }
 
 .passenger-card {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr 1fr;
+}
+
+.title {
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.passenger-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.riders {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262929;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  text-align: center;
 }
