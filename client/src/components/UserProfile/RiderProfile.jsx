@@ -7,6 +7,7 @@ import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import RiderReviewsList from './RiderReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
+import {randomFacts} from './RandomFacts.jsx';
 
 class RiderProfile extends React.Component {
   constructor(props) {
@@ -251,7 +252,7 @@ class RiderProfile extends React.Component {
           <span className='profileTitle'>Fact of the day</span>
           <div className='profileCurrentRoute'>
             <div className='profileCurrentRouteTitle'>Did you know? &#128173;</div>
-            <div className='profileCurrentRouteInfo'>Los Angeles, Long Beach & Riverside are the number 1 cities in CA with highest levels of transportation related pollution</div>
+            <div className='profileCurrentRouteInfo'>{randomFacts[Math.floor(Math.random() * 16)]}</div>
           </div>
         </div>
 
