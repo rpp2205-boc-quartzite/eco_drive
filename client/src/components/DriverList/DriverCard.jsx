@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { FiInfo } from "react-icons/fi";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
@@ -6,7 +7,7 @@ import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import DriverConfirmation from './DriverConfirmation.jsx'
 import BookingSuccessMessage from './BookingSuccessMessage.jsx'
 
-const DriverCard = ({driverInfo, userRouteInfo, startDistance, endDistance, updateRiderOnGoingRoute}) => {
+const DriverCard = ({driverInfo, userInfo, userRouteInfo, startDistance, endDistance, updateRiderOnGoingRoute}) => {
 
   const [driverConfirmationOn, setDriverConfirmation] = useState(false);
   const [successMessageOn, setSuccessMessage] = useState(false);
@@ -19,7 +20,7 @@ const DriverCard = ({driverInfo, userRouteInfo, startDistance, endDistance, upda
     setSuccessMessage(!successMessageOn)
   }
 
-  const [favoriteDriver, setFavoriteDriver] = useState((driverInfo.favorites || []).includes(driverInfo._id))
+  const [favoriteDriver, setFavoriteDriver] = useState((userInfo.favorites || []).includes(driverInfo._id))
 
   const toggleFavoriteDriver = () => {
     if (favoriteDriver) {
@@ -72,7 +73,9 @@ const DriverCard = ({driverInfo, userRouteInfo, startDistance, endDistance, upda
               ? <HiHeart className='card-icon full-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
               : <HiOutlineHeart className='card-icon outlined-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
             }
-            <FiInfo className='card-icon info-icon'/>
+            <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list'}}>
+              <FiInfo className='card-icon info-icon'/>
+            </Link>
           </div>
         </div>
         <p>From: {startDistance.text} from your starting point</p>

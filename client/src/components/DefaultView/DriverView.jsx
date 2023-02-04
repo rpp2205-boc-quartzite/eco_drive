@@ -2,12 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
+import { TbRefresh } from "react-icons/tb";
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-
 import Autocomplete from "react-google-autocomplete";
+
 import DefaultRoute from './DefaultRoute.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import OngoingTrip from './OngoingTrip.jsx';
@@ -130,7 +131,7 @@ function DriverView ({ userId }) {
         <div className="headerToggleView">
           <Link to="/riderview">
             <div className="viewToggle">Rider</div>
-            <HiOutlineRefresh className="viewToggleButton" size={25} />
+            <TbRefresh className="viewToggleButton" size={25} />
           </Link>
         </div>
         <div className="headerAvatarLogout">

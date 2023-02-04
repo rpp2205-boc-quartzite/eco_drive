@@ -14,7 +14,10 @@ const userSchema = mongoose.Schema({
   drivers_license:  String,
   license_plate:    String,
   dob:              String,
-  avatar:           String,
+  avatar: {
+    type: String,
+    default: 'https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg'
+  },
   is_driver:        Boolean,
   is_rider:         Boolean,
 
