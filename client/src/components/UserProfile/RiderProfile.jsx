@@ -11,9 +11,10 @@ import { useLocation, useParams, Link } from "react-router-dom";
 class RiderProfile extends React.Component {
   constructor(props) {
     super(props);
+    console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
-      //userId: this.props.location.state.id,
-      userId: '63d36e8fcd478f26557c4a37',
+      userId: this.props.location.state.id,
+      //userId: '63d36f099d38b4ed1dba8f3a',
       full_name: '',
       email: '',
       start_address: '',
@@ -96,12 +97,16 @@ class RiderProfile extends React.Component {
   }
 
   render () {
-    console.log('CHECKING RIDER PROPS', this.props)
+    console.log('CHECKING RIDER PROPS', this.props.location.state.id)
     return (
       <div>
       {/* TOP BUTTONS */}
         {this.state.drivers_license ?
-        <Link to="/driverprofile">
+        // <Link to="/driverprofile">
+
+      <Link
+      to="/driverprofile"
+      state={{id: this.state.userId}}>
         <span className='profileToggle'>Rider</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
         </Link> : <span>

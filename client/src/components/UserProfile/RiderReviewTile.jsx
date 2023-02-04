@@ -17,7 +17,6 @@ class RiderReviewTile extends React.Component {
           {/* <div className='profileReviewerName'>{this.state.full_name}</div>
           ***** hardcoding this due to lack of good data in DB for now */}
           <div className='profileReviewerName'>Amy Johnson</div>
-          <div>HU!</div>
           {/* <div className='profileReviewerName'>{this.state.full_name}</div> */}
           <div>
             <Ratings

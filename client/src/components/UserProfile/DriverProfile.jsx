@@ -11,10 +11,10 @@ import { useLocation, useParams, Link } from "react-router-dom";
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
+    console.log( 'DRIVER PROFILE PROPS', this.props)
     this.state = {
-      //userId: this.props.location.state.id,
-      userId: '63d36e8fcd478f26557c4a37',
+      userId: this.props.location.state.id,
+      //userId: '63d36f099d38b4ed1dba8f3a',
       full_name: '',
       email: '',
       start_address: '',
@@ -104,7 +104,11 @@ class DriverProfile extends React.Component {
     return (
       <div>
       {/* TOP BUTTONS */}
-        <Link to="/riderprofile"><span className='profileToggle'>Driver</span>
+        {/* <Link to="/riderprofile" > */}
+        <Link
+      to="/riderprofile"
+      state={{id: this.state.userId}}>
+        <span className='profileToggle'>Driver</span>
         <span className='profileToggleButton'><HiOutlineRefresh/></span>
         </Link>
         <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
