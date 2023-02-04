@@ -68,6 +68,7 @@ const DriverInteractions = function(props) {
     return () => clearInterval(interval);
   }, []);
 
+
   //   const findRiders = () => {
   //     const driver = {
   //       userId: route.id,
@@ -96,7 +97,6 @@ const DriverInteractions = function(props) {
   //   findRiders();
   // // }, [route])
 
-
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds(time + 1)
@@ -123,6 +123,7 @@ const DriverInteractions = function(props) {
   if (loadError) return "Error Loading Maps";
   if (!riders.length) return (
     <div className='loading-screen'>
+        {console.log('RIDERS', riders)}
     <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
     <p>Finding Riders...</p>
  </div>
@@ -209,7 +210,7 @@ const DriverInteractions = function(props) {
         </div> */}
         <br></br>
         <div className="rider-list" data="DriverInteractions">
-          <RiderList driver={driverData} riders={riders} seats={seats} />
+          <RiderList driver={driverData} riders={riders} seats={seats}/>
         </div>
     </div>
   )
