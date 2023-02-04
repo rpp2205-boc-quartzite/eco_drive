@@ -26,7 +26,7 @@ app.use(bodyParser.json())
 const db = require('../database/index.js');
 
 // db controllers
-const User = require('../database/controllers/user.js');
+const tripCompletion = require('../database/controllers/tripCompletion.js');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -51,11 +51,35 @@ app.get('/goodbye', (req, res) => {
 
 // ---- Trip Completion  ---- //
 
+// test database user insertion
 app.post('/database', async (req, res) => {
-  console.log('server/index.js - app.post - /database - here');
-  await User.addExampleUser()
+  // console.log('server/index.js - app.post - /database - here');
+  await tripCompletion.addExampleUser()
   res.send('complete')
 })
+
+// start the trip
+app.put('/start-trip/:_id', async (req, res) => {
+  // console.log('made it here', req.params._id);
+  let result = await tripCompletion.startTrip(req.params._id)
+  res.send(result);
+})
+
+// end the trip
+app.put('/end-trip/:_id', async (req, res) => {
+  // console.log('made it here2', req.params._id);
+  let result = await tripCompletion.endTrip(req.params._id)
+  res.send(result);
+})
+
+// favorite a user
+app.put('/favorite/:user_id/:favorite_user_id', async (req, res) => {
+  console.log('favorite time', req.params.user_id, req.params.favorite_user_id);
+  let result = await tripCompletion.endTrip(req.params._id)
+  res.send(result);
+})
+
+
 
 // ---- Authentication  ---- //
 

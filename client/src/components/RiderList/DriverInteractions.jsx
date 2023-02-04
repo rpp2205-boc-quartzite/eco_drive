@@ -60,13 +60,33 @@ const DriverInteractions = function(props) {
   const [time, setSeconds] = React.useState(0);
 
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(time + 1)
-      console.log('Test #', time)
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+useEffect(() => {
+  const findRiders = () => {
+    const driver = {
+      userId: route.id,
+      start_address: route.start_address,
+      start_lat: route.start_lat,
+      start_lng: route.start_lng,
+      end_address: route.end_address,
+      end_lat: route.end_lat,
+      end_lng: route.end_lng,
+      time: route.time,
+      total_seats: route.total_seats,
+      default: route.default,
+    }
+
+    setDriver(driver);
+
+    setUserRouteInfo(driver);
+    return axios.post('/rider-list', driver)
+      .then((res) => {
+        setSeating(res.data.seats);
+        return setRiders(res.data.riders);
+      })
+      .catch((err) => console.log('Find drivers error: ', err))
+  }
+  findRiders();
+}, [route])
 
 
   //   const findRiders = () => {

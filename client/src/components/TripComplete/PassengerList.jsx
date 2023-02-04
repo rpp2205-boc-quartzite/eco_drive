@@ -3,14 +3,14 @@ import PassengerCard from './PassengerCard.jsx';
 
 const PassengerList = () => {
 
-  const passengerList = [{}, {}, {}];
+  const passengerList = [{name: 'me'}, {name: 'i'}, {name: 'him'}];
 
   return (
     <div className="passengerList">
 
-      <p> Favorite or Review Passengers </p>
+      <p className="riders">Riders</p>
 
-      { passengerList.map( (passenger) => <PassengerCard/>) }
+      { passengerList.map( (passenger) => <PassengerCard key={passenger.name} />) }
 
     </div>
   )
