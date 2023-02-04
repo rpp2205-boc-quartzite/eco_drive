@@ -3,7 +3,7 @@ import axios from 'axios';
 import Autocomplete from "react-google-autocomplete";
 import { Link } from 'react-router-dom';
 import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import { TbRefresh } from "react-icons/tb";
 import DefaultRoute from './DefaultRoute.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import { format } from "date-fns";
@@ -128,7 +128,7 @@ function DriverView ({ userId }) {
         <div className="headerToggleView">
           <Link to="/riderview">
             <div className="viewToggle">Driver</div>
-            <HiOutlineRefresh className="viewToggleButton" size={25} />
+            <TbRefresh className="viewToggleButton" size={25} />
           </Link>
         </div>
         <div className="headerAvatarLogout">

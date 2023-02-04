@@ -52,6 +52,7 @@ function RiderView ({ userId }) {
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
+      setUserInfo(result.data[0])
       setUpcoming(result.data[0].rider_route)
       setFavorites(result.data[0].favorites)
       setUserInfo(result.data[0])
@@ -136,9 +137,8 @@ function RiderView ({ userId }) {
                 <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-
-            <Link to="/driver-list" state={{route: route}}>
-              <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers</button>
+            <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
+            <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers</button>
             </Link>
           </div>
         </form>
