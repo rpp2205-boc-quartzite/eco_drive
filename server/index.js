@@ -55,17 +55,16 @@ app.post('/database', async (req, res) => {
   res.send('complete')
 })
 
-// start rider route
+// start route
 app.put('/start-route/:_id/:route', async (req, res) => {
-  // console.log('made it here', req.params._id);
   let result = await tripComplete.startRoute(req.params._id, req.params.route)
   res.send(result);
 })
 
-// end the route (remove from route and add to trips array)
+// end route (send back passenger ID list)
 app.put('/end-trip/:_id/:route', async (req, res) => {
-  // console.log('made it here2', req.params._id);
   let result = await tripComplete.endTrip(req.params._id, req.params.route)
+  console.log('RESULTT:', result);
   res.send(result);
 })
 

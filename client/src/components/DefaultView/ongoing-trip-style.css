@@ -25,7 +25,7 @@
   border: 1px solid var(--gray4);
   border-radius: 5px;
   padding: 16px 16px;
-  margin: 0;
+  margin-top: 8px;
   margin-bottom: 16px;
 }
 /* profile line */

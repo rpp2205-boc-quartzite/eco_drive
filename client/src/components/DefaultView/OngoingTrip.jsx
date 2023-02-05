@@ -10,7 +10,6 @@ const OngoingTrip = (props) => {
 
   const [user, setUser] = useState(null);
   const [driver,setDriver] = useState(null);
-  const [isFavorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const myFunc = async () => {
@@ -37,11 +36,13 @@ const OngoingTrip = (props) => {
   }
 
   // end trip
-  const endTrip = () => {
-    console.log('ended');
+  const endTrip = async () => {
+    console.log('before', user);
+    let route = (user.driver_route.started? 'driver': 'rider')
+    let result = await axios.put(`/end-trip/${user._id}/${route}`).catch(err => console.log('ERROR:', err))
+    console.log('after', user);
   }
 
-  console.log('User:', user);
 
   // user driver_route started
   if (user && user.driver_route.started) {
@@ -84,7 +85,7 @@ const OngoingTrip = (props) => {
             </div>
             <span id="name">{driver.full_name}</span>
             <div>
-              {isFavorite
+              {driver.favorites.includes(user._id)
                 ? <HiHeart className='card-icon full-heart-icon'/>
                 : <HiOutlineHeart className='card-icon outlined-heart-icon'/>
               }

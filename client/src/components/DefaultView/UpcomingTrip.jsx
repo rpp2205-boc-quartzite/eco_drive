@@ -9,7 +9,6 @@ const UpcomingTrip = (props) => {
 
   const [user, setUser] = useState(null);
   const [driver,setDriver] = useState(null);
-  const [isFavorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const myFunc = async () => {
@@ -42,8 +41,6 @@ const UpcomingTrip = (props) => {
     let result = await axios.put(`/start-route/${user._id}/${route}`).catch(err => console.log('ERROR:', err))
     console.log('Finished:', user);
   }
-
-  console.log('User2', user);
 
   // upcoming route as a driver
   // user driver_route not started && user has a driver_route set
@@ -87,7 +84,7 @@ const UpcomingTrip = (props) => {
             </div>
             <span id="name">{driver.full_name}</span>
             <div>
-              {isFavorite
+              {driver.favorites.includes(user._id)
                 ? <HiHeart className='card-icon full-heart-icon'/>
                 : <HiOutlineHeart className='card-icon outlined-heart-icon'/>
               }
