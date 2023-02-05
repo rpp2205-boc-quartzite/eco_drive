@@ -30,8 +30,13 @@ module.exports = {
     let users = await User.find( { _id } ).catch(err => console.log('ERR FINDING: ', err))
     let user = users[0];
     // console.log('USER:', user);
-    user.rider_route.started = true;
-    await user.save()
+    if (route == "rider") {
+      user.rider_route.started = true;
+      await user.save()
+    } else if (route == "driver") {
+      user.driver_route.started = true;
+      await user.save()
+    }
     // console.log('USER2:', user);
     return 'started trip';
   },
@@ -44,7 +49,7 @@ module.exports = {
     // console.log('USER:', user);
 
     // end route as a rider
-    if (user.rider_route.started) {
+    if (route == "rider") {
       // add rider_route to rider_trips
       user.rider_trips.push(user.rider_route)
       // reset rider_route
@@ -52,19 +57,16 @@ module.exports = {
         started: false
       }
       await user.save();
-    }
 
     // end route as driver
-    if (user.driver_route.started) {
+    } else if (route == "driver") {
       // add driver route to driver_trips
       user.driver_trips.push(user.driver_route);
       // for all riders
       for (var riderId of user.driver_route.riders) {
         let riders = await User.find( { _id: riderId } ).catch(err => console.log('ERR FINDING: ', err))
         let rider = riders[0];
-        // add rider_route to rider_trips
         rider.rider_trips.push(rider.rider_route);
-        // remove rider_route
         rider.rider_route = {
           started: false
         }
@@ -76,7 +78,6 @@ module.exports = {
       }
       await user.save();
     }
-
     return 'ended trip!';
   },
 

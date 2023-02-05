@@ -1,1 +1,1 @@
-module.exports="AIzaSyAdZQXhvyRtuU-5MvHLDeAPfRV9-d9W61g"
+module.exports= 'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac';

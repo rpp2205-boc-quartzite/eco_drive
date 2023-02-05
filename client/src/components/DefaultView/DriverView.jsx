@@ -33,9 +33,9 @@ function DriverView ({ userId }) {
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
-  const [showPrompt, setPrompt] = useState(false)
+  const [showPrompt, setPrompt] = useState(false);
+  const [favorites, setFavorites] = useState({});
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
-
 
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
@@ -114,6 +114,7 @@ function DriverView ({ userId }) {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
       setUpcoming(result.data[0].driver_route)
+      setFavorites(result.data[0].favorites)
       if (!result.data[0].drivers_license) {
         setPrompt(true)
       }
@@ -130,7 +131,7 @@ function DriverView ({ userId }) {
       <div className="defaultViewHeader">
         <div className="headerToggleView">
           <Link to="/riderview">
-            <div className="viewToggle">Rider</div>
+            <div className="viewToggle">Driver</div>
             <TbRefresh className="viewToggleButton" size={25} />
           </Link>
         </div>
@@ -160,7 +161,6 @@ function DriverView ({ userId }) {
               <Autocomplete
                 className="inputField1"
                 apiKey={API_KEY}
-                style={{ width: "90%" }}
                 placeholder="Starting point"
                 ref={pickUpRef}
                 onPlaceSelected={(place) => {
@@ -168,7 +168,6 @@ function DriverView ({ userId }) {
                   let lng = place.geometry.location.lng();
                   setStart({...start, start_address: place.formatted_address, start_lat: lat, start_lng: lng});
                   setPickUp(place.formatted_address);
-                  // console.log(place);
                 }}
                 options={{
                   types: ["address"],
@@ -178,7 +177,6 @@ function DriverView ({ userId }) {
               <Autocomplete
                 className="inputField2"
                 apiKey={API_KEY}
-                style={{ width: "90%" }}
                 placeholder="Destination"
                 ref={dropOffRef}
                 onPlaceSelected={(place) => {
@@ -186,7 +184,6 @@ function DriverView ({ userId }) {
                   let lng = place.geometry.location.lng();
                   setEnd({...end, end_address: place.formatted_address, end_lat: lat, end_lng: lng});
                   setDropOff(place.formatted_address);
-                  // console.log(place);
                 }}
                 options={{
                   types: ["address"],
@@ -206,20 +203,18 @@ function DriverView ({ userId }) {
                     timeCaption="Time"
                     dateFormat="h:mm aa"
                   />
-              <input type="text" className="inputField4" style={{ width: "90%" }} placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/>
+              <input type="text" className="inputField4" placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/>
               <div className="defaultRadioCont">
                 <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-
             <Link to="/rider-list" state={{dir: directionsResponse, route: route}}>
-              <button className="primary-btn-find">Find Riders</button>
+            <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders</button>
             </Link>
           </div>
         </form>
-
       <div>
-        <DefaultRoute userId={userId} upcoming={upcoming} />
+        < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/>
         <OngoingTrip user = {userId} />
         <UpcomingTrip user = {userId} />
       </div>
