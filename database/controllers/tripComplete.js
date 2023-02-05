@@ -36,23 +36,27 @@ module.exports = {
 
   // end a trip (& send back passenger ID list)
   endTrip: async (_id, route) => {
-    let user = await User.find({ _id })
+    let users = await User.find({ _id })
+    let user = users[0];
     console.log('Before:', user)
 
     if (route === "driver") {
       let rider_list = user.driver_route.riders;
       await User.updateOne({ _id }, {$set: {driver_route: { started: false }}}).catch(err => console.log(err));
+      user = await User.find({ _id })
+      console.log('After:', user)
+      return rider_list;
 
     } else if (route == "rider") {
-      let driver = await User.find({ _id: [user.rider_route.driver_id] }).catch(err => console.log(err));
+      let drivers = await User.find({ _id: [user.rider_route.driver_id] }).catch(err => console.log(err));
+      let driver = drivers[0];
       let rider_list = driver.driver_route.riders;
       rider_list.push(driver._id);
-      await User.updateOne({ _id }, {$set: {driver_route: { started: false }}}).catch(err => console.log(err));
+      await User.updateOne({ _id }, {$set: {rider_route: { started: false }}}).catch(err => console.log(err));
+      user = await User.find({ _id })
+      console.log('After:', user)
+      return rider_list;
     }
-
-    user = await User.find({ _id })
-    console.log('After:', user)
-    return rider_list;
   },
 
   // add a favorite to a user's list
