@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { FiInfo } from "react-icons/fi";
-import { HiOutlineHeart, HiHeart } from "react-icons/hi";
+import { HiHeart } from "react-icons/hi";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -67,7 +67,9 @@ const OngoingTrip = (props) => {
           <div className="detail"> {user.driver_route.time} </div>
           <div className="buttons">
             <button className="end-button">Cancel</button>
-            <button type='submit' onClick={endTrip} className="end-button" id="end-trip-button">End Trip</button>
+            <Link to="/trip-complete" state={{ user }}>
+              <button type='submit' onClick={endTrip} className="end-button" id="end-trip-button">End Trip</button>
+            </Link>
           </div>
         </div>
       </div>
@@ -87,7 +89,7 @@ const OngoingTrip = (props) => {
             <div>
               {driver.favorites.includes(user._id)
                 ? <HiHeart className='card-icon full-heart-icon'/>
-                : <HiOutlineHeart className='card-icon outlined-heart-icon'/>
+                : (<p> </p>)
               }
             </div>
             <Link to="/ratings-reviews">
@@ -99,20 +101,22 @@ const OngoingTrip = (props) => {
           <div className="detail"> {user.rider_route.time} </div>
           <div className="buttons">
             <button className="end-button">Cancel</button>
-            <button type='submit' onClick={endTrip} className="end-button" id="end-trip-button">End Trip</button>
+            <Link to="/trip-complete" state={{ user }}>
+              <button type='submit' onClick={endTrip} className="end-button" id="end-trip-button">End Trip</button>
+            </Link>
           </div>
         </div>
       </div>
     )
-  // no upcoming routes
+  // no ongoing routes
   } else {
     return (
       <div className="ongoing-trip-container">
-      <div className="ongoing-title">Ongoing Trip</div>
+        <div className="ongoing-title">Ongoing Trip</div>
         <div className="card">
           <p> No Active Routes </p>
         </div>
-    </div>
+      </div>
     )
   }
 }

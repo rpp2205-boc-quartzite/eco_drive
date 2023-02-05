@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { FiInfo } from "react-icons/fi";
-import { HiOutlineHeart, HiHeart } from "react-icons/hi";
+import { HiHeart } from "react-icons/hi";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -86,7 +86,7 @@ const UpcomingTrip = (props) => {
             <div>
               {driver.favorites.includes(user._id)
                 ? <HiHeart className='card-icon full-heart-icon'/>
-                : <HiOutlineHeart className='card-icon outlined-heart-icon'/>
+                : (<p> </p>)
               }
             </div>
             <Link to="/ratings-reviews">

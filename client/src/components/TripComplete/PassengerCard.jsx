@@ -1,11 +1,13 @@
-import { React, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiInfo } from "react-icons/fi";
+import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import axios from 'axios';
 
 const PassengerCard = (props) => {
 
-  const [avatarLink, setAvatarLink] = useState('foto');
-  const [name, setName] = useState('myname');
+  // const [avatarLink, setAvatarLink] = useState('foto');
+  // const [name, setName] = useState('myname');
 
   const getUser = (userId) => {
     axios.get('/getdriverview',  { params: {userId} })
@@ -19,17 +21,18 @@ const PassengerCard = (props) => {
       .catch(err => console.log('ERRRORR', err))
   }
 
-  getUser(props.pId)
+  // getUser(props.pId)
 
   return (
     <div className="passenger-card">
       <div >
-        <img src={avatarLink} alt="avatar" className='profilePhoto'/>
+        {/* <img src={avatarLink} alt="avatar" className='profilePhoto'/> */}
+        avatar
       </div>
-      <span> {name} </span>
-      <span> Heart </span>
-      <Link to='/ratings_reviews' state={props.pId}>
-        <span> Info </span>
+      <span id="name"> name </span>
+      <HiHeart className='card-icon full-heart-icon'/>
+      <Link to="/ratings-reviews">
+        <FiInfo className='card-icon info-icon'/>
       </Link>
     </div>
   )
