@@ -21,7 +21,7 @@
   padding-bottom: 10px;
 }
 /* card */
-.card {
+.trip-card {
   border: 1px solid var(--gray4);
   border-radius: 5px;
   padding: 16px 16px;
@@ -33,6 +33,12 @@
   display: grid;
   grid-template-columns: 1fr 3fr 1fr 1fr;
   text-align: center;
+  line-height: 40px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 /* avatar */
 .profilePhoto {
@@ -43,19 +49,34 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  float: left;
 }
 /* route information */
 .detail {
-  padding-top: 3px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 /* buttons container */
 .buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  margin-top: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 }
 /* buttons */
 .end-button {
   width: 100px;
+  border-radius: 50px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  border: 0em;
 }
 /* end trip button */
 #end-trip-button {
@@ -63,5 +84,5 @@
 }
 /* start trip button */
 #start-trip-button {
-  background-color: green;
+  background: var(--green3);
 }

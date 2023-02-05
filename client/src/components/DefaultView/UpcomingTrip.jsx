@@ -41,7 +41,7 @@ const UpcomingTrip = (props) => {
     return (
       <div className="ongoing-trip-container">
         <div className="ongoing-title">Upcoming Trip</div>
-        <div className="card">
+        <div className="trip-card">
           <div className="profile">
             <div>
               <img src={user.avatar} alt="avatar" className='profilePhoto'/>
@@ -66,7 +66,7 @@ const UpcomingTrip = (props) => {
     return (
       <div className="ongoing-trip-container">
         <div className="ongoing-title">Upcoming Trip</div>
-        <div className="card">
+        <div className="trip-card">
           <div className="profile">
             <div>
               <img src={driver.avatar} alt="avatar" className='profilePhoto'/>
