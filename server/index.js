@@ -5,18 +5,6 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 const auth = require('./auth.js');
-const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
-const { updateDriverProfile, updateRiderProfile, getUserInfo } = require('../database/controllers/userProfile.js')
-const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
-//const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
-const { postReviewHandler } = require('../database/controllers/reviews.js');
-const { postReportHandler } = require('../database/controllers/report.js');
-//*****const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
-//const { getDriverView, getRiderView } = require('../database/controllers/defaultviews.js')
-const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
-const { calculateDistance } = require('./helpers/driverListHelpers.js')
-const { getRiderArray, updateCurrentDriverRoute, updateCurrentRiderRoute, updateAllRiderRoutes } = require ('../database/controllers/riderList.js');
-//const goodbye = require('./routes/goodbye.js');
 const bodyParser = require('body-parser');
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -27,7 +15,15 @@ app.use(bodyParser.json())
 const db = require('../database/index.js');
 
 // db controllers
-const User = require('../database/models/user.js');
+const tripComplete = require('../database/controllers/tripComplete.js');
+const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
+const { calculateDistance } = require('./helpers/driverListHelpers.js')
+const { getRiderArray, updateCurrentDriverRoute, updateCurrentRiderRoute, updateAllRiderRoutes } = require ('../database/controllers/riderList.js');
+const { postReviewHandler } = require('../database/controllers/reviews.js');
+const { postReportHandler } = require('../database/controllers/report.js');
+const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
+const { updateDriverProfile, updateRiderProfile, getUserInfo } = require('../database/controllers/userProfile.js')
+const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -55,28 +51,28 @@ app.get('/goodbye', (req, res) => {
 // test database user insertion
 app.post('/database', async (req, res) => {
   // console.log('server/index.js - app.post - /database - here');
-  await tripCompletion.addExampleUser()
+  await tripComplete.addExampleUser()
   res.send('complete')
 })
 
 // start the trip
 app.put('/start-trip/:_id', async (req, res) => {
   // console.log('made it here', req.params._id);
-  let result = await tripCompletion.startTrip(req.params._id)
+  let result = await tripComplete.startTrip(req.params._id)
   res.send(result);
 })
 
 // end the trip
 app.put('/end-trip/:_id', async (req, res) => {
   // console.log('made it here2', req.params._id);
-  let result = await tripCompletion.endTrip(req.params._id)
+  let result = await tripComplete.endTrip(req.params._id)
   res.send(result);
 })
 
 // favorite a user
 app.put('/favorite/:user_id/:favorite_user_id', async (req, res) => {
   console.log('favorite time', req.params.user_id, req.params.favorite_user_id);
-  let result = await tripCompletion.endTrip(req.params._id)
+  let result = await tripComplete.endTrip(req.params._id)
   res.send(result);
 })
 
