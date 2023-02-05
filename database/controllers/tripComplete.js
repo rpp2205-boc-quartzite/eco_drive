@@ -26,18 +26,11 @@ module.exports = {
 
   // start user's route
   startRoute: async (_id, route) => {
-    console.log('Here we are ID', _id);
-    let users = await User.find( { _id } ).catch(err => console.log('ERR FINDING: ', err))
-    let user = users[0];
-    // console.log('USER:', user);
-    if (route == "rider") {
-      user.rider_route.started = true;
-      await user.save()
-    } else if (route == "driver") {
-      user.driver_route.started = true;
-      await user.save()
-    }
-    // console.log('USER2:', user);
+    let user = await User.find({ _id })
+    console.log('Before:', user)
+    const result = await User.updateOne({ _id }, {$set: {[`${route}_route.started`]: true}}).catch(err => console.log(err));
+    user = await User.find({ _id })
+    console.log('After:', user)
     return 'started trip';
   },
 

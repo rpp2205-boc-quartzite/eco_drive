@@ -58,7 +58,7 @@ app.post('/database', async (req, res) => {
 // start rider route
 app.put('/start-route/:_id/:route', async (req, res) => {
   // console.log('made it here', req.params._id);
-  let result = await tripComplete.startTrip(req.params._id, req.params.route)
+  let result = await tripComplete.startRoute(req.params._id, req.params.route)
   res.send(result);
 })
 

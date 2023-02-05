@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import { FiInfo } from "react-icons/fi";
+import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -6,6 +9,7 @@ const UpcomingTrip = (props) => {
 
   const [user, setUser] = useState(null);
   const [driver,setDriver] = useState(null);
+  const [isFavorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const myFunc = async () => {
@@ -23,7 +27,7 @@ const UpcomingTrip = (props) => {
 
   // upcoming route as a rider
   const getDriver = async () => {
-    if (!user.rider_route.started && user.rider_route.driver_id) {
+    if (user && !user.rider_route.started && user.rider_route.driver_id) {
       let driverId = user.rider_route.driver_id;
       let result = await axios.get('/getdriverview', { params: {userId: driverId}}).catch(err => console.log('ERR: ', err))
       result = result.data[0];
@@ -31,9 +35,15 @@ const UpcomingTrip = (props) => {
     }
   }
 
-  const startTrip = () => {
-    console.log('started');
+  // mark trip as started and make sure component re-renders
+  const startTrip = async () => {
+    console.log('Start:', user);
+    let route = (user.driver_route.start_address? 'driver': 'rider')
+    let result = await axios.put(`/start-route/${user._id}/${route}`).catch(err => console.log('ERROR:', err))
+    console.log('Finished:', user);
   }
+
+  console.log('User2', user);
 
   // upcoming route as a driver
   // user driver_route not started && user has a driver_route set
@@ -46,9 +56,13 @@ const UpcomingTrip = (props) => {
             <div>
               <img src={user.avatar} alt="avatar" className='profilePhoto'/>
             </div>
-            <span>{user.full_name}</span>
-            <span>Heart</span>
-            <span>Info</span>
+            <span id="name">{user.full_name}</span>
+            <div>
+              <p> </p>
+            </div>
+            <Link to="/ratings-reviews">
+              <FiInfo className='card-icon info-icon'/>
+            </Link>
           </div>
           <div className="detail"> {user.driver_route.start_address} </div>
           <div className="detail"> {user.license_plate} </div>
@@ -71,9 +85,16 @@ const UpcomingTrip = (props) => {
             <div>
               <img src={driver.avatar} alt="avatar" className='profilePhoto'/>
             </div>
-            <span>{driver.full_name}</span>
-            <span>Heart</span>
-            <span>Info</span>
+            <span id="name">{driver.full_name}</span>
+            <div>
+              {isFavorite
+                ? <HiHeart className='card-icon full-heart-icon'/>
+                : <HiOutlineHeart className='card-icon outlined-heart-icon'/>
+              }
+            </div>
+            <Link to="/ratings-reviews">
+              <FiInfo className='card-icon info-icon'/>
+            </Link>
           </div>
           <div className="detail"> {user.rider_route.start_address} </div>
           <div className="detail"> {driver.license_plate} </div>

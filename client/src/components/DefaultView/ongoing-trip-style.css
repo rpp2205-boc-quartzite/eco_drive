@@ -51,6 +51,11 @@
   margin-right: auto;
   float: left;
 }
+/* name */
+#name {
+  padding-left: 12px;
+  text-align: left;
+}
 /* route information */
 .detail {
   font-family: 'Poppins';
@@ -77,12 +82,15 @@
   font-weight: 400;
   font-size: 12px;
   border: 0em;
+  height: 25px;
 }
 /* end trip button */
 #end-trip-button {
-  background-color: red;
+  background: #f52811;
+  color: var(--gray1);
 }
 /* start trip button */
 #start-trip-button {
   background: var(--green3);
+  color: var(--gray1);
 }
