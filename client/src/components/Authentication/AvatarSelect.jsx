@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+
 const headers = {
-  'Authorization': 'Client-ID 1KZjL3_0ZYb1wtaVFXfznj2NwflFvLSfR4pcGFQGsKc'
+  'Authorization': process.env.UNSPLASH
 };
 
 export default function AvatarSelect(props) {

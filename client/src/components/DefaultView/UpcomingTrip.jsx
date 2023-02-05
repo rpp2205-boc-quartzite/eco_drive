@@ -7,8 +7,6 @@ class UpcomingTrip extends React.Component {
     super(props)
     this.state = {
       user: null,
-      hasRiderRoute: false,
-      hasDriverRoute: false,
       driver: null
     }
   }
@@ -18,23 +16,18 @@ class UpcomingTrip extends React.Component {
       .then(result => {
         let user = result.data[0];
         // console.log('USSSSEERRR:', user);
-        this.setState( { user } ); // set the user profile
+        this.setState( { user } );
 
-        if (!user.rider_route.started && user.rider_route.driver_id) { // upcoming route as a rider
+        // upcoming route as a rider
+        if (!user.rider_route.started && user.rider_route.driver_id) {
           let driverId = user.rider_route.driver_id;
           axios.get('/getdriverview', { params: {userId: driverId}})
             .then(result => {
               let driver = result.data[0];
               // console.log('DRIVEERRRR:', driver);
-              this.setState( {driver, hasRiderRoute: true} ); // set the driver profile
+              this.setState( {driver} );
             })
-            .catch(err => {
-              console.log('Failed');
-            })
-        }
-
-        if (!user.driver_route.started && user.driver_route.riders.length > 0) { // upcoming route as a driver
-          this.setState( {driver: user, hasDriverRoute: true} ) // set driver as user
+            .catch(err => console.log('Failed', err))
         }
       })
       .catch(err => console.log('ERR: ', err))
@@ -42,31 +35,25 @@ class UpcomingTrip extends React.Component {
 
   startTrip () {
     // start driver trip
-    if (hasDriverRoute) {
-      axios.put(`/start-driver-trip/${this.state.user._id}`)
+    if (!user.driver_route.started && user.driver_route.start_address) {
+      axios.put(`/start-route/${this.state.user._id}/driver`)
       .then(result => {
         console.log('RESULT:', result);
-        this.setState(hasDriverRoute: false);
       })
-      .catch(err => {
-        console.log('ERROR HERE:', err);
-      })
+      .catch(err => console.log('ERROR HERE:', err))
     // start rider trip
-    } else if (hasRiderRoute) {
-      axios.put(`/start-rider-trip/${this.state.user._id}`)
+    } else if (!user.rider_route.started && user.rider_route.driver_id) {
+      axios.put(`/start-route/${this.state.user._id}/rider`)
       .then(result => {
         console.log('RESULT:', result);
-        this.setState(hasRiderRoute: false);
       })
-      .catch(err => {
-        console.log('ERROR HERE:', err);
-      })
+      .catch(err => console.log('ERROR HERE:', err))
     }
   }
 
   render () {
     // upcoming route as driver
-    if (hasDriverRoute) {
+    if (!user.driver_route.started && user.driver_route.start_address) {
       return (
         <div className="ongoing-trip-container">
           <div className="ongoing-title">Upcoming Trip</div>
@@ -90,7 +77,7 @@ class UpcomingTrip extends React.Component {
         </div>
       )
     // upcoming route as rider
-    } else if (hasRiderRoute) {
+    } else if (!user.rider_route.started && user.rider_route.driver_id) {
       return (
         <div className="ongoing-trip-container">
           <div className="ongoing-title">Upcoming Trip</div>

@@ -24,8 +24,8 @@ module.exports = {
     return user;
   },
 
-  // start user's rider route trip
-  startTrip: async (_id) => {
+  // start user's route
+  startRoute: async (_id, route) => {
     console.log('Here we are ID', _id);
     let users = await User.find( { _id } ).catch(err => console.log('ERR FINDING: ', err))
     let user = users[0];
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   // end user's trip (rider or driver)
-  endTrip: async (_id) => {
+  endTrip: async (_id, route) => {
     // console.log('Lets Do This: ', _id);
     let users = await User.find( { _id } ).catch(err => console.log('ERR FINDING: ', err))
     let user = users[0];

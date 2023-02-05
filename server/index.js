@@ -3,8 +3,10 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const dotenv = require('dotenv');
 const auth = require('./auth.js');
-const { register, login } = require('../database/controllers/authentication.js');
+const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
+const { updateDriverProfile, updateRiderProfile, getUserInfo } = require('../database/controllers/userProfile.js')
 const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
 //const { getDriver, getRider } = require('../database/controllers/defaultviews.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
@@ -25,7 +27,7 @@ app.use(bodyParser.json())
 const db = require('../database/index.js');
 
 // db controllers
-const tripCompletion = require('../database/controllers/tripCompletion.js');
+const User = require('../database/controllers/tripComplete.js');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -57,14 +59,14 @@ app.post('/database', async (req, res) => {
   res.send('complete')
 })
 
-// start the trip
-app.put('/start-trip/:_id', async (req, res) => {
+// start rider route
+app.put('/start-route/:_id/:route', async (req, res) => {
   // console.log('made it here', req.params._id);
-  let result = await tripCompletion.startTrip(req.params._id)
+  let result = await tripCompletion.startTrip(req.params._id, req.params.route);
   res.send(result);
 })
 
-// end the trip
+// end the route (remove from route and add to trips array)
 app.put('/end-trip/:_id', async (req, res) => {
   // console.log('made it here2', req.params._id);
   let result = await tripCompletion.endTrip(req.params._id)
@@ -92,6 +94,11 @@ app.post('/register', register);
 // Login Endpoint
 app.post('/login', login);
 
+app.get('/validate', validate);
+
+app.post('/sendMail', sendMail);
+
+app.put('/change-password', changePassword);
 
 // ---- Default Driver view routes  ---- //
 app.get('/getdriverview', function(req, res) {
@@ -234,80 +241,6 @@ app.put('/driver-list', async (req, res) => {
     res.status(400).send(err)
   }
 })
-
-
-// ###################################################################################//
-// ----------------------------------- Rider List ----------------------------------- //
-// ###################################################################################//
-
-app.post('/rider-list', async (req, res) => {
-  const driver =  {
-    id: req.body.userId,
-    start_address: req.body.start_address,
-    start_lat: req.body.start_lat,
-    start_lng: req.body.start_lng,
-    end_address: req.body.end_address,
-    end_lat: req.body.end_lat,
-    end_lng: req.body.end_lng,
-    time: req.body.time,
-    total_seats: req.body.total_seats,
-    default: req.body.default
-  }
-
-  const riderArray = [];
-  const seats = {total: driver.total_seats};
-
-  try {
-    const unassignedRiders = await getRiderArray();
-    // console.log("Unassigned Riders", unassignedRiders)
-    for (let rider of unassignedRiders) {
-      const startDistance = await calculateDistance(driver.start_lat, driver.start_lng, rider.rider_route.start_lat, rider.rider_route.start_lng);
-      const endDistance = await calculateDistance(driver.start_lat, driver.start_lng, rider.rider_route.start_lat, rider.rider_route.start_lng);
-      if (startDistance !== undefined && endDistance !== undefined) {
-        riderArray.push({rider, startDistance, endDistance, seats})
-      }
-      riderArray.sort((a, b) => {
-        return a.startDistance.value - b.startDistance.value
-      })
-    }
-    res.status(200).send(riderArray)
-  }
-  catch (err) {
-    console.log('The Following Error Occured When Attempting to Capture Riders: ', err)
-    res.status(404).send(err)
-  }
-})
-
-
-app.post('/add-current-routes', async (req, res) => {
-  const driver =  {
-    userId: req.body.driver.userId,
-    start_address: req.body.driver.start_address,
-    start_lat: req.body.driver.start_lat,
-    start_lng: req.body.driver.start_lng,
-    end_address: req.body.driver.end_address,
-    end_lat: req.body.driver.end_lat,
-    end_lng: req.body.driver.end_lng,
-    time: req.body.driver.time,
-    total_seats: req.body.driver.total_seats,
-    default: req.body.driver.default,
-    riders: req.body.riderIDs
-  }
-
-  const riders = req.body.riderIDs;
-
-  try {
-    const updatedDriver = await updateCurrentDriverRoute(driver, riders)
-    const updateRiders = await updateAllRiderRoutes(riders, driver)
-    res.status(200).send({driver: driver, riders: riders})
-
-  }
-  catch(err) {
-    console.log('Updating Driver/Rider Routes: ', err);
-    res.status(400).send(err)
-  }
-})
-
 
 // ---- Catch all for routing ---- //
 

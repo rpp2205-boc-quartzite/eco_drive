@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import Ratings from 'react-ratings-declarative';
-class DriverReviewTile extends React.Component {
+
+class RiderReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,9 +23,9 @@ class DriverReviewTile extends React.Component {
   }
 
   render() {
-    console.log('tile testing', this.state.full_name)
-      return (
-        <div className='profileReviewBox'>
+    return (
+      <div className='profileReviewBox'>
+
           {/* <div className='profileReviewerName'>{this.state.full_name}</div>
           ***** hardcoding this due to lack of good data in DB for now */}
           <div className='profileReviewerName'>Amy Johnson</div>
@@ -45,7 +45,7 @@ class DriverReviewTile extends React.Component {
             </Ratings>
           </div>
           <div className='profileReviewText'>{this.props.review.slice(0, 200)}</div>
-          <div className='profileReviewDate'>2/3/23</div>
+          <div className='profileReviewDate'>1/26/23</div>
         </div>
 
       )
@@ -53,6 +53,4 @@ class DriverReviewTile extends React.Component {
   }
 }
 
-export default DriverReviewTile;
-
-
+export default RiderReviewTile;

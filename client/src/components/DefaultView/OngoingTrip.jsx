@@ -38,29 +38,24 @@ class OngoingTrip extends React.Component {
   }
 
   endTrip () {
-    if (hasDriverRoute) { // end route as driver
+    if (this.state.user.driver_route.started) {
       axios.put(`/end-driver-route/${this.state.user._id}`)
-      .then(result => {
-        console.log('RESULT:', result);
-        this.setState(hasDriverRoute: false);
-      })
-      .catch(err => {
-        console.log('ERROR HERE:', err);
-      })
+        .then(result => {
+          console.log('RESULT:', result);
+        })
+        .catch(err => console.log('ERROR HERE:', err))
 
-    } else if (hasRiderRoute) { // end route as rider
+    } else if (this.state.user.rider_route.started) {
       axios.put(`/end-rider-route/${this.state.user._id}`)
-      .then(result => {
-        console.log('RESULT:', result);
-        this.setState(hasRiderRoute: false);
-      })
-      .catch(err => {
-        console.log('ERROR HERE:', err);
-      })
+        .then(result => {
+          console.log('RESULT:', result);
+        })
+        .catch(err => console.log('ERROR HERE:', err))
     }
   }
 
   render () {
+    console.log(this.state);
     // ongoing route as driver
     if (this.state.user.driver_route.started) {
       return (
@@ -123,4 +118,4 @@ class OngoingTrip extends React.Component {
   }
 }
 
-export default UpcomingTrip;
+export default OngoingTrip;
