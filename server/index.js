@@ -55,17 +55,16 @@ app.post('/database', async (req, res) => {
   res.send('complete')
 })
 
-// start the trip
-app.put('/start-trip/:_id', async (req, res) => {
-  // console.log('made it here', req.params._id);
-  let result = await tripComplete.startTrip(req.params._id)
+// start route
+app.put('/start-route/:_id/:route', async (req, res) => {
+  let result = await tripComplete.startRoute(req.params._id, req.params.route)
   res.send(result);
 })
 
-// end the trip
-app.put('/end-trip/:_id', async (req, res) => {
-  // console.log('made it here2', req.params._id);
-  let result = await tripComplete.endTrip(req.params._id)
+// end route (send back passenger ID list)
+app.put('/end-trip/:_id/:route', async (req, res) => {
+  let result = await tripComplete.endTrip(req.params._id, req.params.route)
+  console.log('RESULTT:', result);
   res.send(result);
 })
 
