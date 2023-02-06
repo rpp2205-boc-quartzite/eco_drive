@@ -5,31 +5,28 @@ import axios from 'axios';
 
 const RiderList = function(props) {
 
-  const [riders, setRiders] = React.useState([]);
-  const [totalRiders, setTotalRiders] = React.useState([]);
+  const [totalRiders, setTotalRiders] = React.useState(['no', 'riders']);
   const [acceptedRiders, setAcceptedRiders] = React.useState({})
   const [declined, setDeclined] = React.useState({});
   const [passedDriver, setPassedDriver] = React.useState(props.driverData);
 
-  if (!riders.length) {
-    setRiders(props.riders)
-  }
+    var localDeclined = localStorage.getItem("declined");
+    var parsedLocalDeclined = JSON.parse(localDeclined);
+    setDeclined(parsedLocalDeclined);
 
-  if (!totalRiders.length) {
-    var seats = props.seats;
-    if (seats > props.riders.length) {
-      seats = props.riders.length;
-    }
-    var ridersArray = [];
-    for (var i = 0; i < seats; i++) {
-      ridersArray.push(props.riders[i]);
-    }
-    setTotalRiders(ridersArray);
-  };
 
-  React.useEffect(() => {
-    console.log('TOTAL RIDERS: ', totalRiders);
-  }, [totalRiders])
+    if (props.riders.length) {
+      var seats = props.seats;
+      if (seats > props.riders.length) {
+        seats = props.riders.length;
+      }
+      var ridersArray = [];
+      for (var i = 0; i < seats; i++) {
+        ridersArray.push(props.riders[i]);
+      }
+      setTotalRiders(ridersArray);
+    }
+
 
 
   const removeRider = (e) => {
@@ -47,21 +44,23 @@ const RiderList = function(props) {
     }
     var newTotal = newRiders.slice(0, seats)
     setDeclined(container);
+    var parsedContsainer = JSON.parse(container);
+    localStorage.setItem("declined", parsedContsainer);
     setTotalRiders(newTotal);
   };
 
 
 
-  if (!totalRiders || !totalRiders.length) {
+  if (totalRiders[0] === 'no') {
     return (
-      <div className='loading-screen'>
-    <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
-    <p>Loading Riders...</p>
- </div>
+      <div>No Riders Have Booked you Yet... But Don't Worry! Check back shortly to see your Riders!</div>
+      // <div className='loading-screen'>
+      //   <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
+      //   <p>Loading Riders...</p>
+      // </div>
     )
   } else {
     return (
-
       <div>
         <br></br>
         <Link to="/driverview" state={{driverData: passedDriver, riderData: totalRiders}}>
