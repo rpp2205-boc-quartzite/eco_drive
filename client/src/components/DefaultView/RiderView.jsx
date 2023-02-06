@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 
-import DefaultRoute from './DefaultRoute.jsx';
+import DefaultRouteRider from './DefaultRouteRider.jsx';
 import OngoingTripRider from './OngoingTripRider.jsx';
 import UpcomingTripRider from './UpcomingTripRider.jsx';
 import './ongoing-trip-style.css';
@@ -166,7 +166,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
           </div>
         </form>
       <div>
-        <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites} userInfo={userInfo}/>
+        <DefaultRouteRider userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites} userInfo={userInfo}/>
         {startedTrip === true
         ? <OngoingTripRider userId={userId} endTrip={endTrip}/>
         : (

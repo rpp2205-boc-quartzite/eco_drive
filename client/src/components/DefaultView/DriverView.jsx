@@ -9,7 +9,7 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
 
-import DefaultRoute from './DefaultRoute.jsx';
+import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import OngoingTripDriver from './OngoingTripDriver.jsx';
 import UpcomingTripDriver from './UpcomingTripDriver.jsx';
@@ -230,7 +230,7 @@ function DriverView ({ userId }) {
           </div>
         </form>
       <div>
-        <DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/>
+        <DefaultRouteDriver userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites} dir={directionsResponse} route={route}/>
         {startedTrip === true
         ? <OngoingTripDriver userId={userId} endTrip={endTrip}/>
         : (

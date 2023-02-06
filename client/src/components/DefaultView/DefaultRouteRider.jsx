@@ -1,32 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom'
 
-const DefaultRoute = ({ userId, upcoming, view, favorites, userInfo }) => {
-  //const [route, setRoute] = useState(upcoming);
+const DefaultRouteRider = ({ userId, upcoming, view, favorites, userInfo }) => {
   const navigate = useNavigate()
 
-  const route = {
-    _id: userId,
-    start_address: upcoming.start_address,
-    start_lat: upcoming.start_lat,
-    start_lng: upcoming.start_lng,
-    end_address: upcoming.end_address,
-    end_lat: upcoming.end_lat,
-    end_lng: upcoming.end_lng,
-    time: upcoming.time,
-    default: upcoming.default,
-    userFavorites: favorites
-  }
+    const route = {
+      _id: userId,
+      start_address: upcoming.start_address,
+      start_lat: upcoming.start_lat,
+      start_lng: upcoming.start_lng,
+      end_address: upcoming.end_address,
+      end_lat: upcoming.end_lat,
+      end_lng: upcoming.end_lng,
+      time: upcoming.time,
+      default: upcoming.default,
+      userFavorites: favorites
+    }
 
   console.log(route)
 
   const handleClick = (e) => {
     e.preventDefault()
-    if (view === 'rider') {
-      navigate('/driver-list', {state: {route: route, userInfo: userInfo}})
-    } else if (view === 'driver') {
-      navigate('/rider-list', {state: {route: route}})
-    }
+    navigate('/driver-list', {state: {route: route, userInfo: userInfo}})
   }
 
   if (upcoming.default) {
@@ -67,4 +62,4 @@ const DefaultRoute = ({ userId, upcoming, view, favorites, userInfo }) => {
   }
 }
 
-export default DefaultRoute;
+export default DefaultRouteRider;
