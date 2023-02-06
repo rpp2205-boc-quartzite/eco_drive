@@ -7,7 +7,7 @@ const PassengerCard = () => {
       <span> Photo </span>
       <span> Name </span>
       <span> Heart </span>
-      <Link to='/ratings_reviews'>
+      <Link to='/ratings-reviews'>
         <span> Info </span>
       </Link>
     </div>

@@ -18,7 +18,7 @@ const db = require('../database/index.js');
 const tripComplete = require('../database/controllers/tripComplete.js');
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
-const { getRiderArray, updateCurrentDriverRoute, updateCurrentRiderRoute, updateAllRiderRoutes } = require ('../database/controllers/riderList.js');
+const { getRiderArray} = require ('../database/controllers/riderList.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
@@ -231,6 +231,42 @@ app.put('/driver-list', async (req, res) => {
     res.status(400).send(err)
   }
 })
+
+// ###################################################################################//
+// ----------------------------------- Rider List ----------------------------------- //
+// ###################################################################################//
+
+app.post('/rider-list', async (req, res) => {
+  const driver =  {
+    id: req.body.userId,
+    start_address: req.body.start_address,
+    start_lat: req.body.start_lat,
+    start_lng: req.body.start_lng,
+    end_address: req.body.end_address,
+    end_lat: req.body.end_lat,
+    end_lng: req.body.end_lng,
+    time: req.body.time,
+  }
+  const driverID = req.body.userId
+  const seats = req.body.total_seats;
+  // console.log('DRIVER DATA: ', driverID);
+
+  try {
+    const assignedRiders = await getRiderArray(driverID);
+    // console.log('DONE WAITING');
+    Promise.all(assignedRiders)
+      .then((riders) => {
+        // console.log('ALL RIDERS: ', riders)
+        res.status(200).send({riders: riders, seats: seats});
+      })
+  }
+  catch (err) {
+    console.log('The Following Error Occured When Attempting to Capture Riders: ', err)
+    res.status(404).send(err)
+  }
+});
+
+
 
 // ---- Catch all for routing ---- //
 
