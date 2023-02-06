@@ -15,7 +15,20 @@ import OngoingTrip from './OngoingTrip.jsx';
 import UpcomingTrip from './UpcomingTrip.jsx';
 // import ApiKey from './apikey.js';
 
-function DriverView ({ userId }) {
+function DriverView ({ userId, driverOngoingRoute }) {
+
+  const [startedTrip, setStartedTrip] = useState(false);
+
+  const startTrip = async () => {
+    let result = await axios.put(`/start-route/${userId}/rider`).catch(err => console.log('ERROR:', err))
+    setStartedTrip(true);
+  }
+
+  const endTrip = async () => {
+    let result = await axios.put(`/end-trip/${userId}/rider`).catch(err => console.log('ERROR:', err))
+    setStartedTrip(false);
+  }
+
   const [start, setStart] = useState({
     start_address: '',
     start_lat: '',
@@ -215,8 +228,8 @@ function DriverView ({ userId }) {
         </form>
       <div>
         < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/>
-        <OngoingTrip user = {userId} />
-        <UpcomingTrip user = {userId} />
+        <OngoingTrip userId= {userId} />
+        <UpcomingTrip userId= {userId} />
       </div>
 
     </div>

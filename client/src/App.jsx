@@ -62,6 +62,7 @@ function App() {
     userRouteInfo.driver_id = driverInfo._id;
     userRouteInfo.starting_distance = startDistance.text;
     userRouteInfo.end_distance = endDistance.text;
+    userRouteInfo.started = false;
     axios.post('/postRiderRoute', userRouteInfo)
     .then((result) => {
       setRiderOnGoingRoute(driverInfo);

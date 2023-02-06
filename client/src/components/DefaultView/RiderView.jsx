@@ -11,9 +11,26 @@ import "react-datepicker/dist/react-datepicker.css";
 import DefaultRoute from './DefaultRoute.jsx';
 import OngoingTrip from './OngoingTrip.jsx';
 import UpcomingTrip from './UpcomingTrip.jsx';
+import './ongoing-trip-style.css';
 
 
 function RiderView ({ userId, riderOnGoingRoute }) {
+
+  const [startedTrip, setStartedTrip] = useState(riderOnGoingRoute.started ? riderOnGoingRoute.started : false);
+
+  console.log('Started trip: ', startedTrip)
+
+
+  const startTrip = async () => {
+    let result = await axios.put(`/start-route/${userId}/rider`).catch(err => console.log('ERROR:', err))
+    setStartedTrip(true);
+  }
+
+  const endTrip = async () => {
+    let result = await axios.put(`/end-trip/${userId}/rider`).catch(err => console.log('ERROR:', err))
+    setStartedTrip(false);
+  }
+
   const [start, setStart] = useState({
     start_address: '',
     start_lat: '',
@@ -59,6 +76,10 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       setUpcoming(result.data[0].rider_route)
       setFavorites(result.data[0].favorites)
       setUserInfo(result.data[0])
+      console.log('Rider route after axios: ', result.data[0].rider_route)
+      if (result.data[0].rider_route.driver_id !== undefined) {
+        setStartedTrip(result.data[0].rider_route.started)
+      }
     })
     .catch(err => console.log(err))
   }, [])
@@ -147,8 +168,29 @@ function RiderView ({ userId, riderOnGoingRoute }) {
         </form>
       <div>
         <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
-        <OngoingTrip user={userId} />
-        <UpcomingTrip user={userId} route={riderOnGoingRoute} />
+        {/* <OngoingTrip userId={userId} active={}/> */}
+        {startedTrip === true
+        ? <OngoingTrip userId={userId} endTrip={endTrip} active={true} />
+        : (
+          <div className="ongoing-trip-container">
+            <div className="ongoing-title">Ongoing Trip</div>
+            <div className="card">
+              <p> No Active Routes </p>
+            </div>
+          </div>
+        )
+        }
+        {!startedTrip
+        ? <UpcomingTrip userId={userId} startTrip={startTrip} active={true}/>
+        : (
+            <div className="ongoing-trip-container">
+              <div className="ongoing-title">Upcoming Trip</div>
+              <div className="card">
+                <p> No Upcoming Routes </p>
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   )
