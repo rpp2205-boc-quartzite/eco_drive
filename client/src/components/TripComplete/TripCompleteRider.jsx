@@ -12,7 +12,7 @@ const TripCompleteRider = () => {
   const location = useLocation();
   const user = location.state.user;
   const driver = location.state.driver;
-  const passengerIds = [];
+  const passengerIds = [driver._id];
   driver.driver_route.riders.forEach((rider) => {
     if (rider.rider_id && !passengerIds.includes(rider.rider_id) && rider.rider_id !== user._id) {
       passengerIds.push(rider.rider_id)
