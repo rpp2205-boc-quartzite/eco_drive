@@ -55,6 +55,15 @@ const DefaultRoute = ({ userId, upcoming, view, favorites }) => {
         </div>
       </div>
     )
+  } else {
+    return (
+      <div>
+        <div className="defaultRouteTitle">Default Route</div>
+          <div className="card">
+            <p> No Default Route Set </p>
+          </div>
+      </div>
+    )
   }
 }
 

@@ -147,7 +147,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                       className="inputField3"
                       selected={displayTime}
                       onChange={(date) => {
-                        setTime(format(displayTime, 'hh:mm aa'));
+                        setTime(format(date, 'hh:mm aa'));
                         setDisplayTime(new Date(date));
                       }}
                       showTimeSelect

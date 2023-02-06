@@ -210,7 +210,7 @@ function DriverView ({ userId }) {
                     className="inputField3"
                     selected={displayTime}
                     onChange={(date) => {
-                      setTime(format(displayTime, 'hh:mm aa'));
+                      setTime(format(date, 'hh:mm aa'));
                       setDisplayTime(new Date(date));
                     }}
                     showTimeSelect
@@ -230,7 +230,7 @@ function DriverView ({ userId }) {
           </div>
         </form>
       <div>
-        {/* < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/> */}
+        <DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/>
         {startedTrip === true
         ? <OngoingTripDriver userId={userId} endTrip={endTrip}/>
         : (
