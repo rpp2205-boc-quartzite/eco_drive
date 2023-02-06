@@ -166,7 +166,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
           </div>
         </form>
       <div>
-        <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
+        <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites} userInfo={userInfo}/>
         {startedTrip === true
         ? <OngoingTripRider userId={userId} endTrip={endTrip}/>
         : (

@@ -19,6 +19,8 @@ const DriverList = (props) => {
   const info = useLocation()
   const {route, userInfo} = info.state
 
+  console.log('HERE IS USER INFO', userInfo)
+
   const findDrivers = () => {
     const rider = {
       _id: route._id,
