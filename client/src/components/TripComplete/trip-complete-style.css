@@ -1,6 +1,4 @@
-/* Trip ended review */
-
-/* Auto layout */
+/* Trip ended  */
 
 .trip-complete {
   display: flex;
@@ -9,7 +7,6 @@
   padding: 40px 16px;
   gap: 32px;
   width: 375px;
-  height: 554px;
   overflow-y: scroll;
   flex: none;
   order: 2;
@@ -53,16 +50,22 @@
 
 .passenger-card {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
   border: 1px solid var(--gray4);
   background: #ececec;
   border-radius: 5px;
   padding: 16px 16px;
   margin-bottom: 15px;
+  text-align: center;
+  line-height: 40px;
+  width: 310px;
 }
 
 #name {
-  padding-left: 5px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
 }
 
 #back-to-home {

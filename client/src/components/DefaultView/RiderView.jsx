@@ -9,8 +9,8 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 
 import DefaultRoute from './DefaultRoute.jsx';
-import OngoingTrip from './OngoingTrip.jsx';
-import UpcomingTrip from './UpcomingTrip.jsx';
+import OngoingTripRider from './OngoingTripRider.jsx';
+import UpcomingTripRider from './UpcomingTripRider.jsx';
 import './ongoing-trip-style.css';
 
 
@@ -76,7 +76,6 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       setUpcoming(result.data[0].rider_route)
       setFavorites(result.data[0].favorites)
       setUserInfo(result.data[0])
-      console.log('Rider route after axios: ', result.data[0].rider_route)
       if (result.data[0].rider_route.driver_id !== undefined) {
         setStartedTrip(result.data[0].rider_route.started)
       }
@@ -168,9 +167,8 @@ function RiderView ({ userId, riderOnGoingRoute }) {
         </form>
       <div>
         <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
-        {/* <OngoingTrip userId={userId} active={}/> */}
         {startedTrip === true
-        ? <OngoingTrip userId={userId} endTrip={endTrip} active={true} />
+        ? <OngoingTripRider userId={userId} endTrip={endTrip}/>
         : (
           <div className="ongoing-trip-container">
             <div className="ongoing-title">Ongoing Trip</div>
@@ -181,7 +179,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
         )
         }
         {!startedTrip
-        ? <UpcomingTrip userId={userId} startTrip={startTrip} active={true}/>
+        ? <UpcomingTripRider userId={userId} startTrip={startTrip}/>
         : (
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>
