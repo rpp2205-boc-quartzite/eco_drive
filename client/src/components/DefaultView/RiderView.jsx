@@ -92,10 +92,15 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             <HiOutlineRefresh className="viewToggleButton" size={25}/>
           </Link>
         </div>
+
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
             <Link to="/riderprofile" state={{id: userId}} >
-            <button>Avatar</button>
+              <img
+                src={avatar}
+                alt="avatar-small"
+                className="defaultViewAvatar"
+              />
             </Link> </div>
 
           <div className="headerLogout">
@@ -157,7 +162,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                       dateFormat="h:mm aa"
                     />
               <div className="defaultRadioCont">
-                <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
+                <input type="radio" className="radioInput" onClick={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
             <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>

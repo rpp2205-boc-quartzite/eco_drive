@@ -361,6 +361,15 @@ h1 {
 .licenseModalContent {
   padding-top: 200px;
 }
+
+.defaultViewAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
 /* -------- BECCA CSS END -------- */
 
 /* -------- BLAKE Authentication CSS -------- */

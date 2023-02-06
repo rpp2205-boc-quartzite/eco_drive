@@ -151,10 +151,15 @@ function DriverView ({ userId }) {
             <TbRefresh className="viewToggleButton" size={25} />
           </Link>
         </div>
+
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
             <Link to="/driverprofile" state={{id: userId}}>
-            <button>Avatar</button>
+              <img
+                  src={avatar}
+                  alt="avatar-small"
+                  className="defaultViewAvatar"
+                />
             </Link></div>
 
           <div className="headerLogout">
