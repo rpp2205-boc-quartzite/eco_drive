@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const RiderList = function(props) {
-  console.log('FIRST RIDER', props.riders[0])
 
   const [riders, setRiders] = React.useState([]);
   const [totalRiders, setTotalRiders] = React.useState([]);
@@ -17,15 +16,19 @@ const RiderList = function(props) {
   }
 
   if (!totalRiders.length) {
+    var seats = props.seats;
+    if (seats > props.riders.length) {
+      seats = props.riders.length;
+    }
     var ridersArray = [];
-    for (var i = 0; i < props.seats; i++) {
+    for (var i = 0; i < seats; i++) {
       ridersArray.push(props.riders[i]);
     }
     setTotalRiders(ridersArray);
   };
 
   React.useEffect(() => {
-    console.log(totalRiders);
+    console.log('TOTAL RIDERS: ', totalRiders);
   }, [totalRiders])
 
 
@@ -34,27 +37,22 @@ const RiderList = function(props) {
     container[e.target.name] = true;
     var newRiders = []
     for (var i = 0; i < props.riders.length; i++) {
-      if (container[props.riders[i].email] === undefined) {
+      if (container[props.riders[i].profile.email] === undefined) {
         newRiders.push(props.riders[i]);
       }
     }
-    var newTotal = newRiders.slice(0, props.seats)
+    var seats = props.seats;
+    if (seats > props.riders.length) {
+      seats = props.riders.length;
+    }
+    var newTotal = newRiders.slice(0, seats)
     setDeclined(container);
     setTotalRiders(newTotal);
   };
 
-  // const postCurrentRoutes = function() {
-  //   return axios.post('/add-current-routes', {
-  //     driver: props.driver,
-  //     riderIDs: acceptedRiders
-  //   })
-  //     .then((results) => {
-  //       console.log(results.data);
-  //     })
-  // }
 
 
-  if (!riders || !riders.length) {
+  if (!totalRiders || !totalRiders.length) {
     return (
       <div className='loading-screen'>
     <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
@@ -66,23 +64,22 @@ const RiderList = function(props) {
 
       <div>
         <br></br>
-        {/* to be added when refactored */}
-        {/* onClick={postCurrentRoutes} */}
         <Link to="/driverview" state={{driverData: passedDriver, riderData: totalRiders}}>
         <button className="start-trip"type="submit" >Accept Riders</button>
         </Link>
         <br></br>
         <div className="rider-card-list">
           {totalRiders.map((rider) => {
+            console.log("RIDER: ", rider)
             return (
-              <div className="rider-card" key={rider.email}>
+              <div className="rider-card" key={rider.profile.email}>
                 <button className="info-icon" type="submit">insert info icon here</button>
-                <div className="rider-name">{rider.full_name}</div>
-                {/* <div><img alt="specific user profile" className="rider-pic" src={rider.pic} /></div> */}
-                {/* <div className="rider-from">{rider.startDistance.text} Miles from Your Pick-Up Location</div>
-                <div className="rider-to">{rider.endDistance.text} Miles to go from Drop-Off Location</div> */}
+                <div className="rider-name">{rider.profile.full_name}</div>
+                <div><img alt="specific user profile" className="rider-pic" src={rider.profile.avatar} /></div>
+                <div className="rider-from">{rider.riderID.starting_distance} from Your Pick-Up Location</div>
+                <div className="rider-to">{rider.riderID.end_distance} from Drop-Off to Final Destination</div>
                 {/* <div className="rider-time">{rider.time}</div> */}
-                <button className="remove-rider" name={rider.email} onClick={removeRider} type="submit">decline this rider</button>
+                <button className="remove-rider" name={rider.profile.email} onClick={removeRider} type="submit">decline this rider</button>
               </div>
             )
           })}
