@@ -104,7 +104,7 @@ const DriverList = (props) => {
           ))}
         </div>
         <div className='driver-list'>
-          <p className='subheader-driver'>Non-favorite drivers</p>
+          <p className='subheader-driver'>Drivers</p>
           {nonFavoritesDrivers.map((driver) => (
             <DriverCard
               key={driver.driverInfo._id}
