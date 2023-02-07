@@ -5,9 +5,10 @@ import { MdLogout } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import RiderReviewsList from './RiderReviewsList.jsx';
+import RiderRecentList from './RiderRecentList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
-import {randomFacts} from './RandomFacts.jsx';
+import { randomFacts } from './RandomFacts.jsx';
 
 class RiderProfile extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class RiderProfile extends React.Component {
     console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
       //userId: this.props.location.state.id,
-      userId: '63d36ee5cd478f26557c4a38',
+      userId: '63db055e255ff6bddca10fe6',
       full_name: '',
       email: '',
       start_address: '',
@@ -27,7 +28,6 @@ class RiderProfile extends React.Component {
       rider_reviews: [],
       recent_drivers: [],
       rating: 4,
-      //hardcoded rating ^ for now
       rider_trips: [],
       editProfile: false,
       infoChangedSuccess: false
@@ -52,7 +52,7 @@ class RiderProfile extends React.Component {
         avatar: result.data[0].avatar,
         drivers_license: result.data[0].drivers_license,
         rider_reviews: result.data[0].rider_reviews,
-        recent_riders: result.data[0].recent_riders
+        recent_drivers: result.data[0].recent_drivers
       })
     })
     .catch(err => console.log(err))
@@ -98,7 +98,8 @@ class RiderProfile extends React.Component {
   }
 
   render () {
-    console.log('CHECKING RIDER PROPS', this.props.location.state.id)
+    //console.log('CHECKING RIDER PROPS', this.props.location.state.id)
+    console.log('HELLOOOO', this.state.recent_drivers)
     return (
       <div>
       {/* TOP BUTTONS */}
@@ -197,13 +198,12 @@ class RiderProfile extends React.Component {
           <span className='profileTitle'>Recent drivers</span>
           <div className='profileRecentDriverContainer'>
           {this.state.recent_drivers.length === 0 ?
-          <div className='profilePlaceholder2'>None yet &#129485;</div>
+          <div className='profilePlaceholder2'>None yet &#129485;
+        </div>
           :
-          <Link to="/ratings-reviews">
-          {!this.state.avatar ?
-          <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
-          <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/>
-          }</Link>
+        <div>
+          <RiderRecentList recent_drivers={this.state.recent_drivers}/>
+        </div>
           }
           </div>
         </div>
@@ -249,9 +249,8 @@ class RiderProfile extends React.Component {
             <div className='profileSavingsTitle'>This translates to</div>
             <div className='profileCurrentRouteInfo'>${(this.state.rider_trips.length + 1)* 5.35} you saved on gas &#9981;</div>
           </div>
-          <span className='profileTitle'>Fact of the day</span>
+          <span className='profileTitle'>Did you know? &#128173;</span>
           <div className='profileCurrentRoute'>
-            <div className='profileCurrentRouteTitle'>Did you know? &#128173;</div>
             <div className='profileCurrentRouteInfo'>{randomFacts[Math.floor(Math.random() * 16)]}</div>
           </div>
         </div>

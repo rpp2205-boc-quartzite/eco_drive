@@ -15,7 +15,7 @@ class DriverProfile extends React.Component {
     console.log( 'DRIVER PROFILE PROPS', this.props)
     this.state = {
       //userId: this.props.location.state.id,
-      userId: '63d36ee5cd478f26557c4a38',
+      userId: '63e1be0115a844ab4b7f1b13',
       full_name: '',
       email: '',
       start_address: '',
@@ -27,7 +27,6 @@ class DriverProfile extends React.Component {
       driver_reviews: [],
       recent_riders: [],
       rating: 4,
-      //hardcoded rating ^ for now
       driver_trips: [],
       editProfile: false,
       infoChangedSuccess: false
@@ -54,7 +53,7 @@ class DriverProfile extends React.Component {
         avatar: result.data[0].avatar,
         drivers_license: result.data[0].drivers_license,
         driver_reviews: result.data[0].driver_reviews,
-        recent_drivers: result.data[0].recent_drivers
+        recent_riders: result.data[0].recent_riders
       })
     })
     .catch(err => console.log(err))
@@ -249,9 +248,8 @@ class DriverProfile extends React.Component {
             <div className='profileSavingsTitle'>This translates to</div>
             <div className='profileCurrentRouteInfo'>${(this.state.driver_trips.length + 1)* 5.35} you saved on gas &#9981;</div>
           </div>
-          <span className='profileTitle'>Fact of the day</span>
+          <span className='profileTitle'>Did you know? &#128173;</span>
           <div className='profileCurrentRoute'>
-            <div className='profileCurrentRouteTitle'>Did you know? &#128173;</div>
             <div className='profileCurrentRouteInfo'>{randomFacts[Math.floor(Math.random() * 16)]}</div>
           </div>
         </div>

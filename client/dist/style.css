@@ -2273,6 +2273,7 @@ input.review-summary {
   font-size: 16px;
   line-height: 24px;
   color: #338F24;
+  margin-left: 8px;
 }
 
 .profileToggleButton {
@@ -2289,6 +2290,7 @@ input.review-summary {
 .profileLogoutButton {
   float: right;
   color: #262929;
+  margin-right: 8px;
 }
 
 .profilePhotoDiv {
@@ -2316,7 +2318,9 @@ input.review-summary {
 
 .profileOnline{
   color: #338F24;
-  font-size: xx-large;
+  font-size: 50px;
+  margin-left: 2px;
+  vertical-align: sub;
 }
 
 .profileRatingStars {
