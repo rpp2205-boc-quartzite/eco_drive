@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from "universal-cookie";
+import Cookies from 'universal-cookie';
 
 import DriverView from './components/DefaultView/DriverView.jsx';
 import RiderView from './components/DefaultView/RiderView.jsx';
@@ -24,10 +24,13 @@ function App() {
   const cookies = new Cookies();
 
   useEffect(() => {
+    const token = cookies.get('TOKEN');
+
+    console.log('token: ', token)
     // console.log(document.cookie)
-    // axios.get('/validate', {token: document.cookie})
+    // axios.get('/validate', {token: token})
     // .then((result) => {
-    //   console.log(result)
+    //   console.log('result', result)
     //   setUserId(result.data.user);
     //   if (result.is_driver) {
     //     navigate('/driverview');

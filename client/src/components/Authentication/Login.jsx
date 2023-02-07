@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 export default function Login(props) {
@@ -32,7 +32,7 @@ export default function Login(props) {
                 </div>
                 <div className='forgot-btn'>
                   <Link to='/password-reset'>
-                    <button className='forgot-btn'><span className='forgot-text'>Forgot Password?</span></button>  
+                    <button className='forgot-btn' type='button'><span className='forgot-text'>Forgot Password?</span></button>  
                   </Link>
                 </div>
               </div>
