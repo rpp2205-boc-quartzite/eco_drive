@@ -73,6 +73,20 @@ module.exports = {
     const filter = {_id: userId};
     await User.updateOne(filter, {$pull: {favorites: driverId}}).catch(err => console.log(err));
     return 'Successfully unfavorite driver'
+  },
+
+  // cancel rider route
+  cancelRiderRoute: async (_id) => {
+    const filter = {_id };
+    await User.updateOne(filter, {$set: {rider_route: { started: false }}}).catch(err => console.log(err));
+    return 'Successfully cancelled route'
+  },
+
+  // cancel driver route
+  cancelDriverRoute: async (_id) => {
+    const filter = {_id };
+    await User.updateOne(filter, {$set: {driver_route: { started: false , riders: []}}}).catch(err => console.log(err));
+    return 'Successfully canceled route'
   }
 
 };
