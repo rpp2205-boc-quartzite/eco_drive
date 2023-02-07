@@ -110,7 +110,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
               <img
                 src={avatar}
                 alt="avatar-small"
-                className="defaultViewAvatar"
+                className="profilePhoto"
               />
             </Link> </div>
 

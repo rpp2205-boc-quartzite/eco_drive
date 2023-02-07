@@ -171,7 +171,7 @@ function DriverView ({ userId }) {
               <img
                   src={avatar}
                   alt="avatar-small"
-                  className="defaultViewAvatar"
+                  className="profilePhoto"
                 />
             </Link></div>
 
