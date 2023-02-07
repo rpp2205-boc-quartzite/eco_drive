@@ -26,39 +26,6 @@ const OngoingTripRider = (props) => {
     myFunc();
   }, [])
 
-  // useEffect(() => {
-  //   const myFunc = async () => {
-  //     await getUser(props.user);
-  //     await getDriver();
-  //   }
-  //   myFunc();
-  // }, [user]);
-
-  // const getUser = async (userId) => {
-  //   let result = await axios.get('/getdriverview',  { params: {userId} }).catch(err => console.log('ERR: ', err))
-  //   result = result.data[0];
-  //   setUser(result);
-  // }
-
-  // ongoing route as a rider
-  // const getDriver = async () => {
-  //   let driverId = user.rider_route.driver_id;
-  //   let result = await axios.get('/getriderview', { params: {userId: driverId}}).catch(err => console.log('ERR: ', err))
-  //   result = result.data[0];
-  //   console.log('result', result);
-  //   setDriver(result);
-  // }
-
-  // end trip
-  // const endTrip = async () => {
-  //   console.log('before', user);
-  //   let route = (user.driver_route.started? 'driver': 'rider')
-  //   let result = await axios.put(`/end-trip/${user._id}/${route}`).catch(err => console.log('ERROR:', err))
-  //   console.log('after', user);
-  // }
-
-  console.log('Driver:', driver);
-
   if (user && driver) {
     return (
       <div className="ongoing-trip-container">
