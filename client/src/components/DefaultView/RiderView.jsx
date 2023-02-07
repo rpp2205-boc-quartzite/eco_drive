@@ -176,12 +176,17 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                 <input type="radio" className="radioInput" onClick={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-            {/* <Link to="/driver-list" state={{route: route, userInfo: userInfo}}> */}
-            <button
-              onClick={(e) => handleClick(e)}
-              disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
-            </button>
-            {/* </Link> */}
+            {isDefault
+            ? <button
+                onClick={(e) => handleClick(e)}
+                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+              </button>
+            : <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
+                <button
+                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+                </button>
+              </Link>
+            }
           </div>
         </form>
       <div>
