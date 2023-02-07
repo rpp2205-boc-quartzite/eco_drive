@@ -7,15 +7,28 @@ import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-
 import Autocomplete from "react-google-autocomplete";
+
 import DefaultRoute from './DefaultRoute.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
-import OngoingTrip from './OngoingTrip.jsx';
-import UpcomingTrip from './UpcomingTrip.jsx';
-// import ApiKey from './apikey.js';
+import OngoingTripDriver from './OngoingTripDriver.jsx';
+import UpcomingTripDriver from './UpcomingTripDriver.jsx';
+import './ongoing-trip-style.css';
 
 function DriverView ({ userId }) {
+
+  const [startedTrip, setStartedTrip] = useState(false);
+
+  const startTrip = async () => {
+    let result = await axios.put(`/start-route/${userId}/driver`).catch(err => console.log('ERROR:', err))
+    setStartedTrip(true);
+  }
+
+  const endTrip = async () => {
+    let result = await axios.put(`/end-trip/${userId}/driver`).catch(err => console.log('ERROR:', err))
+    setStartedTrip(false);
+  }
+
   const [start, setStart] = useState({
     start_address: '',
     start_lat: '',
@@ -115,6 +128,9 @@ function DriverView ({ userId }) {
       setName(result.data[0].full_name)
       setUpcoming(result.data[0].driver_route)
       setFavorites(result.data[0].favorites)
+      if (result.data[0].driver_route.start_address !== undefined) {
+        setStartedTrip(result.data[0].driver_route.started)
+      }
       if (!result.data[0].drivers_license) {
         setPrompt(true)
       }
@@ -214,9 +230,29 @@ function DriverView ({ userId }) {
           </div>
         </form>
       <div>
-        < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/>
-        <OngoingTrip user = {userId} />
-        <UpcomingTrip user = {userId} />
+        {/* < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/> */}
+        {startedTrip === true
+        ? <OngoingTripDriver userId={userId} endTrip={endTrip}/>
+        : (
+          <div className="ongoing-trip-container">
+            <div className="ongoing-title">Ongoing Trip</div>
+            <div className="card">
+              <p> No Active Routes </p>
+            </div>
+          </div>
+        )
+        }
+        {!startedTrip
+        ? <UpcomingTripDriver userId={userId} startTrip={startTrip}/>
+        : (
+            <div className="ongoing-trip-container">
+              <div className="ongoing-title">Upcoming Trip</div>
+              <div className="card">
+                <p> No Upcoming Routes </p>
+              </div>
+            </div>
+          )
+        }
       </div>
 
     </div>

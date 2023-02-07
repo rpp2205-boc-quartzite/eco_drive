@@ -1,31 +1,17 @@
-/* Trip ended review */
-
-/* Auto layout */
+/* Trip ended  */
 
 .trip-complete {
-
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 16px;
   gap: 32px;
-
   width: 375px;
-  height: 554px;
   overflow-y: scroll;
-
-  background: #FFFFFF;
-
   flex: none;
   order: 2;
   align-self: stretch;
   flex-grow: 1;
-
-}
-
-.passenger-card {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr 1fr;
 }
 
 .title {
@@ -41,14 +27,6 @@
   flex-grow: 0;
 }
 
-.passenger-list {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
 .riders {
   font-family: 'Poppins';
   font-style: normal;
@@ -61,3 +39,47 @@
   flex-grow: 0;
   text-align: center;
 }
+
+.passenger-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.passenger-card {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+  border: 1px solid var(--gray4);
+  background: #ececec;
+  border-radius: 5px;
+  padding: 16px 16px;
+  margin-bottom: 15px;
+  text-align: center;
+  line-height: 40px;
+  width: 310px;
+}
+
+#name {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+#back-to-home {
+  width: 180px;
+  border-radius: 50px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  border: 0em;
+  height: 30px;
+  background: var(--green3);
+  color: var(--gray1);
+}
+
+
+

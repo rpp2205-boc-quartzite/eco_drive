@@ -18,7 +18,7 @@ const db = require('../database/index.js');
 const tripComplete = require('../database/controllers/tripComplete.js');
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
-const { getRiderArray, updateCurrentDriverRoute, updateCurrentRiderRoute, updateAllRiderRoutes } = require ('../database/controllers/riderList.js');
+const { getRiderArray} = require ('../database/controllers/riderList.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
@@ -55,17 +55,16 @@ app.post('/database', async (req, res) => {
   res.send('complete')
 })
 
-// start the trip
-app.put('/start-trip/:_id', async (req, res) => {
-  // console.log('made it here', req.params._id);
-  let result = await tripComplete.startTrip(req.params._id)
+// start route
+app.put('/start-route/:_id/:route', async (req, res) => {
+  let result = await tripComplete.startRoute(req.params._id, req.params.route)
   res.send(result);
 })
 
-// end the trip
-app.put('/end-trip/:_id', async (req, res) => {
-  // console.log('made it here2', req.params._id);
-  let result = await tripComplete.endTrip(req.params._id)
+// end route (send back passenger ID list)
+app.put('/end-trip/:_id/:route', async (req, res) => {
+  let result = await tripComplete.endTrip(req.params._id, req.params.route)
+  console.log('RESULTT:', result);
   res.send(result);
 })
 
@@ -231,6 +230,42 @@ app.put('/driver-list', async (req, res) => {
     res.status(400).send(err)
   }
 })
+
+// ###################################################################################//
+// ----------------------------------- Rider List ----------------------------------- //
+// ###################################################################################//
+
+app.post('/rider-list', async (req, res) => {
+  const driver =  {
+    id: req.body.userId,
+    start_address: req.body.start_address,
+    start_lat: req.body.start_lat,
+    start_lng: req.body.start_lng,
+    end_address: req.body.end_address,
+    end_lat: req.body.end_lat,
+    end_lng: req.body.end_lng,
+    time: req.body.time,
+  }
+  const driverID = req.body.userId
+  const seats = req.body.total_seats;
+  // console.log('DRIVER DATA: ', driverID);
+
+  try {
+    const assignedRiders = await getRiderArray(driverID);
+    // console.log('DONE WAITING');
+    Promise.all(assignedRiders)
+      .then((riders) => {
+        // console.log('ALL RIDERS: ', riders)
+        res.status(200).send({riders: riders, seats: seats});
+      })
+  }
+  catch (err) {
+    console.log('The Following Error Occured When Attempting to Capture Riders: ', err)
+    res.status(404).send(err)
+  }
+});
+
+
 
 // ---- Catch all for routing ---- //
 

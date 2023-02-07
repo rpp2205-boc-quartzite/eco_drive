@@ -1,40 +1,9 @@
+/* container */
 .ongoing-trip-container {
   width: 350px;
   margin-bottom: 22px;
 }
-
-.card {
-  border: 1px solid var(--gray4);
-  border-radius: 5px;
-  padding: 16px 16px;
-  margin: 0;
-  margin-bottom: 16px;
-}
-.profile {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr 1fr;
-}
-.detail {
-  padding-top: 3px;
-}
-
-.buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.end-button {
-  width: 100px;
-}
-
-#end-trip-button {
-  background-color: red;
-}
-
-#start-trip-button {
-  background-color: green;
-}
-
+/* title */
 .ongoing-title {
   width: 343px;
   height: 24px;
@@ -51,7 +20,27 @@
   padding-left: 17px;
   padding-bottom: 10px;
 }
-
+/* card */
+.trip-card {
+  border: 1px solid var(--gray4);
+  border-radius: 5px;
+  padding: 16px 16px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+/* profile line */
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  text-align: center;
+  line-height: 40px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+/* avatar */
 .profilePhoto {
   width: 40px;
   height: 40px;
@@ -60,4 +49,48 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  float: left;
+}
+/* name */
+#name {
+  padding-left: 12px;
+  text-align: left;
+}
+/* route information */
+.detail {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+/* buttons container */
+.buttons {
+  margin-top: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+/* buttons */
+.end-button {
+  width: 100px;
+  border-radius: 50px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  border: 0em;
+  height: 25px;
+}
+/* end trip button */
+#end-trip-button {
+  background: #f52811;
+  color: var(--gray1);
+}
+/* start trip button */
+#start-trip-button {
+  background: var(--green3);
+  color: var(--gray1);
 }
