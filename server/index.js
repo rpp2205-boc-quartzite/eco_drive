@@ -18,7 +18,7 @@ const db = require('../database/index.js');
 const tripComplete = require('../database/controllers/tripComplete.js');
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
-const { getRiderArray} = require ('../database/controllers/riderList.js');
+const { getRiderArray, addDriversRoute} = require ('../database/controllers/riderList.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
@@ -264,6 +264,30 @@ app.post('/rider-list', async (req, res) => {
     res.status(404).send(err)
   }
 });
+
+app.post("/add-driver-route", (req, res) => {
+  const driver =  {
+    id: req.body.info.id,
+    start_address: req.body.info.start_address,
+    start_lat: req.body.info.start_lat,
+    start_lng: req.body.info.start_lng,
+    end_address: req.body.info.end_address,
+    end_lat: req.body.info.end_lat,
+    end_lng: req.body.info.end_lng,
+    time: req.body.info.time,
+    started: false,
+  }
+
+
+  addDriversRoute(driver)
+    .then((results) => {
+      res.status(204).send(results);
+    })
+    .catch((err) => {
+      console.log('Error: ', err)
+    });
+
+})
 
 
 

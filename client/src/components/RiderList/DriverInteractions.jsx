@@ -36,21 +36,33 @@ const DriverInteractions = function(props) {
   var data = location.state.dir.json;
   var route = location.state.route;
 
-  if (typeof window !== 'undefined') {
-    if (!localStorage.getItem('mapData')) {
-      localStorage.setItem("mapData", data);
-      route = JSON.stringify(route)
-      localStorage.setItem("route", route);
-    } else {
-      const localMap = localStorage.getItem("mapData");
-      const localRoute = localStorage.getItem("route")
-      data = localMap;
-      route = JSON.parse(localRoute);
-    }
-  }
+
+  // if (typeof window !== 'undefined') {
+  //   if (!localStorage.getItem('mapData')) {
+  //     localStorage.setItem("mapData", data);
+  //     route = JSON.stringify(route)
+  //     localStorage.setItem("route", route);
+  //   } else {
+  //     const localMap = localStorage.getItem("mapData");
+  //     const localRoute = localStorage.getItem("route")
+  //     data = localMap;
+  //     route = JSON.parse(localRoute);
+  //   }
+  // }
 
   const directions = JSON.parse(data)
 
+  useEffect(() => {
+    axios.post("/add-driver-route", {
+      info: route
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, [route])
 
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: API_KEY,
@@ -95,7 +107,7 @@ const DriverInteractions = function(props) {
           .catch((err) => console.log('Find drivers error: ', err))
       }
       findRiders();
-    }, 5000);
+    }, 7000);
     return () => clearInterval(interval);
   }, [route]);
 
