@@ -14,8 +14,8 @@ class RiderProfile extends React.Component {
     super(props);
     console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
-      userId: this.props.location.state.id,
-      //userId: '63d36ee5cd478f26557c4a38',
+      //userId: this.props.location.state.id,
+      userId: '63d36ee5cd478f26557c4a38',
       full_name: '',
       email: '',
       start_address: '',
@@ -121,8 +121,8 @@ class RiderProfile extends React.Component {
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
           {!this.state.avatar ?
-          <img className='profilePhoto' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
-          <img className='profilePhoto' src={this.state.avatar} alt="profile avatar"/>
+          <img className='profileprofilePhoto' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
+          <img className='profileprofilePhoto' src={this.state.avatar} alt="profile avatar"/>
           }
         </div>
         <div className='profileName'>
