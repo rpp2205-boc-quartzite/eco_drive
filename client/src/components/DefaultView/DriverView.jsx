@@ -136,7 +136,7 @@ function DriverView ({ userId }) {
       }
     })
     .catch(err => console.log(err))
-  }, [])
+  }, [userId])
 
   const closeModal = () => {
     setPrompt(!showPrompt)

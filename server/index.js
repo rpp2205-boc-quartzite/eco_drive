@@ -6,10 +6,12 @@ const app = express();
 const dotenv = require('dotenv');
 const auth = require('./auth.js');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({extended: true}));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 // connect to db
 const db = require('../database/index.js');

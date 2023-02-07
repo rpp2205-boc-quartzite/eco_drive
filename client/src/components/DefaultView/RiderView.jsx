@@ -81,7 +81,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       }
     })
     .catch(err => console.log(err))
-  }, [])
+  }, [userId])
 
   return (
     <div className="allDefaultView">

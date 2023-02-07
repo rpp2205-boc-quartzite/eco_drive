@@ -24,26 +24,20 @@ function App() {
   const cookies = new Cookies();
 
   useEffect(() => {
-    const token = cookies.get('TOKEN');
-
-    console.log('token: ', token)
-    // console.log(document.cookie)
-    // axios.get('/validate', {token: token})
-    // .then((result) => {
-    //   console.log('result', result)
-    //   setUserId(result.data.user);
-    //   if (result.is_driver) {
-    //     navigate('/driverview');
-    //   } else {
-    //     navigate('/riderview');
-    //   }
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
-    // cookies.set('TOKEN', undefined, {
-    //   path: "/",
-    // });
+    if (userId === '') {
+      axios.get('/validate')
+      .then((result) => {
+        setUserId(result.data.userId);
+        if (result.is_driver) {
+          navigate('/driverview');
+        } else {
+          navigate('/riderview');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   });
 
   const authenticate = (email, pass) => {
