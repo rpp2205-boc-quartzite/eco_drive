@@ -18,7 +18,7 @@ const db = require('../database/index.js');
 const tripComplete = require('../database/controllers/tripComplete.js');
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
-const { getRiderArray} = require ('../database/controllers/riderList.js');
+const { getRiderArray, addDriversRoute} = require ('../database/controllers/riderList.js');
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
@@ -68,12 +68,30 @@ app.put('/end-trip/:_id/:route', async (req, res) => {
   res.send(result);
 })
 
-// favorite a user
+// add favorite
 app.put('/favorite/:user_id/:favorite_user_id', async (req, res) => {
-  console.log('favorite time', req.params.user_id, req.params.favorite_user_id);
-  let result = await tripComplete.endTrip(req.params._id)
+  let result = await tripComplete.addFavorite(req.params._id, req.params.favorite_user_id)
   res.send(result);
 })
+
+// remove favorite
+app.put('/unfavorite/:user_id/:favorite_user_id', async (req, res) => {
+  let result = await tripComplete.removeFavorite(req.params.user_id, req.params.favorite_user_id)
+  res.send(result);
+})
+
+// cancel rider trip
+app.put('/cancel-rider-route:user_id', async (req, res) => {
+  let result = await tripComplete.cancelRiderRoute(req.params.user_id)
+  res.send(result);
+})
+
+// cancel driver trip
+app.put('/cancel-driver-route:user_id', async (req, res) => {
+  let result = await tripComplete.cancelDriverRoute(req.params.user_id)
+  res.send(result);
+})
+
 
 
 
@@ -216,7 +234,7 @@ app.post('/driver-list', async (req, res) => {
 
 // Add/remove driver to/off user's favorites list
 app.put('/driver-list', async (req, res) => {
-  console.log(req.query.action);
+  console.log('/driver-list', req)
   try {
     if (req.query.action === 'add-favorite') {
       await addFavorite(req.query.userId, req.query.driverId)
@@ -264,6 +282,30 @@ app.post('/rider-list', async (req, res) => {
     res.status(404).send(err)
   }
 });
+
+app.post("/add-driver-route", (req, res) => {
+  const driver =  {
+    id: req.body.info.id,
+    start_address: req.body.info.start_address,
+    start_lat: req.body.info.start_lat,
+    start_lng: req.body.info.start_lng,
+    end_address: req.body.info.end_address,
+    end_lat: req.body.info.end_lat,
+    end_lng: req.body.info.end_lng,
+    time: req.body.info.time,
+    started: false,
+  }
+
+
+  addDriversRoute(driver)
+    .then((results) => {
+      res.status(204).send(results);
+    })
+    .catch((err) => {
+      console.log('Error: ', err)
+    });
+
+})
 
 
 

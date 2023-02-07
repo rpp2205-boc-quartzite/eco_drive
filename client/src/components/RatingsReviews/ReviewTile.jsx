@@ -13,11 +13,11 @@ export default function ReviewTile(props) {
   const changeDateFormat = () => {
     let timestamp = props.review._id.toString().substring(0, 8);
     let date = new Date( parseInt( timestamp, 16 ) * 1000 );
-    let myDate = new Date(date);
+    let shortDate = new Date(date);
     // let month = ["January", "February", "March", "April", "May", "June",
     // "July", "August", "September", "October", "November", "December"];
     //let longDate = month[myDate.getMonth()] + ' ' + (myDate.getDate() + 1).toString() + ', ' + myDate.getFullYear().toString();
-    return myDate.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: '2-digit' });
+    return shortDate.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: '2-digit' });
   }
 
   // const show = () => {
@@ -44,9 +44,9 @@ export default function ReviewTile(props) {
       <OverallRating rating={props.review.rating}/>
       {/* <div><strong>{props.review.summary}</strong></div> */}
       <div className='reviewSummary'>{props.review.review_summary ? <div>{props.review.review_summary}</div> : <div>test-header</div>}</div>
-      <div className='profileReviewerName'>Steve Apple</div>
+      <div className='reviewsProfileReviewerName'>{props.review.full_name}</div>
       <div className='dateOfReview'>{changeDateFormat()}</div>
-      <div className= 'profileReviewText'>
+      <div className= 'reviewProfileReviewText'>
         {props.review.review_text}
       </div>
       {/* <div>

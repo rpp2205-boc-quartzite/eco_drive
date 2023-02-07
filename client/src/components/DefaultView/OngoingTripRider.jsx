@@ -26,38 +26,10 @@ const OngoingTripRider = (props) => {
     myFunc();
   }, [])
 
-  // useEffect(() => {
-  //   const myFunc = async () => {
-  //     await getUser(props.user);
-  //     await getDriver();
-  //   }
-  //   myFunc();
-  // }, [user]);
-
-  // const getUser = async (userId) => {
-  //   let result = await axios.get('/getdriverview',  { params: {userId} }).catch(err => console.log('ERR: ', err))
-  //   result = result.data[0];
-  //   setUser(result);
-  // }
-
-  // ongoing route as a rider
-  // const getDriver = async () => {
-  //   let driverId = user.rider_route.driver_id;
-  //   let result = await axios.get('/getriderview', { params: {userId: driverId}}).catch(err => console.log('ERR: ', err))
-  //   result = result.data[0];
-  //   console.log('result', result);
-  //   setDriver(result);
-  // }
-
-  // end trip
-  // const endTrip = async () => {
-  //   console.log('before', user);
-  //   let route = (user.driver_route.started? 'driver': 'rider')
-  //   let result = await axios.put(`/end-trip/${user._id}/${route}`).catch(err => console.log('ERROR:', err))
-  //   console.log('after', user);
-  // }
-
-  console.log('Driver:', driver);
+  const cancelRoute = async () => {
+    await axios.get(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    setDriver(null);
+  }
 
   if (user && driver) {
     return (
@@ -75,7 +47,7 @@ const OngoingTripRider = (props) => {
                 : (<p> </p>)
               }
             </div>
-            <Link to="/ratings-reviews">
+            <Link to="/ratings-reviews" state={ {from: 'riderview', userData: user, revieweeData: driver }}>
               <FiInfo className='card-icon info-icon'/>
             </Link>
           </div>
@@ -83,7 +55,7 @@ const OngoingTripRider = (props) => {
           <div className="detail"> {driver.license_plate} </div>
           <div className="detail"> {driver.driver_route.time} </div>
           <div className="buttons">
-            <button className="end-button">Cancel</button>
+            <button className="end-button" onClick={cancelRoute}>Cancel</button>
             <Link to="/trip-complete-rider" state={{ driver, user }}>
               <button type='submit' onClick={props.endTrip} className="end-button" id="end-trip-button">End Trip</button>
             </Link>
