@@ -44,7 +44,7 @@ function DriverView ({ userId }) {
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
   const [displayTime, setDisplayTime] = useState(new Date());
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [showPrompt, setPrompt] = useState(false);

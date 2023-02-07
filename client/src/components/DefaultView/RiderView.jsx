@@ -46,7 +46,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
   const [avatar, setAvatar] = useState('');
   const [userInfo, setUserInfo] = useState({})
   const [displayTime, setDisplayTime] = useState(new Date());
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [favorites, setFavorites] = useState({});
