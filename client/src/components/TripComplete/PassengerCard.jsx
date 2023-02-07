@@ -7,6 +7,7 @@ import axios from 'axios';
 const PassengerCard = (props) => {
 
   const [user, setUser] = useState(null);
+  const [favorite, setFavorite] = useState(props.user.favorites.includes(props.pId));
 
   useEffect(() => {
     const myFunc = async () => {
@@ -17,6 +18,17 @@ const PassengerCard = (props) => {
     myFunc();
   }, [])
 
+  const addFavorite = async () => {
+    await axios.put(`/favorite/${props.user._id}/${props.pId}`).catch(err => console.log(err));
+    setFavorite(true);
+  }
+
+  const removeFavorite = async () => {
+    await axios.put(`/unfavorite/${props.user._id}/${props.pId}`).catch(err => console.log(err));
+    setFavorite(false);
+  }
+
+
   if (user) {
     return (
       <div className="passenger-card">
@@ -25,17 +37,14 @@ const PassengerCard = (props) => {
         </div>
         <span id="name"> {user.full_name} </span>
         <div id="heart">
-          {props.user.favorites.includes(props.pId)
-          ? <HiHeart className='card-icon full-heart-icon'/>
-          : <HiOutlineHeart className='card-icon outlined-heart-icon'/>
+          {favorite
+          ? <HiHeart className='card-icon full-heart-icon' onClick={removeFavorite}/>
+          : <HiOutlineHeart className='card-icon outlined-heart-icon' onClick={addFavorite}/>
           }
         </div>
-        <Link to="/ratings-reviews">
+        <Link to="/ratings-reviews" state={ {from: 'trip-complete-rider', userData: props.user, revieweeData: user }}>
           <FiInfo className='card-icon info-icon'/>
         </Link>
-        <div id="name">
-          report
-        </div>
       </div>
     )
   } else {

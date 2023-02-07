@@ -68,10 +68,15 @@ app.put('/end-trip/:_id/:route', async (req, res) => {
   res.send(result);
 })
 
-// favorite a user
+// add favorite
 app.put('/favorite/:user_id/:favorite_user_id', async (req, res) => {
-  console.log('favorite time', req.params.user_id, req.params.favorite_user_id);
-  let result = await tripComplete.endTrip(req.params._id)
+  let result = await tripComplete.addFavorite(req.params._id, req.params.favorite_user_id)
+  res.send(result);
+})
+
+// remove favorite
+app.put('/unfavorite/:user_id/:favorite_user_id', async (req, res) => {
+  let result = await tripComplete.removeFavorite(req.params.user_id, req.params.favorite_user_id)
   res.send(result);
 })
 
