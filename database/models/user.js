@@ -56,6 +56,21 @@ const userSchema = mongoose.Schema({
     ]
   },
 
+  default_driver_route: {
+    start_address:  String,
+    end_address:    String,
+    start_lat:      Number,
+    start_lng:      Number,
+    end_lat:        Number,
+    end_lng:        Number,
+    time:           String,
+    total_seats:    Number,
+    default:        {
+      type: Boolean,
+      default: false,
+    },
+  },
+
   rider_route: {
     started: {
       type: Boolean,
@@ -73,6 +88,20 @@ const userSchema = mongoose.Schema({
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User'
     }
+  },
+
+  default_rider_route: {
+    start_address:  String,
+    end_address:    String,
+    start_lat:      Number,
+    start_lng:      Number,
+    end_lat:        Number,
+    end_lng:        Number,
+    time:           String,
+    default:        {
+      type: Boolean,
+      default: false,
+    },
   },
 
   driver_trips: [
