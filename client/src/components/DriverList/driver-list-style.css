@@ -112,6 +112,19 @@
   gap: 24px;
 }
 
+.no-driver-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%
+}
+
 /* ------------- Buttons --------------------------- */
 
 .primary-btn {
