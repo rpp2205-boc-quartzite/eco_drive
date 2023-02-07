@@ -64,7 +64,7 @@ export default function AvatarSelect(props) {
                   onClick={onClick}/>
               </div>))}
           </div>
-        </div> : <p>Loading...</p>}
+        </div> : <p className='avatar-container'>Loading...</p>}
       </div>
       <div className='signup-btn-wrapper'>
         <button className='signup-btn' onClick={props.handleSubmit}><span className='sign-up-text'>Sign Up</span></button>

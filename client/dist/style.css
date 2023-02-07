@@ -817,7 +817,7 @@ h1 {
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
-  line-height: 36px;
+  line-height: 66px;
   text-align: center;
   color: #262929;
   flex: none;
@@ -990,7 +990,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 50px 0px;
+  padding: 100px 50px 0px;
   gap: 35px;
   width: 375px;
   height: 644px;
@@ -1008,7 +1008,7 @@ h1 {
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
-  line-height: 36px;
+  line-height: 106px;
   color: #262929;
   flex: none;
   order: 0;
@@ -1022,7 +1022,7 @@ h1 {
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 74px;
   display: flex;
   align-items: center;
   color: #000000;
@@ -1367,6 +1367,20 @@ h1 {
   flex: none;
   order: 2;
   flex-grow: 0;
+  padding-top: 120px;
+}
+
+.inner-fields-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 343px;
+  height: 208px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
 }
 
 .forgot-pass-wrapper {
@@ -1390,6 +1404,20 @@ h1 {
   font-weight: 700;
   font-size: 24px;
   line-height: 36px;
+  color: #262929;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.forgot-pass-title-2 {
+  width: 208px;
+  height: 36px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 66px;
   color: #262929;
   flex: none;
   order: 0;
@@ -1536,7 +1564,7 @@ h1 {
   width: 375px;
   height: 312px;
   left: 0px;
-  top: 142px;
+  top: 167px;
 }
 
 .reset-pass-form {
