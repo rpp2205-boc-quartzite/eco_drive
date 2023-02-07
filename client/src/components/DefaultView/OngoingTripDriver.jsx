@@ -19,6 +19,10 @@ const OngoingTripDriver = (props) => {
     myFunc();
   }, [])
 
+  const cancelRoute = async () => {
+    await axios.get(`/cancel-driver-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+  }
+
 
   if (user) {
     return (
@@ -41,10 +45,12 @@ const OngoingTripDriver = (props) => {
           <div className="detail"> {user.license_plate} </div>
           <div className="detail"> {user.driver_route.time} </div>
           <div className="buttons">
-            <button className="end-button">Cancel</button>
-            {/* <Link to="/trip-complete" state={{ user }}> */}
+            <Link to="/driverview">
+              <button className="end-button" onClick={cancelRoute}>Cancel</button>
+            </Link>
+            <Link to="/trip-complete" state={{ user }}>
               <button type='submit' onClick={props.endTrip} className="end-button" id="end-trip-button">End Trip</button>
-            {/* </Link> */}
+            </Link>
           </div>
         </div>
       </div>
