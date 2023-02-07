@@ -101,7 +101,7 @@ class DriverProfile extends React.Component {
   }
 
   render () {
-    console.log('CHECKING DRIVER PROPS', this.props.location.state.id)
+    //console.log('CHECKING DRIVER PROPS', this.props.location.state.id)
     return (
       <div>
       {/* TOP BUTTONS */}
