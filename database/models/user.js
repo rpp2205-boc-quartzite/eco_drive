@@ -117,6 +117,7 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0,
       },
+      full_name: String,
       review_summary: String,
       helpfulness: Number,
       review_text:  String
@@ -133,6 +134,7 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0,
       },
+      full_name: String,
       review_summary: String,
       helpfulness: Number,
       review_text: String

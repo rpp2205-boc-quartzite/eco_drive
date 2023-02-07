@@ -95,6 +95,7 @@ const DriverList = (props) => {
               key={driver.driverInfo._id}
               driverInfo={driver.driverInfo}
               userInfo={userInfo}
+              route={route}
               userRouteInfo={userRouteInfo}
               startDistance={driver.startDistance}
               endDistance={driver.endDistance}
@@ -109,6 +110,7 @@ const DriverList = (props) => {
               key={driver.driverInfo._id}
               driverInfo={driver.driverInfo}
               userInfo={userInfo}
+              route={route}
               userRouteInfo={userRouteInfo}
               startDistance={driver.startDistance}
               endDistance={driver.endDistance}
