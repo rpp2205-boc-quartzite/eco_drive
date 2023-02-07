@@ -42,7 +42,7 @@ const OngoingTripRider = (props) => {
                 : (<p> </p>)
               }
             </div>
-            <Link to="/ratings-reviews">
+            <Link to="/ratings-reviews" state={ {from: 'riderview', userData: user, revieweeData: driver }}>
               <FiInfo className='card-icon info-icon'/>
             </Link>
           </div>

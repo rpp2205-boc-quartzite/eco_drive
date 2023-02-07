@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { FiInfo } from "react-icons/fi";
-import { HiHeart } from "react-icons/hi";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -32,7 +31,7 @@ const UpcomingTripDriver = (props) => {
             <div>
               <p> </p>
             </div>
-            <Link to="/ratings-reviews">
+            <Link to="/driverprofile" state={ {from:'driverview', user}}>
               <FiInfo className='card-icon info-icon'/>
             </Link>
           </div>
