@@ -15,7 +15,7 @@ export default function Login(props) {
           <div className='login-wrapper'>
             <form className='login-form' onSubmit={handleSubmit}>
               <h2 className='login-title'>Login</h2>
-              <div className='inner-fields-2'>
+              <div className='inner-fields-3'>
                 <div className='label-container'>
                   <div className='label-title-container'>
                     <label className='label-title-3' htmlFor='email'>Email</label>
