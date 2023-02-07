@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { FiInfo } from "react-icons/fi";
-import { HiHeart } from "react-icons/hi";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
 
 const OngoingTripDriver = (props) => {
-
-  console.log('props info: ', props);
 
   const [user, setUser] = useState(null);
 
@@ -36,7 +33,7 @@ const OngoingTripDriver = (props) => {
             <div>
               <p> </p>
             </div>
-            <Link to="/driverprofile">
+            <Link to="/driverprofile" state={ {from:'driverview', user}}>
               <FiInfo className='card-icon info-icon'/>
             </Link>
           </div>

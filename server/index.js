@@ -68,12 +68,30 @@ app.put('/end-trip/:_id/:route', async (req, res) => {
   res.send(result);
 })
 
-// favorite a user
+// add favorite
 app.put('/favorite/:user_id/:favorite_user_id', async (req, res) => {
-  console.log('favorite time', req.params.user_id, req.params.favorite_user_id);
-  let result = await tripComplete.endTrip(req.params._id)
+  let result = await tripComplete.addFavorite(req.params._id, req.params.favorite_user_id)
   res.send(result);
 })
+
+// remove favorite
+app.put('/unfavorite/:user_id/:favorite_user_id', async (req, res) => {
+  let result = await tripComplete.removeFavorite(req.params.user_id, req.params.favorite_user_id)
+  res.send(result);
+})
+
+// cancel rider trip
+app.put('/cancel-rider-route:user_id', async (req, res) => {
+  let result = await tripComplete.cancelRiderRoute(req.params.user_id)
+  res.send(result);
+})
+
+// cancel driver trip
+app.put('/cancel-driver-route:user_id', async (req, res) => {
+  let result = await tripComplete.cancelDriverRoute(req.params.user_id)
+  res.send(result);
+})
+
 
 
 
@@ -216,7 +234,7 @@ app.post('/driver-list', async (req, res) => {
 
 // Add/remove driver to/off user's favorites list
 app.put('/driver-list', async (req, res) => {
-  console.log(req.query.action);
+  console.log('/driver-list', req)
   try {
     if (req.query.action === 'add-favorite') {
       await addFavorite(req.query.userId, req.query.driverId)

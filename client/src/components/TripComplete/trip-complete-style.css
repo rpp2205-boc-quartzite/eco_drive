@@ -50,7 +50,7 @@
 
 .passenger-card {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
   border: 1px solid var(--gray4);
   background: #ececec;
   border-radius: 5px;

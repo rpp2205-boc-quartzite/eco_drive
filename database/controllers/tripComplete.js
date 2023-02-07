@@ -42,14 +42,16 @@ module.exports = {
 
     if (route === "driver") {
       let rider_list = user.driver_route.riders;
+      await User.updateOne({ _id }, {$set: {recent_riders: rider_list}}).catch(err => console.log(err));
       await User.updateOne({ _id }, {$set: {driver_route: { started: false }}}).catch(err => console.log(err));
       user = await User.find({ _id })
       console.log('After:', user)
       return rider_list;
 
-    } else if (route == "rider") {
+    } else if (route === "rider") {
       let drivers = await User.find({ _id: [user.rider_route.driver_id] }).catch(err => console.log(err));
       let driver = drivers[0];
+      await User.updateOne({ _id }, {$push: {recent_drivers: driver._id}}).catch(err => console.log(err));
       let rider_list = driver.driver_route.riders;
       rider_list.push(driver._id);
       await User.updateOne({ _id }, {$set: {rider_route: { started: false }}}).catch(err => console.log(err));
@@ -60,17 +62,31 @@ module.exports = {
   },
 
   // add a favorite to a user's list
-  addFavorite: async (user_id, favorite_user_id) => {
-    // console.log('Lets Do This: ', user_id, favorite_user_id);
-    let users = await User.find( { _id: user_id } ).catch(err => console.log('ERR FINDING: ', err))
-    let user = users[0];
-    console.log('USER:', user);
+  addFavorite: async (userId, driverId) => {
+    const filter = {_id: userId};
+    await User.updateOne(filter, {$push: {favorites: driverId}}).catch(err => console.log(err));
+    return 'Successfully favorite driver'
+  },
 
-    user.favorites.push(favorite_user_id);
-    await user.save();
-    console.log('After favorite:', user);
+  // remove a favorite from a user's list
+  removeFavorite: async (userId, driverId) => {
+    const filter = {_id: userId};
+    await User.updateOne(filter, {$pull: {favorites: driverId}}).catch(err => console.log(err));
+    return 'Successfully unfavorite driver'
+  },
 
-    return 'favorite added!'
+  // cancel rider route
+  cancelRiderRoute: async (_id) => {
+    const filter = {_id };
+    await User.updateOne(filter, {$set: {rider_route: { started: false }}}).catch(err => console.log(err));
+    return 'Successfully cancelled route'
+  },
+
+  // cancel driver route
+  cancelDriverRoute: async (_id) => {
+    const filter = {_id };
+    await User.updateOne(filter, {$set: {driver_route: { started: false , riders: []}}}).catch(err => console.log(err));
+    return 'Successfully canceled route'
   }
 
 };

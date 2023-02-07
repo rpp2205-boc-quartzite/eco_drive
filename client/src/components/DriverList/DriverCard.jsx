@@ -7,7 +7,7 @@ import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import DriverConfirmation from './DriverConfirmation.jsx'
 import BookingSuccessMessage from './BookingSuccessMessage.jsx'
 
-const DriverCard = ({driverInfo, userInfo, userRouteInfo, startDistance, endDistance, updateRiderOnGoingRoute}) => {
+const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, endDistance, updateRiderOnGoingRoute}) => {
 
   const [driverConfirmationOn, setDriverConfirmation] = useState(false);
   const [successMessageOn, setSuccessMessage] = useState(false);
@@ -75,7 +75,8 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, startDistance, endDist
               ? <HiHeart className='card-icon full-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
               : <HiOutlineHeart className='card-icon outlined-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
             }
-            <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list'}}>
+            {/* <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list'}}></Link> */}
+            <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list', route: route}}>
               <FiInfo className='card-icon info-icon'/>
             </Link>
           </div>

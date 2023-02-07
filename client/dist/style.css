@@ -2094,6 +2094,18 @@ button.form-field-report:disabled {
   justify-content: center;
 } */
 
+.reviewsProfileReviewerName {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: right;
+  color: #76858A;
+  position: relative;
+  top: -18%;
+  right: 0%;
+}
+
 
 input.review-summary {
   margin: 10px 0px 10px 0px;
@@ -2238,6 +2250,16 @@ input.review-summary {
   margin-left: 6%;
   text-align: center;
   font-size: 21px;
+}
+
+.reviewProfileReviewText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #262929;
+  position: relative;
+  top: -8%;
 }
 
 /* -------- BRANDON CSS END -------- */
