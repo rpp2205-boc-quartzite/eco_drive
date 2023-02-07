@@ -19,6 +19,7 @@ const tripComplete = require('../database/controllers/tripComplete.js');
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
 const { getRiderArray, addDriversRoute, removeRiderFromRiderArray} = require ('../database/controllers/riderList.js');
+
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
@@ -220,7 +221,7 @@ app.post('/driver-list', async (req, res) => {
       if (startDistance !== undefined && endDistance !== undefined) {
         driverList.push({driverInfo: driver, startDistance, endDistance})
       }
-      console.log(driverList)
+      // console.log(driverList)
       driverList.sort((a, b) => {
         return a.startDistance.value - b.startDistance.value
       })
@@ -321,7 +322,6 @@ app.post("/rider-remove", async (req, res) => {
         res.status(404).send(err)
       }
 })
-
 
 
 // ---- Catch all for routing ---- //

@@ -53,6 +53,7 @@ module.exports = {
       started: newRoute.started,
       default: newRoute.default,
       riders: newRoute.riders
+
     }
     return User.findOneAndUpdate(id, {driver_route: update})
       .then((result) => {

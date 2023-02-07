@@ -13,7 +13,7 @@ import DriverCard from './DriverCard.jsx'
 
 const DriverList = (props) => {
 
-  const [drivers, setDrivers] = useState([]);
+  const [drivers, setDrivers] = useState(null);
   const [userRouteInfo, setUserRouteInfo] = useState({})
 
   const info = useLocation()
@@ -54,72 +54,105 @@ const DriverList = (props) => {
   useEffect(() => {findDrivers()}, [route])
 
 
-  if (drivers.length > 0) {
-    const favoritesDrivers = [];
-    const nonFavoritesDrivers = [];
-    for (let i = 0; i < drivers.length; i++) {
-      if ((userInfo.favorites || []).includes(drivers[i].driverInfo._id)) {
-        favoritesDrivers.push(drivers[i])
-      } else {
-        nonFavoritesDrivers.push(drivers[i])
+  if (drivers !== null) {
+    if (drivers.length > 0) {
+      const favoritesDrivers = [];
+      const nonFavoritesDrivers = [];
+      for (let i = 0; i < drivers.length; i++) {
+        if ((userInfo.favorites || []).includes(drivers[i].driverInfo._id)) {
+          favoritesDrivers.push(drivers[i])
+        } else {
+          nonFavoritesDrivers.push(drivers[i])
+        }
       }
+      return (
+        <div>
+          <div className='top-bar'>
+            <div className='top-bar-left'>
+              <p>Rider</p>
+              <Link to="/driverview">
+                <TbRefresh className='top-bar-icons' />
+              </Link>
+            </div>
+            <div className='top-bar-right'>
+              <Link to="/riderprofile">
+                <img className='avatar' src={userInfo.avatar} alt="" />
+              </Link>
+              <Link to="/">
+                <MdLogout className='top-bar-icons' />
+              </Link>
+            </div>
+          </div>
+          <div className='title-bar'>
+            <Link to="/riderview">
+              <BiArrowBack className='driver-list-back-icon' />
+            </Link>
+            <p>Your nearest drivers</p>
+          </div>
+          <div className='driver-list'>
+            <p className='subheader-driver'>Favorite drivers</p>
+            {favoritesDrivers.map((driver) => (
+              <DriverCard
+                key={driver.driverInfo._id}
+                driverInfo={driver.driverInfo}
+                userInfo={userInfo}
+                route={route}
+                userRouteInfo={userRouteInfo}
+                startDistance={driver.startDistance}
+                endDistance={driver.endDistance}
+                updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
+              />
+            ))}
+          </div>
+          <div className='driver-list'>
+            <p className='subheader-driver'>Drivers</p>
+            {nonFavoritesDrivers.map((driver) => (
+              <DriverCard
+                key={driver.driverInfo._id}
+                driverInfo={driver.driverInfo}
+                userInfo={userInfo}
+                route={route}
+                userRouteInfo={userRouteInfo}
+                startDistance={driver.startDistance}
+                endDistance={driver.endDistance}
+                updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
+              />
+            ))}
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className='loading-screen'>
+          <div className='no-driver-top'>
+            <div className='top-bar'>
+              <div className='top-bar-left'>
+                <p>Rider</p>
+                <Link to="/driverview">
+                  <TbRefresh className='top-bar-icons' />
+                </Link>
+              </div>
+              <div className='top-bar-right'>
+                <Link to="/riderprofile">
+                  <img className='avatar' src={userInfo.avatar} alt="" />
+                </Link>
+                <Link to="/">
+                  <MdLogout className='top-bar-icons' />
+                </Link>
+              </div>
+            </div>
+            <div className='title-bar'>
+              <Link to="/riderview">
+                <BiArrowBack className='driver-list-back-icon' />
+              </Link>
+              <p>Your nearest drivers</p>
+            </div>
+          </div>
+          <img className='loading-gif' src="https://uploads-ssl.webflow.com/5eea00f42c5f66e46d83aa23/5f36a54aa224a34042f8d88f_sad.gif" alt="No drivers" />
+          <p>No driver is active</p>
+        </div>
+      )
     }
-    return (
-      <div>
-        <div className='top-bar'>
-          <div className='top-bar-left'>
-            <p>Rider</p>
-            <Link to="/driverview">
-              <TbRefresh className='top-bar-icons' />
-            </Link>
-          </div>
-          <div className='top-bar-right'>
-            <Link to="/riderprofile">
-              <img className='avatar' src={userInfo.avatar} alt="" />
-            </Link>
-            <Link to="/">
-              <MdLogout className='top-bar-icons' />
-            </Link>
-          </div>
-        </div>
-        <div className='title-bar'>
-          <Link to="/riderview">
-            <BiArrowBack className='driver-list-back-icon' />
-          </Link>
-          <p>Your nearest drivers</p>
-        </div>
-        <div className='driver-list'>
-          <p className='subheader-driver'>Favorite drivers</p>
-          {favoritesDrivers.map((driver) => (
-            <DriverCard
-              key={driver.driverInfo._id}
-              driverInfo={driver.driverInfo}
-              userInfo={userInfo}
-              route={route}
-              userRouteInfo={userRouteInfo}
-              startDistance={driver.startDistance}
-              endDistance={driver.endDistance}
-              updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
-            />
-          ))}
-        </div>
-        <div className='driver-list'>
-          <p className='subheader-driver'>Non-favorite drivers</p>
-          {nonFavoritesDrivers.map((driver) => (
-            <DriverCard
-              key={driver.driverInfo._id}
-              driverInfo={driver.driverInfo}
-              userInfo={userInfo}
-              route={route}
-              userRouteInfo={userRouteInfo}
-              startDistance={driver.startDistance}
-              endDistance={driver.endDistance}
-              updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
-            />
-          ))}
-        </div>
-      </div>
-    )
   } else {
     return (
       <div className='loading-screen'>

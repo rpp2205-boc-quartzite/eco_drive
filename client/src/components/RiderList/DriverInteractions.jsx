@@ -56,9 +56,6 @@ const DriverInteractions = function(props) {
     axios.post("/add-driver-route", {
       info: route
     })
-    // .then(function (response) {
-    //   // console.log(response.data);
-    // })
     .catch(function (error) {
       console.log(error);
     });

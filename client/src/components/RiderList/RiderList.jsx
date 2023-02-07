@@ -6,7 +6,6 @@ import axios from 'axios';
 const RiderList = function(props) {
 
   const driverID = props.driver.id;
-  // console.log('RIDERS_BACK: ', props.riders)
 
 
   const [totalRiders, setTotalRiders] = React.useState(['no', 'riders']);
@@ -14,6 +13,7 @@ const RiderList = function(props) {
 
 React.useEffect(() => {
   if (props.riders.length) {
+
     var seats = props.seats;
     if (seats > props.riders.length) {
       seats = props.riders.length;
@@ -42,7 +42,6 @@ React.useEffect(() => {
     .catch((err) => {
       console.log('Error: ', err)
     })
-
   };
 
   const riderListFun = function() {
