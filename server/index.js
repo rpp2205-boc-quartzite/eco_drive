@@ -222,7 +222,7 @@ app.post('/driver-list', async (req, res) => {
       if (startDistance !== undefined && endDistance !== undefined) {
         driverList.push({driverInfo: driver, startDistance, endDistance})
       }
-      console.log(driverList)
+      // console.log(driverList)
       driverList.sort((a, b) => {
         return a.startDistance.value - b.startDistance.value
       })
