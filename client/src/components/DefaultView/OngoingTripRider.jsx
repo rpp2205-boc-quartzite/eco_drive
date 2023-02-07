@@ -26,6 +26,11 @@ const OngoingTripRider = (props) => {
     myFunc();
   }, [])
 
+  const cancelRoute = async () => {
+    await axios.get(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    setDriver(null);
+  }
+
   if (user && driver) {
     return (
       <div className="ongoing-trip-container">
@@ -42,7 +47,7 @@ const OngoingTripRider = (props) => {
                 : (<p> </p>)
               }
             </div>
-            <Link to="/ratings-reviews">
+            <Link to="/ratings-reviews" state={ {from: 'riderview', userData: user, revieweeData: driver }}>
               <FiInfo className='card-icon info-icon'/>
             </Link>
           </div>
@@ -50,7 +55,7 @@ const OngoingTripRider = (props) => {
           <div className="detail"> {driver.license_plate} </div>
           <div className="detail"> {driver.driver_route.time} </div>
           <div className="buttons">
-            <button className="end-button">Cancel</button>
+            <button className="end-button" onClick={cancelRoute}>Cancel</button>
             <Link to="/trip-complete-rider" state={{ driver, user }}>
               <button type='submit' onClick={props.endTrip} className="end-button" id="end-trip-button">End Trip</button>
             </Link>
