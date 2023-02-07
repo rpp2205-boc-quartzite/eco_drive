@@ -55,7 +55,7 @@ const DriverList = (props) => {
 
 
   if (drivers !== null) {
-    if (drivers.length === 0) {
+    if (drivers.length > 0) {
       const favoritesDrivers = [];
       const nonFavoritesDrivers = [];
       for (let i = 0; i < drivers.length; i++) {
