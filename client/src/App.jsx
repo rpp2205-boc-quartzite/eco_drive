@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import HelloWorld from './components/helloWorld.jsx';
+
 import DriverView from './components/DefaultView/DriverView.jsx';
 import RiderView from './components/DefaultView/RiderView.jsx';
 import Dashboard from './components/Authentication/Dashboard.jsx';
@@ -13,9 +13,8 @@ import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
 import DriverList from './components/DriverList/DriverList.jsx';
 import AllReviews from './components/RatingsReviews/AllReviews.jsx';
-//import Placeholder from './components/RiderList/Placeholder.jsx';
 import DriverInteractions from './components/RiderList/DriverInteractions.jsx'
-import TripComplete from './components/TripComplete/TripComplete.jsx';
+import TripCompleteRider from './components/TripComplete/TripCompleteRider.jsx';
 
 function App() {
   const [userId, setUserId] = useState('');
@@ -63,6 +62,7 @@ function App() {
     userRouteInfo.driver_id = driverInfo._id;
     userRouteInfo.starting_distance = startDistance.text;
     userRouteInfo.end_distance = endDistance.text;
+    userRouteInfo.started = false;
     axios.post('/postRiderRoute', userRouteInfo)
     .then((result) => {
       setRiderOnGoingRoute(driverInfo);
@@ -85,10 +85,8 @@ function App() {
         <Route path="/riderprofile" element={<RiderProfile />} />
         <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
         <Route path="/rider-list" element={<DriverInteractions updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
-        <Route path="/trip-complete" element={<TripComplete />} />
+        <Route path="/trip-complete-rider" element={<TripCompleteRider />} />
       </Routes>
-    {/* <HelloWorld /> */}
-    {/* <DriverView /> */}
     </div>
   )
 }

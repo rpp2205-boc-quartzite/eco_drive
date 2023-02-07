@@ -199,7 +199,7 @@ class DriverProfile extends React.Component {
           {this.state.recent_riders.length === 0 ?
           <div className='profilePlaceholder2'>None yet &#129485;</div>
           :
-          <Link to="/ratings_reviews">
+          <Link to="/ratings-reviews">
           {!this.state.avatar ?
           <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
           <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/>

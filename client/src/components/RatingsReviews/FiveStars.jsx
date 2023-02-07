@@ -1,6 +1,6 @@
 import React from 'react';
 
-class OverallRating extends React.Component {
+class FiveStars extends React.Component {
   constructor(props) {
     super(props);
     this.state = {stars: [0, 0, 0, 0, 0]};
@@ -12,13 +12,11 @@ class OverallRating extends React.Component {
 
   componentDidUpdate(prevProps) {
     if(this.props.rating !== prevProps.rating) {
-      console.log('OverallRating.jsx - componentDidUpdate');
       this.renderStarsByQuarters(this.props.rating);
     }
   }
 
   renderStarsByQuarters (rating) {
-    console.log('OverallRating.jsx - renderStarsByQuarters: ', rating);
     if (isNaN(rating) || !rating) {
       this.setState({stars: [0, 0, 0, 0, 0]});
     } else {
@@ -66,4 +64,4 @@ class OverallRating extends React.Component {
   }
 }
 
-export default OverallRating;
+export default FiveStars;

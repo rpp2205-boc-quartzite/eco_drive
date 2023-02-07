@@ -3,26 +3,33 @@ const User = require('../models/user.js').User;
 module.exports = {
   getRiderArray: (userId) => {
 
-    const getRiderProfile = function(riderID) {
-      return User.find({_id: riderID})
+    const getRiderProfile = async function(riderID) {
+      // console.log('RIDER ID: ', riderID.rider_id)
+      return await User.find({_id: riderID.rider_id})
         .then((rider) => {
-          return rider[0];
+          const container = {
+            riderID: riderID,
+            profile: rider[0]
+          }
+
+          // console.log('CONTAINER: ', container)
+          return container;
         })
     }
 
     const filter = {_id: userId};
     return User.find(filter)
       .then((driver) => {
+        // console.log('RIDER ARRAY: ', driver[0].driver_route.riders)
         return driver[0].driver_route.riders;
       })
       .then((riderArray) => {
         const riderProfiles = [];
+        console.log(riderArray);
         for (var i = 0; i < riderArray.length; i++) {
           var profile = getRiderProfile(riderArray[i])
-          // console.log(profile);
           riderProfiles.push(profile);
         }
-        // console.log(riderProfiles)
         return riderProfiles;
       })
       .catch(err => {
@@ -31,72 +38,4 @@ module.exports = {
       })
   },
 
-  // updateCurrentDriverRoute: (currentRoute) => {
-  //   const id = {_id: currentRoute.userId}
-  //   const update = {
-  //     started: false,
-  //     start_address: currentRoute.start_address,
-  //     start_lat: currentRoute.start_lat,
-  //     start_lng: currentRoute.start_lng,
-  //     end_address: currentRoute.end_address,
-  //     end_lat: currentRoute.end_lat,
-  //     end_lng: currentRoute.end_lng,
-  //     time: currentRoute.time,
-  //     total_seats: currentRoute.total_seats,
-  //     default: currentRoute.default,
-  //   };
-
-  //   return User.findOneAndUpdate(id, {driver_route: update })
-  //     .then((result) => {
-  //       console.log('Current Driver Route Added!')
-  //     })
-  //     .catch((err) => {
-  //       console.log('Error updating record', err)
-  //     });
-  // },
-
-//   updateAllRiderRoutes: async (idArray, driverData) => {
-//     const updateCurrentRiderRoute = async (currentRoute) => {
-//       const user_id = {_id: currentRoute._id}
-//       const update = {
-//         started: false,
-//         start_address: currentRoute.start_address,
-//         start_lat: currentRoute.start_lat,
-//         start_lng: currentRoute.start_lng,
-//         end_address: currentRoute.end_address,
-//         end_lat: currentRoute.end_lat,
-//         end_lng: currentRoute.end_lng,
-//         time: currentRoute.time,
-//         default: currentRoute.default,
-//         driver_id: currentRoute.driver_id
-//       }
-
-//       return User.findOneAndUpdate(user_id, {rider_route: update})
-//         .then((result) => {
-//           console.log('Accepted Rider Route Added');
-//         })
-//         .catch ((err) => {
-//           console.log('Error updating rider route: ', err);
-//         })
-//     }
-//     var promiseArray = [];
-//     for (var i = 0; i < idArray.length; i++) {
-//       const update = {
-//         _id: idArray[i],
-//         start_address: driverData.start_address,
-//         start_lat: driverData.start_lat,
-//         start_lng: driverData.start_lng,
-//         end_address: driverData.end_address,
-//         end_lat: driverData.end_lat,
-//         end_lng: driverData.end_lng,
-//         time: driverData.time,
-//         default: driverData.default,
-//         driver_id: driverData._id
-//       }
-
-//       promiseArray.push(updateCurrentRiderRoute(update))
-//     }
-
-//     return Promise.all(promiseArray);
-//   }
 };

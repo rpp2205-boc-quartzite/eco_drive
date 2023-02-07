@@ -1,41 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import StarRating from './StarRating.jsx';
 import axios from 'axios';
 
 const ReviewModal = (props) => {
   const [submitted, setSubmitted] = useState(false);
+  const [reported, setReported] = useState(false);
   const [values, setValues] = useState({
-    nickname: '',
+    full_name: props.userData.full_name,
     rating: 1,
-    email: '',
     text: '',
     summary: '',
     characterCount: 25
   });
 
-  // useEffect(() => {
-  //   var id = '63d36e8fcd478f26557c4a37';
-  //   axios.get('/getreviews', { params: {id} })
-  //   .then((result) => {
-  //     setValues((values) => ({
-  //       ...values,
-  //       name: result.data[0].full_name,
-  //       avatar: result.data[0].avatar,
-  //       riderReviews: result.data[0].rider_reviews,
-  //       driverReviews: result.data[0].driver_reviews
-  //     }));
-  //   })
-  //   .catch(err => console.log(err))
-  // }, [submitted]);
+  useEffect(() => {
+    setValues((values) => ({
+      ...values,
+      full_name: props.userData.full_name,
+      rating: 1,
+      text: '',
+      summary: '',
+      characterCount: 25
+    }));
+  }, [props.show]);
 
   const handleTextInputChange = (event) => {
     event.persist();
     let length = 25 - event.target.value.length;
-    if (values.characterCount < 0) {
-      console.log('testing characterCount', values.characterCount);
-    }
+    // if (values.characterCount < 0) {
+    //   console.log('testing characterCount', values.characterCount);
+    // }
     setValues((values) => ({
       ...values,
       text: event.target.value,
@@ -64,17 +60,17 @@ const ReviewModal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (props.reported) {
+    if (props.isReportModalOpen) {
       let report = {
         report_text: values.text
       };
 
       console.log('ReviewModal handleSubmit report');
 
-      axios.post(`/reviews/63d36e8fcd478f26557c4a37/report`, report)
+      axios.post(`/reviews/${props.revieweeData._id}/report`, report)
       .then((response) => {
-        setSubmitted(true);
-        props.submit();
+        setReported(true);
+        props.reportUser(true);
         setTimeout(
           () => closeModal(),
           2000
@@ -86,12 +82,13 @@ const ReviewModal = (props) => {
 
     } else {
       let review = {
-        userId: props.userid,
+        revieweeId: props.revieweeData._id,
+        full_name: props.userData.full_name,
         rating: values.rating,
         review_text: values.text,
         review_summary: values.summary
       };
-
+      console.log('full_name: ', props.userData.full_name);
       console.log('ReviewModal handleSubmit review', review);
 
       axios.post('/newreview', review)
@@ -121,7 +118,7 @@ const ReviewModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          {props.reported ? (
+          {props.isReportModalOpen ? (
             <Modal.Title id="report-modal">
               <div>Are You Sure You Want to Report this Driver?</div>
             </Modal.Title>
@@ -135,7 +132,7 @@ const ReviewModal = (props) => {
           <div className="form-container">
             <form id="review-form" onSubmit={handleSubmit}>
               <label className="rf-label">
-                {props.reported ? (
+                {props.isReportModalOpen ? (
                   <div></div>
                 ) : (
                   <div>
@@ -147,7 +144,7 @@ const ReviewModal = (props) => {
                 )}
               </label>
               <label className="rf-label">
-                {props.reported ? (
+                {props.isReportModalOpen ? (
                   <div>
                     <h4 className="rf-header">Write your comment</h4>
                     <textarea value={values.text} className="form-field" required minLength="25" maxLength="180" placeholder=""  onChange={handleTextInputChange}/>
@@ -162,7 +159,7 @@ const ReviewModal = (props) => {
                 )}
                 {values.characterCount > 0 ? <div>Minimum required characters left: [{values.characterCount}]</div> :<div>Minimum reached</div>}
               </label>
-                {props.reported ? (
+                {props.isReportModalOpen ? (
                   // <button className="form-field-report" type="submit" onClick={handleSubmit}>Report</button>
                   <input className="form-field-report" disabled={values.characterCount > 0} type="submit" value="Report"/>
                 ) : (
@@ -170,9 +167,9 @@ const ReviewModal = (props) => {
                   <input className="form-field-submit" disabled={values.characterCount > 0} type="submit" value="Submit"/>
                 )}
             </form>
-              {props.reported ? (
+              {props.isReportModalOpen ? (
                 <div>
-                  {submitted && <div className='success-message'>Thank you. Your report has been submitted.</div>}
+                  {reported && <div className='success-message'>Thank you. Your report has been submitted.</div>}
                 </div>
               ) : (
                 <div>

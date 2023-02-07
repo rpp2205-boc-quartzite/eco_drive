@@ -9,11 +9,28 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 
 import DefaultRoute from './DefaultRoute.jsx';
-import OngoingTrip from './OngoingTrip.jsx';
-import UpcomingTrip from './UpcomingTrip.jsx';
+import OngoingTripRider from './OngoingTripRider.jsx';
+import UpcomingTripRider from './UpcomingTripRider.jsx';
+import './ongoing-trip-style.css';
 
 
 function RiderView ({ userId, riderOnGoingRoute }) {
+
+  const [startedTrip, setStartedTrip] = useState(riderOnGoingRoute.started ? riderOnGoingRoute.started : false);
+
+  console.log('Started trip: ', startedTrip)
+
+
+  const startTrip = async () => {
+    let result = await axios.put(`/start-route/${userId}/rider`).catch(err => console.log('ERROR:', err))
+    setStartedTrip(true);
+  }
+
+  const endTrip = async () => {
+    let result = await axios.put(`/end-trip/${userId}/rider`).catch(err => console.log('ERROR:', err))
+    setStartedTrip(false);
+  }
+
   const [start, setStart] = useState({
     start_address: '',
     start_lat: '',
@@ -31,6 +48,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
   const [time, setTime] = useState('');
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
+  const [favorites, setFavorites] = useState({});
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
 
   const route = {
@@ -43,8 +61,11 @@ function RiderView ({ userId, riderOnGoingRoute }) {
     end_lat: end.end_lat,
     end_lng: end.end_lng,
     time: time,
-    default: isDefault
+    default: isDefault,
+    userFavorites: favorites
   }
+
+  console.log(route)
 
   useEffect(() => {
     axios.get('/getriderview', { params: {userId} })
@@ -53,6 +74,11 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       setName(result.data[0].full_name)
       setUserInfo(result.data[0])
       setUpcoming(result.data[0].rider_route)
+      setFavorites(result.data[0].favorites)
+      setUserInfo(result.data[0])
+      if (result.data[0].rider_route.driver_id !== undefined) {
+        setStartedTrip(result.data[0].rider_route.started)
+      }
     })
     .catch(err => console.log(err))
   }, [])
@@ -62,13 +88,13 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       <div className="defaultViewHeader">
         <div className="headerToggleView">
           <Link to="/driverview">
-            <div className="viewToggle">Driver</div>
+            <div className="viewToggle">Rider</div>
             <HiOutlineRefresh className="viewToggleButton" size={25}/>
           </Link>
         </div>
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
-          <Link to='/riderprofile' state={{id: userId}} >
+            <Link to="/riderprofile" state={{id: userId}} >
             <button>Avatar</button>
             </Link> </div>
 
@@ -90,7 +116,6 @@ function RiderView ({ userId, riderOnGoingRoute }) {
               <Autocomplete
                   className="inputField1"
                   apiKey={API_KEY}
-                  style={{ width: "90%" }}
                   placeholder="Starting point"
                   onPlaceSelected={(place) => {
                     let lat = place.geometry.location.lat();
@@ -106,7 +131,6 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                 <Autocomplete
                     className="inputField2"
                     apiKey={API_KEY}
-                    style={{ width: "90%" }}
                     placeholder="Destination"
                     onPlaceSelected={(place) => {
                       let lat = place.geometry.location.lat();
@@ -136,17 +160,35 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                 <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-
             <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
-              <button className="primary-btn-find">Find Drivers</button>
+            <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers</button>
             </Link>
           </div>
         </form>
-
       <div>
-        <DefaultRoute userId={userId} upcoming={upcoming} />
-        <OngoingTrip user={userId} />
-        <UpcomingTrip user={userId} route={riderOnGoingRoute} />
+        <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
+        {startedTrip === true
+        ? <OngoingTripRider userId={userId} endTrip={endTrip}/>
+        : (
+          <div className="ongoing-trip-container">
+            <div className="ongoing-title">Ongoing Trip</div>
+            <div className="card">
+              <p> No Active Routes </p>
+            </div>
+          </div>
+        )
+        }
+        {!startedTrip
+        ? <UpcomingTripRider userId={userId} startTrip={startTrip}/>
+        : (
+            <div className="ongoing-trip-container">
+              <div className="ongoing-title">Upcoming Trip</div>
+              <div className="card">
+                <p> No Upcoming Routes </p>
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   )
