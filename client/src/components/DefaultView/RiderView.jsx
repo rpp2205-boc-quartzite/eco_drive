@@ -122,7 +122,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       </div>
 
       <div className="welcomeCont">
-        <div className="welcomeMsg">Welcome {name},</div>
+        <div className="welcomeMsg">Welcome {name.split(' ')[0]},</div>
       </div>
 
       <div className="findNearestDrivers">Find your nearest drivers</div>

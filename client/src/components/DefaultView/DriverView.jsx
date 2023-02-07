@@ -183,7 +183,7 @@ function DriverView ({ userId }) {
       </div>
 
       <div className="welcomeCont">
-        <div className="welcomeMsg">Welcome {name},</div>
+        <div className="welcomeMsg">Welcome {name.split(' ')[0]},</div>
       </div>
 
       {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
