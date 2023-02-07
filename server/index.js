@@ -217,7 +217,7 @@ app.post('/driver-list', async (req, res) => {
 
 // Add/remove driver to/off user's favorites list
 app.put('/driver-list', async (req, res) => {
-  console.log(req.query.action);
+  console.log('/driver-list', req)
   try {
     if (req.query.action === 'add-favorite') {
       await addFavorite(req.query.userId, req.query.driverId)
