@@ -23,7 +23,7 @@ const OngoingTripDriver = (props) => {
   if (user) {
     return (
       <div className="ongoing-trip-container">
-        <div className="ongoing-title">Ongoing Trip</div>
+        <h5>Ongoing Trip</h5>
         <div className="trip-card">
           <div className="profile">
             <div>
@@ -52,7 +52,7 @@ const OngoingTripDriver = (props) => {
   } else {
     return (
       <div className="ongoing-trip-container">
-        <div className="ongoing-title">Ongoing Trip</div>
+        <h5>Ongoing Trip</h5>
         <div className="card">
           <p> No Active Routes </p>
         </div>

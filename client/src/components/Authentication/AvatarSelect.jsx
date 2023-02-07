@@ -45,9 +45,9 @@ export default function AvatarSelect(props) {
           <div className='inner-avatar-wrapper'>
             {photos.map((photo, index) => (
               <div key={index}>
-                <img 
+                <img
                   className={selected === photo.urls.small ? 'selected' : 'avatar-photo'}
-                  alt='avatar select' 
+                  alt='avatar select'
                   src={photo.urls.small}
                   id={photo.urls.small}
                   onClick={onClick}/>
@@ -56,9 +56,9 @@ export default function AvatarSelect(props) {
           <div className='inner-avatar-wrapper'>
             {photos2.map((photo, index) => (
               <div key={index}>
-                <img 
+                <img
                   className={props.state === photo.urls.small ? 'selected' : 'avatar-photo'}
-                  alt='avatar select' 
+                  alt='avatar select'
                   src={photo.urls.small}
                   id={photo.urls.small}
                   onClick={onClick}/>
@@ -68,7 +68,7 @@ export default function AvatarSelect(props) {
       </div>
       <div className='signup-btn-wrapper'>
         <button className='signup-btn' onClick={props.handleSubmit}><span className='sign-up-text'>Sign Up</span></button>
-        <button className='back-btn' onClick={goBack}><span className='back-text'>Go Back</span></button>    
+        <button className='back-btn' onClick={goBack}><span className='back-text'>Go Back</span></button>
       </div>
     </div>
   );
