@@ -93,7 +93,7 @@ function App() {
           <Route path="/driverview" element={<DriverView userId={userId} logOut={logOut}/>} />
           <Route path="/ratings-reviews" element={<Reviews />} />
           <Route path="/all-reviews" element={<AllReviews />} />
-          <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute}/>} />
+          <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute} logOut={logOut}/>} />
           <Route path="/driverprofile" element={<DriverProfile />} />
           <Route path="/riderprofile" element={<RiderProfile />} />
           <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
