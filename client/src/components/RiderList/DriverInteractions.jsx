@@ -30,18 +30,36 @@ const libraries = ["places"];
 
 const DriverInteractions = function(props) {
 
+
   const location = useLocation();
 
-  // console.log('TEST', location.state)
+  var data = location.state.dir.json;
+  var route = location.state.route;
 
-  const data = location.state.dir.json;
 
-  const route = location.state.route;
-
-  // console.log('ROUTE: ', route)
+  // if (typeof window !== 'undefined') {
+  //   if (!localStorage.getItem('mapData')) {
+  //     localStorage.setItem("mapData", data);
+  //     route = JSON.stringify(route)
+  //     localStorage.setItem("route", route);
+  //   } else {
+  //     const localMap = localStorage.getItem("mapData");
+  //     const localRoute = localStorage.getItem("route")
+  //     data = localMap;
+  //     route = JSON.parse(localRoute);
+  //   }
+  // }
 
   const directions = JSON.parse(data)
 
+  useEffect(() => {
+    axios.post("/add-driver-route", {
+      info: route
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, [route])
 
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: API_KEY,
@@ -54,49 +72,42 @@ const DriverInteractions = function(props) {
   const [userRouteInfo, setUserRouteInfo] = React.useState({})
   const [distance, setDistance] = React.useState('');
   const [duration, setDuration] = React.useState('');
-  const [tripStatus, setTripStatus] = React.useState('START');
   const [seats, setSeating] = React.useState(1)
   const [driverData, setDriver] = React.useState({});
-  const [time, setSeconds] = React.useState(0);
-
-
-
-useEffect(() => {
-  const findRiders = () => {
-    const driver = {
-      userId: route.id,
-      start_address: route.start_address,
-      start_lat: route.start_lat,
-      start_lng: route.start_lng,
-      end_address: route.end_address,
-      end_lat: route.end_lat,
-      end_lng: route.end_lng,
-      time: route.time,
-      total_seats: route.total_seats,
-      default: route.default,
-    }
-
-    setDriver(driver);
-
-    setUserRouteInfo(driver);
-    return axios.post('/rider-list', driver)
-      .then((res) => {
-        setSeating(res.data.seats);
-        return setRiders(res.data.riders);
-      })
-      .catch((err) => console.log('Find drivers error: ', err))
-  }
-  findRiders();
-}, [route])
 
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSeconds(time + 1)
-      console.log('Test #', time)
-    }, 5000);
+      // console.log('Checked for Riders')
+      const findRiders = () => {
+        const driver = {
+          userId: route.id,
+          start_address: route.start_address,
+          start_lat: route.start_lat,
+          start_lng: route.start_lng,
+          end_address: route.end_address,
+          end_lat: route.end_lat,
+          end_lng: route.end_lng,
+          time: route.time,
+          total_seats: route.total_seats,
+          default: route.default,
+        }
+
+
+        setDriver(driver);
+
+        setUserRouteInfo(driver);
+        return axios.post('/rider-list', driver)
+          .then((res) => {
+            setSeating(res.data.seats);
+            return setRiders(res.data.riders);
+          })
+          .catch((err) => console.log('Find drivers error: ', err))
+      }
+      findRiders();
+    }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [route]);
 
   useEffect(() => {
     if (!loaded)
@@ -114,13 +125,6 @@ useEffect(() => {
 
 
   if (loadError) return "Error Loading Maps";
-  if (!riders.length) return (
-    <div className='loading-screen'>
-        {console.log('RIDERS', riders)}
-    <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
-    <p>Finding Riders...</p>
- </div>
-  )
   if (!isLoaded) return (
     <div className='loading-screen'>
       <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
@@ -153,28 +157,11 @@ useEffect(() => {
     }
   }
 
-  // const tripCheck = function() {
-  //   if (tripStatus === 'START') {
-  //     return (
-  //       <button className="start-trip"type="submit" onClick={tripChange}>Start Trip</button>
-  //     )
-  //   } else {
-  //     return (
-  //       <Link to="/trip-complete" >
-  //       <button className="end-trip" type="submit" >End Trip</button>
-  //     </Link>
-  //     )
-  //   }
-  // };
 
-  // const tripChange = function() {
-  //   setTripStatus('END');
-  // };
 
 
   return (
     <div>
-      {/* {console.log('This is the Rider Info: ', riders)} */}
       <div>
         <div className="test-top">
           <div className="setting">Driver</div>
@@ -197,13 +184,9 @@ useEffect(() => {
           <h1>Expected Duration: {duration}</h1>
         </div>
       </div>
-        {/* <br></br>
-        <div className="start-trip-place">
-          {tripCheck()}
-        </div> */}
         <br></br>
         <div className="rider-list" data="DriverInteractions">
-          <RiderList driver={driverData} riders={riders} seats={seats}/>
+          <RiderList driver={route} riders={riders} seats={seats}/>
         </div>
     </div>
   )

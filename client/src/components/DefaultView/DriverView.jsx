@@ -21,12 +21,12 @@ function DriverView ({ userId }) {
   const [startedTrip, setStartedTrip] = useState(false);
 
   const startTrip = async () => {
-    let result = await axios.put(`/start-route/${userId}/driver`).catch(err => console.log('ERROR:', err))
+    await axios.put(`/start-route/${userId}/driver`).catch(err => console.log('ERROR:', err))
     setStartedTrip(true);
   }
 
   const endTrip = async () => {
-    let result = await axios.put(`/end-trip/${userId}/driver`).catch(err => console.log('ERROR:', err))
+    await axios.put(`/end-trip/${userId}/driver`).catch(err => console.log('ERROR:', err))
     setStartedTrip(false);
   }
 
@@ -142,7 +142,7 @@ function DriverView ({ userId }) {
       }
     })
     .catch(err => console.log(err))
-  }, [])
+  }, [userId])
 
   const handleClick = (e) => {
     e.preventDefault();

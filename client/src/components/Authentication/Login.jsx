@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 export default function Login(props) {
@@ -15,7 +15,7 @@ export default function Login(props) {
           <div className='login-wrapper'>
             <form className='login-form' onSubmit={handleSubmit}>
               <h2 className='login-title'>Login</h2>
-              <div className='inner-fields-2'>
+              <div className='inner-fields-3'>
                 <div className='label-container'>
                   <div className='label-title-container'>
                     <label className='label-title-3' htmlFor='email'>Email</label>
@@ -32,7 +32,7 @@ export default function Login(props) {
                 </div>
                 <div className='forgot-btn'>
                   <Link to='/password-reset'>
-                    <button className='forgot-btn'><span className='forgot-text'>Forgot Password?</span></button>  
+                    <button className='forgot-btn' type='button'><span className='forgot-text'>Forgot Password?</span></button>  
                   </Link>
                 </div>
               </div>

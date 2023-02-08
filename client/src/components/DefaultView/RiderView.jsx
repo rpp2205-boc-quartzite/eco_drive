@@ -83,7 +83,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       }
     })
     .catch(err => console.log(err))
-  }, [])
+  }, [userId])
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -189,7 +189,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             }
           </div>
         </form>
-      <div>
+      <div className='ongoing-upcoming-flex'>
         {defaultRoute.default
         ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'}/>
         : (
@@ -202,23 +202,23 @@ function RiderView ({ userId, riderOnGoingRoute }) {
         )
         }
         {startedTrip === true
-        ? <OngoingTripRider userId={userId} endTrip={endTrip}/>
+        ? <OngoingTripRider userId={userId} riderOnGoingRoute={riderOnGoingRoute} endTrip={endTrip}/>
         : (
-          <div className="ongoing-trip-container">
-            <div className="ongoing-title">Ongoing Trip</div>
-            <div className="card">
-              <p> No Active Routes </p>
+            <div className="ongoing-trip-container">
+              <h5>Ongoing Trip</h5>
+              <div className="card">
+                <p> No Active Routes </p>
+              </div>
             </div>
-          </div>
-        )
+          )
         }
         {!startedTrip
         ? <UpcomingTripRider userId={userId} startTrip={startTrip}/>
         : (
             <div className="ongoing-trip-container">
-              <div className="ongoing-title">Upcoming Trip</div>
+              <h5>Upcoming Trip</h5>
               <div className="card">
-                <p> No Upcoming Routes </p>
+                <p>No Upcoming Routes</p>
               </div>
             </div>
           )
