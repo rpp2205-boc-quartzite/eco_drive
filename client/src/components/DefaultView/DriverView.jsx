@@ -265,7 +265,7 @@ function DriverView ({ userId, logOut }) {
           <div className="ongoing-trip-container">
             <h5>Ongoing Trip</h5>
             <div className="card">
-              <p className='no-route-message'> No Active Routes </p>
+              <p className='no-route-message'> No active routes </p>
             </div>
           </div>
         )
@@ -276,7 +276,7 @@ function DriverView ({ userId, logOut }) {
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>
               <div className="card">
-                <p className='no-route-message'> No Upcoming Routes </p>
+                <p className='no-route-message'> No upcoming routes </p>
               </div>
             </div>
           )
