@@ -1098,13 +1098,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 50px 0px;
+  padding: 64px 50px 0px;
   gap: 35px;
   width: 375px;
   height: 644px;
   background: var(--gray1);
   flex: none;
-  order: 1;
   align-self: stretch;
   flex-grow: 1;
 }
@@ -1119,7 +1118,6 @@ h1 {
   line-height: 106px;
   color: var(--gray6);
   flex: none;
-  order: 0;
   flex-grow: 0;
 }
 
@@ -1128,14 +1126,13 @@ h1 {
   height: 24px;
   font-family: 'Poppins';
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 16px;
   line-height: 74px;
   display: flex;
   align-items: center;
   color: var(--gray6);
   flex: none;
-  order: 1;
   flex-grow: 0;
 }
 
@@ -1149,7 +1146,6 @@ h1 {
   width: 316px;
   height: 208px;
   flex: none;
-  order: 2;
   flex-grow: 0;
 }
 
