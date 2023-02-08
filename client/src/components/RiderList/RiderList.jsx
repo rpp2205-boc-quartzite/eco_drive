@@ -1,6 +1,7 @@
 import React from "react";
 import "./RiderList.css";
 import { Link } from 'react-router-dom';
+import { FiInfo } from "react-icons/fi";
 import axios from 'axios';
 
 const RiderList = function(props) {
@@ -48,7 +49,11 @@ React.useEffect(() => {
 
     if (totalRiders[0] === 'no') {
       return (
-        <div>No Riders Have Booked you Yet... But Don't Worry! Check back shortly to see your Riders!</div>
+        <div className="driver-list">
+          <div>
+          Hang Tight! Riders will appear here as they book your ride.
+          </div>
+        </div>
       )
     } else {
       return (
@@ -56,23 +61,40 @@ React.useEffect(() => {
           <br></br>
           {/* state={{driverData: passedDriver, riderData: totalRiders}} */}
           <Link to="/driverview">
-          <button className="start-trip"type="submit" >Accept Riders</button>
+          <button className="primary-btn-find" type="submit" >Accept Riders</button>
           </Link>
           <br></br>
           <div className="rider-card-list">
             {totalRiders.map((rider) => {
               // console.log("RIDER: ", rider)
               return (
-                <div className="rider-card" key={rider.profile.email}>
-                  <button className="info-icon" type="submit">insert info icon here</button>
-                  <div className="rider-name">{rider.profile.full_name}</div>
-                  <div><img alt="specific user profile" className="rider-pic" src={rider.profile.avatar} /></div>
-                  <div className="rider-from">{rider.riderID.starting_distance} from Your Pick-Up Location</div>
-                  <div className="rider-to">{rider.riderID.end_distance} from Drop-Off to Final Destination</div>
-                  <div className="rider-time">{rider.riderID.time}</div>
-                  <button className="remove-rider" id={rider.riderID.rider_id} type="submit" onClick={removeRider}>decline this rider</button>
-                </div>
-              )
+                // <div className="card" key={rider.profile.email}>
+                //   <button className="info-icon" type="submit">insert info icon here</button>
+                //   <div className="rider-name">{rider.profile.full_name}</div>
+                //   <div><img alt="specific user profile" className="rider-pic" src={rider.profile.avatar} /></div>
+                //   <div className="rider-from">{rider.riderID.starting_distance} from Your Pick-Up Location</div>
+                //   <div className="rider-to">{rider.riderID.end_distance} from Drop-Off to Final Destination</div>
+                //   <div className="rider-time">{rider.riderID.time}</div>
+                //   <button className="remove-rider" id={rider.riderID.rider_id} type="submit" onClick={removeRider}>decline this rider</button>
+                // </div>
+                  <div className='card'>
+                    <div className='card-header'>
+                      <div className='header-info'>
+                        <img className='avatar' src={rider.profile.avatar} alt="Rider Avatar" />
+                        <p>{rider.profile.full_name}</p>
+                      </div>
+                      <div className='icons-flex'>
+                        <Link to="/ratings-reviews" state={{userData: props.userInfo, revieweeData: props.riders, from: 'rider-list', route: props.route}}>
+                          <FiInfo className='card-icon info-icon'/>
+                        </Link>
+                      </div>
+                    </div>
+                    <p>{rider.riderID.starting_distance} from Your Pick-Up Location</p>
+                    <p>{rider.riderID.end_distance} from Drop-Off to Final Destination</p>
+                    <p>Time: {rider.riderID.time} </p>
+                    <button className='secondary-btn' id={rider.riderID.rider_id} type="submit" onClick={removeRider}>decline this rider</button>
+                 </div>
+                      )
             })}
           </div>
         </div>
