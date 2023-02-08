@@ -1209,7 +1209,7 @@ h1 {
 }
 
 .defaultRouteCont {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 16px;
@@ -1218,7 +1218,12 @@ h1 {
   height: 232px;
   flex: none;
   order: 7;
-  flex-grow: 0;
+  flex-grow: 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
 }
 
 .defaultRouteTitle {
