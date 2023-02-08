@@ -180,7 +180,7 @@ function DriverView ({ userId, logOut }) {
 
       {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
 
-      <div className="findNearestDrivers">Find your nearest riders</div>
+      <div className="findNearestDrivers">Start your new trip</div>
         <form>
           <div className="inputFieldsCont">
             <div className="inputFields">
@@ -237,11 +237,11 @@ function DriverView ({ userId, logOut }) {
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Start Trip
               </button>
             : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Start Trip
                 </button>
               </Link>
             }
