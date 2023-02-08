@@ -711,7 +711,7 @@ h1 {
   flex-grow: 0;
 }
 .label-title-3 {
-  width: 50px;
+  width: 45px;
   height: 24px;
   font-family: 'Poppins';
   font-style: normal;
@@ -871,7 +871,7 @@ h1 {
   flex: none;
   order: 0;
   flex-grow: 0;
-  padding-left: 10px;
+  z-index: 1;
 }
 
 .tos-text {
