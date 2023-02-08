@@ -67,7 +67,7 @@ const OngoingTripRider = (props) => {
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
         <div className="card">
-          <p> No Active Routes </p>
+          <p className='no-route-message'> No Active Routes </p>
         </div>
       </div>
     )

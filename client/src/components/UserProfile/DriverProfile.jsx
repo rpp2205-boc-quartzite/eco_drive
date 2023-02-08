@@ -103,14 +103,31 @@ class DriverProfile extends React.Component {
       <div>
       {/* TOP BUTTONS */}
         {/* <Link to="/riderprofile" > */}
-        <Link
+        {/* <Link
       to="/riderprofile"
       state={{id: this.state.userId}}>
         <span className='profileToggle'>Driver</span>
         <span className='profileToggleButton'><RiRefreshLine/></span>
         </Link>
         <Link to="/"><span className='profileLogoutButton'><RiLogoutBoxRLine /></span></Link>
-        <Link to="/driverview"><span className='profileHomeButton'><RiHome4Fill/></span></Link>
+        <Link to="/driverview"><span className='profileHomeButton'><RiHome4Fill/></span></Link> */}
+
+        <div className='top-bar'>
+          <div className='top-bar-left'>
+            <p>Driver</p>
+            <Link to="/riderprofile" state={{id: this.state.userId}}>
+              <RiRefreshLine className='top-bar-icons' />
+            </Link>
+          </div>
+          <div className='top-bar-right'>
+            <Link to="/driverview">
+              <RiHome4Fill className='top-bar-icons'/>
+            </Link>
+            <Link to="/">
+              <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+            </Link>
+          </div>
+        </div>
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>

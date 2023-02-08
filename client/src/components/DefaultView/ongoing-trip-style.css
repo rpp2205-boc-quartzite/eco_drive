@@ -1,5 +1,5 @@
 /* Align upcoming and ongoing sections in defaut view */
-.ongoing-upcoming-flex {
+.default-ongoing-upcoming-flex {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -134,4 +134,10 @@
 #start-trip-button {
   background: var(--green3);
   color: var(--gray1);
+}
+/* Message displying no route in ongoing trip cards */
+.no-route-message {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--gray4);
 }

@@ -42,7 +42,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
     end_lng: ''
   })
   const [name, setName] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState('https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg');
   const [userInfo, setUserInfo] = useState({});
   const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
@@ -95,28 +95,20 @@ function RiderView ({ userId, riderOnGoingRoute }) {
 
   return (
     <div className="allDefaultView">
-      <div className="defaultViewHeader">
-        <div className="headerToggleView">
+      <div className='top-bar'>
+        <div className='top-bar-left'>
+          <p>Rider</p>
           <Link to="/driverview">
-            <div className="viewToggle">Rider</div>
-            <RiRefreshLine className="viewToggleButton" size={25}/>
+            <RiRefreshLine className='top-bar-icons' />
           </Link>
         </div>
-
-        <div className="headerAvatarLogout">
-          <div className="headerAvatar">
-            <Link to="/riderprofile" state={{id: userId, userInfo: userInfo, from: 'riderview'}} >
-              <img
-                src={avatar}
-                alt="avatar-small"
-                className="profilePhoto"
-              />
-            </Link> </div>
-
-          <div className="headerLogout">
-            <Link to="/">
-            <RiLogoutBoxRLine className="logout" size={20}/>
-            </Link></div>
+        <div className='top-bar-right'>
+          <Link to="/riderprofile" state={{id: userId, userInfo: userInfo, from: 'riderview'}}>
+            <img className='avatar' src={avatar} alt="avatar-small" />
+          </Link>
+          <Link to="/">
+            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+          </Link>
         </div>
       </div>
 
@@ -188,16 +180,16 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             }
           </div>
         </form>
-      <div className='ongoing-upcoming-flex'>
+      <div className='default-ongoing-upcoming-flex'>
         {defaultRoute.default
         ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'}/>
         : (
-          <div>
-            <div className="defaultRouteTitle">Default Route</div>
-            <div className="card">
-              <p> No Default Route Set </p>
+            <div className="ongoing-trip-container">
+              <h5>Default Route</h5>
+              <div className="card">
+                <p className='no-route-message'>No default route set</p>
+              </div>
             </div>
-          </div>
         )
         }
         {startedTrip === true
@@ -206,7 +198,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             <div className="ongoing-trip-container">
               <h5>Ongoing Trip</h5>
               <div className="card">
-                <p> No Active Routes </p>
+                <p className='no-route-message'> No active routes </p>
               </div>
             </div>
           )
@@ -217,7 +209,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             <div className="ongoing-trip-container">
               <h5>Upcoming Trip</h5>
               <div className="card">
-                <p>No Upcoming Routes</p>
+                <p className='no-route-message'>No upcoming routes</p>
               </div>
             </div>
           )

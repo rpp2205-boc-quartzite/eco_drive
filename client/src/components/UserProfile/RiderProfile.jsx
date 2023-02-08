@@ -99,7 +99,7 @@ class RiderProfile extends React.Component {
     return (
       <div>
       {/* TOP BUTTONS */}
-        {this.state.drivers_license ?
+        {/* {this.state.drivers_license ?
         // <Link to="/driverprofile">
 
       <Link
@@ -113,7 +113,31 @@ class RiderProfile extends React.Component {
         }
 
         <Link to="/"><span className='profileLogoutButton'><RiLogoutBoxRLine /></span></Link>
-        <Link to="/riderview"><span className='profileHomeButton'><RiHome4Fill/></span></Link>
+        <Link to="/riderview"><span className='profileHomeButton'><RiHome4Fill/></span></Link> */}
+
+        <div className='top-bar'>
+        <div className='top-bar-left'>
+          <p>Rider</p>
+          {this.state.drivers_license
+            ? <Link to="/driverprofile" state={{id: this.state.userId}}>
+                <RiRefreshLine className='top-bar-icons' />
+              </Link>
+            : <RiRefreshLine className='top-bar-icons' />
+          }
+        </div>
+        <div className='top-bar-right'>
+          <Link to="/riderview">
+            <RiHome4Fill className='top-bar-icons'/>
+          </Link>
+          <Link to="/">
+            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+          </Link>
+        </div>
+      </div>
+
+      {/* <div className="welcomeCont">
+        <div className="welcomeMsg">Welcome {name.split(' ')[0]},</div>
+      </div> */}
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>

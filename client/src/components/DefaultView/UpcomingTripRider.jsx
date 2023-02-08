@@ -62,7 +62,7 @@ const UpcomingTripRider = (props) => {
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
         <div className="card">
-          <p>No Upcoming Routes</p>
+          <p className='no-route-message'>No Upcoming Routes</p>
         </div>
       </div>
     )
