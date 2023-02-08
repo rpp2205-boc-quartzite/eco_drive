@@ -15,7 +15,7 @@ import OngoingTripDriver from './OngoingTripDriver.jsx';
 import UpcomingTripDriver from './UpcomingTripDriver.jsx';
 import './ongoing-trip-style.css';
 
-function DriverView ({ userId }) {
+function DriverView ({ userId, logOut }) {
 
   const [startedTrip, setStartedTrip] = useState(false);
 
@@ -159,7 +159,7 @@ function DriverView ({ userId }) {
 
           <div className="headerLogout">
             <Link to="/">
-            <MdLogout className="logout" size={20}/>
+            <MdLogout className="logout" size={20} onClick={logOut}/>
             </Link></div>
         </div>
       </div>
