@@ -29,18 +29,43 @@ const DriverPrompt = ({ show, close, userId }) => {
     return null;
   } else {
     return (
-      <div className="licenseModal">
-        <div className="licenseModalContent">
-        <div className="licenseModalTitle">To sign up as a driver with EcoDrive, please update your record with your license information:</div>
-        <input className="licenseModalInput1" type="text" placeholder="Driver's license number" onChange={(e) => setLicense(e.target.value)}/>
-        <input type="text" className="licenseModalInput2" placeholder="License plate" onChange={(e) => setPlate(e.target.value)}/>
-        <div className="licenseModalButtonCont">
-          <button type="Submit" className="primary-btn-license-submit" onClick={(e) => handleSubmit(e)}>Submit</button>
-          <Link to="/riderview">
-            <button className="secondary-btn-cancel">Cancel</button>
-          </Link>
+      // <div className="licenseModal">
+      //   <div className="licenseModalContent">
+      //   <div className="licenseModalTitle">To sign up as a driver with EcoDrive, please update your record with your license information:</div>
+      //   <input className="licenseModalInput1" type="text" placeholder="Driver's license number" onChange={(e) => setLicense(e.target.value)}/>
+      //   <input type="text" className="licenseModalInput2" placeholder="License plate" onChange={(e) => setPlate(e.target.value)}/>
+      //   {/* <div className="btn-horizontal-flex">
+      //     <button type="Submit" className="primary-btn-license-submit" onClick={(e) => handleSubmit(e)}>Submit</button>
+      //     <Link to="/riderview">
+      //       <button className="cancel-btn btn-flex-grow">Cancel</button>
+      //     </Link>
+      //   </div> */}
+      //   <div className="btn-horizontal-flex">
+      //     <Link to="/riderview" className="link link-wrap-btn">
+      //       <button className="cancel-btn btn-flex-grow">Cancel</button>
+      //     </Link>
+      //     <button type='submit' onClick={(e) => handleSubmit(e)}  className="primary-btn btn-flex-grow">Submit</button>
+      //   </div>
+      //   </div>
+      // </div>
+
+      <div className='modal trans-bg display-block'>
+        <div className='popup-container'>
+          <h5>To sign up as a driver with EcoDrive, please update your record with your license information:</h5>
+          <div className='modalInputFields'>
+            <input className="licenseModalInput" type="text" placeholder="Driver's license number" onChange={(e) => setLicense(e.target.value)}/>
+            <input type="text" className="licenseModalInput" placeholder="License plate" onChange={(e) => setPlate(e.target.value)}/>
+          </div>
+          <div className="btn-horizontal-flex">
+            <Link to="/riderview" className="link link-wrap-btn">
+              <button className="cancel-btn btn-flex-grow">Cancel</button>
+            </Link>
+            <button type='submit' onClick={(e) => handleSubmit(e)}  className="primary-btn btn-flex-grow">Submit</button>
+          </div>
         </div>
-        </div>
+        <Link to="/riderview">
+          <div className='dark-space'></div>
+        </Link>
       </div>
     )
   }

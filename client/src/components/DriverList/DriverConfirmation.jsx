@@ -16,9 +16,9 @@ const DriverConfirmation = ({driverInfo, userRouteInfo, toggleDriverConfirmation
           <p>Time: {driverInfo.driver_route.time}</p>
         </div>
         <div className='btn-horizontal-flex'>
-          <button className='cancel-btn' onClick={() => {toggleDriverConfirmation()}}>Cancel</button>
+          <button className='cancel-btn btn-flex-grow' onClick={() => {toggleDriverConfirmation()}}>Cancel</button>
           <button
-            className='primary-btn'
+            className='primary-btn btn-flex-grow'
             onClick={() => {
               toggleDriverConfirmation()
               toggleSuccessMessage();

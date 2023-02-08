@@ -22,10 +22,10 @@ export default function Register(props) {
   const calculateAge = (date) => {
     const now = new Date();
     const diff = Math.abs(now - date );
-    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
+    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
 
     return age
-  }  
+  }
 
   const handleNext = (event) => {
     event.preventDefault();
@@ -65,6 +65,7 @@ export default function Register(props) {
     }
 
     if (drivers_license === '') {
+      console.log(email)
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false, is_rider: true})
         .then((result) => {
           props.authCheck(email, password);
@@ -80,62 +81,64 @@ export default function Register(props) {
         .catch((err) => {
           alert('Email already in use.');
         });
-    }; 
+    };
   }
 
   return (
     <div className='signup-form-container'>
-      {driverCheck === false && 
+      {driverCheck === false &&
         <div className='signup-wrappers'>
-          <form className='sign-form' onSubmit={handleNext}>
-            <div className='inner-fields'>
-              <h2 className='signup-title'>Sign Up</h2>
-              <div className='label-container'>
-                <div className='label-title-container'>
-                  <label htmlFor='name' className='label-title-2'>Name</label>
-                  <div className='valid-check'>*</div>
+          <div className='sign-tos-wrapper'>
+            <form className='sign-form' onSubmit={handleNext}>
+              <div className='inner-fields'>
+                <h2 className='signup-title'>Sign Up</h2>
+                <div className='label-container'>
+                  <div className='label-title-container'>
+                    <label htmlFor='name' className='label-title-2'>Name</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
                 </div>
-                <input className='input-field' value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
-              </div>
-              <div className='label-container-2'>
-                <div className='label-title-container'>
-                  <label htmlFor='email' className='label-title-3'>Email</label>
-                  <div className='valid-check'>*</div>
+                <div className='label-container-2'>
+                  <div className='label-title-container'>
+                    <label htmlFor='email' className='label-title-3'>Email</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())} type='email' id='email' name='email' required/>
                 </div>
-                <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
-              </div>
-              <div className='label-container-3'>
-                <div className='label-title-container'>
-                  <label htmlFor='dob' className='label-title-4'>Date of Birth</label>
-                  <div className='valid-check'>*</div>
+                <div className='label-container-3'>
+                  <div className='label-title-container'>
+                    <label htmlFor='dob' className='label-title-4'>Date of Birth</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
                 </div>
-                <input className='input-field' value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
-              </div>
-              <div className='label-container-4'>
-                <div className='label-title-container'>
-                  <label htmlFor='password' className='label-title-5'>Password</label>
-                  <div className='valid-check'>*</div>
+                <div className='label-container-4'>
+                  <div className='label-title-container'>
+                    <label htmlFor='password' className='label-title-5'>Password</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
                 </div>
-                <input className='input-field' value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
-              </div>
-              <div className='label-container-5'>
-                <div className='label-title-container'>
-                  <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
-                  <div className='valid-check'>*</div>
+                <div className='label-container-5'>
+                  <div className='label-title-container'>
+                    <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
                 </div>
-                <input className='input-field' value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
               </div>
-            </div>
-            </form>
-            <div className='tos-wrapper'>
-              <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
-                <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
-            </div>
-            <div className='signup-btn-wrapper'>
-              <button className='next-btn' type='submit' onClick={handleNext}><span className='next-text'>Next</span></button> 
+              </form>
+              <div className='tos-wrapper'>
+                  <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
+                  <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
+              </div>
+          </div>
+            <div className='link-frame'>
+              <button className='primary-btn' type='submit' onClick={handleNext}>Next</button>
             <Link to='/'>
-              <button className='back-btn'><span className='back-text'>Go Back</span></button> 
-            </Link> 
+              <button className='back-btn'><span className='back-text'>Go Back</span></button>
+            </Link>
             </div>
         </div>}
       {driverCheck === true &&
@@ -158,13 +161,12 @@ export default function Register(props) {
             <p className='driver-skip'>* If you are not a driver, press Next to skip.</p>
           </div>
         </form>
-        <div className='signup-btn-wrapper'>
-          <button className='next-btn' type='submit' onClick={handleAvatar}><span className='next-text'>Next</span></button>
+        <div className='link-frame'>
+          <button className='primary-btn' type='submit' onClick={handleAvatar}>Next</button>
           <button className='back-btn' onClick={(event) => setDriverCheck(false)}><span className='back-text'>Go Back</span></button>
         </div>
-      </div>
-        } 
-        {avatarCheck === true && 
+      </div>}
+        {avatarCheck === true &&
           <AvatarSelect state={avatar} setState={setAvatarValue} setAvatar ={setAvatar} setDriverCheck={setDriverCheck} handleSubmit={handleSubmit}/>}
   </div>
   )

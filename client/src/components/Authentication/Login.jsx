@@ -21,7 +21,7 @@ export default function Login(props) {
                     <label className='label-title-3' htmlFor='email'>Email</label>
                     <div className='valid-check'>*</div>
                   </div>
-                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />                  
+                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />
                 </div>
                 <div className='label-container-2'>
                   <div className='label-title-container'>
@@ -32,17 +32,17 @@ export default function Login(props) {
                 </div>
                 <div className='forgot-btn'>
                   <Link to='/password-reset'>
-                    <button className='forgot-btn' type='button'><span className='forgot-text'>Forgot Password?</span></button>  
+                    <button className='forgot-btn' type='button'><span className='forgot-text'>Forgot Password?</span></button>
                   </Link>
                 </div>
               </div>
             </form>
           </div>
-          <div className='signup-btn-wrapper'>
-            <button className='next-btn' type='submit' onClick={handleSubmit}><span className='login-text'>Log In</span></button>
+          <div className='link-frame'>
+            <button className='primary-btn' type='submit' onClick={handleSubmit}>Log In</button>
             <Link to='/'>
-              <button className='back-btn'><span className='back-text'>Go Back</span></button> 
-            </Link> 
+              <button className='back-btn'><span className='back-text'>Go Back</span></button>
+            </Link>
           </div>
         </div>
     )
