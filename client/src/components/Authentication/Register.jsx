@@ -65,6 +65,7 @@ export default function Register(props) {
     }
 
     if (drivers_license === '') {
+      console.log(email)
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false, is_rider: true})
         .then((result) => {
           props.authCheck(email, password);
@@ -102,7 +103,7 @@ export default function Register(props) {
                   <label htmlFor='email' className='label-title-3'>Email</label>
                   <div className='valid-check'>*</div>
                 </div>
-                <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)} type='email' id='email' name='email' required/>
+                <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())} type='email' id='email' name='email' required/>
               </div>
               <div className='label-container-3'>
                 <div className='label-title-container'>
