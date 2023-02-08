@@ -119,6 +119,7 @@ export default function AvatarSelect(props) {
                 </div>))}
             </div>
           </div>
+          <button className='secondary-btn' onClick={getPics}>Refresh Photos</button>
         </div>
         <div className='link-frame'>
           <button className='primary-btn' onClick={props.handleSubmit}>Sign Up</button>
