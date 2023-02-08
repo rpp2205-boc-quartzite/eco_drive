@@ -249,7 +249,7 @@ function DriverView ({ userId }) {
                 onClick={(e) => handleClick(e)}
                 disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
               </button>
-            : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}}>
+            : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
                   disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
                 </button>

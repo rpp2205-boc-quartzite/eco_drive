@@ -181,7 +181,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                 onClick={(e) => handleClick(e)}
                 disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
               </button>
-            : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}}>
+            : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}} style={{ textDecoration: 'none' }}>
                 <button
                   disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
                 </button>
