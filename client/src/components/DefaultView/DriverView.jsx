@@ -43,6 +43,7 @@ function DriverView ({ userId }) {
   const [seats, setSeats] = useState('');
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [userInfo, setUserInfo] = useState({});
   const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
   const [isDefault, setIsDefault] = useState(false);
@@ -130,6 +131,7 @@ function DriverView ({ userId }) {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
       setUpcoming(result.data[0].driver_route)
+      setUserInfo(result.data[0])
       setFavorites(result.data[0].favorites)
       setDefaultRoute(result.data[0].default_driver_route)
       if (result.data[0].driver_route.start_address !== undefined) {
@@ -146,7 +148,7 @@ function DriverView ({ userId }) {
     e.preventDefault();
     axios.post('/driver/:_id/defaultroute', {data: route})
     .then((result) => {
-      navigate('/rider-list', {state: {dir: directionsResponse, route: route}})
+      navigate('/rider-list', {state: {dir: directionsResponse, route: route, userInfo: userInfo}})
     })
     .catch(err => console.log(err))
   }
@@ -167,7 +169,7 @@ function DriverView ({ userId }) {
 
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
-            <Link to="/driverprofile" state={{id: userId}}>
+            <Link to="/driverprofile" state={{id: userId, userInfo: userInfo, from: 'driverview'}}>
               <img
                   src={avatar}
                   alt="avatar-small"
@@ -247,7 +249,7 @@ function DriverView ({ userId }) {
                 onClick={(e) => handleClick(e)}
                 disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
               </button>
-            : <Link to="/rider-list" state={{dir: directionsResponse, route: route}}>
+            : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}}>
                 <button
                   disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
                 </button>
@@ -257,7 +259,7 @@ function DriverView ({ userId }) {
         </form>
       <div>
         {defaultRoute.default
-        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} view={'driver'} favorites={favorites} dir={directionsResponse} route={route}/>
+        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'}/>
         : (
           <div>
             <div className="defaultRouteTitle">Default Route</div>

@@ -44,7 +44,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
   })
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
-  const [userInfo, setUserInfo] = useState({})
+  const [userInfo, setUserInfo] = useState({});
   const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
   const [isDefault, setIsDefault] = useState(false);
@@ -89,7 +89,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
     e.preventDefault();
     axios.post('/rider/:_id/defaultroute', {data: route})
     .then((result) => {
-      navigate('/driver-list', {state: {route: route, userInfo: userInfo}})
+      navigate('/driver-list', {state: {route: route, userInfo: userInfo, from: 'riderview'}})
     })
     .catch(err => console.log(err))
   }
@@ -106,7 +106,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
 
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
-            <Link to="/riderprofile" state={{id: userId}} >
+            <Link to="/riderprofile" state={{id: userId, userInfo: userInfo, from: 'riderview'}} >
               <img
                 src={avatar}
                 alt="avatar-small"
@@ -181,7 +181,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                 onClick={(e) => handleClick(e)}
                 disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
               </button>
-            : <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
+            : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}}>
                 <button
                   disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
                 </button>
@@ -191,7 +191,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
         </form>
       <div>
         {defaultRoute.default
-        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} view={'rider'} favorites={favorites} userInfo={userInfo}/>
+        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'}/>
         : (
           <div>
             <div className="defaultRouteTitle">Default Route</div>
