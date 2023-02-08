@@ -14,7 +14,7 @@ import UpcomingTripRider from './UpcomingTripRider.jsx';
 import './ongoing-trip-style.css';
 
 
-function RiderView ({ userId, riderOnGoingRoute }) {
+function RiderView ({ userId, riderOnGoingRoute, logOut }) {
 
   const [startedTrip, setStartedTrip] = useState(riderOnGoingRoute.started ? riderOnGoingRoute.started : false);
 
@@ -107,7 +107,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             <img className='avatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+            <RiLogoutBoxRLine className='top-bar-icons' size={20} onClick={logOut}/>
           </Link>
         </div>
       </div>

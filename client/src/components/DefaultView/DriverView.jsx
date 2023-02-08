@@ -14,7 +14,7 @@ import OngoingTripDriver from './OngoingTripDriver.jsx';
 import UpcomingTripDriver from './UpcomingTripDriver.jsx';
 import './ongoing-trip-style.css';
 
-function DriverView ({ userId }) {
+function DriverView ({ userId, logOut }) {
 
   const [startedTrip, setStartedTrip] = useState(false);
 
@@ -169,7 +169,7 @@ function DriverView ({ userId }) {
             <img className='avatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+            <RiLogoutBoxRLine className='top-bar-icons' size={20} onClick={logOut}/>
           </Link>
         </div>
       </div>

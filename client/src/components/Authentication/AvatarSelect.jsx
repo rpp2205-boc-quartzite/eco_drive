@@ -14,15 +14,31 @@ export default function AvatarSelect(props) {
   const [selected, setSelected] = useState('');
 
   useEffect(() => {
+    if (photos === null) {
+      axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
+      .then((response) => {
+        setPhotos(response.data.slice(2,5));
+        setPhotos2(response.data.slice(6,9));
+        setSelected(response.data.slice(2,3)[0].urls.small);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  });
+
+  const getPics = (event) => {
+    event.preventDefault();
     axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
     .then((response) => {
       setPhotos(response.data.slice(2,5));
       setPhotos2(response.data.slice(6,9));
+      setSelected(response.data.slice(2,3)[0].urls.small);
     })
     .catch(function (error) {
       console.log(error);
     });
-  }, []);
+  }
 
   const onClick = (event) => {
     event.preventDefault();
@@ -95,7 +111,7 @@ export default function AvatarSelect(props) {
               {photos2.map((photo, index) => (
                 <div key={index}>
                   <img
-                    className={props.state === photo.urls.small ? 'selected' : 'avatar-photo'}
+                    className={selected === photo.urls.small ? 'selected' : 'avatar-photo'}
                     alt='avatar select'
                     src={photo.urls.small}
                     id={photo.urls.small}
@@ -103,6 +119,7 @@ export default function AvatarSelect(props) {
                 </div>))}
             </div>
           </div>
+          <button className='secondary-btn' onClick={getPics}>Refresh Photos</button>
         </div>
         <div className='link-frame'>
           <button className='primary-btn' onClick={props.handleSubmit}>Sign Up</button>
