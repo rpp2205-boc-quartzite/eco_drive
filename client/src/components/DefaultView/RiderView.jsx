@@ -168,7 +168,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       <div className='ongoing-upcoming-flex'>
         <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
         {startedTrip === true
-        ? <OngoingTripRider userId={userId} endTrip={endTrip}/>
+        ? <OngoingTripRider userId={userId} riderOnGoingRoute={riderOnGoingRoute} endTrip={endTrip}/>
         : (
             <div className="ongoing-trip-container">
               <h5>Ongoing Trip</h5>

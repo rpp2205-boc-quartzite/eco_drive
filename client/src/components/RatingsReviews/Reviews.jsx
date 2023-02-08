@@ -133,7 +133,7 @@ export default function Reviews(props) {
         ? <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
             <BiArrowBack className="backButton" size={20} />
           </Link>
-        : <Link to="/driverprofile">
+        : <Link to="/riderview">
             <BiArrowBack className="backButton" size={20} />
           </Link>
       }

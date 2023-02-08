@@ -46,7 +46,8 @@ const OngoingTripRider = (props) => {
                 ? <HiHeart className='card-icon full-heart-icon'/>
                 : (<HiOutlineHeart className='card-icon outlined-heart-icon'/>)
               }
-              <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver }}>
+              {/* <Link to="/ratings-reviews"  state={ { from: 'riderview', userData: user, revieweeData: driver, userId: props.userId, riderOnGoingRoute: props.riderOnGoingRoute } }> */}
+              <Link to="/ratings-reviews"  state={ { from: 'riderview', userData: user, revieweeData: driver } }>
                 <FiInfo className='card-icon info-icon'/>
               </Link>
             </div>
