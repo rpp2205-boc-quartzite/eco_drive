@@ -6,6 +6,7 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import RiderReviewsList from './RiderReviewsList.jsx';
 import RiderRecentList from './RiderRecentList.jsx';
+import PreviousRidesList from './PreviousRidesList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
 import { randomFacts } from './RandomFacts.jsx';
@@ -16,7 +17,7 @@ class RiderProfile extends React.Component {
     console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
       userId: this.props.location.state.id,
-      //userId: '63d36ee5cd478f26557c4a38',
+      //userId: '63d36e8fcd478f26557c4a37',
       // userId: '63db055e255ff6bddca10fe6',
       full_name: '',
       email: '',
@@ -103,7 +104,7 @@ class RiderProfile extends React.Component {
 
   render () {
     //console.log('CHECKING RIDER PROPS', this.props.location.state.id)
-    console.log('HELLOOOO', this.state.recent_drivers)
+    //console.log('HELLOOOO', this.state.recent_drivers)
     return (
       <div>
       {/* TOP BUTTONS */}
@@ -232,14 +233,7 @@ class RiderProfile extends React.Component {
           {this.state.rider_trips.length === 0 ?
           <div className='profilePlaceholder2'>None yet &#129485;</div>
           :
-          <div className='profileCurrentRoute'>
-            <div className='profileCurrentRouteTitle'>From:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.start_address}</div>
-            <div className='profileCurrentRouteTitle'>To:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.end_address}</div>
-            <div className='profileCurrentRouteTitle'>Time:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.time}</div>
-          </div>
+          <PreviousRidesList rider_trips={this.state.rider_trips}/>
           }
 
         </div>

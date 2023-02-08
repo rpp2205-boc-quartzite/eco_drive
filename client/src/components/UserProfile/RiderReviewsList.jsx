@@ -1,6 +1,6 @@
 import React from 'react';
 import RiderReviewTile from './RiderReviewTile.jsx';
-
+import axios from 'axios';
 
 class RiderReviewsList extends React.Component {
   constructor(props) {
