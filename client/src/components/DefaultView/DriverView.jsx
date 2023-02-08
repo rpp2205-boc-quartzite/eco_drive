@@ -180,7 +180,7 @@ function DriverView ({ userId, logOut }) {
 
       {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
 
-      <div className="findNearestDrivers">Find your nearest riders</div>
+      <div className="findNearestDrivers">Start your new trip</div>
         <form>
           <div className="inputFieldsCont">
             <div className="inputFields">
@@ -237,11 +237,11 @@ function DriverView ({ userId, logOut }) {
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Start Trip
               </button>
             : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Start Trip
                 </button>
               </Link>
             }
@@ -265,7 +265,7 @@ function DriverView ({ userId, logOut }) {
           <div className="ongoing-trip-container">
             <h5>Ongoing Trip</h5>
             <div className="card">
-              <p className='no-route-message'> No Active Routes </p>
+              <p className='no-route-message'> No active routes </p>
             </div>
           </div>
         )
@@ -276,7 +276,7 @@ function DriverView ({ userId, logOut }) {
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>
               <div className="card">
-                <p className='no-route-message'> No Upcoming Routes </p>
+                <p className='no-route-message'> No upcoming routes </p>
               </div>
             </div>
           )
