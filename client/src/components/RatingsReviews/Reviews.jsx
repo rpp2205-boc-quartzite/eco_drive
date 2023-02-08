@@ -40,14 +40,19 @@ export default function Reviews(props) {
       removeDriverOffFavorites()
         .then(() => {
           setFavoriteDriver(!favoriteDriver)
-          console.log('Successfully unfavorite driver ', revieweeData.full_name)
+          let newUserFavorites = userData.favorites.filter(favorite => {
+            return favorite !== revieweeData._id;
+          });
+          userData.favorites = newUserFavorites;
+          console.log('userData favorites: ', userData);
         })
         .catch(() => console.log('Unable to unfavorite driver'))
     } else {
       addDriverToFavorites()
         .then(() => {
           setFavoriteDriver(!favoriteDriver)
-          console.log('Successfully favorite driver ', revieweeData.full_name)
+          userData.favorites.push(revieweeData._id);
+          console.log('userData favorites: ', userData);
         })
         .catch(() => console.log('Unable to favorite driver'))
     }
@@ -69,12 +74,12 @@ export default function Reviews(props) {
         revieweeData.rider_reviews = result.data[0].rider_reviews;
         revieweeData.driver_reviews = result.data[0].driver_reviews;
         if (revieweeData.rider_reviews.some(review => review.full_name === userData.full_name)) {
-          if (location.state.from.includes('driver')) {
+          if (location.state.view.includes('driver')) {
             setSubmitted(true);
           }
         }
         if (revieweeData.driver_reviews.some(review => review.full_name === userData.full_name)) {
-          if (location.state.from.includes('rider')) {
+          if (location.state.view.includes('rider')) {
             setSubmitted(true);
           }
         }
@@ -136,6 +141,29 @@ export default function Reviews(props) {
     <div>
     <div className="reviewHeader">
     <div className="reviewHeaderBackButton">
+    {(() => {
+      if (location.state.from === 'driver-list') {
+        return (
+          <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
+          </Link>
+        )
+    } else if (location.state.from === 'trip-complete-rider') {
+        return (
+          <Link to="/trip-complete-rider" state={{user: userData, driver: revieweeData}}>
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
+          </Link>
+        )
+    } else {
+        return (
+          <Link to="/riderview">
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
+          </Link>
+        )
+    }
+    })()}
+    </div>
+    {/* <div className="reviewHeaderBackButton">
       {
         location.state.from === 'driver-list'
         ? <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
@@ -145,7 +173,7 @@ export default function Reviews(props) {
             <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
       }
-    </div>
+    </div> */}
     <div className="reviewHeaderLogout">
       <Link to="/">
         <RiLogoutBoxRLine className="logout" size={20} />
@@ -281,7 +309,7 @@ export default function Reviews(props) {
   )
 }
 
-// if (revieweeData.driver_reviews.length === 0 && revieweeData.rider_reviews.length === 0) {
+////// if (revieweeData.driver_reviews.length === 0 && revieweeData.rider_reviews.length === 0) {
   //   return (
   //     <div>
   //     <div className="reviewHeader">
@@ -463,3 +491,86 @@ export default function Reviews(props) {
   //     </div>
   //   )
   // }
+
+
+  // <div>
+  // {(() => {
+//     if (revieweeData.driver_reviews.length === 0 && revieweeData.rider_reviews.length === 0) {
+//       return (
+//         <span className='profileTitle'>No reviews have been submitted for this user.</span>
+//       )
+//     } else if (revieweeData.driver_reviews.length > 0 && revieweeData.rider_reviews.length > 0) {
+//       return (
+//         <div>
+//           <div className='profileReviewDiv'>
+//             <span className='profileTitle'>Reviews as a Driver</span>
+//             <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
+//             <div className='profileReviewContainer'>
+//               {revieweeData.sortedDriverReviews.slice(0, 6).map(review => {
+//                 return (
+//                   <ReviewTile className='' review={review} key={review._id} />
+//                 )
+//               })}
+//             </div>
+//           </div>
+//           <div className='profileReviewDiv'>
+//             <span className='profileTitle'>Reviews as a Rider</span>
+//             <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
+//             <div className='profileReviewContainer'>
+//               {revieweeData.sortedRiderReviews.slice(0, 6).map(review => {
+//                 return (
+//                   <ReviewTile className='' review={review} key={review._id}/>
+//                 )
+//               })}
+//             </div>
+//           </div>
+//         </div>
+//       )
+//     } else if (revieweeData.driver_reviews.length > 0 && revieweeData.rider_reviews.length === 0){
+//       return (
+//         <div className='profileReviewDiv'>
+//           <span className='profileTitle'>Reviews as a Driver</span>
+//           <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
+//           <div className='profileReviewContainer'>
+//             {revieweeData.sortedDriverReviews.slice(0, 6).map(review => {
+//               return (
+//                 <ReviewTile className='' review={review} key={review._id} />
+//               )
+//             })}
+//           </div>
+//         </div>
+//       )
+//     } else {
+//       return (
+//         <div className='profileReviewDiv'>
+//           <span className='profileTitle'>Reviews as a Rider</span>
+//           <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
+//           <div className='profileReviewContainer'>
+//             {revieweeData.sortedRiderReviews.slice(0, 6).map(review => {
+//               return (
+//                 <ReviewTile className='' review={review} key={review._id}/>
+//               )
+//             })}
+//           </div>
+//         </div>
+//       )
+//     }
+//   })()}
+// </div>
+
+{/* <div className="reviewHeaderBackButton">
+{(() => {
+  if (location.state.from === 'driver-list') {
+    <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
+      <BiArrowBack className="backButton" color={'#262929'} size={20} />
+    </Link>
+} else if (location.state.from === 'trip-complete-rider') {
+    <Link to="/trip-complete-rider" state={{route: route, userInfo: userInfo}}>
+      <BiArrowBack className="backButton" color={'#262929'} size={20} />
+    </Link>
+} else {
+    <Link to="/riderview">
+      <BiArrowBack className="backButton" color={'#262929'} size={20} />
+    </Link>
+})()}
+</div> */}

@@ -226,7 +226,7 @@ export default function AllReviews(props) {
     <div>
       <div className="reviewHeader">
         <div className="reviewHeaderBackButton">
-          <Link to="/ratings-reviews" state={{userData: location.state.userData, revieweeData: location.state.revieweeData, route: location.state.route, from: location.state.from }}>
+          <Link to="/ratings-reviews" state={{userData: location.state.userData, revieweeData: location.state.revieweeData, route: location.state.route, from: location.state.from, view: location.state.view }}>
             <BiArrowBack className="backButton" size={20} />
           </Link>
         </div>
