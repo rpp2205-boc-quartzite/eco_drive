@@ -14,16 +14,20 @@ export default function AvatarSelect(props) {
   const [selected, setSelected] = useState('');
 
   useEffect(() => {
+    if (photos === null) {
       axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
       .then((response) => {
         setPhotos(response.data.slice(2,5));
         setPhotos2(response.data.slice(6,9));
-        setSelected(photos[0]);
+      })
+      .then(() => {
+        setSelected('https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg');
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+    }
+  });
 
   const getPics = (event) => {
     event.preventDefault();

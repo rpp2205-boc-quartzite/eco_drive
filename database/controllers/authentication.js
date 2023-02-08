@@ -12,7 +12,6 @@ module.exports = {
       name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1);
     };
     const fullName = name.join(' ');
-    console.log(fullName);
 
     bcrypt
     .hash(req.body.password, 10)
