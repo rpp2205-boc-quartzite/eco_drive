@@ -2,12 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import { AiFillHome } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
-import {HiOutlineRefresh} from 'react-icons/hi'
+import { HiOutlineRefresh } from 'react-icons/hi';
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
+import DriverRecentList from './DriverRecentList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
-import {randomFacts} from './RandomFacts.jsx';
+import { randomFacts } from './RandomFacts.jsx';
 
 class DriverProfile extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class DriverProfile extends React.Component {
     console.log( 'DRIVER PROFILE PROPS', this.props)
     this.state = {
       //userId: this.props.location.state.id,
-      userId: '63e1be0115a844ab4b7f1b13',
+      userId: '63e2e3c99aa4b02ef8addcbc',
       full_name: '',
       email: '',
       start_address: '',
@@ -29,7 +30,8 @@ class DriverProfile extends React.Component {
       rating: 4,
       driver_trips: [],
       editProfile: false,
-      infoChangedSuccess: false
+      infoChangedSuccess: false,
+      wholeObj: {}
     };
     this.editProfileOrClose = this.editProfileOrClose.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -53,7 +55,8 @@ class DriverProfile extends React.Component {
         avatar: result.data[0].avatar,
         drivers_license: result.data[0].drivers_license,
         driver_reviews: result.data[0].driver_reviews,
-        recent_riders: result.data[0].recent_riders
+        recent_riders: result.data[0].recent_riders,
+        wholeObj: result
       })
     })
     .catch(err => console.log(err))
@@ -196,13 +199,12 @@ class DriverProfile extends React.Component {
           <span className='profileTitle'>Recent riders</span>
           <div className='profileRecentDriverContainer'>
           {this.state.recent_riders.length === 0 ?
-          <div className='profilePlaceholder2'>None yet &#129485;</div>
+          <div className='profilePlaceholder2'>None yet &#129485;
+        </div>
           :
-          <Link to="/ratings-reviews">
-          {!this.state.avatar ?
-          <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
-          <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/>
-          }</Link>
+        <div>
+          <DriverRecentList recent_riders={this.state.recent_riders} wholeObj={this.state.wholeObj}/>
+        </div>
           }
           </div>
         </div>
