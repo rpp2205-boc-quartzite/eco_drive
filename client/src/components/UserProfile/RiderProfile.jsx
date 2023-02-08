@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { AiFillHome } from 'react-icons/ai';
-import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
-import { FaPen, FaCheckCircle} from 'react-icons/fa';
+import { RiRefreshLine, RiLogoutBoxRLine, RiHome4Fill, RiPencilFill, RiCheckboxCircleFill } from "react-icons/ri";
 import RiderReviewsList from './RiderReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
@@ -109,14 +106,14 @@ class RiderProfile extends React.Component {
       to="/driverprofile"
       state={{id: this.state.userId}}>
         <span className='profileToggle'>Rider</span>
-        <span className='profileToggleButton'><HiOutlineRefresh/></span>
+        <span className='profileToggleButton'><RiRefreshLine/></span>
         </Link> : <span>
         <span className='profileToggle'>Rider</span>
-        <span className='profileToggleButton'><HiOutlineRefresh/></span></span>
+        <span className='profileToggleButton'><RiRefreshLine/></span></span>
         }
 
-        <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
-        <Link to="/riderview"><span className='profileHomeButton'><AiFillHome/></span></Link>
+        <Link to="/"><span className='profileLogoutButton'><RiLogoutBoxRLine /></span></Link>
+        <Link to="/riderview"><span className='profileHomeButton'><RiHome4Fill/></span></Link>
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
@@ -148,7 +145,7 @@ class RiderProfile extends React.Component {
       {/* UPDATE PROFILE */}
         <div>
           <div className='profileButton'> <button className='profileUpdateButton' onClick={this.editProfileOrClose}>
-            Update Profile <FaPen
+            Update Profile <RiPencilFill
               size="10px"
               color="green" />
           </button>
@@ -176,7 +173,7 @@ class RiderProfile extends React.Component {
 
       {this.state.infoChangedSuccess ?
       <div className='profileInfoChangeSuccess' onClick={this.handleSuccessClosure}>
-        <div className='profileCheck'><FaCheckCircle size="40px"/></div>
+        <div className='profileCheck'><RiCheckboxCircleFill size="40px"/></div>
         <div className='profileSuccessText'>Your profile is successfully updated!</div>
         </div>
       : null}

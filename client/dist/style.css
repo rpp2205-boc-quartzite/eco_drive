@@ -468,13 +468,14 @@ h1 {
 }
 
 .link-frame {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
+  align-items: stretch;
   padding: 40px 16px;
   gap: 16px;
-  position: absolute;
+  position: fixed;
   height: 161px;
   left: 0px;
   right: 0px;
@@ -569,7 +570,7 @@ h1 {
 .sign-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   padding: 0px 16px;
   gap: 12px;
   width: 375px;
@@ -1018,7 +1019,6 @@ h1 {
 }
 
 .driver-skip {
-  width: 246px;
   height: 18px;
   font-family: 'Poppins';
   font-style: normal;
@@ -1580,20 +1580,14 @@ h1 {
 }
 
 .verification-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
-  gap: 12px;
-  width: 343px;
-  height: 41px;
-  background: var(--gray6);
-  border-radius: 50px;
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
+  background-color: var(--gray6);
+  border: 0px;
+  border-radius: 100px;
+  color: var(--gray1);
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
 }
 
 .verification-text {

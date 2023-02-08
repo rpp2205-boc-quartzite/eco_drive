@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
 import { format } from "date-fns";
 import Autocomplete from "react-google-autocomplete";
 import DatePicker from "react-datepicker";
@@ -100,7 +99,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
         <div className="headerToggleView">
           <Link to="/driverview">
             <div className="viewToggle">Rider</div>
-            <HiOutlineRefresh className="viewToggleButton" size={25}/>
+            <RiRefreshLine className="viewToggleButton" size={25}/>
           </Link>
         </div>
 
@@ -116,7 +115,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
 
           <div className="headerLogout">
             <Link to="/">
-            <MdLogout className="logout" size={20}/>
+            <RiLogoutBoxRLine className="logout" size={20}/>
             </Link></div>
         </div>
       </div>

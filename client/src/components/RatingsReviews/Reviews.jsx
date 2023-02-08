@@ -5,15 +5,10 @@ import { Link } from 'react-router-dom';
 import ReviewModal from './ReviewModal.jsx';
 import ReviewTile from './ReviewTile.jsx';
 import OverallRating from './OverallRating.jsx';
-import { FaPen } from 'react-icons/fa';
 import AllReviews from './AllReviews.jsx';
 import { useLocation } from 'react-router-dom'
-import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import { RiRefreshLine, RiLogoutBoxRLine, RiHome4Fill, RiPencilFill, RiHeart3Line, RiHeart3Fill } from "react-icons/ri";
 import { BiArrowBack } from 'react-icons/bi';
-import { AiFillHome } from 'react-icons/ai';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { AiFillHeart } from 'react-icons/ai';
 
 export default function Reviews(props) {
   const [showModal, setShowModal] = useState(false);
@@ -140,12 +135,12 @@ export default function Reviews(props) {
     </div>
     <div className="reviewHeaderLogout">
       <Link to="/">
-        <MdLogout className="logout" size={20} />
+        <RiLogoutBoxRLine className="logout" size={20} />
       </Link>
     </div>
     <div className="reviewHeaderHome">
       <Link to="/driverview">
-        <AiFillHome size={20} />
+        <RiHome4Fill size={20} />
       </Link>
     </div>
     </div>
@@ -154,8 +149,8 @@ export default function Reviews(props) {
         ?  <div className="reviewFavorite">
             {
               favoriteDriver
-              ? <AiFillHeart className="unfavorite" color="red" size={25} onClick={toggleFavoriteDriver} />
-              : <AiOutlineHeart className="favorite" size={25} onClick={toggleFavoriteDriver} />
+              ? <RiHeart3Fill className="unfavorite" color="red" size={25} onClick={toggleFavoriteDriver} />
+              : <RiHeart3Line className="favorite" size={25} onClick={toggleFavoriteDriver} />
             }
             </div>
         : null
@@ -187,7 +182,7 @@ export default function Reviews(props) {
         }
       >
         Write Your Review
-        <FaPen size="10px" color="green" />
+        <RiPencilFill size="10px" color="green" />
       </button>
     </div>
     <div className='reportButton'>
