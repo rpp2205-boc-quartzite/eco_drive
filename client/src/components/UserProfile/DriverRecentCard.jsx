@@ -12,7 +12,7 @@ class DriverRecentCard extends React.Component {
 
   componentDidMount () {
     var id = this.props.id;
-    console.log('IDDDD', id)
+    console.log('RECENT CARD HCELSEA IDDDD', typeof id)
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
       console.log('ID!!!', result)
