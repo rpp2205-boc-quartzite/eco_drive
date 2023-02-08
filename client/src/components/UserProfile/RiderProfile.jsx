@@ -16,7 +16,8 @@ class RiderProfile extends React.Component {
     console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
       //userId: this.props.location.state.id,
-      userId: '63db055e255ff6bddca10fe6',
+      userId: '63dec887dc68389182e30771',
+      // userId: '63db055e255ff6bddca10fe6',
       full_name: '',
       email: '',
       start_address: '',
@@ -30,7 +31,8 @@ class RiderProfile extends React.Component {
       rating: 4,
       rider_trips: [],
       editProfile: false,
-      infoChangedSuccess: false
+      infoChangedSuccess: false,
+      wholeObj: {}
     };
     this.editProfileOrClose = this.editProfileOrClose.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -52,7 +54,8 @@ class RiderProfile extends React.Component {
         avatar: result.data[0].avatar,
         drivers_license: result.data[0].drivers_license,
         rider_reviews: result.data[0].rider_reviews,
-        recent_drivers: result.data[0].recent_drivers
+        recent_drivers: result.data[0].recent_drivers,
+        wholeObj: result
       })
     })
     .catch(err => console.log(err))
@@ -202,7 +205,7 @@ class RiderProfile extends React.Component {
         </div>
           :
         <div>
-          <RiderRecentList recent_drivers={this.state.recent_drivers}/>
+          <RiderRecentList recent_drivers={this.state.recent_drivers} wholeObj={this.state.wholeObj}/>
         </div>
           }
           </div>

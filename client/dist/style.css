@@ -2470,17 +2470,18 @@ input.review-summary {
 }
 
 .profileRecentDriverContainer {
-  display: flex;
+  display: grid;
 }
 
 .profileRecentDriver {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 100px;
   object-fit: cover;
   flex: 33.33%;
   padding: 5px;
-  margin-left: 3px;
+  margin-left: 1px;
+  float: left;
 }
 .secondprofileRecentDriver {
   width: 40px;

@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import { Link } from "react-router-dom";
 
 class RiderRecentCard extends React.Component {
   constructor(props) {
@@ -22,19 +24,14 @@ class RiderRecentCard extends React.Component {
   }
 
   render() {
-    console.log('this.props.id', this.props.id)
+    console.log('this.props.wholeObj', this.props.wholeObj)
     return (
       <div>
-        {this.props.id}
-          {/* <div className='profileReviewerName'>{this.state.full_name}</div> */}
-          {/* <div className='profileReviewText'>{this.props.review.slice(0, 200)}</div>
-          <div className='profileReviewDate'>1/26/23</div> */}
-
-          {/* <Link to="/ratings-reviews">
-          {!this.state.avatar ?
-          <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
-          <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/>
-        }</Link> */}
+          <Link to="/ratings-reviews" state={{userData: this.props.wholeObj, revieweeData: this.props.id, from: 'rider-view'}}>
+          {this.state.avatar ?
+          <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/> :
+          <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/>
+        }</Link>
 
         </div>
 

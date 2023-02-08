@@ -11,13 +11,14 @@ class RiderRecentList extends React.Component {
   }
 
   render() {
-    console.log('asdf', this.props.recent_drivers)
+    console.log('checking RiderRecentList props', this.props.wholeObj)
       return (
         <div>
           {this.props.recent_drivers.map((driver) =>
             <RiderRecentCard
             key={driver}
             id={driver}
+            wholeObj={this.props.wholeObj}
             />
           )}
         </div>
