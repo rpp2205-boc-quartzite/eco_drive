@@ -1821,6 +1821,7 @@ textarea.form-field {
   font-family: "Roboto", sans-serif;
   height: 86px;
   width: 310px;
+  background: #f3f3f3;
 }
 
 .form-field {
@@ -1838,9 +1839,9 @@ textarea.form-field {
   margin-bottom: 15px;
 } */
 
-input {
+/* input {
   background: var(--gray1);
-}
+} */
 
 input.rating {
   display: none;
@@ -2200,6 +2201,7 @@ input.review-summary {
   font-family: "Roboto", sans-serif;
   height: 5px;
   width: 310px;
+  background: #f3f3f3;
 }
 
 /* Ratings Breakdown */
