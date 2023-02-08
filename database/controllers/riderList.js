@@ -38,4 +38,28 @@ module.exports = {
       })
   },
 
+  addDriversRoute: (newRoute) => {
+    console.log('addDriversRoute: ', newRoute)
+    const id = {_id: newRoute.id}
+    const update = {
+      start_address: newRoute.start_address,
+      start_lat: newRoute.start_lat,
+      start_lng: newRoute.start_lng,
+      end_address: newRoute.end_address,
+      end_lat: newRoute.end_lat,
+      end_lng: newRoute.end_lng,
+      time: newRoute.time,
+      total_seats: newRoute.total_seats,
+      started: newRoute.started,
+      default: newRoute.default
+    }
+    return User.findOneAndUpdate(id, {driver_route: update})
+      .then((result) => {
+        console.log(result);
+        return result;
+      })
+      .catch(err => console.log('Error updating record'));
+  },
+
+
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { FiInfo } from "react-icons/fi";
-import { HiHeart } from "react-icons/hi";
+import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -26,66 +26,38 @@ const OngoingTripRider = (props) => {
     myFunc();
   }, [])
 
-  // useEffect(() => {
-  //   const myFunc = async () => {
-  //     await getUser(props.user);
-  //     await getDriver();
-  //   }
-  //   myFunc();
-  // }, [user]);
-
-  // const getUser = async (userId) => {
-  //   let result = await axios.get('/getdriverview',  { params: {userId} }).catch(err => console.log('ERR: ', err))
-  //   result = result.data[0];
-  //   setUser(result);
-  // }
-
-  // ongoing route as a rider
-  // const getDriver = async () => {
-  //   let driverId = user.rider_route.driver_id;
-  //   let result = await axios.get('/getriderview', { params: {userId: driverId}}).catch(err => console.log('ERR: ', err))
-  //   result = result.data[0];
-  //   console.log('result', result);
-  //   setDriver(result);
-  // }
-
-  // end trip
-  // const endTrip = async () => {
-  //   console.log('before', user);
-  //   let route = (user.driver_route.started? 'driver': 'rider')
-  //   let result = await axios.put(`/end-trip/${user._id}/${route}`).catch(err => console.log('ERROR:', err))
-  //   console.log('after', user);
-  // }
-
-  console.log('Driver:', driver);
+  const cancelRoute = async () => {
+    await axios.get(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    setDriver(null);
+  }
 
   if (user && driver) {
     return (
       <div className="ongoing-trip-container">
-        <div className="ongoing-title">Ongoing Trip</div>
-        <div className="trip-card">
-          <div className="profile">
-            <div>
-              <img src={driver.avatar} alt="avatar" className='profilePhoto'/>
+        <h5>Ongoing Trip</h5>
+        <div className="card">
+          <div className="card-header">
+            <div className='header-info'>
+              <img src={driver.avatar} alt="avatar" className='avatar'/>
+              <p>{driver.full_name}</p>
             </div>
-            <span id="name">{driver.full_name}</span>
-            <div>
+            <div className='icons-flex'>
               {user.favorites.includes(driver._id)
                 ? <HiHeart className='card-icon full-heart-icon'/>
-                : (<p> </p>)
+                : (<HiOutlineHeart className='card-icon outlined-heart-icon'/>)
               }
+              <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver }}>
+                <FiInfo className='card-icon info-icon'/>
+              </Link>
             </div>
-            <Link to="/ratings-reviews">
-              <FiInfo className='card-icon info-icon'/>
-            </Link>
           </div>
-          <div className="detail"> {driver.driver_route.start_address} </div>
-          <div className="detail"> {driver.license_plate} </div>
-          <div className="detail"> {driver.driver_route.time} </div>
-          <div className="buttons">
-            <button className="end-button">Cancel</button>
-            <Link to="/trip-complete-rider" state={{ driver, user }}>
-              <button type='submit' onClick={props.endTrip} className="end-button" id="end-trip-button">End Trip</button>
+          <p className='card-detail'>Pickup: {driver.driver_route.start_address}</p>
+          <p className='card-detail'>License plate #: {driver.license_plate}</p>
+          <p className='card-detail'>Time: {driver.driver_route.time} </p>
+          <div className="btn-horizontal-flex">
+            <button className="cancel-btn btn-flex-grow" onClick={cancelRoute}>Cancel</button>
+            <Link to="/trip-complete-rider" className="link link-wrap-btn btn-flex-grow" state={{ driver, user }}>
+              <button type='submit' onClick={props.endTrip}  className="negative-btn" id="end-trip-button">End Trip</button>
             </Link>
           </div>
         </div>
@@ -94,7 +66,7 @@ const OngoingTripRider = (props) => {
   } else {
     return (
       <div className="ongoing-trip-container">
-        <div className="ongoing-title">Ongoing Trip</div>
+        <h5>Ongoing Trip</h5>
         <div className="card">
           <p> No Active Routes </p>
         </div>
