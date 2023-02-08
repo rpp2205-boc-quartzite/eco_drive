@@ -53,6 +53,8 @@ function RiderView ({ userId, riderOnGoingRoute }) {
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
   const [timeClicked, setTimeClicked] = useState(false);
+
+  const upcomingCheck = Object.keys(upcoming).length > 0;
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
 
@@ -76,12 +78,14 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
       setUserInfo(result.data[0])
-      setUpcoming(result.data[0].rider_route)
       setFavorites(result.data[0].favorites)
       setUserInfo(result.data[0])
       setDefaultRoute(result.data[0].default_rider_route)
       if (result.data[0].rider_route.driver_id !== undefined) {
         setStartedTrip(result.data[0].rider_route.started)
+      }
+      if (result.data[0].rider_route.start_address !== undefined) {
+        setUpcoming(result.data[0].rider_route)
       }
     })
     .catch(err => console.log(err))
@@ -197,7 +201,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
         </form>
       <div className='ongoing-upcoming-flex'>
         {defaultRoute.default
-        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'}/>
+        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'} startedTrip={startedTrip}/>
         : (
           <div>
             <div className="defaultRouteTitle">Default Route</div>

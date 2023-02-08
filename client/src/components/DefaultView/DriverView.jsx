@@ -53,6 +53,8 @@ function DriverView ({ userId }) {
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
   const [timeClicked, setTimeClicked] = useState(false);
+
+  const upcomingCheck = Object.keys(upcoming).length > 0;
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
 
@@ -113,6 +115,9 @@ function DriverView ({ userId }) {
     //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
     //*****************************************************//
 
+
+    console.log('DIRRRRR', directionsResponse)
+
   const route = {
     id: userId,
     full_name: name,
@@ -132,7 +137,6 @@ function DriverView ({ userId }) {
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
-      setUpcoming(result.data[0].driver_route)
       setUserInfo(result.data[0])
       setFavorites(result.data[0].favorites)
       setDefaultRoute(result.data[0].default_driver_route)
@@ -142,13 +146,16 @@ function DriverView ({ userId }) {
       if (!result.data[0].drivers_license) {
         setPrompt(true)
       }
+      if (result.data[0].driver_route.start_address !== undefined) {
+        setUpcoming(result.data[0].driver_route)
+      }
     })
     .catch(err => console.log(err))
   }, [userId])
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('/driver/:_id/defaultroute', {data: route})
+    axios.post('/driver/:_id/defaultroute', {data: route}) //, directionsResponse: directionsResponse
     .then((result) => {
       navigate('/rider-list', {state: {dir: directionsResponse, route: route, userInfo: userInfo}})
     })
@@ -230,6 +237,7 @@ function DriverView ({ userId }) {
               />
               <DatePicker
                     className="inputField3"
+                    placeholderText="Start time"
                     selected={timeClicked ? displayTime : null}
                     onChange={(date) => {
                       setTime(format(date, 'hh:mm aa'));
@@ -264,7 +272,7 @@ function DriverView ({ userId }) {
         </form>
       <div>
         {defaultRoute.default
-        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'}/>
+        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'} startedTrip={startedTrip} />
         : (
           <div>
             <div className="defaultRouteTitle">Default Route</div>
