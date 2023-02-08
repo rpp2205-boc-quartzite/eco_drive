@@ -68,6 +68,19 @@ export default function Reviews(props) {
         console.log('reviews result', result);
         revieweeData.rider_reviews = result.data[0].rider_reviews;
         revieweeData.driver_reviews = result.data[0].driver_reviews;
+        if (revieweeData.rider_reviews.some(review => review.full_name === userData.full_name)) {
+          if (location.state.from.includes('driver')) {
+            setSubmitted(true);
+          }
+        }
+        if (revieweeData.driver_reviews.some(review => review.full_name === userData.full_name)) {
+          if (location.state.from.includes('rider')) {
+            setSubmitted(true);
+          }
+        }
+        if (revieweeData.reported.some(report => report.full_name === userData.full_name)) {
+          setReported(true);
+        }
       })
       .catch(err => console.log(err))
   }, [submitted]);
@@ -126,10 +139,10 @@ export default function Reviews(props) {
       {
         location.state.from === 'driver-list'
         ? <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
-            <BiArrowBack className="backButton" size={20} />
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
         : <Link to="/riderview">
-            <BiArrowBack className="backButton" size={20} />
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
       }
     </div>
