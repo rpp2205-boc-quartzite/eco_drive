@@ -36,21 +36,30 @@ const DriverInteractions = function(props) {
   var data = location.state.dir.json;
   var route = location.state.route;
 
-  if (typeof window !== 'undefined') {
-    if (!localStorage.getItem('mapData')) {
-      localStorage.setItem("mapData", data);
-      route = JSON.stringify(route)
-      localStorage.setItem("route", route);
-    } else {
-      const localMap = localStorage.getItem("mapData");
-      const localRoute = localStorage.getItem("route")
-      data = localMap;
-      route = JSON.parse(localRoute);
-    }
-  }
+
+  // if (typeof window !== 'undefined') {
+  //   if (!localStorage.getItem('mapData')) {
+  //     localStorage.setItem("mapData", data);
+  //     route = JSON.stringify(route)
+  //     localStorage.setItem("route", route);
+  //   } else {
+  //     const localMap = localStorage.getItem("mapData");
+  //     const localRoute = localStorage.getItem("route")
+  //     data = localMap;
+  //     route = JSON.parse(localRoute);
+  //   }
+  // }
 
   const directions = JSON.parse(data)
 
+  useEffect(() => {
+    axios.post("/add-driver-route", {
+      info: route
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, [route])
 
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: API_KEY,
@@ -69,7 +78,7 @@ const DriverInteractions = function(props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('Checked for Riders')
+      // console.log('Checked for Riders')
       const findRiders = () => {
         const driver = {
           userId: route.id,
@@ -84,6 +93,7 @@ const DriverInteractions = function(props) {
           default: route.default,
         }
 
+
         setDriver(driver);
 
         setUserRouteInfo(driver);
@@ -95,7 +105,7 @@ const DriverInteractions = function(props) {
           .catch((err) => console.log('Find drivers error: ', err))
       }
       findRiders();
-    }, 5000);
+    }, 2000);
     return () => clearInterval(interval);
   }, [route]);
 
@@ -176,7 +186,7 @@ const DriverInteractions = function(props) {
       </div>
         <br></br>
         <div className="rider-list" data="DriverInteractions">
-          <RiderList driver={driverData} riders={riders} seats={seats}/>
+          <RiderList driver={route} riders={riders} seats={seats}/>
         </div>
     </div>
   )
