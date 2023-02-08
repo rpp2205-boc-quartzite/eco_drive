@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiInfo } from "react-icons/fi";
-import { HiOutlineHeart, HiHeart } from "react-icons/hi";
+import { RiHeart3Line, RiHeart3Fill, RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 
 const PassengerCard = (props) => {
@@ -42,15 +41,15 @@ const PassengerCard = (props) => {
         <div >
           <img src={user.avatar} alt="avatar" className='profilePhoto'/>
         </div>
-        <span id="name"> {user.full_name} </span>
+        <span id="username"> {user.full_name} </span>
         <div id="heart">
           {favorite
-          ? <HiHeart className='card-icon full-heart-icon' onClick={removeFavorite}/>
-          : <HiOutlineHeart className='card-icon outlined-heart-icon' onClick={addFavorite}/>
+          ? <RiHeart3Fill className='card-icon full-heart-icon' onClick={removeFavorite}/>
+          : <RiHeart3Line className='card-icon outlined-heart-icon' onClick={addFavorite}/>
           }
         </div>
         <Link to="/ratings-reviews" state={ {from: 'trip-complete-rider', userData: props.user, revieweeData: user, view: 'rider' }}>
-          <FiInfo className='card-icon info-icon'/>
+          <RiInformationLine className='card-icon info-icon'/>
         </Link>
       </div>
     )

@@ -35,7 +35,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log('Please register or login.');
       });
     }
   });
@@ -60,7 +60,14 @@ function App() {
     .catch((err) => {
       alert('Incorrect email or password. Please try again.');
     })
-  }
+  };
+
+  const logOut = (event) => {
+    cookies.remove('TOKEN', {
+      path: "/",
+    });
+    navigate('/');
+  };
 
   const [riderOnGoingRoute, setRiderOnGoingRoute] = useState({});
   const updateRiderOnGoingRoute = (driverInfo, userRouteInfo, startDistance, endDistance) => {
@@ -73,7 +80,7 @@ function App() {
       setRiderOnGoingRoute(driverInfo);
       navigate('/riderview')
     })
-  }
+  };
 
   return (
     <div>
@@ -83,10 +90,10 @@ function App() {
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
         <Route path='/password-reset' element={<PasswordReset authCheck={authenticate}/>} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/driverview" element={<DriverView userId={userId}/>} />
+          <Route path="/driverview" element={<DriverView userId={userId} logOut={logOut}/>} />
           <Route path="/ratings-reviews" element={<Reviews />} />
           <Route path="/all-reviews" element={<AllReviews />} />
-          <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute}/>} />
+          <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute} logOut={logOut}/>} />
           <Route path="/driverprofile" element={<DriverProfile />} />
           <Route path="/riderprofile" element={<RiderProfile />} />
           <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />

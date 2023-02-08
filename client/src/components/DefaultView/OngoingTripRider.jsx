@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { FiInfo } from "react-icons/fi";
-import { HiHeart, HiOutlineHeart } from "react-icons/hi";
+import { RiHeart3Line, RiHeart3Fill, RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -43,11 +42,11 @@ const OngoingTripRider = (props) => {
             </div>
             <div className='icons-flex'>
               {user.favorites.includes(driver._id)
-                ? <HiHeart className='card-icon full-heart-icon'/>
-                : (<HiOutlineHeart className='card-icon outlined-heart-icon'/>)
+                ? <RiHeart3Fill className='card-icon full-heart-icon'/>
+                : (<RiHeart3Line className='card-icon outlined-heart-icon'/>)
               }
               <Link to="/ratings-reviews"  state={ { from: 'riderview', userData: user, revieweeData: driver, view: 'rider' } }>
-                <FiInfo className='card-icon info-icon'/>
+                <RiInformationLine className='card-icon info-icon'/>
               </Link>
             </div>
           </div>
@@ -56,8 +55,8 @@ const OngoingTripRider = (props) => {
           <p className='card-detail'>Time: {driver.driver_route.time} </p>
           <div className="btn-horizontal-flex">
             <button className="cancel-btn btn-flex-grow" onClick={cancelRoute}>Cancel</button>
-            <Link to="/trip-complete-rider" className="link link-wrap-btn btn-flex-grow" state={{ driver, user }}>
-              <button type='submit' onClick={props.endTrip}  className="negative-btn" id="end-trip-button">End Trip</button>
+            <Link to="/trip-complete-rider" className="link link-wrap-btn" state={{ driver, user }}>
+              <button type='submit' onClick={props.endTrip}  className="negative-btn btn-flex-grow" id="end-trip-button">End Trip</button>
             </Link>
           </div>
         </div>
@@ -68,7 +67,7 @@ const OngoingTripRider = (props) => {
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
         <div className="card">
-          <p> No Active Routes </p>
+          <p className='no-route-message'> No Active Routes </p>
         </div>
       </div>
     )

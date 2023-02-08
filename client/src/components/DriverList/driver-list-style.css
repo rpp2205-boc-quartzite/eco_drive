@@ -133,8 +133,10 @@
   border-radius: 100px;
   color: var(--gray1);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .primary-btn:hover {
@@ -147,8 +149,10 @@
   border-radius: 100px;
   color: var(--green3);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .secondary-btn:hover {
@@ -161,8 +165,10 @@
   border-radius: 100px;
   color: var(--gray6);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .cancel-btn:hover {
@@ -175,8 +181,10 @@
   border-radius: 100px;
   color: var(--gray6);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .negative-btn:hover {

@@ -75,20 +75,20 @@ export default function PasswordReset(props) {
                   <label className='label-title-8' htmlFor='email'>Enter your email</label>
                   <div className='valid-check-pass'>*</div>
                 </div>
-                <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />                  
+                <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />
               </div>
-            </div>      
+            </div>
           </form>
           <p className='pass-note'>*We will send you a verification code to your email. Please have it available for the next step!</p>
           </div>
-          <div className='pass-btn-wrapper'>
-            <button className='verification-btn' onClick={handleSubmit}><span className='verification-text'>Send Verification Code</span></button>
+          <div className='link-frame'>
+            <button className='primary-btn' onClick={handleSubmit}>Send Verification Code</button>
             <Link to='/'>
-              <button className='back-btn'><span className='back-text'>Go Back</span></button> 
-            </Link> 
+              <button className='back-btn'><span className='back-text'>Go Back</span></button>
+            </Link>
           </div>
         </div>}
-      {request === true && 
+      {request === true &&
         <div>
           <div className='reset-pass-wrapper'>
             <h2 className='forgot-pass-title'>Reset Password</h2>
@@ -99,7 +99,7 @@ export default function PasswordReset(props) {
                     <label className='verify-code-title'>Verification Code</label>
                     <div className='valid-check-pass'>*</div>
                   </div>
-                  <input className='input-field' value={inputToken} onChange={(event) => setInputToken(event.target.value)}type='text' id='inputToken' name='inputToken' />  
+                  <input className='input-field' value={inputToken} onChange={(event) => setInputToken(event.target.value)}type='text' id='inputToken' name='inputToken' />
                 </div>
                 <div className='label-container-reset'>
                   <div className='label-title-container-pass'>
@@ -118,12 +118,12 @@ export default function PasswordReset(props) {
               </div>
             </form>
           </div>
-          <div className='signup-btn-wrapper'>
-            <button className='reset-pass-btn' onClick={submitReset}><span className='reset-pass-text'>Reset Password</span></button>
-            <button className='back-btn' onClick={(event) => setRequest(false)}><span className='back-text'>Go Back</span></button> 
+          <div className='link-frame'>
+            <button className='primary-btn' onClick={submitReset}>Reset Password</button>
+            <button className='back-btn' onClick={(event) => setRequest(false)}><span className='back-text'>Go Back</span></button>
           </div>
         </div>
       }
     </div>
   )
-}; 
+};
