@@ -173,7 +173,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                       dateFormat="h:mm aa"
                     />
               <div className="defaultRadioCont">
-                <input type="radio" className="radioInput" onClick={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
+                <input type="checkbox" className="radioInput" checked={isDefault} onChange={(e) => setIsDefault(!isDefault)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
             {isDefault

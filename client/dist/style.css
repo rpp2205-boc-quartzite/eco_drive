@@ -295,6 +295,18 @@ h1 {
   flex: none;
   order: 0;
   flex-grow: 0;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.radioInput:checked {
+  background-color: gray;
 }
 
 .saveDefaultText {

@@ -241,7 +241,7 @@ function DriverView ({ userId }) {
                   />
               <input type="text" className="inputField4" placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/>
               <div className="defaultRadioCont">
-                <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
+                <input type="checkbox" className="radioInput" checked={isDefault} onChange={(e) => setIsDefault(!isDefault)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
             {isDefault
