@@ -588,7 +588,7 @@ h1 {
 .sign-form {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   padding: 0px 16px;
   gap: 12px;
   width: 375px;
@@ -596,6 +596,20 @@ h1 {
   flex: none;
   order: 0;
   flex-grow: 0;
+}
+
+.sign-tos-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+
+  position: absolute;
+  width: 375px;
+  height: 556px;
+  left: 0px;
+  top: 0px;
 }
 
 .sign-form-2 {
@@ -833,24 +847,30 @@ h1 {
   flex-direction: row;
   align-items: flex-start;
   padding: 0px 16px;
-  gap: 17px;
+  gap: 5px;
   width: 375px;
   height: 36px;
   flex: none;
   order: 1;
   flex-grow: 0;
+  margin-top: -25px;
 }
 
 .tos-checkbox {
   box-sizing: border-box;
-  position: absolute;
-  /* left: 0%;
+  position: relative;
+  left: 0%;
   right: 0%;
   top: 0%;
-  bottom: 0%; */
+  bottom: 0%;
   background: var(--gray1);
   border: 2px solid var(--gray4);
   border-radius: 5px;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
   padding-left: 10px;
 }
 
@@ -868,8 +888,8 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 1;
-  padding-left: 25px;
-  padding-bottom: 20px;
+  padding-left: 5px;
+  padding-bottom: 15px;
 }
 
 .signup-wrapper {
@@ -878,6 +898,19 @@ h1 {
   align-items: flex-start;
   padding: 0px;
   gap: 28px;
+  position: absolute;
+  width: 375px;
+  height: 556px;
+  left: 0px;
+  top: 0px;
+}
+
+.signup-wrappers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
   position: absolute;
   width: 375px;
   height: 556px;

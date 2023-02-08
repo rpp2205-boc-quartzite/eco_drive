@@ -88,50 +88,52 @@ export default function Register(props) {
     <div className='signup-form-container'>
       {driverCheck === false &&
         <div className='signup-wrappers'>
-          <form className='sign-form' onSubmit={handleNext}>
-            <div className='inner-fields'>
-              <h2 className='signup-title'>Sign Up</h2>
-              <div className='label-container'>
-                <div className='label-title-container'>
-                  <label htmlFor='name' className='label-title-2'>Name</label>
-                  <div className='valid-check'>*</div>
+          <div className='sign-tos-wrapper'>
+            <form className='sign-form' onSubmit={handleNext}>
+              <div className='inner-fields'>
+                <h2 className='signup-title'>Sign Up</h2>
+                <div className='label-container'>
+                  <div className='label-title-container'>
+                    <label htmlFor='name' className='label-title-2'>Name</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
                 </div>
-                <input className='input-field' value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
-              </div>
-              <div className='label-container-2'>
-                <div className='label-title-container'>
-                  <label htmlFor='email' className='label-title-3'>Email</label>
-                  <div className='valid-check'>*</div>
+                <div className='label-container-2'>
+                  <div className='label-title-container'>
+                    <label htmlFor='email' className='label-title-3'>Email</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())} type='email' id='email' name='email' required/>
                 </div>
-                <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())} type='email' id='email' name='email' required/>
-              </div>
-              <div className='label-container-3'>
-                <div className='label-title-container'>
-                  <label htmlFor='dob' className='label-title-4'>Date of Birth</label>
-                  <div className='valid-check'>*</div>
+                <div className='label-container-3'>
+                  <div className='label-title-container'>
+                    <label htmlFor='dob' className='label-title-4'>Date of Birth</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
                 </div>
-                <input className='input-field' value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
-              </div>
-              <div className='label-container-4'>
-                <div className='label-title-container'>
-                  <label htmlFor='password' className='label-title-5'>Password</label>
-                  <div className='valid-check'>*</div>
+                <div className='label-container-4'>
+                  <div className='label-title-container'>
+                    <label htmlFor='password' className='label-title-5'>Password</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
                 </div>
-                <input className='input-field' value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
-              </div>
-              <div className='label-container-5'>
-                <div className='label-title-container'>
-                  <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
-                  <div className='valid-check'>*</div>
+                <div className='label-container-5'>
+                  <div className='label-title-container'>
+                    <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
+                    <div className='valid-check'>*</div>
+                  </div>
+                  <input className='input-field' value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
                 </div>
-                <input className='input-field' value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
               </div>
-            </div>
-            </form>
-            <div className='tos-wrapper'>
-              <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
-                <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
-            </div>
+              </form>
+              <div className='tos-wrapper'>
+                  <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
+                  <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
+              </div>
+          </div>
             <div className='link-frame'>
               <button className='primary-btn' type='submit' onClick={handleNext}>Next</button>
             <Link to='/'>
@@ -163,8 +165,7 @@ export default function Register(props) {
           <button className='primary-btn' type='submit' onClick={handleAvatar}>Next</button>
           <button className='back-btn' onClick={(event) => setDriverCheck(false)}><span className='back-text'>Go Back</span></button>
         </div>
-      </div>
-        }
+      </div>}
         {avatarCheck === true &&
           <AvatarSelect state={avatar} setState={setAvatarValue} setAvatar ={setAvatar} setDriverCheck={setDriverCheck} handleSubmit={handleSubmit}/>}
   </div>
