@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
+import { BiSearchAlt2 } from "react-icons/bi";
 
 import DefaultRouteRider from './DefaultRouteRider.jsx';
 import OngoingTripRider from './OngoingTripRider.jsx';
@@ -180,10 +181,13 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             ? <button
                 onClick={(e) => handleClick(e)}
                 disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+                {/* <div className="findTxt">Find Drivers </div> */}
+                <BiSearchAlt2 className="searchBtn" size={20}/>
               </button>
             : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}} style={{ textDecoration: 'none' }}>
                 <button
                   disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+                  <BiSearchAlt2 className="searchBtn" size={20}/>
                 </button>
               </Link>
             }

@@ -9,6 +9,7 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
 import { useNavigate } from 'react-router-dom';
+import { BiSearchAlt2 } from "react-icons/bi";
 
 import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
@@ -248,10 +249,12 @@ function DriverView ({ userId }) {
             ? <button
                 onClick={(e) => handleClick(e)}
                 disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                <BiSearchAlt2 className="searchBtn" size={20}/>
               </button>
             : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
                   disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                  <BiSearchAlt2 className="searchBtn" size={20}/>
                 </button>
               </Link>
             }
