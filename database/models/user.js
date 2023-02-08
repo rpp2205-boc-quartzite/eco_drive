@@ -119,7 +119,6 @@ const userSchema = mongoose.Schema({
       },
       full_name: String,
       review_summary: String,
-      helpfulness: Number,
       review_text:  String
     }
   ],
@@ -136,7 +135,6 @@ const userSchema = mongoose.Schema({
       },
       full_name: String,
       review_summary: String,
-      helpfulness: Number,
       review_text: String
     }
   ],
@@ -147,7 +145,8 @@ const userSchema = mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'User'
       },
-      report_text: String
+      report_text: String,
+      full_name: String
     }
   ],
 
