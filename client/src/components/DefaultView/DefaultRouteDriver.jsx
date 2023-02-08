@@ -13,6 +13,7 @@ const DefaultRouteDriver = ({ userId, defaultRoute, favorites, dir, userInfo, fr
     end_lat: defaultRoute.end_lat,
     end_lng: defaultRoute.end_lng,
     time: defaultRoute.time,
+    total_seats: defaultRoute.total_seats,
     default: defaultRoute.default,
     userFavorites: favorites
   }

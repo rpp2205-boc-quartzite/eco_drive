@@ -113,6 +113,7 @@ module.exports = {
       end_lat: route.end_lat,
       end_lng: route.end_lng,
       time: route.time,
+      total_seats: route.total_seats,
       default: true
     }
     return User.findOneAndUpdate(id, {default_driver_route: update})
