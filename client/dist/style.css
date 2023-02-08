@@ -1620,7 +1620,7 @@ h1 {
   gap: 12px;
   width: 343px;
   height: 41px;
-  background: var(--green3);
+  background: #338F24;
   border-radius: 50px;
   flex: none;
   order: 0;

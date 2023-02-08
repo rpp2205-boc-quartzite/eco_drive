@@ -14,15 +14,29 @@ export default function AvatarSelect(props) {
   const [selected, setSelected] = useState('');
 
   useEffect(() => {
+      axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
+      .then((response) => {
+        setPhotos(response.data.slice(2,5));
+        setPhotos2(response.data.slice(6,9));
+        setSelected(photos[0]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  const getPics = (event) => {
+    event.preventDefault();
     axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
     .then((response) => {
       setPhotos(response.data.slice(2,5));
       setPhotos2(response.data.slice(6,9));
+      setSelected(photos[0]);
     })
     .catch(function (error) {
       console.log(error);
     });
-  }, []);
+  }
 
   const onClick = (event) => {
     event.preventDefault();
@@ -64,9 +78,10 @@ export default function AvatarSelect(props) {
                   onClick={onClick}/>
               </div>))}
           </div>
+          <button className='secondary-btn' onClick={getPics}><span className='back-text'>Refresh Photos</span></button>
         </div> : <p className='avatar-container'>Loading...</p>}
       </div>
-      <div className='signup-btn-wrapper'>
+      <div className='signup-btn-wrapper'>   
         <button className='signup-btn' onClick={props.handleSubmit}><span className='sign-up-text'>Sign Up</span></button>
         <button className='back-btn' onClick={goBack}><span className='back-text'>Go Back</span></button>
       </div>
