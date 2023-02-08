@@ -77,9 +77,7 @@ const DriverList = (props) => {
               <Link to="/riderprofile">
                 <img className='avatar' src={userInfo.avatar} alt="" />
               </Link>
-              <Link to="/">
-                <RiLogoutBoxRLine className='top-bar-icons' />
-              </Link>
+              <RiLogoutBoxRLine className='top-bar-icons' onClick={props.logOut}/>
             </div>
           </div>
           <div className='title-bar'>

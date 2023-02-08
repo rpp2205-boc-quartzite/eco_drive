@@ -417,7 +417,7 @@ h1 {
   flex-grow: 1;
 }
 
-.secondary-btn {
+/* .secondary-btn {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -433,7 +433,7 @@ h1 {
   flex: none;
   order: 3;
   flex-grow: 0;
-}
+} */
 /* -------- BECCA CSS END -------- */
 
 /* -------- BLAKE Authentication CSS -------- */
@@ -1210,6 +1210,25 @@ h1 {
   order: 1;
   align-self: stretch;
   flex-grow: 0;
+}
+
+.licenseModalInput {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 16px 16px;
+  height: 50px;
+  background: var(--gray1);
+  border: 1.5px solid var(--gray3);
+  border-radius: 5px;
+}
+
+.modalInputFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
 }
 
 .defaultRouteCont {
