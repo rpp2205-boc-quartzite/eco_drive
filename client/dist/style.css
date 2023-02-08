@@ -1225,6 +1225,7 @@ h1 {
   justify-content: flex-start;
   align-items: stretch;
   gap: 12px;
+  width: 100%;
 }
 
 .defaultRouteCont {
