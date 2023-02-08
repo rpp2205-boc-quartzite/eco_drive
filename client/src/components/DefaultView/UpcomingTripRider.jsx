@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { FiInfo } from "react-icons/fi";
-import { HiHeart, HiOutlineHeart } from "react-icons/hi";
+import { RiHeart3Line, RiHeart3Fill, RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -40,11 +39,11 @@ const UpcomingTripRider = (props) => {
             </div>
             <div className='icons-flex'>
               {user.favorites.includes(driver._id)
-                ? <HiHeart className='card-icon full-heart-icon'/>
-                : (<HiOutlineHeart className='card-icon outlined-heart-icon'/>)
+                ? <RiHeart3Fill className='card-icon full-heart-icon'/>
+                : (<RiHeart3Line className='card-icon outlined-heart-icon'/>)
               }
               <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver }}>
-                <FiInfo className='card-icon info-icon'/>
+                <RiInformationLine className='card-icon info-icon'/>
               </Link>
             </div>
           </div>
@@ -63,7 +62,7 @@ const UpcomingTripRider = (props) => {
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
         <div className="card">
-          <p>No Upcoming Routes</p>
+          <p className='no-route-message'>No Upcoming Routes</p>
         </div>
       </div>
     )

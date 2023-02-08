@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { FiInfo } from "react-icons/fi";
+import { RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -30,7 +30,7 @@ const UpcomingTripDriver = (props) => {
             </div>
             <div className='icons-flex'>
               <Link to="/driverprofile" state={ {from:'driverview', user}}>
-                <FiInfo className='card-icon info-icon'/>
+                <RiInformationLine className='card-icon info-icon'/>
               </Link>
             </div>
           </div>
@@ -49,7 +49,7 @@ const UpcomingTripDriver = (props) => {
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
         <div className="card">
-          <p> No Upcoming Routes </p>
+          <p className='no-route-message'> No Upcoming Routes </p>
         </div>
       </div>
     )
