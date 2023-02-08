@@ -243,9 +243,9 @@ class RiderProfile extends React.Component {
           <span className='profileTitle'>Your savings this month</span>
           <div className='profileSavings'>
             <div className='profileSavingsTitle'>You saved the equivalent of</div>
-            <div className='profileCurrentRouteInfo'>{(this.state.rider_trips.length + 1) * .05} trees &#127794; <div>or</div> {(this.state.rider_trips.length + 1)* 10} minutes of driving &#128663;</div>
+            <div className='profileCurrentRouteInfo'>{ (Math.round(((this.state.rider_trips.length + 1) * .05) * 100) / 100).toFixed(2) } trees &#127794; <div>or</div> {(Math.round(((this.state.rider_trips.length + 1) * 10) * 100) / 100).toFixed(0)} minutes of driving &#128663;</div>
             <div className='profileSavingsTitle'>This translates to</div>
-            <div className='profileCurrentRouteInfo'>${(this.state.rider_trips.length + 1)* 5.35} you saved on gas &#9981;</div>
+            <div className='profileCurrentRouteInfo'>${ (Math.round(((this.state.rider_trips.length + 1) * 5.35) * 100) / 100).toFixed(2) } you saved on gas &#9981;</div>
           </div>
           <span className='profileTitle'>Did you know? &#128173;</span>
           <div className='profileCurrentRoute'>

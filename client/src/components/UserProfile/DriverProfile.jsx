@@ -6,6 +6,7 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import { FaPen, FaCheckCircle} from 'react-icons/fa';
 import DriverReviewsList from './DriverReviewsList.jsx';
 import DriverRecentList from './DriverRecentList.jsx';
+import PreviousDrivesList from './PreviousDrivesList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
 import { randomFacts } from './RandomFacts.jsx';
@@ -56,7 +57,8 @@ class DriverProfile extends React.Component {
         drivers_license: result.data[0].drivers_license,
         driver_reviews: result.data[0].driver_reviews,
         recent_riders: result.data[0].recent_riders,
-        wholeObj: result
+        wholeObj: result,
+        driver_trips: result.data[0].driver_trips
       })
     })
     .catch(err => console.log(err))
@@ -229,14 +231,7 @@ class DriverProfile extends React.Component {
           {this.state.driver_trips.length === 0 ?
           <div className='profilePlaceholder2'>None yet &#129485;</div>
           :
-          <div className='profileCurrentRoute'>
-            <div className='profileCurrentRouteTitle'>From:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.start_address}</div>
-            <div className='profileCurrentRouteTitle'>To:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.end_address}</div>
-            <div className='profileCurrentRouteTitle'>Time:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.time}</div>
-          </div>
+          <PreviousDrivesList driver_trips={this.state.driver_trips}/>
           }
 
         </div>
@@ -246,10 +241,13 @@ class DriverProfile extends React.Component {
           <span className='profileTitle'>Your savings this month</span>
           <div className='profileSavings'>
             <div className='profileSavingsTitle'>You saved the equivalent of</div>
-            <div className='profileCurrentRouteInfo'>{(this.state.driver_trips.length + 1) * .05} trees &#127794; <div>or</div> {(this.state.driver_trips.length + 1)* 10} minutes of driving &#128663;</div>
+            <div className='profileCurrentRouteInfo'>{ (Math.round(((this.state.driver_trips.length + 1) * .05) * 100) / 100).toFixed(2) } trees &#127794; <div>or</div> {(Math.round(((this.state.driver_trips.length + 1) * 10) * 100) / 100).toFixed(0)} minutes of driving &#128663;</div>
             <div className='profileSavingsTitle'>This translates to</div>
-            <div className='profileCurrentRouteInfo'>${(this.state.driver_trips.length + 1)* 5.35} you saved on gas &#9981;</div>
+            <div className='profileCurrentRouteInfo'>${ (Math.round(((this.state.driver_trips.length + 1) * 5.35) * 100) / 100).toFixed(2) } you saved on gas &#9981;</div>
           </div>
+
+
+
           <span className='profileTitle'>Did you know? &#128173;</span>
           <div className='profileCurrentRoute'>
             <div className='profileCurrentRouteInfo'>{randomFacts[Math.floor(Math.random() * 16)]}</div>
