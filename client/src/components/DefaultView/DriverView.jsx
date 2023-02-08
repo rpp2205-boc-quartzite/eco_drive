@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
-import { TbRefresh } from "react-icons/tb";
+import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
@@ -42,7 +40,7 @@ function DriverView ({ userId }) {
   })
   const [seats, setSeats] = useState('');
   const [name, setName] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState('https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg');
   const [userInfo, setUserInfo] = useState({});
   const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
@@ -159,28 +157,20 @@ function DriverView ({ userId }) {
 
   return (
     <div className="allDefaultView">
-      <div className="defaultViewHeader">
-        <div className="headerToggleView">
+      <div className='top-bar'>
+        <div className='top-bar-left'>
+          <p>Driver</p>
           <Link to="/riderview">
-            <div className="viewToggle">Driver</div>
-            <TbRefresh className="viewToggleButton" size={25} />
+            <RiRefreshLine className='top-bar-icons' />
           </Link>
         </div>
-
-        <div className="headerAvatarLogout">
-          <div className="headerAvatar">
-            <Link to="/driverprofile" state={{id: userId, userInfo: userInfo, from: 'driverview'}}>
-              <img
-                  src={avatar}
-                  alt="avatar-small"
-                  className="profilePhoto"
-                />
-            </Link></div>
-
-          <div className="headerLogout">
-            <Link to="/">
-            <MdLogout className="logout" size={20}/>
-            </Link></div>
+        <div className='top-bar-right'>
+          <Link to="/driverprofile" state={{id: userId, userInfo: userInfo, from: 'driverview'}}>
+            <img className='avatar' src={avatar} alt="avatar-small" />
+          </Link>
+          <Link to="/">
+            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+          </Link>
         </div>
       </div>
 
@@ -257,25 +247,25 @@ function DriverView ({ userId }) {
             }
           </div>
         </form>
-      <div>
+      <div className='default-ongoing-upcoming-flex'>
         {defaultRoute.default
         ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'}/>
         : (
-          <div>
-            <div className="defaultRouteTitle">Default Route</div>
-            <div className="card">
-              <p> No Default Route Set </p>
+            <div className="ongoing-trip-container">
+              <h5>Default Route</h5>
+              <div className="card">
+                <p className='no-route-message'>No default route set</p>
+              </div>
             </div>
-          </div>
         )
         }
         {startedTrip === true
         ? <OngoingTripDriver userId={userId} endTrip={endTrip}/>
         : (
           <div className="ongoing-trip-container">
-            <div className="ongoing-title">Ongoing Trip</div>
+            <h5>Ongoing Trip</h5>
             <div className="card">
-              <p> No Active Routes </p>
+              <p className='no-route-message'> No Active Routes </p>
             </div>
           </div>
         )
@@ -286,7 +276,7 @@ function DriverView ({ userId }) {
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>
               <div className="card">
-                <p> No Upcoming Routes </p>
+                <p className='no-route-message'> No Upcoming Routes </p>
               </div>
             </div>
           )

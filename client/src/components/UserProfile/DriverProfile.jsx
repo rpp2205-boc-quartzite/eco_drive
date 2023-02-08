@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { AiFillHome } from 'react-icons/ai';
-import { MdLogout } from 'react-icons/md';
-import {HiOutlineRefresh} from 'react-icons/hi'
-import { FaPen, FaCheckCircle} from 'react-icons/fa';
+import { RiRefreshLine, RiLogoutBoxRLine, RiHome4Fill, RiPencilFill, RiCheckboxCircleFill } from "react-icons/ri";
 import DriverReviewsList from './DriverReviewsList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
@@ -106,14 +103,31 @@ class DriverProfile extends React.Component {
       <div>
       {/* TOP BUTTONS */}
         {/* <Link to="/riderprofile" > */}
-        <Link
+        {/* <Link
       to="/riderprofile"
       state={{id: this.state.userId}}>
         <span className='profileToggle'>Driver</span>
-        <span className='profileToggleButton'><HiOutlineRefresh/></span>
+        <span className='profileToggleButton'><RiRefreshLine/></span>
         </Link>
-        <Link to="/"><span className='profileLogoutButton'><MdLogout /></span></Link>
-        <Link to="/driverview"><span className='profileHomeButton'><AiFillHome/></span></Link>
+        <Link to="/"><span className='profileLogoutButton'><RiLogoutBoxRLine /></span></Link>
+        <Link to="/driverview"><span className='profileHomeButton'><RiHome4Fill/></span></Link> */}
+
+        <div className='top-bar'>
+          <div className='top-bar-left'>
+            <p>Driver</p>
+            <Link to="/riderprofile" state={{id: this.state.userId}}>
+              <RiRefreshLine className='top-bar-icons' />
+            </Link>
+          </div>
+          <div className='top-bar-right'>
+            <Link to="/driverview">
+              <RiHome4Fill className='top-bar-icons'/>
+            </Link>
+            <Link to="/">
+              <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+            </Link>
+          </div>
+        </div>
 
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
@@ -145,7 +159,7 @@ class DriverProfile extends React.Component {
       {/* UPDATE PROFILE */}
         <div>
           <div className='profileButton'> <button className='profileUpdateButton' onClick={this.editProfileOrClose}>
-            Update Profile <FaPen
+            Update Profile <RiPencilFill
               size="10px"
               color="green" />
           </button>
@@ -176,7 +190,7 @@ class DriverProfile extends React.Component {
 
       {this.state.infoChangedSuccess ?
       <div className='profileInfoChangeSuccess' onClick={this.handleSuccessClosure}>
-        <div className='profileCheck'><FaCheckCircle size="40px"/></div>
+        <div className='profileCheck'><RiCheckboxCircleFill size="40px"/></div>
         <div className='profileSuccessText'>Your profile is successfully updated!</div>
         </div>
       : null}
