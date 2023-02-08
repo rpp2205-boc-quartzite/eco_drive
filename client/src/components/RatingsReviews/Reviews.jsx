@@ -181,7 +181,7 @@ export default function Reviews(props) {
     </div>
     <div className="reviewHeaderHome">
       <Link to="/driverview">
-        <RiHome4Fill size={20} />
+        <RiHome4Fill color="#262929" size={20} />
       </Link>
     </div>
     </div>
@@ -211,35 +211,43 @@ export default function Reviews(props) {
             <OverallRating rating={0}/>
            </div>
       }
-    <div className='writeReviewButton'>
-      <button
-        disabled={submitted === true}
-        className='btn-write-review'
-        onClick={() =>
-          {
-            showReportModal(false);
-            setShowModal(true);
-          }
-        }
-      >
-        Write Your Review
-        <RiPencilFill size="10px" color="green" />
-      </button>
-    </div>
-    <div className='reportButton'>
-      <button
-        disabled={reported === true}
-        className='btn-report-review'
-        onClick={() =>
-          {
-            showReportModal(true);
-            setShowModal(true);
-          }
-        }
-      >
-        Report this Driver
-      </button>
-    </div>
+      {
+        location.state.from === 'driver-list'
+        ? null
+        : <div className='writeReviewButton'>
+            <button
+              disabled={submitted === true}
+              className='btn-write-review'
+              onClick={() =>
+                {
+                  showReportModal(false);
+                  setShowModal(true);
+                }
+              }
+            >
+              Write Your Review
+              <RiPencilFill size="10px" color="green" />
+            </button>
+          </div>
+      }
+      {
+        location.state.from === 'driver-list'
+        ? null
+        : <div className='reportButton'>
+            <button
+              disabled={reported === true}
+              className='btn-report-review'
+              onClick={() =>
+                {
+                  showReportModal(true);
+                  setShowModal(true);
+                }
+              }
+            >
+              Report this Driver
+            </button>
+         </div>
+      }
     <div>
       {(() => {
         if (revieweeData.driver_reviews.length === 0 && revieweeData.rider_reviews.length === 0) {
