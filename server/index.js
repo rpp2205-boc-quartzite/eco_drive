@@ -26,7 +26,7 @@ const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
 const { updateDriverProfile, updateRiderProfile, getUserInfo } = require('../database/controllers/userProfile.js')
-const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense, removeIdOffRiderListOfDriver } = require('../database/controllers/defaultviews.js')
+const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense, removeIdOffRiderListOfDriver, postDefaultRiderRoute, postDefaultDriverRoute } = require('../database/controllers/defaultviews.js')
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -110,7 +110,7 @@ app.get('/validate', validate);
 app.post('/sendMail', sendMail);
 app.put('/change-password', changePassword);
 
-// ---- Default Driver view routes  ---- //
+// ---- Default Driver & Rider view routes  ---- //
 app.get('/getdriverview', function(req, res) {
   let userid = req.query.userId;
   getDriverView(userid)
@@ -121,7 +121,6 @@ app.get('/getdriverview', function(req, res) {
   .catch(err => console.log(err))
 });
 
-// ---- Default Rider view routes  ---- //
 app.get('/getriderview', function(req, res) {
   let userid = req.query.userId;
   getRiderView(userid)
@@ -153,6 +152,19 @@ app.post('/postDriverLicense', function(req, res) {
   .catch(err => console.log(err))
 })
 
+app.post('/rider/:_id/defaultroute', function(req, res) {
+  let data = req.body.data;
+  postDefaultRiderRoute(data)
+  .then(result => res.end())
+  .catch(err => console.log('err',err))
+})
+
+app.post('/driver/:_id/defaultroute', function(req, res) {
+  let data = req.body.data;
+  postDefaultDriverRoute(data)
+  .then(result => res.end())
+  .catch(err => console.log('err',err))
+})
 
 // ---- Ratings and Reviews routes  ---- //
 app.get('/getreviews', function(req, res) {
