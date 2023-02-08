@@ -19,9 +19,7 @@ export default function AvatarSelect(props) {
       .then((response) => {
         setPhotos(response.data.slice(2,5));
         setPhotos2(response.data.slice(6,9));
-      })
-      .then(() => {
-        setSelected('https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg');
+        setSelected(response.data.slice(2,3)[0].urls.small);
       })
       .catch(function (error) {
         console.log(error);
@@ -35,7 +33,7 @@ export default function AvatarSelect(props) {
     .then((response) => {
       setPhotos(response.data.slice(2,5));
       setPhotos2(response.data.slice(6,9));
-      setSelected(photos[0]);
+      setSelected(response.data.slice(2,3)[0].urls.small);
     })
     .catch(function (error) {
       console.log(error);
@@ -75,7 +73,7 @@ export default function AvatarSelect(props) {
             {photos2.map((photo, index) => (
               <div key={index}>
                 <img
-                  className={props.state === photo.urls.small ? 'selected' : 'avatar-photo'}
+                  className={selected === photo.urls.small ? 'selected' : 'avatar-photo'}
                   alt='avatar select'
                   src={photo.urls.small}
                   id={photo.urls.small}

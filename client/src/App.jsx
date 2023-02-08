@@ -35,7 +35,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log('Please register or login.');
       });
     }
   });
