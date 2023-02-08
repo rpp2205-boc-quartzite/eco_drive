@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
-import { BiSearchAlt2 } from "react-icons/bi";
+import { BiSearchAlt2, BiAlarm } from "react-icons/bi";
 
 import DefaultRouteRider from './DefaultRouteRider.jsx';
 import OngoingTripRider from './OngoingTripRider.jsx';
@@ -52,6 +52,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
   const [upcoming, setUpcoming] = useState({});
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
+  const [timeClicked, setTimeClicked] = useState(false);
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
 
@@ -162,10 +163,12 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                   />
                   <DatePicker
                       className="inputField3"
-                      selected={displayTime}
+                      placeholderText="Start time"
+                      selected={timeClicked ? displayTime : null}
                       onChange={(date) => {
                         setTime(format(date, 'hh:mm aa'));
                         setDisplayTime(new Date(date));
+                        setTimeClicked(true);
                       }}
                       showTimeSelect
                       showTimeSelectOnly
@@ -180,13 +183,12 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
-                {/* <div className="findTxt">Find Drivers </div> */}
+                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Drivers
                 <BiSearchAlt2 className="searchBtn" size={20}/>
               </button>
             : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Drivers
                   <BiSearchAlt2 className="searchBtn" size={20}/>
                 </button>
               </Link>

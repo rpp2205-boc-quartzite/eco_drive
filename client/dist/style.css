@@ -453,6 +453,17 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
+/* .timePickerIcon {
+  position: absolute;
+  float: right;
+  right: 24px;
+  top: calc(50% - 20px/2);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  z-index: 1;
+} */
 /* -------- BECCA CSS END -------- */
 
 /* -------- BLAKE Authentication CSS -------- */

@@ -9,7 +9,7 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
 import { useNavigate } from 'react-router-dom';
-import { BiSearchAlt2 } from "react-icons/bi";
+import { BiSearchAlt2, BiAlarm } from "react-icons/bi";
 
 import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
@@ -52,6 +52,7 @@ function DriverView ({ userId }) {
   const [showPrompt, setPrompt] = useState(false);
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
+  const [timeClicked, setTimeClicked] = useState(false);
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
 
@@ -229,10 +230,11 @@ function DriverView ({ userId }) {
               />
               <DatePicker
                     className="inputField3"
-                    selected={displayTime}
+                    selected={timeClicked ? displayTime : null}
                     onChange={(date) => {
                       setTime(format(date, 'hh:mm aa'));
                       setDisplayTime(new Date(date));
+                      setTimeClicked(true);
                     }}
                     showTimeSelect
                     showTimeSelectOnly
@@ -248,12 +250,12 @@ function DriverView ({ userId }) {
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Riders
                 <BiSearchAlt2 className="searchBtn" size={20}/>
               </button>
             : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Riders
                   <BiSearchAlt2 className="searchBtn" size={20}/>
                 </button>
               </Link>
