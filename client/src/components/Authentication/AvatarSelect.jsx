@@ -15,7 +15,7 @@ export default function AvatarSelect(props) {
 
   useEffect(() => {
     if (photos === null) {
-      axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
+      axios.get('https://api.unsplash.com/photos/random?query=ecology&count=10', {headers: headers})
       .then((response) => {
         setPhotos(response.data.slice(2,5));
         setPhotos2(response.data.slice(6,9));
@@ -29,7 +29,7 @@ export default function AvatarSelect(props) {
 
   const getPics = (event) => {
     event.preventDefault();
-    axios.get('https://api.unsplash.com/photos/random?count=10', {headers: headers})
+    axios.get('https://api.unsplash.com/photos/random?query=ecology&count=10', {headers: headers})
     .then((response) => {
       setPhotos(response.data.slice(2,5));
       setPhotos2(response.data.slice(6,9));

@@ -1366,6 +1366,7 @@ h1 {
 .avatar-photo {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 5px;
   flex-direction: row;
   align-items: flex-start;
@@ -1376,6 +1377,7 @@ h1 {
 .selected {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 5px;
   border: solid 5px var(--green3);
   flex-direction: row;
