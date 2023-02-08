@@ -21,11 +21,18 @@ const PassengerCard = (props) => {
   const addFavorite = async () => {
     await axios.put(`/favorite/${props.user._id}/${props.pId}`).catch(err => console.log(err));
     setFavorite(true);
+    props.user.favorites.push(user._id);
+    console.log('props.user.favorites', props.user.favorites);
   }
 
   const removeFavorite = async () => {
     await axios.put(`/unfavorite/${props.user._id}/${props.pId}`).catch(err => console.log(err));
     setFavorite(false);
+    let newUserFavorites = props.user.favorites.filter(favorite => {
+      return favorite !== user._id;
+    });
+    props.user.favorites = newUserFavorites;
+    console.log('props.user.favorites', props.user.favorites);
   }
 
 
@@ -42,7 +49,7 @@ const PassengerCard = (props) => {
           : <HiOutlineHeart className='card-icon outlined-heart-icon' onClick={addFavorite}/>
           }
         </div>
-        <Link to="/ratings-reviews" state={ {from: 'trip-complete-rider', userData: props.user, revieweeData: user }}>
+        <Link to="/ratings-reviews" state={ {from: 'trip-complete-rider', userData: props.user, revieweeData: user, view: 'rider' }}>
           <FiInfo className='card-icon info-icon'/>
         </Link>
       </div>

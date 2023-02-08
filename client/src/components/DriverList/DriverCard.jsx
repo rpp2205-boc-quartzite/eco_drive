@@ -27,6 +27,10 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
       removeDriverOffFavorites()
         .then(() => {
           setFavoriteDriver(!favoriteDriver)
+          let newUserFavorites = userInfo.favorites.filter(favorite => {
+            return favorite !== driverInfo._id;
+          });
+          userInfo.favorites = newUserFavorites;
           console.log('Successfully unfavorite driver ', driverInfo.full_name)
         })
         .catch(() => console.log('Unable to unfavorite driver'))
@@ -34,6 +38,7 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
       addDriverToFavorites()
         .then(() => {
           setFavoriteDriver(!favoriteDriver)
+          userInfo.favorites.push(driverInfo._id);
           console.log('Successfully favorite driver ', driverInfo.full_name)
         })
         .catch(() => console.log('Unable to favorite driver'))
@@ -76,7 +81,7 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
               : <HiOutlineHeart className='card-icon outlined-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
             }
             {/* <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list'}}></Link> */}
-            <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list', route: route}}>
+            <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list', route: route, view: 'rider'}}>
               <FiInfo className='card-icon info-icon'/>
             </Link>
           </div>
