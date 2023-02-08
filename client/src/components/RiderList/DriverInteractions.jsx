@@ -56,9 +56,6 @@ const DriverInteractions = function(props) {
     axios.post("/add-driver-route", {
       info: route
     })
-    .then(function (response) {
-      console.log(response.data);
-    })
     .catch(function (error) {
       console.log(error);
     });
@@ -81,7 +78,7 @@ const DriverInteractions = function(props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('Checked for Riders')
+      // console.log('Checked for Riders')
       const findRiders = () => {
         const driver = {
           userId: route.id,
@@ -96,6 +93,7 @@ const DriverInteractions = function(props) {
           default: route.default,
         }
 
+
         setDriver(driver);
 
         setUserRouteInfo(driver);
@@ -107,7 +105,7 @@ const DriverInteractions = function(props) {
           .catch((err) => console.log('Find drivers error: ', err))
       }
       findRiders();
-    }, 7000);
+    }, 2000);
     return () => clearInterval(interval);
   }, [route]);
 
@@ -188,7 +186,7 @@ const DriverInteractions = function(props) {
       </div>
         <br></br>
         <div className="rider-list" data="DriverInteractions">
-          <RiderList driver={driverData} riders={riders} seats={seats}/>
+          <RiderList driver={route} riders={riders} seats={seats}/>
         </div>
     </div>
   )
