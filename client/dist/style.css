@@ -362,6 +362,60 @@ h1 {
 .licenseModalContent {
   padding-top: 200px;
 }
+
+.defaultViewAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.licenseModalButtonCont {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+  width: 311px;
+  height: 41px;
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.primary-btn-license-submit {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  width: 147.5px;
+  height: 41px;
+  background: #338F24;
+  border-radius: 50px;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+
+.secondary-btn-cancel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  width: 147.5px;
+  height: 41px;
+  background: #CAD6DD;
+  border-radius: 50px;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
 /* -------- BECCA CSS END -------- */
 
 /* -------- BLAKE Authentication CSS -------- */
@@ -1767,6 +1821,7 @@ textarea.form-field {
   font-family: "Roboto", sans-serif;
   height: 86px;
   width: 310px;
+  background: #f3f3f3;
 }
 
 .form-field {
@@ -1784,9 +1839,9 @@ textarea.form-field {
   margin-bottom: 15px;
 } */
 
-input {
+/* input {
   background: var(--gray1);
-}
+} */
 
 input.rating {
   display: none;
@@ -2146,6 +2201,7 @@ input.review-summary {
   font-family: "Roboto", sans-serif;
   height: 5px;
   width: 310px;
+  background: #f3f3f3;
 }
 
 /* Ratings Breakdown */

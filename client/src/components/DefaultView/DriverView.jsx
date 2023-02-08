@@ -8,8 +8,9 @@ import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
+import { useNavigate } from 'react-router-dom';
 
-import DefaultRoute from './DefaultRoute.jsx';
+import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import OngoingTripDriver from './OngoingTripDriver.jsx';
 import UpcomingTripDriver from './UpcomingTripDriver.jsx';
@@ -42,13 +43,16 @@ function DriverView ({ userId, logOut }) {
   const [seats, setSeats] = useState('');
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [userInfo, setUserInfo] = useState({});
   const [displayTime, setDisplayTime] = useState(new Date());
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [showPrompt, setPrompt] = useState(false);
   const [favorites, setFavorites] = useState({});
+  const [defaultRoute, setDefaultRoute] = useState({});
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
+  const navigate = useNavigate()
 
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
@@ -127,7 +131,9 @@ function DriverView ({ userId, logOut }) {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
       setUpcoming(result.data[0].driver_route)
+      setUserInfo(result.data[0])
       setFavorites(result.data[0].favorites)
+      setDefaultRoute(result.data[0].default_driver_route)
       if (result.data[0].driver_route.start_address !== undefined) {
         setStartedTrip(result.data[0].driver_route.started)
       }
@@ -137,6 +143,15 @@ function DriverView ({ userId, logOut }) {
     })
     .catch(err => console.log(err))
   }, [userId])
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    axios.post('/driver/:_id/defaultroute', {data: route})
+    .then((result) => {
+      navigate('/rider-list', {state: {dir: directionsResponse, route: route, userInfo: userInfo}})
+    })
+    .catch(err => console.log(err))
+  }
 
   const closeModal = () => {
     setPrompt(!showPrompt)
@@ -151,10 +166,15 @@ function DriverView ({ userId, logOut }) {
             <TbRefresh className="viewToggleButton" size={25} />
           </Link>
         </div>
+
         <div className="headerAvatarLogout">
           <div className="headerAvatar">
-            <Link to="/driverprofile" state={{id: userId}}>
-            <button>Avatar</button>
+            <Link to="/driverprofile" state={{id: userId, userInfo: userInfo, from: 'driverview'}}>
+              <img
+                  src={avatar}
+                  alt="avatar-small"
+                  className="profilePhoto"
+                />
             </Link></div>
 
           <div className="headerLogout">
@@ -165,7 +185,7 @@ function DriverView ({ userId, logOut }) {
       </div>
 
       <div className="welcomeCont">
-        <div className="welcomeMsg">Welcome {name},</div>
+        <div className="welcomeMsg">Welcome {name.split(' ')[0]},</div>
       </div>
 
       {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
@@ -210,7 +230,7 @@ function DriverView ({ userId, logOut }) {
                     className="inputField3"
                     selected={displayTime}
                     onChange={(date) => {
-                      setTime(format(displayTime, 'hh:mm aa'));
+                      setTime(format(date, 'hh:mm aa'));
                       setDisplayTime(new Date(date));
                     }}
                     showTimeSelect
@@ -224,14 +244,32 @@ function DriverView ({ userId, logOut }) {
                 <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-            <Link to="/rider-list" state={{dir: directionsResponse, route: route}}>
-            <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders</button>
-            </Link>
+            {isDefault
+            ? <button
+                onClick={(e) => handleClick(e)}
+                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+              </button>
+            : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
+                <button
+                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                </button>
+              </Link>
+            }
           </div>
         </form>
       <div>
-        {/* < DefaultRoute userId={userId} upcoming={upcoming} view={'driver'} favorites={favorites}/> */}
-        {startedTrip
+        {defaultRoute.default
+        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'}/>
+        : (
+          <div>
+            <div className="defaultRouteTitle">Default Route</div>
+            <div className="card">
+              <p> No Default Route Set </p>
+            </div>
+          </div>
+        )
+        }
+        {startedTrip === true
         ? <OngoingTripDriver userId={userId} endTrip={endTrip}/>
         : (
           <div className="ongoing-trip-container">

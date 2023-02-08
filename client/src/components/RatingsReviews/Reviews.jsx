@@ -67,12 +67,25 @@ export default function Reviews(props) {
   }
 
   useEffect(() => {
-    var id = revieweeId;
+    let id = revieweeId;
       axios.get('/getreviews', { params: {id} })
       .then((result) => {
         console.log('reviews result', result);
         revieweeData.rider_reviews = result.data[0].rider_reviews;
         revieweeData.driver_reviews = result.data[0].driver_reviews;
+        if (revieweeData.rider_reviews.some(review => review.full_name === userData.full_name)) {
+          if (location.state.from.includes('driver')) {
+            setSubmitted(true);
+          }
+        }
+        if (revieweeData.driver_reviews.some(review => review.full_name === userData.full_name)) {
+          if (location.state.from.includes('rider')) {
+            setSubmitted(true);
+          }
+        }
+        if (revieweeData.reported.some(report => report.full_name === userData.full_name)) {
+          setReported(true);
+        }
       })
       .catch(err => console.log(err))
   }, [submitted]);
@@ -119,8 +132,11 @@ export default function Reviews(props) {
 
   sort();
   console.log('driver reviews: ', revieweeData.driver_reviews);
+  console.log('rider reviews: ', revieweeData.rider_reviews);
   console.log('submitted: ', submitted);
   console.log('favorited: ', favoriteDriver);
+  console.log('revieweeData has own properties: ', revieweeData.hasOwnProperty('test'), revieweeData.hasOwnProperty('driver_reviews'));
+
   return (
     <div>
     <div className="reviewHeader">
@@ -128,10 +144,10 @@ export default function Reviews(props) {
       {
         location.state.from === 'driver-list'
         ? <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
-            <BiArrowBack className="backButton" size={20} />
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
-        : <Link to="/driverprofile">
-            <BiArrowBack className="backButton" size={20} />
+        : <Link to="/riderview">
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
       }
     </div>
@@ -142,7 +158,7 @@ export default function Reviews(props) {
     </div>
     <div className="reviewHeaderHome">
       <Link to="/driverview">
-        <AiFillHome size={20} />
+        <AiFillHome color={'#262929'} size={20} />
       </Link>
     </div>
     </div>
@@ -163,9 +179,15 @@ export default function Reviews(props) {
     <div className="profileName">{revieweeData.full_name}
       <span className='profileOnline'>&#183;</span>
     </div>
-    <div className="poi-overall-rating">
-      <OverallRating rating={calculateRating()}/>
-    </div>
+      {
+        revieweeData.rider_reviews.length !== 0 || revieweeData.driver_reviews.length !== 0
+        ?  <div className="poi-overall-rating">
+             <OverallRating rating={calculateRating()}/>
+           </div>
+        :  <div className="poi-overall-rating">
+            <OverallRating rating={0}/>
+           </div>
+      }
     <div className='writeReviewButton'>
       <button
         disabled={submitted === true}
@@ -206,7 +228,7 @@ export default function Reviews(props) {
             <div>
               <div className='profileReviewDiv'>
                 <span className='profileTitle'>Reviews as a Driver</span>
-                <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData }} to="/all-reviews">See All</Link>
+                <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
                 <div className='profileReviewContainer'>
                   {revieweeData.sortedDriverReviews.slice(0, 6).map(review => {
                     return (
@@ -217,7 +239,7 @@ export default function Reviews(props) {
               </div>
               <div className='profileReviewDiv'>
                 <span className='profileTitle'>Reviews as a Rider</span>
-                <Link className="btn-select-all-reviews" state={{ text: 'rider', userData: userData, revieweeData: revieweeData }} to="/all-reviews">See All</Link>
+                <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
                 <div className='profileReviewContainer'>
                   {revieweeData.sortedRiderReviews.slice(0, 6).map(review => {
                     return (
@@ -232,7 +254,7 @@ export default function Reviews(props) {
           return (
             <div className='profileReviewDiv'>
               <span className='profileTitle'>Reviews as a Driver</span>
-              <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData }} to="/all-reviews">See All</Link>
+              <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
               <div className='profileReviewContainer'>
                 {revieweeData.sortedDriverReviews.slice(0, 6).map(review => {
                   return (
@@ -246,7 +268,7 @@ export default function Reviews(props) {
           return (
             <div className='profileReviewDiv'>
               <span className='profileTitle'>Reviews as a Rider</span>
-              <Link className="btn-select-all-reviews" state={{ text: 'rider', userData: userData, revieweeData: revieweeData }} to="/all-reviews">See All</Link>
+              <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
               <div className='profileReviewContainer'>
                 {revieweeData.sortedRiderReviews.slice(0, 6).map(review => {
                   return (
@@ -259,7 +281,7 @@ export default function Reviews(props) {
         }
       })()}
     </div>
-    <ReviewModal show={showModal} isReportModalOpen={reportModal} reportUser={setReported} userData={userData} revieweeData={revieweeData} submit={() => setSubmitted(true)} close={() => setShowModal(false)} />
+    <ReviewModal show={showModal} isReportModalOpen={reportModal} from={location.state.from} reportUser={setReported} userData={userData} revieweeData={revieweeData} submit={() => setSubmitted(true)} close={() => setShowModal(false)} />
   </div>
   )
 }
