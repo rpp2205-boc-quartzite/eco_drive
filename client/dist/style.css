@@ -2502,6 +2502,7 @@ input.review-summary {
 
 .profileRecentDriverContainer {
   display: grid;
+  margin-bottom: 13px;
 }
 
 .profileRecentDriver {

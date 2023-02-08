@@ -15,8 +15,8 @@ class RiderProfile extends React.Component {
     super(props);
     console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
-      //userId: this.props.location.state.id,
-      userId: '63dec887dc68389182e30771',
+      userId: this.props.location.state.id,
+      //userId: '63d36ee5cd478f26557c4a38',
       // userId: '63db055e255ff6bddca10fe6',
       full_name: '',
       email: '',
@@ -55,7 +55,8 @@ class RiderProfile extends React.Component {
         drivers_license: result.data[0].drivers_license,
         rider_reviews: result.data[0].rider_reviews,
         recent_drivers: result.data[0].recent_drivers,
-        wholeObj: result
+        wholeObj: result,
+        rider_trips: result.data[0].rider_trips
       })
     })
     .catch(err => console.log(err))
