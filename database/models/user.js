@@ -101,7 +101,7 @@ const userSchema = mongoose.Schema({
     default:        {
       type: Boolean,
       default: false,
-    },
+    }
   },
 
   driver_trips: [
