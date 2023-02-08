@@ -4,7 +4,6 @@ import axios from 'axios';
 
 export default function PasswordReset(props) {
   const [email, setEmail] = useState('');
-  const [tempPass, setTempPass] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [request, setRequest] = useState(false);
@@ -13,12 +12,10 @@ export default function PasswordReset(props) {
   const navigate = useNavigate();
 
   const generateOTP = () => {
-    var string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var digits = '0123456789';
     let OTP = '';
-
-    var len = string.length;
     for (let i = 0; i < 6; i++ ) {
-        OTP += string[Math.floor(Math.random() * len)];
+        OTP += digits[Math.floor(Math.random() * 10)];
     }
     return OTP;
 }
