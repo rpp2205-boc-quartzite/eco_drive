@@ -60,6 +60,10 @@ class RiderProfile extends React.Component {
     .catch(err => console.log(err))
   }
 
+  logout() {
+    this.props.logOut();
+  }
+
   editProfileOrClose() {
     if (this.state.editProfile === true) {
       this.setState({editProfile: false})
@@ -136,7 +140,7 @@ class RiderProfile extends React.Component {
             <RiHome4Fill className='top-bar-icons'/>
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+            <RiLogoutBoxRLine className='top-bar-icons' size={20} onClick={this.props.logOut}/>
           </Link>
         </div>
       </div>
