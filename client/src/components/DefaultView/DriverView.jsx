@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
+import { RiRefreshLine, RiLogoutBoxRLine, RiAddFill } from "react-icons/ri";
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
 import { useNavigate } from 'react-router-dom';
-import { BiSearchAlt2, BiAlarm } from "react-icons/bi";
 
 import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
@@ -259,13 +258,13 @@ function DriverView ({ userId, logOut }) {
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Riders
-                <BiSearchAlt2 className="searchBtn" size={20}/>
+                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Create Route
+                <RiAddFill className="searchBtn" size={20}/>
               </button>
             : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Riders
-                  <BiSearchAlt2 className="searchBtn" size={20}/>
+                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Create Route
+                  <RiAddFill className="searchBtn" size={20}/>
                 </button>
               </Link>
             }

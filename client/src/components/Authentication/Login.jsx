@@ -21,7 +21,7 @@ export default function Login(props) {
                     <label className='label-title-3' htmlFor='email'>Email</label>
                     <div className='valid-check'>*</div>
                   </div>
-                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />
+                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())}type='email' id='email' name='email' />
                 </div>
                 <div className='label-container-2'>
                   <div className='label-title-container'>

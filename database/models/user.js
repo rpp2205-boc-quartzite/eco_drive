@@ -50,6 +50,10 @@ const userSchema = mongoose.Schema({
           type: mongoose.SchemaTypes.ObjectId,
           ref: 'User'
         },
+        avatar: {
+          type: String,
+          default: 'https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg'
+        },
         starting_distance: String,
         end_distance: String,
       }
