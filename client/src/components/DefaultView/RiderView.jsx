@@ -60,7 +60,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
     setUpcomingCheck(bool)
   }
 
-  console.log('can start trip????', startedTrip, upcomingCheck)
+  // console.log('can start trip????', startedTrip, upcomingCheck)
 
   const route = {
     _id: userId,

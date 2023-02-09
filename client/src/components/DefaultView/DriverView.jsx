@@ -52,7 +52,6 @@ function DriverView ({ userId, logOut }) {
   const [timeClicked, setTimeClicked] = useState(false);
   const [upcomingCheck, setUpcomingCheck] = useState(false)
 
-  // const upcomingCheck = Object.keys(upcoming).length > 0;
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
 
@@ -60,7 +59,7 @@ function DriverView ({ userId, logOut }) {
     setUpcomingCheck(bool)
   }
 
-  console.log('can start trip????', startedTrip, upcomingCheck)
+  // console.log('can start trip????', startedTrip, upcomingCheck)
 
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
