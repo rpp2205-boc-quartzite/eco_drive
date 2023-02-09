@@ -42,9 +42,9 @@ const DriverInteractions = function(props) {
   var route = location.state.route;
   var userInfo = location.state.userInfo;
 
-  console.log('DATA: ', data);
-  console.log('Route: ', route);
-  console.log('UserInfo: ', userInfo);
+  // console.log('DATA: ', data);
+  // console.log('Route: ', route);
+  // console.log('UserInfo: ', userInfo);
 
 
   // if (typeof window !== 'undefined') {
