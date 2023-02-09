@@ -9,13 +9,17 @@ const UpcomingTripDriver = (props) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const myFunc = async () => {
-      let result = await axios.get('/getdriverview',  { params: {userId: props.userId} }).catch(err => console.log('ERR: ', err))
-      result = result.data[0];
-      setUser(result);
-    }
-    myFunc();
-  }, [])
+    setInterval(() => {
+      console.log('Interval here');
+      const myFunc = async () => {
+        let result = await axios.get('/getdriverview',  { params: {userId: props.userId} }).catch(err => console.log('ERR: ', err))
+        result = result.data[0];
+        setUser(result);
+      }
+      myFunc();
+    }, 5000);
+  }, []);
+
 
   const cancelRoute = async () => {
     await axios.put(`/cancel-driver-route/${props.userId}`).catch(err => console.log('ERR: ', err))
@@ -34,9 +38,13 @@ const UpcomingTripDriver = (props) => {
               <p>{user.full_name}</p>
             </div>
             <div className='icons-flex'>
-              <Link to="/driverprofile" state={ {from:'driverview', user}}>
-                <RiInformationLine className='card-icon info-icon'/>
-              </Link>
+              {user.driver_route.riders.map(rider => {
+                return (
+                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, reviewee_id: rider.rider_id} }>
+                  <img src={rider.avatar} alt="avatar" className='avatar'/>
+                </Link>
+                )
+              })}
             </div>
           </div>
           <p className='card-detail'>Pickup: {user.driver_route.start_address}</p>
