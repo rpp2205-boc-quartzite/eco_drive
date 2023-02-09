@@ -130,7 +130,7 @@ export default function Register(props) {
               </div>
               </form>
               <div className='tos-wrapper'>
-                  <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
+                  <input className='radioInput' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
                   <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
               </div>
           </div>

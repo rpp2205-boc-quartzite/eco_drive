@@ -303,6 +303,7 @@ h1 {
   -webkit-appearance: none;
   outline: none;
   cursor: pointer;
+  z-index: 1;
 }
 
 .radioInput:checked {
@@ -645,6 +646,23 @@ h1 {
   flex-grow: 0;
 }
 
+/* .radioInput {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  background-color: white;
+  border: 1.5px solid var(--gray3);
+  border-radius: 5px;
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
+} */
+
 .sign-tos-wrapper {
   display: flex;
   flex-direction: column;
@@ -935,8 +953,8 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 1;
-  padding-left: 5px;
-  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
 
 .signup-wrapper {
