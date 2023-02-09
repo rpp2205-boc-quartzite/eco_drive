@@ -16,8 +16,8 @@ class RiderProfile extends React.Component {
     super(props);
     console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
-      //userId: this.props.location.state.id,
-      userId: '63d36e8fcd478f26557c4a37',
+      userId: this.props.location.state.id,
+      //userId: '63d36e8fcd478f26557c4a37',
       // userId: '63db055e255ff6bddca10fe6',
       full_name: '',
       email: '',
