@@ -60,8 +60,8 @@ const OngoingTripDriver = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="card">
-          <p className='no-route-message'> No active routes </p>
+        <div className="driver-card">
+          <p className='not-found-text'> No active routes </p>
         </div>
       </div>
     )

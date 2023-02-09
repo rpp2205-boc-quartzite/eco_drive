@@ -135,10 +135,5 @@
   background: var(--green3);
   color: var(--gray1);
 }
-/* Message displying no route in ongoing trip cards */
-.no-route-message {
-  font-size: 14px;
-  font-style: italic;
-  color: var(--gray4);
-}
+
 
