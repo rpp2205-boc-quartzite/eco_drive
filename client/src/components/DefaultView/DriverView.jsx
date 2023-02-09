@@ -107,14 +107,20 @@ function DriverView ({ userId, logOut }) {
     }
   }, [directionsResponse])
 
-
+  if (typeof window !== 'undefined') {
+    if (isDefault) {
+      var jsonMapData = JSON.stringify(directionsResponse);
+      localStorage.setItem("defaultRouteMap", jsonMapData);
+      // console.log('Default Route Set', jsonMapData);
+    }
+  }
 
     //*****************************************************//
     //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
     //*****************************************************//
 
 
-    console.log('DIRRRRR', directionsResponse)
+    // console.log('DIRRRRR', directionsResponse)
 
   const route = {
     id: userId,

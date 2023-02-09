@@ -19,6 +19,11 @@ const OngoingTripDriver = (props) => {
     myFunc();
   }, [])
 
+  const cancelRoute = async () => {
+    await axios.put(`/cancel-driver-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    setUser(null);
+  }
+
 
   if (user) {
     return (
@@ -37,14 +42,16 @@ const OngoingTripDriver = (props) => {
               <RiInformationLine className='card-icon info-icon'/>
             </Link>
           </div>
-          <div className="detail"> {user.driver_route.start_address} </div>
-          <div className="detail"> {user.license_plate} </div>
-          <div className="detail"> {user.driver_route.time} </div>
-          <div className="buttons">
-            <button className="end-button">Cancel</button>
-            {/* <Link to="/trip-complete" state={{ user }}> */}
-              <button type='submit' onClick={props.endTrip} className="end-button" id="end-trip-button">End Trip</button>
-            {/* </Link> */}
+          <p className='card-detail'>Pickup: {user.driver_route.start_address}</p>
+          <p className='card-detail'>License plate #: {user.license_plate}</p>
+          <p className='card-detail'>Time: {user.driver_route.time}</p>
+          <div className="btn-horizontal-flex">
+            <Link to="/driverview">
+              <button className="cancel-btn btn-flex-grow" onClick={cancelRoute}>Cancel</button>
+            </Link>
+            <Link to="/trip-complete-driver" className="link link-wrap-btn" state={{ user }}>
+              <button type='submit' onClick={props.endTrip}  className="negative-btn btn-flex-grow">End Trip</button>
+            </Link>
           </div>
         </div>
       </div>
