@@ -20,6 +20,7 @@ class DriverReviewsList extends React.Component {
                 <DriverReviewTile
                 key={review._id}
                 id={review._id}
+                full_name={review.full_name}
                 review={review.review_text}
                 rating={review.rating}
                 />

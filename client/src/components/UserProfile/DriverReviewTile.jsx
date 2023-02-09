@@ -5,35 +5,17 @@ class DriverReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      full_name: ''
     }
   }
 
-  componentDidMount () {
-    var id = this.props.id;
-    // var id = '63e2f59e9afa2a254a9389d9'
-    console.log('IDDDD', typeof id)
-    axios.get('/getUserInfo', { params: {id} })
-    // console.log('chelsea hi!')
-    .then((result) => {
-      console.log('IS THIS OWRKING?ID!!!', result)
-      this.setState({
-        full_name: result.data[0].full_name
-      })
-    })
-    .catch(err => console.log(err))
-  }
 
   render() {
-    console.log('tile testing', this.props.id)
+    console.log('FULL NAMEEEE testing', this.state.full_name)
       return (
         <div className='profileReviewBox'>
           {/* <div className='profileReviewerName'>{this.state.full_name}</div>
           ***** hardcoding this due to lack of good data in DB for now */}
-          {this.state.full_name ?
-            <div className='profileReviewerName'>{this.state.full_name}</div> :
-            <div className='profileReviewerName'>Amy Johnson</div>
-          }
+            <div className='profileReviewerName'>{this.props.full_name}</div>
 
           <div>
             <Ratings
