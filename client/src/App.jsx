@@ -17,6 +17,7 @@ import DriverList from './components/DriverList/DriverList.jsx';
 import AllReviews from './components/RatingsReviews/AllReviews.jsx';
 import DriverInteractions from './components/RiderList/DriverInteractions.jsx'
 import TripCompleteRider from './components/TripComplete/TripCompleteRider.jsx';
+import TripCompleteDriver from './components/TripComplete/TripCompleteDriver.jsx';
 
 function App() {
   const [userId, setUserId] = useState('');
@@ -99,6 +100,7 @@ function App() {
           <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute} logOut={logOut}/>} />
           <Route path="/rider-list" element={<DriverInteractions updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
           <Route path="/trip-complete-rider" element={<TripCompleteRider />} />
+          <Route path="/trip-complete-driver" element={<TripCompleteDriver />} />
         </Route>
       </Routes>
     </div>

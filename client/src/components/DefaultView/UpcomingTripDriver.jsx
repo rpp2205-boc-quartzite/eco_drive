@@ -17,6 +17,11 @@ const UpcomingTripDriver = (props) => {
     myFunc();
   }, [])
 
+  const cancelRoute = async () => {
+    await axios.put(`/cancel-driver-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    setUser(null);
+  }
+
   // upcoming route as a driver
   if (user && user.driver_route.start_address !== undefined) {
     return (
@@ -38,8 +43,10 @@ const UpcomingTripDriver = (props) => {
           <p className='card-detail'>License plate #: {user.license_plate}</p>
           <p className='card-detail'>Time: {user.driver_route.time} </p>
           <div className="btn-horizontal-flex">
-            <button className="cancel-btn">Cancel</button>
-            <button type='submit' onClick={props.startTrip} className="primary-btn" id="start-trip-button">Start Trip</button>
+            <Link to="/driverview">
+              <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
+            </Link>
+            <button type='submit' onClick={props.startTrip} className="primary-btn">Start Trip</button>
           </div>
         </div>
       </div>
