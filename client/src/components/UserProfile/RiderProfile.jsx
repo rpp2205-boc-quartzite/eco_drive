@@ -2,9 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import { RiRefreshLine, RiLogoutBoxRLine, RiHome4Fill, RiPencilFill, RiCheckboxCircleFill } from "react-icons/ri";
 import RiderReviewsList from './RiderReviewsList.jsx';
+import RiderRecentList from './RiderRecentList.jsx';
+import PreviousRidesList from './PreviousRidesList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
-import {randomFacts} from './RandomFacts.jsx';
+import { randomFacts } from './RandomFacts.jsx';
 
 class RiderProfile extends React.Component {
   constructor(props) {
@@ -12,7 +14,8 @@ class RiderProfile extends React.Component {
     console.log( 'RIDER PROFILE PROPS', this.props)
     this.state = {
       userId: this.props.location.state.id,
-      //userId: '63d36ee5cd478f26557c4a38',
+      //userId: '63d36e8fcd478f26557c4a37',
+      // userId: '63db055e255ff6bddca10fe6',
       full_name: '',
       email: '',
       start_address: '',
@@ -24,10 +27,10 @@ class RiderProfile extends React.Component {
       rider_reviews: [],
       recent_drivers: [],
       rating: 4,
-      //hardcoded rating ^ for now
       rider_trips: [],
       editProfile: false,
-      infoChangedSuccess: false
+      infoChangedSuccess: false,
+      wholeObj: {}
     };
     this.editProfileOrClose = this.editProfileOrClose.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -39,7 +42,7 @@ class RiderProfile extends React.Component {
     var id = this.state.userId;
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
-      //console.log('got da rider', result)
+      console.log('got da rider', result.data[0])
       this.setState({
         full_name: result.data[0].full_name,
         email: result.data[0].email,
@@ -49,7 +52,9 @@ class RiderProfile extends React.Component {
         avatar: result.data[0].avatar,
         drivers_license: result.data[0].drivers_license,
         rider_reviews: result.data[0].rider_reviews,
-        recent_riders: result.data[0].recent_riders
+        recent_drivers: result.data[0].recent_drivers,
+        wholeObj: result,
+        rider_trips: result.data[0].rider_trips
       })
     })
     .catch(err => console.log(err))
@@ -96,6 +101,7 @@ class RiderProfile extends React.Component {
 
   render () {
     //console.log('CHECKING RIDER PROPS', this.props.location.state.id)
+    //console.log('HELLOOOO', this.state.recent_drivers)
     return (
       <div>
       {/* TOP BUTTONS */}
@@ -142,8 +148,8 @@ class RiderProfile extends React.Component {
       {/* PROFILE PHOTO */}
         <div className='profilePhotoDiv'>
           {!this.state.avatar ?
-          <img className='profilePhoto' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
-          <img className='profilePhoto' src={this.state.avatar} alt="profile avatar"/>
+          <img className='profileprofilePhoto' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
+          <img className='profileprofilePhoto' src={this.state.avatar} alt="profile avatar"/>
           }
         </div>
         <div className='profileName'>
@@ -218,13 +224,12 @@ class RiderProfile extends React.Component {
           <span className='profileTitle'>Recent drivers</span>
           <div className='profileRecentDriverContainer'>
           {this.state.recent_drivers.length === 0 ?
-          <div className='profilePlaceholder2'>None yet &#129485;</div>
+          <div className='profilePlaceholder2'>None yet &#129485;
+        </div>
           :
-          <Link to="/ratings-reviews">
-          {!this.state.avatar ?
-          <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/> :
-          <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/>
-          }</Link>
+        <div>
+          <RiderRecentList recent_drivers={this.state.recent_drivers} wholeObj={this.state.wholeObj}/>
+        </div>
           }
           </div>
         </div>
@@ -249,14 +254,7 @@ class RiderProfile extends React.Component {
           {this.state.rider_trips.length === 0 ?
           <div className='profilePlaceholder2'>None yet &#129485;</div>
           :
-          <div className='profileCurrentRoute'>
-            <div className='profileCurrentRouteTitle'>From:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.start_address}</div>
-            <div className='profileCurrentRouteTitle'>To:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.end_address}</div>
-            <div className='profileCurrentRouteTitle'>Time:</div>
-            <div className='profileCurrentRouteInfo'>{this.state.time}</div>
-          </div>
+          <PreviousRidesList rider_trips={this.state.rider_trips}/>
           }
 
         </div>
@@ -266,13 +264,12 @@ class RiderProfile extends React.Component {
           <span className='profileTitle'>Your savings this month</span>
           <div className='profileSavings'>
             <div className='profileSavingsTitle'>You saved the equivalent of</div>
-            <div className='profileCurrentRouteInfo'>{(this.state.rider_trips.length + 1) * .05} trees &#127794; <div>or</div> {(this.state.rider_trips.length + 1)* 10} minutes of driving &#128663;</div>
+            <div className='profileCurrentRouteInfo'>{ (Math.round(((this.state.rider_trips.length + 1) * .05) * 100) / 100).toFixed(2) } trees &#127794; <div>or</div> {(Math.round(((this.state.rider_trips.length + 1) * 10) * 100) / 100).toFixed(0)} minutes of driving &#128663;</div>
             <div className='profileSavingsTitle'>This translates to</div>
-            <div className='profileCurrentRouteInfo'>${(this.state.rider_trips.length + 1)* 5.35} you saved on gas &#9981;</div>
+            <div className='profileCurrentRouteInfo'>${ (Math.round(((this.state.rider_trips.length + 1) * 5.35) * 100) / 100).toFixed(2) } you saved on gas &#9981;</div>
           </div>
-          <span className='profileTitle'>Fact of the day</span>
+          <span className='profileTitle'>Did you know? &#128173;</span>
           <div className='profileCurrentRoute'>
-            <div className='profileCurrentRouteTitle'>Did you know? &#128173;</div>
             <div className='profileCurrentRouteInfo'>{randomFacts[Math.floor(Math.random() * 16)]}</div>
           </div>
         </div>
