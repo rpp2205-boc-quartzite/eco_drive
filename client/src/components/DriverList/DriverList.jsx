@@ -65,7 +65,7 @@ const DriverList = (props) => {
         }
       }
       return (
-        <div>
+        <div className='component-container'>
           <div className='top-bar'>
             <div className='top-bar-left'>
               <p>Rider</p>
