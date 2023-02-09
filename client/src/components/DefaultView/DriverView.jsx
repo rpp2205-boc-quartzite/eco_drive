@@ -7,6 +7,7 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
 import { useNavigate } from 'react-router-dom';
+import { BiSearchAlt2, BiAlarm } from "react-icons/bi";
 
 import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
@@ -14,7 +15,7 @@ import OngoingTripDriver from './OngoingTripDriver.jsx';
 import UpcomingTripDriver from './UpcomingTripDriver.jsx';
 import './ongoing-trip-style.css';
 
-function DriverView ({ userId }) {
+function DriverView ({ userId, logOut }) {
 
   const [startedTrip, setStartedTrip] = useState(false);
 
@@ -49,6 +50,9 @@ function DriverView ({ userId }) {
   const [showPrompt, setPrompt] = useState(false);
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
+  const [timeClicked, setTimeClicked] = useState(false);
+
+  const upcomingCheck = Object.keys(upcoming).length > 0;
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
 
@@ -109,6 +113,9 @@ function DriverView ({ userId }) {
     //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
     //*****************************************************//
 
+
+    console.log('DIRRRRR', directionsResponse)
+
   const route = {
     id: userId,
     full_name: name,
@@ -128,7 +135,6 @@ function DriverView ({ userId }) {
     .then((result) => {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
-      setUpcoming(result.data[0].driver_route)
       setUserInfo(result.data[0])
       setFavorites(result.data[0].favorites)
       setDefaultRoute(result.data[0].default_driver_route)
@@ -138,13 +144,16 @@ function DriverView ({ userId }) {
       if (!result.data[0].drivers_license) {
         setPrompt(true)
       }
+      if (result.data[0].driver_route.start_address !== undefined) {
+        setUpcoming(result.data[0].driver_route)
+      }
     })
     .catch(err => console.log(err))
   }, [userId])
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('/driver/:_id/defaultroute', {data: route})
+    axios.post('/driver/:_id/defaultroute', {data: route}) //, directionsResponse: directionsResponse
     .then((result) => {
       navigate('/rider-list', {state: {dir: directionsResponse, route: route, userInfo: userInfo}})
     })
@@ -169,7 +178,7 @@ function DriverView ({ userId }) {
             <img className='avatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+            <RiLogoutBoxRLine className='top-bar-icons' size={20} onClick={logOut}/>
           </Link>
         </div>
       </div>
@@ -180,7 +189,7 @@ function DriverView ({ userId }) {
 
       {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
 
-      <div className="findNearestDrivers">Find your nearest riders</div>
+      <div className="findNearestDrivers">Start your new trip</div>
         <form>
           <div className="inputFieldsCont">
             <div className="inputFields">
@@ -218,10 +227,12 @@ function DriverView ({ userId }) {
               />
               <DatePicker
                     className="inputField3"
-                    selected={displayTime}
+                    placeholderText="Start time"
+                    selected={timeClicked ? displayTime : null}
                     onChange={(date) => {
                       setTime(format(date, 'hh:mm aa'));
                       setDisplayTime(new Date(date));
+                      setTimeClicked(true);
                     }}
                     showTimeSelect
                     showTimeSelectOnly
@@ -231,17 +242,19 @@ function DriverView ({ userId }) {
                   />
               <input type="text" className="inputField4" placeholder="Available seats" onChange={(e) => setSeats(Number(e.target.value))}/>
               <div className="defaultRadioCont">
-                <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
+                <input type="checkbox" className="radioInput" checked={isDefault} onChange={(e) => setIsDefault(!isDefault)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Riders
+                <BiSearchAlt2 className="searchBtn" size={20}/>
               </button>
             : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Riders
+                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Riders
+                  <BiSearchAlt2 className="searchBtn" size={20}/>
                 </button>
               </Link>
             }
@@ -249,7 +262,7 @@ function DriverView ({ userId }) {
         </form>
       <div className='default-ongoing-upcoming-flex'>
         {defaultRoute.default
-        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'}/>
+        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'} startedTrip={startedTrip} />
         : (
             <div className="ongoing-trip-container">
               <h5>Default Route</h5>
@@ -265,7 +278,7 @@ function DriverView ({ userId }) {
           <div className="ongoing-trip-container">
             <h5>Ongoing Trip</h5>
             <div className="card">
-              <p className='no-route-message'> No Active Routes </p>
+              <p className='no-route-message'> No active routes </p>
             </div>
           </div>
         )
@@ -276,7 +289,7 @@ function DriverView ({ userId }) {
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>
               <div className="card">
-                <p className='no-route-message'> No Upcoming Routes </p>
+                <p className='no-route-message'> No upcoming routes </p>
               </div>
             </div>
           )

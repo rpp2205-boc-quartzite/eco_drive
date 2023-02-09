@@ -45,7 +45,7 @@ const OngoingTripRider = (props) => {
                 ? <RiHeart3Fill className='card-icon full-heart-icon'/>
                 : (<RiHeart3Line className='card-icon outlined-heart-icon'/>)
               }
-              <Link to="/ratings-reviews"  state={{from: 'riderview', userData: user, revieweeData: driver }}>
+              <Link to="/ratings-reviews"  state={ { from: 'riderview', userData: user, revieweeData: driver, view: 'rider' } }>
                 <RiInformationLine className='card-icon info-icon'/>
               </Link>
             </div>
@@ -58,7 +58,7 @@ const OngoingTripRider = (props) => {
               <button className="cancel-btn btn-flex-grow" onClick={cancelRoute}>Cancel</button>
             </Link>
             <Link to="/trip-complete-rider" className="link link-wrap-btn" state={{ driver, user }}>
-              <button type='submit' onClick={props.endTrip}  className="negative-btn btn-flex-grow" id="end-trip-button">End Trip</button>
+              <button type='submit' onClick={props.endTrip}  className="negative-btn btn-flex-grow">End Trip</button>
             </Link>
           </div>
         </div>
@@ -69,7 +69,7 @@ const OngoingTripRider = (props) => {
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
         <div className="card">
-          <p className='no-route-message'> No Active Routes </p>
+          <p className='no-route-message'> No active routes </p>
         </div>
       </div>
     )

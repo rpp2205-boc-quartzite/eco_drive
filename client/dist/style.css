@@ -14,7 +14,7 @@
   --gray5: #5d6a6e;
   --gray6: #262929;
   --yellow: #FFB629;
-  --red: #E72E2E;
+  --red: #ED3C3C;
   --red2: #BC1F1F;
 }
 
@@ -295,6 +295,18 @@ h1 {
   flex: none;
   order: 0;
   flex-grow: 0;
+  background-color: white;
+  border: 1.5px solid var(--gray3);
+  border-radius: 5px;
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.radioInput:checked {
+  background-color: gray;
 }
 
 .saveDefaultText {
@@ -416,6 +428,59 @@ h1 {
   order: 0;
   flex-grow: 1;
 }
+
+.findTxt {
+  width: 82px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.searchBtn {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .timePickerIcon {
+  position: absolute;
+  float: right;
+  right: 24px;
+  top: calc(50% - 20px/2);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  z-index: 1;
+
+/* .secondary-btn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20px;
+  padding: -50px 20px;
+  gap: 12px;
+  width: 196px;
+  height: 41px;
+  border: 2px solid #338F24;
+  border-radius: 50px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+} */
 /* -------- BECCA CSS END -------- */
 
 /* -------- BLAKE Authentication CSS -------- */
@@ -570,7 +635,7 @@ h1 {
 .sign-form {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   padding: 0px 16px;
   gap: 12px;
   width: 375px;
@@ -578,6 +643,20 @@ h1 {
   flex: none;
   order: 0;
   flex-grow: 0;
+}
+
+.sign-tos-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+
+  position: absolute;
+  width: 375px;
+  height: 556px;
+  left: 0px;
+  top: 0px;
 }
 
 .sign-form-2 {
@@ -679,7 +758,7 @@ h1 {
   flex-grow: 0;
 }
 .label-title-3 {
-  width: 50px;
+  width: 45px;
   height: 24px;
   font-family: 'Poppins';
   font-style: normal;
@@ -815,25 +894,31 @@ h1 {
   flex-direction: row;
   align-items: flex-start;
   padding: 0px 16px;
-  gap: 17px;
+  gap: 5px;
   width: 375px;
   height: 36px;
   flex: none;
   order: 1;
   flex-grow: 0;
+  margin-top: -25px;
 }
 
 .tos-checkbox {
   box-sizing: border-box;
-  position: absolute;
-  /* left: 0%;
+  position: relative;
+  left: 0%;
   right: 0%;
   top: 0%;
-  bottom: 0%; */
+  bottom: 0%;
   background: var(--gray1);
   border: 2px solid var(--gray4);
   border-radius: 5px;
-  padding-left: 10px;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  z-index: 1;
 }
 
 .tos-text {
@@ -850,8 +935,8 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 1;
-  padding-left: 25px;
-  padding-bottom: 20px;
+  padding-left: 5px;
+  padding-bottom: 15px;
 }
 
 .signup-wrapper {
@@ -860,6 +945,19 @@ h1 {
   align-items: flex-start;
   padding: 0px;
   gap: 28px;
+  position: absolute;
+  width: 375px;
+  height: 556px;
+  left: 0px;
+  top: 0px;
+}
+
+.signup-wrappers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
   position: absolute;
   width: 375px;
   height: 556px;
@@ -1047,13 +1145,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 50px 0px;
+  padding: 64px 50px 0px;
   gap: 35px;
   width: 375px;
   height: 644px;
   background: var(--gray1);
   flex: none;
-  order: 1;
   align-self: stretch;
   flex-grow: 1;
 }
@@ -1068,7 +1165,6 @@ h1 {
   line-height: 106px;
   color: var(--gray6);
   flex: none;
-  order: 0;
   flex-grow: 0;
 }
 
@@ -1077,14 +1173,13 @@ h1 {
   height: 24px;
   font-family: 'Poppins';
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 16px;
   line-height: 74px;
   display: flex;
   align-items: center;
   color: var(--gray6);
   flex: none;
-  order: 1;
   flex-grow: 0;
 }
 
@@ -1093,11 +1188,11 @@ h1 {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
+  margin-top: -20px;
   gap: 8px;
   width: 316px;
   height: 208px;
   flex: none;
-  order: 2;
   flex-grow: 0;
 }
 
@@ -1160,8 +1255,28 @@ h1 {
   flex-grow: 0;
 }
 
-.defaultRouteCont {
+.licenseModalInput {
+  box-sizing: border-box;
   display: flex;
+  align-items: center;
+  padding: 16px 16px;
+  height: 50px;
+  background: var(--gray1);
+  border: 1.5px solid var(--gray3);
+  border-radius: 5px;
+}
+
+.modalInputFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+}
+
+.defaultRouteCont {
+  /* display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 16px;
@@ -1170,7 +1285,12 @@ h1 {
   height: 232px;
   flex: none;
   order: 7;
-  flex-grow: 0;
+  flex-grow: 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
 }
 
 .defaultRouteTitle {
@@ -1314,6 +1434,7 @@ h1 {
 .avatar-photo {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 5px;
   flex-direction: row;
   align-items: flex-start;
@@ -1324,6 +1445,7 @@ h1 {
 .selected {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 5px;
   border: solid 5px var(--green3);
   flex-direction: row;
@@ -1668,7 +1790,7 @@ h1 {
   gap: 12px;
   width: 343px;
   height: 41px;
-  background: var(--green3);
+  background: #338F24;
   border-radius: 50px;
   flex: none;
   order: 0;
@@ -2354,6 +2476,7 @@ input.review-summary {
   font-size: 16px;
   line-height: 24px;
   color: #338F24;
+  margin-left: 8px;
 }
 
 .profileToggleButton {
@@ -2370,13 +2493,14 @@ input.review-summary {
 .profileLogoutButton {
   float: right;
   color: #262929;
+  margin-right: 8px;
 }
 
 .profilePhotoDiv {
   padding-top: 16px;
 }
 
-.profilePhoto {
+.profileprofilePhoto {
   width: 89.77px;
   height: 89.77px;
   border-radius: 100px;
@@ -2397,7 +2521,9 @@ input.review-summary {
 
 .profileOnline{
   color: #338F24;
-  font-size: xx-large;
+  font-size: 50px;
+  margin-left: 2px;
+  vertical-align: sub;
 }
 
 .profileRatingStars {
@@ -2547,17 +2673,19 @@ input.review-summary {
 }
 
 .profileRecentDriverContainer {
-  display: flex;
+  display: grid;
+  margin-bottom: 13px;
 }
 
 .profileRecentDriver {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 100px;
   object-fit: cover;
   flex: 33.33%;
   padding: 5px;
-  margin-left: 3px;
+  margin-left: 1px;
+  float: left;
 }
 .secondprofileRecentDriver {
   width: 40px;
@@ -2724,4 +2852,62 @@ input.review-summary {
   text-align: center;
 }
 
+.profilePreviousBox {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.profilePreviousRouteTitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #97AAB0;
+}
+
+.profilePreviousRouteInfo {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 27px;
+  color: #262929;
+}
+
+.profilePreviousRoutesBox {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* padding: 12px 16px; */
+  gap: 6px;
+  width: 333px;
+  height: 154px;
+  /* background: #E3F1F5; */
+  margin-top: 6px;
+  margin-right: 8px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: pre-wrap;
+  border-radius: 10px;
+  word-wrap: break-word;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  position: relative;
+  border: solid 1px #97AAB0;
+  padding: 9px;
+  border-radius: 9px;
+  margin: 8px;
+}
+
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */
+
+/* --------------- NICK CSS------------------------------------- */
+.Gmap {
+  height: 275px;
+  width: 370px;
+  margin: auto;
+  border-radius: 5px;
+  border-color: #338F24;
+  border-width: thin;
+}
+/* --------------- NICK CSS END------------------------------------- */

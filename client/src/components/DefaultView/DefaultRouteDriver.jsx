@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
 
-const DefaultRouteDriver = ({ userId, defaultRoute, favorites, dir, userInfo, from }) => {
+const DefaultRouteDriver = ({ userId, defaultRoute, favorites, dir, userInfo, from, startedTrip, upcomingCheck }) => {
   const navigate = useNavigate()
 
   const route = {
@@ -15,14 +15,15 @@ const DefaultRouteDriver = ({ userId, defaultRoute, favorites, dir, userInfo, fr
     time: defaultRoute.time,
     total_seats: defaultRoute.total_seats,
     default: defaultRoute.default,
-    userFavorites: favorites
+    // userFavorites: favorites
   }
 
-  console.log(route)
-
+  console.log('SOS', dir)
   const handleClick = (e) => {
     e.preventDefault()
-    navigate('/rider-list', {state: {dir: dir, route: route, userInfo: userInfo, from: from}})
+    if (!startedTrip && !upcomingCheck) {
+      navigate('/rider-list', {state: {dir: dir, route: route, userInfo: userInfo, from: from}})
+    }
   }
 
   if (defaultRoute.default) {
