@@ -1,5 +1,10 @@
 .component-container {
-
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: stretch;
+  justify-content: flex-start;
 }
 
 .title-bar {
