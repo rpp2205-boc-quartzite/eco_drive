@@ -119,6 +119,15 @@ function DriverView ({ userId, logOut }) {
     }
   }
 
+  const pulledRoute = localStorage.getItem("currentRoute");
+  const passedRoute = JSON.parse(pulledRoute);
+
+  const pulledMapData = localStorage.getItem("currentMapData");
+  const passedMapData = JSON.parse(pulledMapData);
+
+  const pulledUserInfo = localStorage.getItem("currentUserInfo");
+  const passedUserInfo = JSON.parse(pulledUserInfo);
+
     //*****************************************************//
     //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
     //*****************************************************//
@@ -194,7 +203,7 @@ function DriverView ({ userId, logOut }) {
       </div>
 
       <div className="welcomeCont">
-        <div className="welcomeMsg">Welcome {name.split(' ')[0]},</div>
+        <div className="welcomeMsg">Welcome <span className='highlight-name'>{name.split(' ')[0]}</span>,</div>
       </div>
 
       {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
@@ -276,35 +285,42 @@ function DriverView ({ userId, logOut }) {
         : (
             <div className="ongoing-trip-container">
               <h5>Default Route</h5>
-              <div className="card">
-                <p className='no-route-message'>No default route set</p>
+              <div className="driver-card">
+                <p className='not-found-text'>No default route set</p>
               </div>
             </div>
         )
         }
         {startedTrip === true
-        ? <OngoingTripDriver userId={userId} endTrip={endTrip}/>
+        ? <OngoingTripDriver userId={userId} endTrip={endTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo}/>
         : (
           <div className="ongoing-trip-container">
             <h5>Ongoing Trip</h5>
-            <div className="card">
-              <p className='no-route-message'> No active routes </p>
+            <div className="driver-card">
+              <p className='not-found-text'> No active routes </p>
             </div>
           </div>
         )
         }
         {!startedTrip
-        ? <UpcomingTripDriver userId={userId} startTrip={startTrip}/>
+        ? <UpcomingTripDriver userId={userId} startTrip={startTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo}/>
         : (
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>
-              <div className="card">
-                <p className='no-route-message'> No upcoming routes </p>
+              <div className="driver-card">
+                <p className='not-found-text'> No upcoming routes </p>
               </div>
             </div>
           )
         }
       </div>
+      {/* <div>
+      <Link to="/rider-list" state={{dir: passedMapData, route: passedRoute, userInfo: passedUserInfo}}>
+        <button>
+          Place Arrow Here
+        </button>
+      </Link>
+      </div> */}
 
     </div>
   )

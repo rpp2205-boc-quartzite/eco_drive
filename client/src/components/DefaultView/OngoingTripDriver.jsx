@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -29,18 +28,22 @@ const OngoingTripDriver = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="trip-card">
-          <div className="profile">
+        <div className="card">
+          <div className="card-header-driver">
+            <ul className='avatars'>
+              {user.driver_route.riders.map(rider => {
+                return (
+                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id}>
+                  <li className="avatars__item">
+                    <img src={rider.avatar} alt="avatar" className='avatars__img'/>
+                  </li>
+                </Link>
+                )
+              })}
+            </ul>
             <div>
-              <img src={user.avatar} alt="avatar" className='profilePhoto'/>
+              {user.driver_route.riders.length} / {user.driver_route.total_seats}
             </div>
-            <span id="name">{user.full_name}</span>
-            <div>
-              <p> </p>
-            </div>
-            <Link to="/driverprofile" state={ {from:'driverview', user}}>
-              <RiInformationLine className='card-icon info-icon'/>
-            </Link>
           </div>
           <p className='card-detail'>Pickup: {user.driver_route.start_address}</p>
           <p className='card-detail'>License plate #: {user.license_plate}</p>
@@ -60,8 +63,8 @@ const OngoingTripDriver = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="card">
-          <p className='no-route-message'> No active routes </p>
+        <div className="driver-card">
+          <p className='not-found-text'> No active routes </p>
         </div>
       </div>
     )

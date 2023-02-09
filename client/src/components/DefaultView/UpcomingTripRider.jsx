@@ -33,7 +33,7 @@ const UpcomingTripRider = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
-        <div className="card">
+        <div className="driver-card">
           <div className="card-header">
             <div className='header-info'>
               <img src={driver.avatar} alt="avatar" className='avatar'/>
@@ -44,7 +44,7 @@ const UpcomingTripRider = (props) => {
                 ? <RiHeart3Fill className='card-icon full-heart-icon'/>
                 : (<RiHeart3Line className='card-icon outlined-heart-icon'/>)
               }
-              <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver }}>
+              <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver } }>
                 <RiInformationLine className='card-icon info-icon'/>
               </Link>
             </div>
@@ -65,8 +65,8 @@ const UpcomingTripRider = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
-        <div className="card">
-          <p className='no-route-message'>No upcoming routes</p>
+        <div className="driver-card">
+          <p className='not-found-text'>No upcoming routes</p>
         </div>
       </div>
     )

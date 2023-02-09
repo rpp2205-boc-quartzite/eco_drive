@@ -4,15 +4,12 @@ module.exports = {
   getRiderArray: (userId) => {
 
     const getRiderProfile = async function(riderID) {
-      // console.log('RIDER ID: ', riderID.rider_id)
       return await User.find({_id: riderID.rider_id})
         .then((rider) => {
           const container = {
             riderID: riderID,
             profile: rider[0]
           }
-
-          // console.log('CONTAINER: ', container)
           return container;
         })
     }
@@ -20,12 +17,10 @@ module.exports = {
     const filter = {_id: userId};
     return User.find(filter)
       .then((driver) => {
-        // console.log('RIDER ARRAY: ', driver[0].driver_route.riders)
         return driver[0].driver_route.riders;
       })
       .then((riderArray) => {
         const riderProfiles = [];
-        console.log(riderArray);
         for (var i = 0; i < riderArray.length; i++) {
           var profile = getRiderProfile(riderArray[i])
           riderProfiles.push(profile);
@@ -39,7 +34,6 @@ module.exports = {
   },
 
   addDriversRoute: (newRoute) => {
-    console.log('addDriversRoute: ', newRoute)
     const id = {_id: newRoute.id}
     const update = {
       start_address: newRoute.start_address,
@@ -55,12 +49,21 @@ module.exports = {
       riders: newRoute.riders
 
     }
-    return User.findOneAndUpdate(id, {driver_route: update})
-      .then((result) => {
-        console.log(result);
-        return result;
-      })
+    return User.find(id)
+    .then((userData) => {
+      if (userData[0].driver_route.start_address === undefined) {
+       return User.findOneAndUpdate(id, {driver_route: update})
+       .then((result) => {
+         console.log(result);
+         return result;
+       })
       .catch(err => console.log('Error updating record'));
+      } else {
+        console.log('User Route is Already Engaged');
+        return;
+      }
+    })
+
   },
 
  removeRiderFromRiderArray: (driverId, riderId) => {
@@ -72,9 +75,6 @@ module.exports = {
     .then((ridersArray) => {
       var newRidersArray = [];
       for (var i = 0; i < ridersArray.length; i++) {
-        // console.log('CURRENT ID: ', JSON.stringify(ridersArray[i].rider_id))
-        // console.log('COMPARISON ID: ', `"${riderId}"`)
-        // console.log(JSON.stringify(ridersArray[i].rider_id) === `"${riderId}"`)
         if (JSON.stringify(ridersArray[i].rider_id) !== `"${riderId}"`) {
           newRidersArray.push(ridersArray[i]);
         }

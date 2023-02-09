@@ -118,7 +118,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
       </div>
 
       <div className="welcomeCont">
-        <div className="welcomeMsg">Welcome {name.split(' ')[0]},</div>
+        <div className="welcomeMsg">Welcome <span className='highlight-name'>{name.split(' ')[0]}</span>,</div>
       </div>
 
       <div className="findNearestDrivers">Find your nearest drivers</div>
@@ -195,8 +195,8 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
         : (
             <div className="ongoing-trip-container">
               <h5>Default Route</h5>
-              <div className="card">
-                <p className='no-route-message'>No default route set</p>
+              <div className="driver-card">
+                <p className='not-found-text'>No default route set</p>
               </div>
             </div>
         )
@@ -206,8 +206,8 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
         : (
             <div className="ongoing-trip-container">
               <h5>Ongoing Trip</h5>
-              <div className="card">
-                <p className='no-route-message'> No active routes </p>
+              <div className="driver-card">
+                <p className='not-found-text'> No active routes </p>
               </div>
             </div>
           )
@@ -217,8 +217,8 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
         : (
             <div className="ongoing-trip-container">
               <h5>Upcoming Trip</h5>
-              <div className="card">
-                <p className='no-route-message'>No upcoming routes</p>
+              <div className="driver-card">
+                <p className='not-found-text'>No upcoming routes</p>
               </div>
             </div>
           )
