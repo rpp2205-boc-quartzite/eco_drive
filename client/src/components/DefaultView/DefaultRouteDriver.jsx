@@ -24,6 +24,7 @@ const DefaultRouteDriver = ({ userId, defaultRoute, favorites, dir, userInfo, fr
   const handleClick = (e) => {
     e.preventDefault()
     if (!startedTrip && !upcomingCheck) {
+      localStorage.setItem("currentMapData", defaultMapData);
       navigate('/rider-list', {state: {dir: parsedMapData, route: route, userInfo: userInfo, from: from}})
     }
   }

@@ -103,9 +103,14 @@ function DriverView ({ userId, logOut }) {
 
   useEffect(() => {
     if (typeof directionsResponse !== 'string') {
-      console.log(directionsResponse)
+      console.log('All Good!')
     }
   }, [directionsResponse])
+
+  if (typeof directionsResponse !== 'string') {
+    var jsonCurrentMapData = JSON.stringify(directionsResponse);
+    localStorage.setItem("currentMapData", jsonCurrentMapData);
+  }
 
   if (typeof window !== 'undefined') {
     if (isDefault) {
