@@ -3,21 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { RiHeart3Line, RiHeart3Fill, RiInformationLine } from "react-icons/ri";
 
-import DriverConfirmation from './DriverConfirmation.jsx'
-import BookingSuccessMessage from './BookingSuccessMessage.jsx'
-
-const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, endDistance, updateRiderOnGoingRoute}) => {
-
-  const [driverConfirmationOn, setDriverConfirmation] = useState(false);
-  const [successMessageOn, setSuccessMessage] = useState(false);
-
-  const toggleDriverConfirmation = () => {
-    setDriverConfirmation(!driverConfirmationOn)
-  }
-
-  const toggleSuccessMessage = () => {
-    setSuccessMessage(!successMessageOn)
-  }
+const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, endDistance, updateRiderOnGoingRoute, toggleDriverConfirmation}) => {
 
   const [favoriteDriver, setFavoriteDriver] = useState((userInfo.favorites || []).includes(driverInfo._id))
 
@@ -55,21 +41,7 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
 
   return (
     <>
-      { successMessageOn && <BookingSuccessMessage /> }
-      {
-        driverConfirmationOn &&
-        <DriverConfirmation
-          driverInfo={driverInfo}
-          userRouteInfo={userRouteInfo}
-          userInfo={userInfo}
-          startDistance={startDistance}
-          endDistance={endDistance}
-          toggleDriverConfirmation={toggleDriverConfirmation}
-          toggleSuccessMessage={toggleSuccessMessage}
-          updateRiderOnGoingRoute={updateRiderOnGoingRoute}
-        />
-      }
-      <div className='card'>
+      <div className='driver-card'>
         <div className='card-header'>
           <div className='header-info'>
             <img className='avatar' src={driverInfo.avatar} alt="Driver Avatar" />
@@ -88,7 +60,7 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
         <p>From: {startDistance.text} from your starting point</p>
         <p>To: {endDistance.text} from your destination</p>
         <p>Time: {driverInfo.driver_route.time} </p>
-        <button className='secondary-btn' onClick={() => {toggleDriverConfirmation()}}>Select Driver</button>
+        <button className='secondary-btn' onClick={() => {toggleDriverConfirmation('on', driverInfo, userInfo, userRouteInfo, startDistance, endDistance)}}>Select Driver</button>
       </div>
     </>
   )
