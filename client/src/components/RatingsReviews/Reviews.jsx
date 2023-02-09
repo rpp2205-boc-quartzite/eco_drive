@@ -154,9 +154,16 @@ export default function Reviews(props) {
             <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
         )
-    } else {
+    } else if (location.state.from === 'riderview') {
         return (
           <Link to="/riderview">
+            {/* {"/riderview"} */}
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
+          </Link>
+        )
+    } else if (location.state.from === 'rider-list') {
+        return (
+          <Link to="/driverview">
             <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
         )
@@ -180,9 +187,15 @@ export default function Reviews(props) {
       </Link>
     </div>
     <div className="reviewHeaderHome">
-      <Link to="/driverview">
-        <RiHome4Fill color="#262929" size={20} />
-      </Link>
+      {
+        location.state.view === 'driver'
+        ? <Link to="/driverview">
+            <RiHome4Fill color="#262929" size={20} />
+          </Link>
+        : <Link to="/riderview">
+            <RiHome4Fill color="#262929" size={20} />
+          </Link>
+      }
     </div>
     </div>
       {
@@ -212,7 +225,7 @@ export default function Reviews(props) {
            </div>
       }
       {
-        location.state.from === 'driver-list'
+        location.state.from === 'driver-list' || location.state.from === 'rider-list'
         ? null
         : <div className='writeReviewButton'>
             <button
@@ -231,7 +244,7 @@ export default function Reviews(props) {
           </div>
       }
       {
-        location.state.from === 'driver-list'
+        location.state.from === 'driver-list' || location.state.from === 'rider-list'
         ? null
         : <div className='reportButton'>
             <button
