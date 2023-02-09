@@ -29,18 +29,20 @@ const OngoingTripDriver = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="trip-card">
-          <div className="profile">
-            <div>
-              <img src={user.avatar} alt="avatar" className='profilePhoto'/>
+        <div className="card">
+          <div className="card-header-driver">
+          <div className='icons-flex'>
+              {user.driver_route.riders.map(rider => {
+                return (
+                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, reviewee_id: rider.rider_id} } key={rider.rider_id}>
+                  <img src={rider.avatar} alt="avatar" className='avatar'/>
+                </Link>
+                )
+              })}
             </div>
-            <span id="name">{user.full_name}</span>
             <div>
-              <p> </p>
+              {user.driver_route.riders.length} / {user.driver_route.total_seats}
             </div>
-            <Link to="/driverprofile" state={ {from:'driverview', user}}>
-              <RiInformationLine className='card-icon info-icon'/>
-            </Link>
           </div>
           <p className='card-detail'>Pickup: {user.driver_route.start_address}</p>
           <p className='card-detail'>License plate #: {user.license_plate}</p>

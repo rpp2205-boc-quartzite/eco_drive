@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import './ongoing-trip-style.css';
+import { IoMdArrowRoundForward } from 'react-icons/io';
 
 const UpcomingTripDriver = (props) => {
 
@@ -30,15 +31,27 @@ const UpcomingTripDriver = (props) => {
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
         <div className="card">
-          <div className="card-header">
-            <div className='icons-flex'>
-              {user.driver_route.riders.map(rider => {
-                return (
-                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, reviewee_id: rider.rider_id} } key={rider.rider_id}>
-                  <img src={rider.avatar} alt="avatar" className='avatar'/>
-                </Link>
-                )
-              })}
+          <div className="card-header-driver">
+            <div className="avatars-container">
+              <ul className='avatars'>
+                {user.driver_route.riders.map(rider => {
+                  return (
+                  <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, reviewee_id: rider.rider_id} } key={rider.rider_id}>
+                    <li className="avatars__item">
+                      <img src={rider.avatar} alt="avatar" className='avatar'/>
+                    </li>
+                  </Link>
+                  )
+                })}
+              </ul>
+            </div>
+            <div>
+              {user.driver_route.riders.length} / {user.driver_route.total_seats}
+            </div>
+            <div>
+              <Link to="/riderview">
+                <IoMdArrowRoundForward className='driver-list-forward-icon' />
+              </Link>
             </div>
           </div>
           <p className='card-detail'>Pickup: {user.driver_route.start_address}</p>
