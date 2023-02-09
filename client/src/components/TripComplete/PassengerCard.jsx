@@ -39,7 +39,7 @@ const PassengerCard = (props) => {
     return (
       <div className="passenger-card">
         <div >
-          <img src={user.avatar} alt="avatar" className='profilePhoto'/>
+          <img src={user.avatar} alt="avatar" className='avatar'/>
         </div>
         <span id="username"> {user.full_name} </span>
         <div id="heart">

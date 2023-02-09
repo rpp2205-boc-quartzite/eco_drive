@@ -16,16 +16,18 @@
   --yellow: #FFB629;
   --red: #ED3C3C;
   --red2: #BC1F1F;
+  background-color: var(--gray1);
+  font-family: 'Poppins', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
-body {
-  background-color: var(--gray1);
-  font-family: 'Poppins', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+#root {
   max-width: 375px;
-  border: 1.5px solid var(--gray3);
 }
 
 /* body {
@@ -35,7 +37,7 @@ body {
   justify-content: center;
   align-items: center;
 } */
-h1, h2, h3, h4, h5, h6, p {
+.h1, .h2, .h3, .h4, .h5, .h6, .p, h1, h2, h3, h4, h5, h6, p {
   margin: 0
 }
 
@@ -460,6 +462,10 @@ h1 {
   align-items: center;
 }
 
+.highlight-name {
+  color: var(--green3);
+}
+
 /* .timePickerIcon {
   position: absolute;
   float: right;
@@ -546,7 +552,7 @@ h1 {
   align-items: stretch;
   padding: 40px 16px;
   gap: 16px;
-  position: fixed;
+  position: absolute;
   height: 161px;
   left: 0px;
   right: 0px;
