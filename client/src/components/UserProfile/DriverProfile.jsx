@@ -17,8 +17,8 @@ class DriverProfile extends React.Component {
     super(props);
     console.log( 'DRIVER PROFILE PROPS', this.props)
     this.state = {
-      userId: this.props.location.state.id,
-      //userId: '63d36e8fcd478f26557c4a37',
+      //userId: this.props.location.state.id,
+      userId: '63e4530e1c39c3f23167be26',
       full_name: '',
       email: '',
       start_address: '',
@@ -29,7 +29,7 @@ class DriverProfile extends React.Component {
       drivers_license: '',
       driver_reviews: [],
       recent_riders: [],
-      rating: 4,
+      rating: 4.5,
       driver_trips: [],
       editProfile: false,
       infoChangedSuccess: false,
@@ -131,7 +131,7 @@ class DriverProfile extends React.Component {
             <Link to="/driverview">
               <RiHome4Fill className='top-bar-icons'/>
             </Link>
-            <Link to="/">
+            <Link to='/'>
               <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
             </Link>
           </div>

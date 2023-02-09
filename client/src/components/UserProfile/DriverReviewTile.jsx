@@ -30,8 +30,11 @@ class DriverReviewTile extends React.Component {
         <div className='profileReviewBox'>
           {/* <div className='profileReviewerName'>{this.state.full_name}</div>
           ***** hardcoding this due to lack of good data in DB for now */}
-          {/* <div className='profileReviewerName'>Amy Johnson</div> */}
-          <div className='profileReviewerName'>{this.state.full_name}</div>
+          {this.state.full_name ?
+            <div className='profileReviewerName'>{this.state.full_name}</div> :
+            <div className='profileReviewerName'>Amy Johnson</div>
+          }
+
           <div>
             <Ratings
               rating={this.props.rating}
