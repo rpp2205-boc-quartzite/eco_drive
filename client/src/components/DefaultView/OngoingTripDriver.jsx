@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -31,15 +30,17 @@ const OngoingTripDriver = (props) => {
         <h5>Ongoing Trip</h5>
         <div className="card">
           <div className="card-header-driver">
-          <div className='icons-flex'>
+            <ul className='avatars'>
               {user.driver_route.riders.map(rider => {
                 return (
-                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, reviewee_id: rider.rider_id} } key={rider.rider_id}>
-                  <img src={rider.avatar} alt="avatar" className='avatar'/>
+                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id}>
+                  <li className="avatars__item">
+                    <img src={rider.avatar} alt="avatar" className='avatars__img'/>
+                  </li>
                 </Link>
                 )
               })}
-            </div>
+            </ul>
             <div>
               {user.driver_route.riders.length} / {user.driver_route.total_seats}
             </div>
@@ -62,8 +63,8 @@ const OngoingTripDriver = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="card">
-          <p className='no-route-message'> No active routes </p>
+        <div className="driver-card">
+          <p className='not-found-text'> No active routes </p>
         </div>
       </div>
     )

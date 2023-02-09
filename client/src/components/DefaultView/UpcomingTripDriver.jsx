@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { IoMdArrowRoundForward } from 'react-icons/io';
 import axios from 'axios';
 import './ongoing-trip-style.css';
-import { IoMdArrowRoundForward } from 'react-icons/io';
 
 const UpcomingTripDriver = (props) => {
 
@@ -19,7 +19,6 @@ const UpcomingTripDriver = (props) => {
     }, 3000);
   }, []);
 
-
   const cancelRoute = async () => {
     await axios.put(`/cancel-driver-route/${props.userId}`).catch(err => console.log('ERR: ', err))
     setUser(null);
@@ -32,24 +31,22 @@ const UpcomingTripDriver = (props) => {
         <h5>Upcoming Trip</h5>
         <div className="card">
           <div className="card-header-driver">
-            <div className="avatars-container">
               <ul className='avatars'>
                 {user.driver_route.riders.map(rider => {
                   return (
-                  <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, reviewee_id: rider.rider_id} } key={rider.rider_id}>
+                  <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id._id}>
                     <li className="avatars__item">
-                      <img src={rider.avatar} alt="avatar" className='avatar'/>
+                      <img src={rider.rider_id.avatar} alt="avatar" className='avatars__img'/>
                     </li>
                   </Link>
                   )
                 })}
               </ul>
-            </div>
             <div>
               {user.driver_route.riders.length} / {user.driver_route.total_seats}
             </div>
             <div>
-              <Link to="/riderview">
+              <Link to="/rider-list" state={{dir: props.passedMapData, route: props.passedRoute, userInfo: props.passedUserInfo}}>
                 <IoMdArrowRoundForward className='driver-list-forward-icon' />
               </Link>
             </div>
@@ -70,8 +67,8 @@ const UpcomingTripDriver = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
-        <div className="card">
-          <p className='no-route-message'> No upcoming routes </p>
+        <div className="driver-card">
+          <p className='not-found-text'> No upcoming routes </p>
         </div>
       </div>
     )

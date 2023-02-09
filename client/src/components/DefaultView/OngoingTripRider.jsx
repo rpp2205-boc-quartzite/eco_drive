@@ -34,7 +34,7 @@ const OngoingTripRider = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="card">
+        <div className="driver-card">
           <div className="card-header">
             <div className='header-info'>
               <img src={driver.avatar} alt="avatar" className='avatar'/>
@@ -68,8 +68,8 @@ const OngoingTripRider = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="card">
-          <p className='no-route-message'> No active routes </p>
+        <div className="driver-card">
+          <p className='not-found-text'> No active routes </p>
         </div>
       </div>
     )

@@ -115,7 +115,6 @@ app.get('/getdriverview', function(req, res) {
   let userid = req.query.userId;
   getDriverView(userid)
   .then((result) => {
-    console.log(result)
     res.send(result)
   })
   .catch(err => console.log(err))
@@ -125,7 +124,6 @@ app.get('/getriderview', function(req, res) {
   let userid = req.query.userId;
   getRiderView(userid)
   .then((result) => {
-    console.log(result)
     res.send(result)
   })
   .catch(err => console.log(err))
