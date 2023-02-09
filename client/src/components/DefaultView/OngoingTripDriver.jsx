@@ -49,8 +49,8 @@ const OngoingTripDriver = (props) => {
             <Link to="/driverview">
               <button className="cancel-btn btn-flex-grow" onClick={cancelRoute}>Cancel</button>
             </Link>
-            <Link to="/trip-complete-driver" state={{ user }}>
-              <button type='submit' onClick={props.endTrip}className="negative-btn btn-flex-grow" id="end-trip-button">End Trip</button>
+            <Link to="/trip-complete-driver" className="link link-wrap-btn" state={{ user }}>
+              <button type='submit' onClick={props.endTrip}  className="negative-btn btn-flex-grow">End Trip</button>
             </Link>
           </div>
         </div>

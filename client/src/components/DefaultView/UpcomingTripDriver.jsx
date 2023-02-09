@@ -46,7 +46,7 @@ const UpcomingTripDriver = (props) => {
             <Link to="/driverview">
               <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
             </Link>
-            <button type='submit' onClick={props.startTrip} className="primary-btn" id="start-trip-button">Start Trip</button>
+            <button type='submit' onClick={props.startTrip} className="primary-btn">Start Trip</button>
           </div>
         </div>
       </div>

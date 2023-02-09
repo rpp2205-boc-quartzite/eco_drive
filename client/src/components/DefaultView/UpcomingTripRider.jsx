@@ -53,7 +53,9 @@ const UpcomingTripRider = (props) => {
           <p className='card-detail'>License plate #: {driver.license_plate}</p>
           <p className='card-detail'>Time: {driver.driver_route.time} </p>
           <div className="btn-horizontal-flex">
-            <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
+            <Link to="/riderview">
+              <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
+            </Link>
             <button type='submit' onClick={props.startTrip} className="primary-btn">Start Trip</button>
           </div>
         </div>
