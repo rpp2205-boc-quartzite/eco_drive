@@ -6,7 +6,8 @@ class RiderRecentCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      avatar: ''
+      avatar: '',
+      wholeReviewerObj: {}
     }
   }
 
@@ -17,7 +18,8 @@ class RiderRecentCard extends React.Component {
     .then((result) => {
       console.log('ID!!!', result)
       this.setState({
-        avatar: result.data[0].avatar
+        avatar: result.data[0].avatar,
+        wholeReviewerObj: result
       })
     })
     .catch(err => console.log(err))
@@ -25,9 +27,10 @@ class RiderRecentCard extends React.Component {
 
   render() {
     console.log('this.props.wholeObj', this.props.wholeObj)
+    console.log('HEY BRANDON', this.state.wholeReviewerObj)
     return (
       <div>
-          <Link to="/ratings-reviews" state={{userData: this.props.wholeObj, revieweeData: this.props.id, from: 'rider-view'}}>
+          <Link to="/ratings-reviews" state={{userData: this.props.wholeObj, revieweeData: this.state.wholeReviewerObj, from: 'rider-view', view: 'rider'}}>
           {this.state.avatar ?
           <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/> :
           <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/>
