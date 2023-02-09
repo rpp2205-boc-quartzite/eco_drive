@@ -164,6 +164,17 @@
   color: var(--gray6);
 }
 
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid var(--gray4);
+  border-radius: 5px;
+  padding: 16px 16px;
+  margin: 0
+}
+
 .subheader-driver {
   margin: 0;
   flex-grow: 1;
@@ -200,6 +211,32 @@
   object-fit: cover;
 }
 
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid var(--gray3);
+  padding: 0 0 16px 0;
+}
+
+.card-header-driver {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.driver-list-forward-icon {
+  color: var(--green3);
+}
+
+.header-info {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+}
 
 /* --------------------------------------------- */
 /* ------------- Top bar ----------------------- */

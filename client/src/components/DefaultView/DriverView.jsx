@@ -292,7 +292,7 @@ function DriverView ({ userId, logOut }) {
         )
         }
         {startedTrip === true
-        ? <OngoingTripDriver userId={userId} endTrip={endTrip}/>
+        ? <OngoingTripDriver userId={userId} endTrip={endTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo}/>
         : (
           <div className="ongoing-trip-container">
             <h5>Ongoing Trip</h5>
@@ -303,7 +303,7 @@ function DriverView ({ userId, logOut }) {
         )
         }
         {!startedTrip
-        ? <UpcomingTripDriver userId={userId} startTrip={startTrip}/>
+        ? <UpcomingTripDriver userId={userId} startTrip={startTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo}/>
         : (
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>

@@ -44,7 +44,7 @@ const UpcomingTripRider = (props) => {
                 ? <RiHeart3Fill className='card-icon full-heart-icon'/>
                 : (<RiHeart3Line className='card-icon outlined-heart-icon'/>)
               }
-              <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver }}>
+              <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver } }>
                 <RiInformationLine className='card-icon info-icon'/>
               </Link>
             </div>
