@@ -1,6 +1,6 @@
 import React from 'react';
 import RiderReviewTile from './RiderReviewTile.jsx';
-
+import axios from 'axios';
 
 class RiderReviewsList extends React.Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class RiderReviewsList extends React.Component {
 
   render() {
     //console.log('asdf', this.props.rider_reviews)
+    // console.log('HEYGEYRERH', this.props.userId)
       return (
         <div>
           <div className='profileReviewContainer'>
@@ -21,6 +22,7 @@ class RiderReviewsList extends React.Component {
                 key={review._id}
                 review={review.review_text}
                 rating={review.rating}
+                userId={this.props.userId}
                 />
               )}
             </div>
