@@ -1,5 +1,4 @@
 import React from "react";
-import "./RiderList.css";
 import { Link } from 'react-router-dom';
 import { FiInfo } from "react-icons/fi";
 import axios from 'axios';

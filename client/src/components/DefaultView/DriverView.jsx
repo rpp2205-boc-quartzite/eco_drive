@@ -119,6 +119,15 @@ function DriverView ({ userId, logOut }) {
     }
   }
 
+  const pulledRoute = localStorage.getItem("currentRoute");
+  const passedRoute = JSON.parse(pulledRoute);
+
+  const pulledMapData = localStorage.getItem("currentMapData");
+  const passedMapData = JSON.parse(pulledMapData);
+
+  const pulledUserInfo = localStorage.getItem("currentUserInfo");
+  const passedUserInfo = JSON.parse(pulledUserInfo);
+
     //*****************************************************//
     //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
     //*****************************************************//
@@ -305,6 +314,13 @@ function DriverView ({ userId, logOut }) {
           )
         }
       </div>
+      {/* <div>
+      <Link to="/rider-list" state={{dir: passedMapData, route: passedRoute, userInfo: passedUserInfo}}>
+        <button>
+          Place Arrow Here
+        </button>
+      </Link>
+      </div> */}
 
     </div>
   )
