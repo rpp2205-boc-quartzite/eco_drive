@@ -71,10 +71,11 @@ function App() {
   };
 
   const [riderOnGoingRoute, setRiderOnGoingRoute] = useState({});
-  const updateRiderOnGoingRoute = (driverInfo, userRouteInfo, startDistance, endDistance) => {
+  const updateRiderOnGoingRoute = (driverInfo, userInfo, userRouteInfo, startDistance, endDistance) => {
     userRouteInfo.driver_id = driverInfo._id;
     userRouteInfo.starting_distance = startDistance.text;
     userRouteInfo.end_distance = endDistance.text;
+    userRouteInfo.avatar = userInfo.avatar;
     userRouteInfo.started = false;
     axios.post('/postRiderRoute', userRouteInfo)
     .then((result) => {
