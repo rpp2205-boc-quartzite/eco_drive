@@ -60,6 +60,10 @@ class RiderProfile extends React.Component {
     .catch(err => console.log(err))
   }
 
+  logout() {
+    this.props.logOut();
+  }
+
   editProfileOrClose() {
     if (this.state.editProfile === true) {
       this.setState({editProfile: false})
