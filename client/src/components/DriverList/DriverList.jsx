@@ -5,8 +5,7 @@ import './driver-list-style.css'
 import { useLocation } from 'react-router-dom'
 
 import { BiArrowBack } from 'react-icons/bi';
-import { TbRefresh } from "react-icons/tb";
-import { MdLogout } from 'react-icons/md';
+import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
 
 
 import DriverCard from './DriverCard.jsx'
@@ -71,16 +70,14 @@ const DriverList = (props) => {
             <div className='top-bar-left'>
               <p>Rider</p>
               <Link to="/driverview">
-                <TbRefresh className='top-bar-icons' />
+                <RiRefreshLine className='top-bar-icons' />
               </Link>
             </div>
             <div className='top-bar-right'>
               <Link to="/riderprofile">
                 <img className='avatar' src={userInfo.avatar} alt="" />
               </Link>
-              <Link to="/">
-                <MdLogout className='top-bar-icons' />
-              </Link>
+              <RiLogoutBoxRLine className='top-bar-icons' onClick={props.logOut}/>
             </div>
           </div>
           <div className='title-bar'>

@@ -6,11 +6,18 @@ require("dotenv").config();
 
 module.exports = {
   register: (req, res) => {
+    const name = req.body.full_name.split(' ');
+    
+    for (var i = 0; i < name.length; i++) {
+      name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1);
+    };
+    const fullName = name.join(' ');
+
     bcrypt
     .hash(req.body.password, 10)
     .then((hashedPassword) => {
       const user = new User({
-        full_name: req.body.full_name,
+        full_name: fullName,
         email: req.body.email,
         password: hashedPassword,
         dob: req.body.dob,

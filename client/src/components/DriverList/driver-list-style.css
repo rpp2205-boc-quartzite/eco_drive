@@ -133,8 +133,10 @@
   border-radius: 100px;
   color: var(--gray1);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .primary-btn:hover {
@@ -147,8 +149,10 @@
   border-radius: 100px;
   color: var(--green3);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .secondary-btn:hover {
@@ -161,8 +165,10 @@
   border-radius: 100px;
   color: var(--gray6);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .cancel-btn:hover {
@@ -173,10 +179,12 @@
   background-color: var(--red);
   border: 0px;
   border-radius: 100px;
-  color: var(--gray6);
+  color: var(--gray1);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .negative-btn:hover {
@@ -220,8 +228,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   gap: 24px;
   color: var(--gray6)
+}
+
+.popup-container h5 {
+  font-family: 'Poppins';
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gray6);
+  margin: 0;
 }
 
 .confirmation-header {

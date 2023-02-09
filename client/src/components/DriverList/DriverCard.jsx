@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
-import { FiInfo } from "react-icons/fi";
-import { HiOutlineHeart, HiHeart } from "react-icons/hi";
+import { RiHeart3Line, RiHeart3Fill, RiInformationLine } from "react-icons/ri";
 
 import DriverConfirmation from './DriverConfirmation.jsx'
 import BookingSuccessMessage from './BookingSuccessMessage.jsx'
@@ -27,6 +26,10 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
       removeDriverOffFavorites()
         .then(() => {
           setFavoriteDriver(!favoriteDriver)
+          let newUserFavorites = userInfo.favorites.filter(favorite => {
+            return favorite !== driverInfo._id;
+          });
+          userInfo.favorites = newUserFavorites;
           console.log('Successfully unfavorite driver ', driverInfo.full_name)
         })
         .catch(() => console.log('Unable to unfavorite driver'))
@@ -34,6 +37,7 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
       addDriverToFavorites()
         .then(() => {
           setFavoriteDriver(!favoriteDriver)
+          userInfo.favorites.push(driverInfo._id);
           console.log('Successfully favorite driver ', driverInfo.full_name)
         })
         .catch(() => console.log('Unable to favorite driver'))
@@ -72,12 +76,11 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
           </div>
           <div className='icons-flex'>
             {favoriteDriver
-              ? <HiHeart className='card-icon full-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
-              : <HiOutlineHeart className='card-icon outlined-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
+              ? <RiHeart3Fill className='card-icon full-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
+              : <RiHeart3Line className='card-icon outlined-heart-icon' onClick={() => {toggleFavoriteDriver()}}/>
             }
-            {/* <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list'}}></Link> */}
-            <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list', route: route}}>
-              <FiInfo className='card-icon info-icon'/>
+            <Link to="/ratings-reviews" state={{userData: userInfo, revieweeData: driverInfo, from: 'driver-list', route: route, view: 'rider'}}>
+              <RiInformationLine className='card-icon info-icon'/>
             </Link>
           </div>
         </div>

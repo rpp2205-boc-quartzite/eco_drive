@@ -3,11 +3,14 @@ import axios from 'axios';
 import mapStyles from "./mapStyles.js";
 import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
-import RiderList from "./RiderList.jsx"
+import RiderList from "./RiderList.jsx";
+import { MdLogout } from 'react-icons/md';
 import { GoogleMap, useLoadScript, DirectionsRenderer } from '@react-google-maps/api';
 import { useLocation } from "react-router-dom";
+import { BiArrowBack } from 'react-icons/bi';
 
 const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
+
 
 const containerStyle = {
   width: '370px',
@@ -31,10 +34,12 @@ const libraries = ["places"];
 const DriverInteractions = function(props) {
 
 
+
   const location = useLocation();
 
   var data = location.state.dir.json;
   var route = location.state.route;
+  var userInfo = location.state.userInfo;
 
 
   // if (typeof window !== 'undefined') {
@@ -158,38 +163,58 @@ const DriverInteractions = function(props) {
   }
 
 
-
+  // className="allDefaultView"
 
   return (
     <div>
-      <div>
-        <div className="test-top">
-          <div className="setting">Driver</div>
-          <div className="profile-pic-padd">
-            <img className="profile-picture" alt="lady from FEC" src="https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"/>
-          </div>
-          <Link to="/driverview" >
-            <button className="return-main" type="submit">return</button>
-          </Link>
-        </div>
+    <div className="defaultViewHeader">
+      <div className="headerToggleView">
+          <div className="viewToggle">Driver</div>
       </div>
+      <div className="headerAvatarLogout">
+          <div className="headerAvatar">
+            <Link to="/driverprofile" state={{id: userInfo._id, userInfo: userInfo, from: 'driverview'}}>
+              <img
+                  src={userInfo.avatar}
+                  alt="avatar-small"
+                  className="profilePhoto"
+                />
+            </Link></div>
+
+          <div className="headerLogout">
+            <Link to="/">
+            <MdLogout className="logout" size={20}/>
+            </Link></div>
+        </div>
+        </div>
       <br></br>
+        <div className='title-bar'>
+          <Link to="/driverview">
+              <BiArrowBack className='driver-list-back-icon' />
+          </Link>
+            <p>Your Route</p>
+        </div>
       <div className="Gmap">
         {mapCheck()}
       </div>
       <br></br>
-      <div className="MapData">
-        <div className="route">
-          <h1>Total Distance: {distance}</h1>
-          <h1>Expected Duration: {duration}</h1>
-        </div>
+      <div className="driver-list">
+          <p>Total Distance: {distance}</p>
+          <p>Expected Duration: {duration}</p>
       </div>
         <br></br>
-        <div className="rider-list" data="DriverInteractions">
-          <RiderList driver={route} riders={riders} seats={seats}/>
+        <div className="driver-list" data="DriverInteractions">
+          <RiderList driver={route} riders={riders} seats={seats} userInfo={userInfo} />
         </div>
     </div>
   )
 }
 
 export default DriverInteractions;
+
+//  <div className='card-header'>
+//   <div className='header-info'>
+//     <p>Total Distance: {distance}</p>
+//     <p>Expected Duration: {duration}</p>
+//   </div>
+// </div>

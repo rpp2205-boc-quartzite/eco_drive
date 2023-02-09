@@ -14,7 +14,7 @@
   --gray5: #5d6a6e;
   --gray6: #262929;
   --yellow: #FFB629;
-  --red: #E72E2E;
+  --red: #ED3C3C;
   --red2: #BC1F1F;
 }
 
@@ -47,7 +47,7 @@ h1 {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   padding: 0px;
   position: relative;
   width: 375px;
@@ -295,6 +295,18 @@ h1 {
   flex: none;
   order: 0;
   flex-grow: 0;
+  background-color: white;
+  border: 1.5px solid var(--gray3);
+  border-radius: 5px;
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.radioInput:checked {
+  background-color: gray;
 }
 
 .saveDefaultText {
@@ -416,6 +428,59 @@ h1 {
   order: 0;
   flex-grow: 1;
 }
+
+.findTxt {
+  width: 82px;
+  height: 21px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #FCFCFC;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.searchBtn {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .timePickerIcon {
+  position: absolute;
+  float: right;
+  right: 24px;
+  top: calc(50% - 20px/2);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  z-index: 1;
+
+/* .secondary-btn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20px;
+  padding: -50px 20px;
+  gap: 12px;
+  width: 196px;
+  height: 41px;
+  border: 2px solid #338F24;
+  border-radius: 50px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+} */
 /* -------- BECCA CSS END -------- */
 
 /* -------- BLAKE Authentication CSS -------- */
@@ -468,13 +533,14 @@ h1 {
 }
 
 .link-frame {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
+  align-items: stretch;
   padding: 40px 16px;
   gap: 16px;
-  position: absolute;
+  position: fixed;
   height: 161px;
   left: 0px;
   right: 0px;
@@ -579,6 +645,20 @@ h1 {
   flex-grow: 0;
 }
 
+.sign-tos-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+
+  position: absolute;
+  width: 375px;
+  height: 556px;
+  left: 0px;
+  top: 0px;
+}
+
 .sign-form-2 {
   display: flex;
   flex-direction: column;
@@ -678,7 +758,7 @@ h1 {
   flex-grow: 0;
 }
 .label-title-3 {
-  width: 50px;
+  width: 45px;
   height: 24px;
   font-family: 'Poppins';
   font-style: normal;
@@ -814,25 +894,31 @@ h1 {
   flex-direction: row;
   align-items: flex-start;
   padding: 0px 16px;
-  gap: 17px;
+  gap: 5px;
   width: 375px;
   height: 36px;
   flex: none;
   order: 1;
   flex-grow: 0;
+  margin-top: -25px;
 }
 
 .tos-checkbox {
   box-sizing: border-box;
-  position: absolute;
-  /* left: 0%;
+  position: relative;
+  left: 0%;
   right: 0%;
   top: 0%;
-  bottom: 0%; */
+  bottom: 0%;
   background: var(--gray1);
   border: 2px solid var(--gray4);
   border-radius: 5px;
-  padding-left: 10px;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  z-index: 1;
 }
 
 .tos-text {
@@ -849,8 +935,8 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 1;
-  padding-left: 25px;
-  padding-bottom: 20px;
+  padding-left: 5px;
+  padding-bottom: 15px;
 }
 
 .signup-wrapper {
@@ -859,6 +945,19 @@ h1 {
   align-items: flex-start;
   padding: 0px;
   gap: 28px;
+  position: absolute;
+  width: 375px;
+  height: 556px;
+  left: 0px;
+  top: 0px;
+}
+
+.signup-wrappers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
   position: absolute;
   width: 375px;
   height: 556px;
@@ -1018,7 +1117,6 @@ h1 {
 }
 
 .driver-skip {
-  width: 246px;
   height: 18px;
   font-family: 'Poppins';
   font-style: normal;
@@ -1047,13 +1145,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 50px 0px;
+  padding: 64px 50px 0px;
   gap: 35px;
   width: 375px;
   height: 644px;
   background: var(--gray1);
   flex: none;
-  order: 1;
   align-self: stretch;
   flex-grow: 1;
 }
@@ -1068,7 +1165,6 @@ h1 {
   line-height: 106px;
   color: var(--gray6);
   flex: none;
-  order: 0;
   flex-grow: 0;
 }
 
@@ -1077,14 +1173,13 @@ h1 {
   height: 24px;
   font-family: 'Poppins';
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 16px;
   line-height: 74px;
   display: flex;
   align-items: center;
   color: var(--gray6);
   flex: none;
-  order: 1;
   flex-grow: 0;
 }
 
@@ -1093,11 +1188,11 @@ h1 {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
+  margin-top: -20px;
   gap: 8px;
   width: 316px;
   height: 208px;
   flex: none;
-  order: 2;
   flex-grow: 0;
 }
 
@@ -1160,8 +1255,28 @@ h1 {
   flex-grow: 0;
 }
 
-.defaultRouteCont {
+.licenseModalInput {
+  box-sizing: border-box;
   display: flex;
+  align-items: center;
+  padding: 16px 16px;
+  height: 50px;
+  background: var(--gray1);
+  border: 1.5px solid var(--gray3);
+  border-radius: 5px;
+}
+
+.modalInputFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+}
+
+.defaultRouteCont {
+  /* display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 16px;
@@ -1170,7 +1285,12 @@ h1 {
   height: 232px;
   flex: none;
   order: 7;
-  flex-grow: 0;
+  flex-grow: 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
 }
 
 .defaultRouteTitle {
@@ -1314,6 +1434,7 @@ h1 {
 .avatar-photo {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 5px;
   flex-direction: row;
   align-items: flex-start;
@@ -1324,6 +1445,7 @@ h1 {
 .selected {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 5px;
   border: solid 5px var(--green3);
   flex-direction: row;
@@ -1580,20 +1702,14 @@ h1 {
 }
 
 .verification-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
-  gap: 12px;
-  width: 343px;
-  height: 41px;
-  background: var(--gray6);
-  border-radius: 50px;
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
+  background-color: var(--gray6);
+  border: 0px;
+  border-radius: 100px;
+  color: var(--gray1);
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
 }
 
 .verification-text {
@@ -1674,7 +1790,7 @@ h1 {
   gap: 12px;
   width: 343px;
   height: 41px;
-  background: var(--green3);
+  background: #338F24;
   border-radius: 50px;
   flex: none;
   order: 0;
@@ -1821,6 +1937,7 @@ textarea.form-field {
   font-family: "Roboto", sans-serif;
   height: 86px;
   width: 310px;
+  background: #f3f3f3;
 }
 
 .form-field {
@@ -1838,9 +1955,9 @@ textarea.form-field {
   margin-bottom: 15px;
 } */
 
-input {
+/* input {
   background: var(--gray1);
-}
+} */
 
 input.rating {
   display: none;
@@ -2200,6 +2317,7 @@ input.review-summary {
   font-family: "Roboto", sans-serif;
   height: 5px;
   width: 310px;
+  background: #f3f3f3;
 }
 
 /* Ratings Breakdown */
@@ -2782,3 +2900,14 @@ input.review-summary {
 }
 
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */
+
+/* --------------- NICK CSS------------------------------------- */
+.Gmap {
+  height: 275px;
+  width: 370px;
+  margin: auto;
+  border-radius: 5px;
+  border-color: #338F24;
+  border-width: thin;
+}
+/* --------------- NICK CSS END------------------------------------- */

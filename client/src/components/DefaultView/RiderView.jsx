@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
 import { format } from "date-fns";
 import Autocomplete from "react-google-autocomplete";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
+import { BiSearchAlt2, BiAlarm } from "react-icons/bi";
 
 import DefaultRouteRider from './DefaultRouteRider.jsx';
 import OngoingTripRider from './OngoingTripRider.jsx';
@@ -15,7 +15,7 @@ import UpcomingTripRider from './UpcomingTripRider.jsx';
 import './ongoing-trip-style.css';
 
 
-function RiderView ({ userId, riderOnGoingRoute }) {
+function RiderView ({ userId, riderOnGoingRoute, logOut }) {
 
   const [startedTrip, setStartedTrip] = useState(riderOnGoingRoute.started ? riderOnGoingRoute.started : false);
 
@@ -43,7 +43,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
     end_lng: ''
   })
   const [name, setName] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState('https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg');
   const [userInfo, setUserInfo] = useState({});
   const [displayTime, setDisplayTime] = useState(new Date());
   const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
@@ -51,6 +51,9 @@ function RiderView ({ userId, riderOnGoingRoute }) {
   const [upcoming, setUpcoming] = useState({});
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
+  const [timeClicked, setTimeClicked] = useState(false);
+
+  const upcomingCheck = Object.keys(upcoming).length > 0;
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
 
@@ -74,12 +77,14 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       setAvatar(result.data[0].avatar)
       setName(result.data[0].full_name)
       setUserInfo(result.data[0])
-      setUpcoming(result.data[0].rider_route)
       setFavorites(result.data[0].favorites)
       setUserInfo(result.data[0])
       setDefaultRoute(result.data[0].default_rider_route)
       if (result.data[0].rider_route.driver_id !== undefined) {
         setStartedTrip(result.data[0].rider_route.started)
+      }
+      if (result.data[0].rider_route.start_address !== undefined) {
+        setUpcoming(result.data[0].rider_route)
       }
     })
     .catch(err => console.log(err))
@@ -96,28 +101,20 @@ function RiderView ({ userId, riderOnGoingRoute }) {
 
   return (
     <div className="allDefaultView">
-      <div className="defaultViewHeader">
-        <div className="headerToggleView">
+      <div className='top-bar'>
+        <div className='top-bar-left'>
+          <p>Rider</p>
           <Link to="/driverview">
-            <div className="viewToggle">Rider</div>
-            <HiOutlineRefresh className="viewToggleButton" size={25}/>
+            <RiRefreshLine className='top-bar-icons' />
           </Link>
         </div>
-
-        <div className="headerAvatarLogout">
-          <div className="headerAvatar">
-            <Link to="/riderprofile" state={{id: userId, userInfo: userInfo, from: 'riderview'}} >
-              <img
-                src={avatar}
-                alt="avatar-small"
-                className="profilePhoto"
-              />
-            </Link> </div>
-
-          <div className="headerLogout">
-            <Link to="/">
-            <MdLogout className="logout" size={20}/>
-            </Link></div>
+        <div className='top-bar-right'>
+          <Link to="/riderprofile" state={{id: userId, userInfo: userInfo, from: 'riderview'}}>
+            <img className='avatar' src={avatar} alt="avatar-small" />
+          </Link>
+          <Link to="/">
+            <RiLogoutBoxRLine className='top-bar-icons' size={20} onClick={logOut}/>
+          </Link>
         </div>
       </div>
 
@@ -161,10 +158,12 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                   />
                   <DatePicker
                       className="inputField3"
-                      selected={displayTime}
+                      placeholderText="Start time"
+                      selected={timeClicked ? displayTime : null}
                       onChange={(date) => {
                         setTime(format(date, 'hh:mm aa'));
                         setDisplayTime(new Date(date));
+                        setTimeClicked(true);
                       }}
                       showTimeSelect
                       showTimeSelectOnly
@@ -173,32 +172,34 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                       dateFormat="h:mm aa"
                     />
               <div className="defaultRadioCont">
-                <input type="radio" className="radioInput" onClick={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
+                <input type="checkbox" className="radioInput" checked={isDefault} onChange={(e) => setIsDefault(!isDefault)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Drivers
+                <BiSearchAlt2 className="searchBtn" size={20}/>
               </button>
             : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Drivers
+                  <BiSearchAlt2 className="searchBtn" size={20}/>
                 </button>
               </Link>
             }
           </div>
         </form>
-      <div className='ongoing-upcoming-flex'>
+      <div className='default-ongoing-upcoming-flex'>
         {defaultRoute.default
-        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'}/>
+        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'} startedTrip={startedTrip}/>
         : (
-          <div>
-            <div className="defaultRouteTitle">Default Route</div>
-            <div className="card">
-              <p> No Default Route Set </p>
+            <div className="ongoing-trip-container">
+              <h5>Default Route</h5>
+              <div className="card">
+                <p className='no-route-message'>No default route set</p>
+              </div>
             </div>
-          </div>
         )
         }
         {startedTrip === true
@@ -207,7 +208,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             <div className="ongoing-trip-container">
               <h5>Ongoing Trip</h5>
               <div className="card">
-                <p> No Active Routes </p>
+                <p className='no-route-message'> No active routes </p>
               </div>
             </div>
           )
@@ -218,7 +219,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
             <div className="ongoing-trip-container">
               <h5>Upcoming Trip</h5>
               <div className="card">
-                <p>No Upcoming Routes</p>
+                <p className='no-route-message'>No upcoming routes</p>
               </div>
             </div>
           )

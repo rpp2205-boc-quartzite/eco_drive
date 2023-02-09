@@ -1,6 +1,7 @@
 import React from 'react';
 import Ratings from 'react-ratings-declarative';
 import axios from 'axios';
+
 class RiderReviewTile extends React.Component {
   constructor(props) {
     super(props);

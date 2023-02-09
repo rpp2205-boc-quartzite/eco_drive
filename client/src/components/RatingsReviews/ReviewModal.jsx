@@ -62,7 +62,8 @@ const ReviewModal = (props) => {
     e.preventDefault();
     if (props.isReportModalOpen) {
       let report = {
-        report_text: values.text
+        report_text: values.text,
+        full_name: props.userData.full_name
       };
 
       console.log('ReviewModal handleSubmit report');
