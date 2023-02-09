@@ -43,10 +43,10 @@ const UpcomingTripDriver = (props) => {
           <p className='card-detail'>License plate #: {user.license_plate}</p>
           <p className='card-detail'>Time: {user.driver_route.time} </p>
           <div className="btn-horizontal-flex">
-            <Link to="/driverview">
+            <Link to="/driverview" className="link link-wrap-btn">
               <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
             </Link>
-            <button type='submit' onClick={props.startTrip} className="primary-btn">Start Trip</button>
+            <button type='submit' onClick={props.startTrip} className="primary-btn btn-flex-grow">Start Trip</button>
           </div>
         </div>
       </div>

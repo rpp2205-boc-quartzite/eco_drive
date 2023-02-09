@@ -21,6 +21,7 @@ class RiderReviewsList extends React.Component {
                 <RiderReviewTile
                 key={review._id}
                 review={review.review_text}
+                full_name={review.full_name}
                 rating={review.rating}
                 userId={this.props.userId}
                 />
