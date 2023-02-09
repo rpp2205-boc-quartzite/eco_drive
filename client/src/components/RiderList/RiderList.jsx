@@ -78,7 +78,7 @@ React.useEffect(() => {
                 //   <div className="rider-time">{rider.riderID.time}</div>
                 //   <button className="remove-rider" id={rider.riderID.rider_id} type="submit" onClick={removeRider}>decline this rider</button>
                 // </div>
-                  <div className='card'>
+                  <div className='card' key={rider.riderID.rider_id}>
                     <div className='card-header'>
                       <div className='header-info'>
                         <img className='avatar' src={rider.profile.avatar} alt="Rider Avatar" />

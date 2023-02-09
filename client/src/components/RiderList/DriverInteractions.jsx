@@ -87,7 +87,7 @@ const DriverInteractions = function(props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // console.log('Checked for Riders')
+
       const findRiders = () => {
         const driver = {
           userId: route.id,
@@ -114,7 +114,7 @@ const DriverInteractions = function(props) {
           .catch((err) => console.log('Find drivers error: ', err))
       }
       findRiders();
-    }, 2000);
+    }, 500);
     return () => clearInterval(interval);
   }, [route]);
 
