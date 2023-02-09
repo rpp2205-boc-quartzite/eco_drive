@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { FiInfo } from "react-icons/fi";
+import { RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -27,7 +27,7 @@ const OngoingTripDriver = (props) => {
   if (user) {
     return (
       <div className="ongoing-trip-container">
-        <div className="ongoing-title">Ongoing Trip</div>
+        <h5>Ongoing Trip</h5>
         <div className="trip-card">
           <div className="profile">
             <div>
@@ -38,18 +38,18 @@ const OngoingTripDriver = (props) => {
               <p> </p>
             </div>
             <Link to="/driverprofile" state={ {from:'driverview', user}}>
-              <FiInfo className='card-icon info-icon'/>
+              <RiInformationLine className='card-icon info-icon'/>
             </Link>
           </div>
-          <div className="detail"> {user.driver_route.start_address} </div>
-          <div className="detail"> {user.license_plate} </div>
-          <div className="detail"> {user.driver_route.time} </div>
-          <div className="buttons">
+          <p className='card-detail'>Pickup: {user.driver_route.start_address}</p>
+          <p className='card-detail'>License plate #: {user.license_plate}</p>
+          <p className='card-detail'>Time: {user.driver_route.time}</p>
+          <div className="btn-horizontal-flex">
             <Link to="/driverview">
-              <button className="end-button" onClick={cancelRoute}>Cancel</button>
+              <button className="cancel-btn btn-flex-grow" onClick={cancelRoute}>Cancel</button>
             </Link>
-            <Link to="/trip-complete" state={{ user }}>
-              <button type='submit' onClick={props.endTrip} className="end-button" id="end-trip-button">End Trip</button>
+            <Link to="/trip-complete-driver" state={{ user }}>
+              <button type='submit' onClick={props.endTrip}className="negative-btn btn-flex-grow" id="end-trip-button">End Trip</button>
             </Link>
           </div>
         </div>
@@ -58,9 +58,9 @@ const OngoingTripDriver = (props) => {
   } else {
     return (
       <div className="ongoing-trip-container">
-        <div className="ongoing-title">Ongoing Trip</div>
+        <h5>Ongoing Trip</h5>
         <div className="card">
-          <p> No Active Routes </p>
+          <p className='no-route-message'> No Active Routes </p>
         </div>
       </div>
     )

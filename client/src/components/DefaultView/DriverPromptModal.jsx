@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const DriverPrompt = ({ show, close, userId }) => {
@@ -33,7 +34,12 @@ const DriverPrompt = ({ show, close, userId }) => {
         <div className="licenseModalTitle">To sign up as a driver with EcoDrive, please update your record with your license information:</div>
         <input className="licenseModalInput1" type="text" placeholder="Driver's license number" onChange={(e) => setLicense(e.target.value)}/>
         <input type="text" className="licenseModalInput2" placeholder="License plate" onChange={(e) => setPlate(e.target.value)}/>
-        <button type="Submit" className="primary-btn-find" onClick={(e) => handleSubmit(e)}>Submit</button>
+        <div className="licenseModalButtonCont">
+          <button type="Submit" className="primary-btn-license-submit" onClick={(e) => handleSubmit(e)}>Submit</button>
+          <Link to="/riderview">
+            <button className="secondary-btn-cancel">Cancel</button>
+          </Link>
+        </div>
         </div>
       </div>
     )

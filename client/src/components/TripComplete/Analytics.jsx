@@ -6,7 +6,15 @@ import React from 'react';
 // need the trip distance in miles
 const Analytics = (props) => {
 
-  let savings = 4 * 300;
+  const mpg = 20;
+
+  const gasPricePerGallon = 4.50
+
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    return 10;
+  }
+
+  let savings = calculateDistance(props.driver_route.start_lat, props.driver_route.start_lng, props.driver_route.end_lat, props.driver_route.end_lat) / mpg * gasPricePerGallon;
 
   return (
     <div>

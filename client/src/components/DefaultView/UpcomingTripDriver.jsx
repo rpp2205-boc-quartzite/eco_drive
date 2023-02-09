@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { FiInfo } from "react-icons/fi";
+import { RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -25,28 +25,27 @@ const UpcomingTripDriver = (props) => {
   if (user && user.driver_route.start_address !== undefined) {
     return (
       <div className="ongoing-trip-container">
-        <div className="ongoing-title">Upcoming Trip</div>
-        <div className="trip-card">
-          <div className="profile">
-            <div>
-              <img src={user.avatar} alt="avatar" className='profilePhoto'/>
+        <h5>Upcoming Trip</h5>
+        <div className="card">
+          <div className="card-header">
+            <div className='header-info'>
+              <img src={user.avatar} alt="avatar" className='avatar'/>
+              <p>{user.full_name}</p>
             </div>
-            <span id="name">{user.full_name}</span>
-            <div>
-              <p> </p>
+            <div className='icons-flex'>
+              <Link to="/driverprofile" state={ {from:'driverview', user}}>
+                <RiInformationLine className='card-icon info-icon'/>
+              </Link>
             </div>
-            <Link to="/driverprofile" state={ {from:'driverview', user}}>
-              <FiInfo className='card-icon info-icon'/>
-            </Link>
           </div>
-          <div className="detail"> {user.driver_route.start_address} </div>
-          <div className="detail"> {user.license_plate} </div>
-          <div className="detail"> {user.driver_route.time} </div>
-          <div className="buttons">
+          <p className='card-detail'>Pickup: {user.driver_route.start_address}</p>
+          <p className='card-detail'>License plate #: {user.license_plate}</p>
+          <p className='card-detail'>Time: {user.driver_route.time} </p>
+          <div className="btn-horizontal-flex">
             <Link to="/driverview">
               <button className="end-button" onClick={cancelRoute}>Cancel</button>
             </Link>
-            <button type='submit' onClick={props.startTrip} className="end-button" id="start-trip-button">Start Trip</button>
+            <button type='submit' onClick={props.startTrip} className="primary-btn" id="start-trip-button">Start Trip</button>
           </div>
         </div>
       </div>
@@ -54,9 +53,9 @@ const UpcomingTripDriver = (props) => {
   } else {
     return (
       <div className="ongoing-trip-container">
-        <div className="ongoing-title">Upcoming Trip</div>
+        <h5>Upcoming Trip</h5>
         <div className="card">
-          <p> No Upcoming Routes </p>
+          <p className='no-route-message'> No Upcoming Routes </p>
         </div>
       </div>
     )

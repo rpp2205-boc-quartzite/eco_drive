@@ -38,4 +38,59 @@ module.exports = {
       })
   },
 
+  addDriversRoute: (newRoute) => {
+    console.log('addDriversRoute: ', newRoute)
+    const id = {_id: newRoute.id}
+    const update = {
+      start_address: newRoute.start_address,
+      start_lat: newRoute.start_lat,
+      start_lng: newRoute.start_lng,
+      end_address: newRoute.end_address,
+      end_lat: newRoute.end_lat,
+      end_lng: newRoute.end_lng,
+      time: newRoute.time,
+      total_seats: newRoute.total_seats,
+      started: newRoute.started,
+      default: newRoute.default,
+      riders: newRoute.riders
+
+    }
+    return User.findOneAndUpdate(id, {driver_route: update})
+      .then((result) => {
+        console.log(result);
+        return result;
+      })
+      .catch(err => console.log('Error updating record'));
+  },
+
+ removeRiderFromRiderArray: (driverId, riderId) => {
+    const driver_id = {_id: driverId};
+    return User.find(driver_id)
+    .then((driver) => {
+      return driver[0].driver_route.riders;
+    })
+    .then((ridersArray) => {
+      var newRidersArray = [];
+      for (var i = 0; i < ridersArray.length; i++) {
+        // console.log('CURRENT ID: ', JSON.stringify(ridersArray[i].rider_id))
+        // console.log('COMPARISON ID: ', `"${riderId}"`)
+        // console.log(JSON.stringify(ridersArray[i].rider_id) === `"${riderId}"`)
+        if (JSON.stringify(ridersArray[i].rider_id) !== `"${riderId}"`) {
+          newRidersArray.push(ridersArray[i]);
+        }
+      }
+      return newRidersArray;
+    })
+    .then((newRidersArray) => {
+      return User.findOneAndUpdate(driver_id, { $set: {"driver_route.riders": newRidersArray}});
+    })
+      .then ((newRidersArray) => {
+        console.log('Successfully removed rider id off driver\'s rider list ')
+        return newRidersArray
+      })
+      .catch((err) => {
+        console.log('Error removing rider id off driver\'s rider list: ', err)
+      })
+  }
 };
+

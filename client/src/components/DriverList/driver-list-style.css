@@ -112,6 +112,19 @@
   gap: 24px;
 }
 
+.no-driver-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%
+}
+
 /* ------------- Buttons --------------------------- */
 
 .primary-btn {
@@ -120,8 +133,10 @@
   border-radius: 100px;
   color: var(--gray1);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .primary-btn:hover {
@@ -134,8 +149,10 @@
   border-radius: 100px;
   color: var(--green3);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .secondary-btn:hover {
@@ -148,8 +165,10 @@
   border-radius: 100px;
   color: var(--gray6);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .cancel-btn:hover {
@@ -162,8 +181,10 @@
   border-radius: 100px;
   color: var(--gray6);
   font-size: 16px;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  max-width: 400px;
 }
 
 .negative-btn:hover {
@@ -231,7 +252,7 @@
 .btn-horizontal-flex {
   width: 100%;
   display: flex;
-  align-items: space-between;
+  justify-content: space-between;
   gap: 16px;
 }
 

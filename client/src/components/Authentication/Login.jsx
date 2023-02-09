@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 export default function Login(props) {
@@ -15,13 +15,13 @@ export default function Login(props) {
           <div className='login-wrapper'>
             <form className='login-form' onSubmit={handleSubmit}>
               <h2 className='login-title'>Login</h2>
-              <div className='inner-fields-2'>
+              <div className='inner-fields-3'>
                 <div className='label-container'>
                   <div className='label-title-container'>
                     <label className='label-title-3' htmlFor='email'>Email</label>
                     <div className='valid-check'>*</div>
                   </div>
-                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />                  
+                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />
                 </div>
                 <div className='label-container-2'>
                   <div className='label-title-container'>
@@ -32,17 +32,17 @@ export default function Login(props) {
                 </div>
                 <div className='forgot-btn'>
                   <Link to='/password-reset'>
-                    <button className='forgot-btn'><span className='forgot-text'>Forgot Password?</span></button>  
+                    <button className='forgot-btn' type='button'><span className='forgot-text'>Forgot Password?</span></button>
                   </Link>
                 </div>
               </div>
             </form>
           </div>
-          <div className='signup-btn-wrapper'>
-            <button className='next-btn' type='submit' onClick={handleSubmit}><span className='login-text'>Log In</span></button>
+          <div className='link-frame'>
+            <button className='primary-btn' type='submit' onClick={handleSubmit}>Log In</button>
             <Link to='/'>
-              <button className='back-btn'><span className='back-text'>Go Back</span></button> 
-            </Link> 
+              <button className='back-btn'><span className='back-text'>Go Back</span></button>
+            </Link>
           </div>
         </div>
     )

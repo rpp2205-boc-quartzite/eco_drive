@@ -22,10 +22,10 @@ export default function Register(props) {
   const calculateAge = (date) => {
     const now = new Date();
     const diff = Math.abs(now - date );
-    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
+    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
 
     return age
-  }  
+  }
 
   const handleNext = (event) => {
     event.preventDefault();
@@ -80,12 +80,12 @@ export default function Register(props) {
         .catch((err) => {
           alert('Email already in use.');
         });
-    }; 
+    };
   }
 
   return (
     <div className='signup-form-container'>
-      {driverCheck === false && 
+      {driverCheck === false &&
         <div className='signup-wrappers'>
           <form className='sign-form' onSubmit={handleNext}>
             <div className='inner-fields'>
@@ -131,17 +131,17 @@ export default function Register(props) {
               <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
                 <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
             </div>
-            <div className='signup-btn-wrapper'>
-              <button className='next-btn' type='submit' onClick={handleNext}><span className='next-text'>Next</span></button> 
+            <div className='link-frame'>
+              <button className='primary-btn' type='submit' onClick={handleNext}>Next</button>
             <Link to='/'>
-              <button className='back-btn'><span className='back-text'>Go Back</span></button> 
-            </Link> 
+              <button className='back-btn'><span className='back-text'>Go Back</span></button>
+            </Link>
             </div>
         </div>}
       {driverCheck === true &&
         <div className='sign-up-wrappers'>
         <form className='sign-form'>
-          <div className='inner-fields'>
+          <div className='inner-fields-2'>
             <h2 className='signup-title'>Sign Up</h2>
             <div className='label-container'>
               <div className='label-title-container'>
@@ -158,13 +158,13 @@ export default function Register(props) {
             <p className='driver-skip'>* If you are not a driver, press Next to skip.</p>
           </div>
         </form>
-        <div className='signup-btn-wrapper'>
-          <button className='next-btn' type='submit' onClick={handleAvatar}><span className='next-text'>Next</span></button>
+        <div className='link-frame'>
+          <button className='primary-btn' type='submit' onClick={handleAvatar}>Next</button>
           <button className='back-btn' onClick={(event) => setDriverCheck(false)}><span className='back-text'>Go Back</span></button>
         </div>
       </div>
-        } 
-        {avatarCheck === true && 
+        }
+        {avatarCheck === true &&
           <AvatarSelect state={avatar} setState={setAvatarValue} setAvatar ={setAvatar} setDriverCheck={setDriverCheck} handleSubmit={handleSubmit}/>}
   </div>
   )

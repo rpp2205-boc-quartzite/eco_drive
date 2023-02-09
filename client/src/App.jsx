@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 import DriverView from './components/DefaultView/DriverView.jsx';
 import RiderView from './components/DefaultView/RiderView.jsx';
@@ -8,6 +9,7 @@ import Dashboard from './components/Authentication/Dashboard.jsx';
 import Login from './components/Authentication/Login.jsx';
 import Register from './components/Authentication/Register.jsx';
 import PasswordReset from './components/Authentication/PasswordReset.jsx';
+import ProtectedRoute from './components/Authentication/ProtectedRoutes.jsx';
 import Reviews from './components/RatingsReviews/Reviews.jsx';
 import DriverProfile from './components/UserProfile/DriverProfile.jsx';
 import RiderProfile from './components/UserProfile/RiderProfile.jsx';
@@ -15,26 +17,28 @@ import DriverList from './components/DriverList/DriverList.jsx';
 import AllReviews from './components/RatingsReviews/AllReviews.jsx';
 import DriverInteractions from './components/RiderList/DriverInteractions.jsx'
 import TripCompleteRider from './components/TripComplete/TripCompleteRider.jsx';
+import TripCompleteDriver from './components/TripComplete/TripCompleteDriver.jsx';
 
 function App() {
   const [userId, setUserId] = useState('');
   const navigate=useNavigate();
+  const cookies = new Cookies();
 
   useEffect(() => {
-    // console.log(document.cookie)
-    // axios.get('/validate', {token: document.cookie})
-    // .then((result) => {
-    //   console.log(result)
-    //   setUserId(result.data.user);
-    //   if (result.is_driver) {
-    //     navigate('/driverview');
-    //   } else {
-    //     navigate('/riderview');
-    //   }
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
+    if (userId === '') {
+      axios.get('/validate')
+      .then((result) => {
+        setUserId(result.data.userId);
+        if (result.is_driver) {
+          navigate('/driverview');
+        } else {
+          navigate('/riderview');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   });
 
   const authenticate = (email, pass) => {
@@ -45,7 +49,9 @@ function App() {
     axios.post('/login', {email, pass})
     .then((result) => {
       setUserId(result.data.user);
-      document.cookie = result.data.token;
+      cookies.set('TOKEN', result.data.token, {
+        path: "/",
+      });
       if (result.is_driver) {
         navigate('/driverview');
       } else {
@@ -77,15 +83,18 @@ function App() {
         <Route path='/register' element={<Register authCheck={authenticate}/>} />
         <Route path='/login' element={<Login authCheck={authenticate}/>} />
         <Route path='/password-reset' element={<PasswordReset authCheck={authenticate}/>} />
-        <Route path="/driverview" element={<DriverView userId={userId}/>} />
-        <Route path="/ratings-reviews" element={<Reviews />} />
-        <Route path="/all-reviews" element={<AllReviews />} />
-        <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute}/>} />
-        <Route path="/driverprofile" element={<DriverProfile />} />
-        <Route path="/riderprofile" element={<RiderProfile />} />
-        <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
-        <Route path="/rider-list" element={<DriverInteractions updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
-        <Route path="/trip-complete-rider" element={<TripCompleteRider />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/driverview" element={<DriverView userId={userId}/>} />
+          <Route path="/ratings-reviews" element={<Reviews />} />
+          <Route path="/all-reviews" element={<AllReviews />} />
+          <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute}/>} />
+          <Route path="/driverprofile" element={<DriverProfile />} />
+          <Route path="/riderprofile" element={<RiderProfile />} />
+          <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
+          <Route path="/rider-list" element={<DriverInteractions updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
+          <Route path="/trip-complete-rider" element={<TripCompleteRider />} />
+          <Route path="/trip-complete-driver" element={<TripCompleteDriver />} />
+        </Route>
       </Routes>
     </div>
   )

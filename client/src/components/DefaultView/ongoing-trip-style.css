@@ -1,7 +1,33 @@
+/* Align upcoming and ongoing sections in defaut view */
+.default-ongoing-upcoming-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  max-width: 500px;
+  padding: 16px 16px;
+  font-family: 'Poppins';
+}
+
 /* container */
 .ongoing-trip-container {
-  width: 350px;
-  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
+}
+.ongoing-trip-container h5 {
+  margin: 0;
+  flex-grow: 1;
+  font-family: 'Poppins';
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray6);
+  text-align: left;
 }
 /* title */
 .ongoing-title {
@@ -27,6 +53,10 @@
   padding: 16px 16px;
   margin-top: 8px;
   margin-bottom: 16px;
+}
+/* card detail */
+.card-detail {
+  font-size: 14px;
 }
 /* profile line */
 .profile {
@@ -84,6 +114,17 @@
   border: 0em;
   height: 25px;
 }
+/* Set buttons to be equal */
+.link-wrap-btn {
+  flex-grow: 1;
+  display: flex;
+}
+.link {
+  text-decoration: none;
+}
+.btn-flex-grow {
+  flex-grow: 1;
+}
 /* end trip button */
 #end-trip-button {
   background: #f52811;
@@ -93,4 +134,10 @@
 #start-trip-button {
   background: var(--green3);
   color: var(--gray1);
+}
+/* Message displying no route in ongoing trip cards */
+.no-route-message {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--gray4);
 }

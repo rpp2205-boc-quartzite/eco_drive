@@ -6,10 +6,12 @@ const app = express();
 const dotenv = require('dotenv');
 const auth = require('./auth.js');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({extended: true}));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 // connect to db
 const db = require('../database/index.js');
@@ -18,12 +20,13 @@ const db = require('../database/index.js');
 const tripComplete = require('../database/controllers/tripComplete.js');
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
 const { calculateDistance } = require('./helpers/driverListHelpers.js')
-const { getRiderArray} = require ('../database/controllers/riderList.js');
+const { getRiderArray, addDriversRoute, removeRiderFromRiderArray} = require ('../database/controllers/riderList.js');
+
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
 const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
 const { updateDriverProfile, updateRiderProfile, getUserInfo } = require('../database/controllers/userProfile.js')
-const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense } = require('../database/controllers/defaultviews.js')
+const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense, removeIdOffRiderListOfDriver, postDefaultRiderRoute, postDefaultDriverRoute } = require('../database/controllers/defaultviews.js')
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -107,7 +110,7 @@ app.get('/validate', validate);
 app.post('/sendMail', sendMail);
 app.put('/change-password', changePassword);
 
-// ---- Default Driver view routes  ---- //
+// ---- Default Driver & Rider view routes  ---- //
 app.get('/getdriverview', function(req, res) {
   let userid = req.query.userId;
   getDriverView(userid)
@@ -118,7 +121,6 @@ app.get('/getdriverview', function(req, res) {
   .catch(err => console.log(err))
 });
 
-// ---- Default Rider view routes  ---- //
 app.get('/getriderview', function(req, res) {
   let userid = req.query.userId;
   getRiderView(userid)
@@ -150,6 +152,19 @@ app.post('/postDriverLicense', function(req, res) {
   .catch(err => console.log(err))
 })
 
+app.post('/rider/:_id/defaultroute', function(req, res) {
+  let data = req.body.data;
+  postDefaultRiderRoute(data)
+  .then(result => res.end())
+  .catch(err => console.log('err',err))
+})
+
+app.post('/driver/:_id/defaultroute', function(req, res) {
+  let data = req.body.data;
+  postDefaultDriverRoute(data)
+  .then(result => res.end())
+  .catch(err => console.log('err',err))
+})
 
 // ---- Ratings and Reviews routes  ---- //
 app.get('/getreviews', function(req, res) {
@@ -220,7 +235,7 @@ app.post('/driver-list', async (req, res) => {
       if (startDistance !== undefined && endDistance !== undefined) {
         driverList.push({driverInfo: driver, startDistance, endDistance})
       }
-      console.log(driverList)
+      // console.log(driverList)
       driverList.sort((a, b) => {
         return a.startDistance.value - b.startDistance.value
       })
@@ -283,6 +298,44 @@ app.post('/rider-list', async (req, res) => {
   }
 });
 
+app.post("/add-driver-route", (req, res) => {
+  const driver =  {
+    id: req.body.info.id,
+    start_address: req.body.info.start_address,
+    start_lat: req.body.info.start_lat,
+    start_lng: req.body.info.start_lng,
+    end_address: req.body.info.end_address,
+    end_lat: req.body.info.end_lat,
+    end_lng: req.body.info.end_lng,
+    time: req.body.info.time,
+    total_seats: req.body.info.total_seats,
+    started: false,
+    riders: []
+  }
+
+
+  addDriversRoute(driver)
+    .then((results) => {
+      res.status(204).send(results);
+    })
+    .catch((err) => {
+      console.log('Error: ', err)
+    });
+
+})
+
+app.post("/rider-remove", async (req, res) => {
+    const driverID = req.body.driverID;
+    const riderID = req.body.riderID;
+      try {
+        const removedRiders = await removeRiderFromRiderArray(driverID, riderID);
+        res.status(200).send(removedRiders);
+      }
+      catch (err) {
+        console.log('The Following Error Occured When Attempting to Remove Riders: ', err)
+        res.status(404).send(err)
+      }
+})
 
 
 // ---- Catch all for routing ---- //

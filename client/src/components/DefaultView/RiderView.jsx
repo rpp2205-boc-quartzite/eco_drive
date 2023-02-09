@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MdLogout } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
 import { format } from "date-fns";
 import Autocomplete from "react-google-autocomplete";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from 'react-router-dom';
 
-import DefaultRoute from './DefaultRoute.jsx';
+import DefaultRouteRider from './DefaultRouteRider.jsx';
 import OngoingTripRider from './OngoingTripRider.jsx';
 import UpcomingTripRider from './UpcomingTripRider.jsx';
 import './ongoing-trip-style.css';
@@ -42,14 +42,16 @@ function RiderView ({ userId, riderOnGoingRoute }) {
     end_lng: ''
   })
   const [name, setName] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [userInfo, setUserInfo] = useState({})
+  const [avatar, setAvatar] = useState('https://i.pinimg.com/474x/f1/da/a7/f1daa70c9e3343cebd66ac2342d5be3f.jpg');
+  const [userInfo, setUserInfo] = useState({});
   const [displayTime, setDisplayTime] = useState(new Date());
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(format(displayTime, 'hh:mm aa'));
   const [isDefault, setIsDefault] = useState(false);
   const [upcoming, setUpcoming] = useState({});
   const [favorites, setFavorites] = useState({});
+  const [defaultRoute, setDefaultRoute] = useState({});
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
+  const navigate = useNavigate()
 
   const route = {
     _id: userId,
@@ -65,8 +67,6 @@ function RiderView ({ userId, riderOnGoingRoute }) {
     userFavorites: favorites
   }
 
-  console.log(route)
-
   useEffect(() => {
     axios.get('/getriderview', { params: {userId} })
     .then((result) => {
@@ -76,37 +76,44 @@ function RiderView ({ userId, riderOnGoingRoute }) {
       setUpcoming(result.data[0].rider_route)
       setFavorites(result.data[0].favorites)
       setUserInfo(result.data[0])
+      setDefaultRoute(result.data[0].default_rider_route)
       if (result.data[0].rider_route.driver_id !== undefined) {
         setStartedTrip(result.data[0].rider_route.started)
       }
     })
     .catch(err => console.log(err))
-  }, [])
+  }, [userId])
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    axios.post('/rider/:_id/defaultroute', {data: route})
+    .then((result) => {
+      navigate('/driver-list', {state: {route: route, userInfo: userInfo, from: 'riderview'}})
+    })
+    .catch(err => console.log(err))
+  }
 
   return (
     <div className="allDefaultView">
-      <div className="defaultViewHeader">
-        <div className="headerToggleView">
+      <div className='top-bar'>
+        <div className='top-bar-left'>
+          <p>Rider</p>
           <Link to="/driverview">
-            <div className="viewToggle">Rider</div>
-            <HiOutlineRefresh className="viewToggleButton" size={25}/>
+            <RiRefreshLine className='top-bar-icons' />
           </Link>
         </div>
-        <div className="headerAvatarLogout">
-          <div className="headerAvatar">
-            <Link to="/riderprofile" state={{id: userId}} >
-            <button>Avatar</button>
-            </Link> </div>
-
-          <div className="headerLogout">
-            <Link to="/">
-            <MdLogout className="logout" size={20}/>
-            </Link></div>
+        <div className='top-bar-right'>
+          <Link to="/riderprofile" state={{id: userId, userInfo: userInfo, from: 'riderview'}}>
+            <img className='avatar' src={avatar} alt="avatar-small" />
+          </Link>
+          <Link to="/">
+            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+          </Link>
         </div>
       </div>
 
       <div className="welcomeCont">
-        <div className="welcomeMsg">Welcome {name},</div>
+        <div className="welcomeMsg">Welcome {name.split(' ')[0]},</div>
       </div>
 
       <div className="findNearestDrivers">Find your nearest drivers</div>
@@ -147,7 +154,7 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                       className="inputField3"
                       selected={displayTime}
                       onChange={(date) => {
-                        setTime(format(displayTime, 'hh:mm aa'));
+                        setTime(format(date, 'hh:mm aa'));
                         setDisplayTime(new Date(date));
                       }}
                       showTimeSelect
@@ -157,34 +164,52 @@ function RiderView ({ userId, riderOnGoingRoute }) {
                       dateFormat="h:mm aa"
                     />
               <div className="defaultRadioCont">
-                <input type="radio" className="radioInput" onChange={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
+                <input type="radio" className="radioInput" onClick={(e) => setIsDefault(true)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-            <Link to="/driver-list" state={{route: route, userInfo: userInfo}}>
-            <button disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers</button>
-            </Link>
+            {isDefault
+            ? <button
+                onClick={(e) => handleClick(e)}
+                disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+              </button>
+            : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}} style={{ textDecoration: 'none' }}>
+                <button
+                  disabled={!start.start_address || !end.end_address} className="primary-btn-find">Find Drivers
+                </button>
+              </Link>
+            }
           </div>
         </form>
-      <div>
-        <DefaultRoute userId={userId} upcoming={upcoming} view={'rider'} favorites={favorites}/>
-        {startedTrip === true
-        ? <OngoingTripRider userId={userId} endTrip={endTrip}/>
+      <div className='default-ongoing-upcoming-flex'>
+        {defaultRoute.default
+        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'}/>
         : (
-          <div className="ongoing-trip-container">
-            <div className="ongoing-title">Ongoing Trip</div>
-            <div className="card">
-              <p> No Active Routes </p>
+            <div className="ongoing-trip-container">
+              <h5>Default Route</h5>
+              <div className="card">
+                <p className='no-route-message'>No default route set</p>
+              </div>
             </div>
-          </div>
         )
+        }
+        {startedTrip === true
+        ? <OngoingTripRider userId={userId} riderOnGoingRoute={riderOnGoingRoute} endTrip={endTrip}/>
+        : (
+            <div className="ongoing-trip-container">
+              <h5>Ongoing Trip</h5>
+              <div className="card">
+                <p className='no-route-message'> No active routes </p>
+              </div>
+            </div>
+          )
         }
         {!startedTrip
         ? <UpcomingTripRider userId={userId} startTrip={startTrip}/>
         : (
             <div className="ongoing-trip-container">
-              <div className="ongoing-title">Upcoming Trip</div>
+              <h5>Upcoming Trip</h5>
               <div className="card">
-                <p> No Upcoming Routes </p>
+                <p className='no-route-message'>No upcoming routes</p>
               </div>
             </div>
           )

@@ -16,7 +16,8 @@ module.exports = {
         dob: req.body.dob,
         drivers_license: req.body.drivers_license,
         license_plate: req.body.license_plate,
-        is_driver: req.body.is_driver
+        is_driver: req.body.is_driver,
+        avatar: req.body.avatar
       });
 
       user
@@ -86,15 +87,15 @@ module.exports = {
   },
 
   validate: (req, res) => {
-    const token = req.body.token;
-    console.log(token)
+    const token = req.cookies.TOKEN
+
     if (!token) {
       return res.status(401).send({ auth: false, message: 'No token provided.' });
     }
   
     jwt.verify(token, 'RANDOM-TOKEN', (err, decoded) => {
       if (err) {
-        return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+        res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
       }
       res.status(200).send(decoded);
     });
