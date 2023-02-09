@@ -84,7 +84,7 @@ React.useEffect(() => {
                         <p>{rider.profile.full_name}</p>
                       </div>
                       <div className='icons-flex'>
-                        <Link to="/ratings-reviews" state={{userData: props.userInfo, revieweeData: props.riders, from: 'rider-list', route: props.route}}>
+                        <Link to="/ratings-reviews" state={{userData: props.userInfo, revieweeData:rider.riderID.rider_id, from: 'rider-list', route: props.route}}>
                           <FiInfo className='card-icon info-icon'/>
                         </Link>
                       </div>

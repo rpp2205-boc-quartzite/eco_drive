@@ -8,6 +8,7 @@ import { MdLogout } from 'react-icons/md';
 import { GoogleMap, useLoadScript, DirectionsRenderer } from '@react-google-maps/api';
 import { useLocation } from "react-router-dom";
 import { BiArrowBack } from 'react-icons/bi';
+import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
 
 const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
 
@@ -40,6 +41,10 @@ const DriverInteractions = function(props) {
   var data = location.state.dir.json;
   var route = location.state.route;
   var userInfo = location.state.userInfo;
+
+  console.log('DATA: ', data);
+  console.log('Route: ', route);
+  console.log('UserInfo: ', userInfo);
 
 
   // if (typeof window !== 'undefined') {
@@ -170,10 +175,13 @@ const DriverInteractions = function(props) {
     <div className="defaultViewHeader">
       <div className="headerToggleView">
           <div className="viewToggle">Driver</div>
+          <Link to="/riderview">
+            <RiRefreshLine className='top-bar-icons' />
+          </Link>
       </div>
       <div className="headerAvatarLogout">
           <div className="headerAvatar">
-            <Link to="/driverprofile" state={{id: userInfo._id, userInfo: userInfo, from: 'driverview'}}>
+            <Link to="/driverprofile" state={{id: userInfo._id, from: 'driverview'}}>
               <img
                   src={userInfo.avatar}
                   alt="avatar-small"
