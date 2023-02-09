@@ -6,15 +6,14 @@ import Analytics from './Analytics.jsx';
 import PassengerList from './PassengerList.jsx';
 
 
-const TripCompleteRider = () => {
+const TripCompleteDriver = () => {
 
   const location = useLocation();
   const user = location.state.user;
-  const driver = location.state.driver;
-  const passengerIds = [driver._id];
-  driver.driver_route.riders.forEach((rider) => {
-    if (rider.rider_id && !passengerIds.includes(rider.rider_id) && rider.rider_id !== user._id) {
-      passengerIds.push(rider.rider_id)
+  const passengerIds = [];
+  user.driver_route.riders.forEach((rider) => {
+    if (rider.rider_id && !passengerIds.includes(rider.rider_id)) {
+      passengerIds.push(rider.rider_id);
     }
   })
 
@@ -22,7 +21,7 @@ const TripCompleteRider = () => {
     <div className="trip-complete">
       <h1 className="title">Trip Complete!</h1>
       <PassengerList pIds={passengerIds} user={user}/>
-      <Analytics driver_route={driver.driver_route}/>
+      <Analytics driver_route={user.driver_route}/>
       <Link to='/riderview'>
         <button id="back-to-home">Back to Home</button>
       </Link>
@@ -30,4 +29,4 @@ const TripCompleteRider = () => {
   )
 }
 
-export default TripCompleteRider;
+export default TripCompleteDriver;
