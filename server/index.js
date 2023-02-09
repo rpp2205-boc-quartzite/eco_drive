@@ -84,13 +84,13 @@ app.put('/unfavorite/:user_id/:favorite_user_id', async (req, res) => {
 })
 
 // cancel rider trip
-app.put('/cancel-rider-route:user_id', async (req, res) => {
+app.put('/cancel-rider-route/:user_id', async (req, res) => {
   let result = await tripComplete.cancelRiderRoute(req.params.user_id)
   res.send(result);
 })
 
 // cancel driver trip
-app.put('/cancel-driver-route:user_id', async (req, res) => {
+app.put('/cancel-driver-route/:user_id', async (req, res) => {
   let result = await tripComplete.cancelDriverRoute(req.params.user_id)
   res.send(result);
 })

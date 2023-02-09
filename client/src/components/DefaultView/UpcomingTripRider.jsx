@@ -14,16 +14,18 @@ const UpcomingTripRider = (props) => {
       let result = await axios.get('/getdriverview',  { params: {userId: props.userId} }).catch(err => console.log('ERR: ', err))
       result = result.data[0];
       setUser(result);
-      let driverId = result.rider_route.driver_id;
-      let driverInfo = await axios.get('/getriderview', { params: {userId: driverId}}).catch(err => console.log('ERR: ', err))
-      driverInfo = driverInfo.data[0];
-      setDriver(driverInfo);
+      if (result) {
+        let driverId = result.rider_route.driver_id;
+        let driverInfo = await axios.get('/getriderview', { params: {userId: driverId}}).catch(err => console.log('ERR: ', err))
+        driverInfo = driverInfo.data[0];
+        setDriver(driverInfo);
+      }
     }
     myFunc();
   }, [])
 
   const cancelRoute = async () => {
-    await axios.get(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    await axios.put(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
     setDriver(null);
   }
 

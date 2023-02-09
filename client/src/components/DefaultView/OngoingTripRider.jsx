@@ -26,7 +26,7 @@ const OngoingTripRider = (props) => {
   }, [])
 
   const cancelRoute = async () => {
-    await axios.get(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    await axios.put(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
     setDriver(null);
   }
 

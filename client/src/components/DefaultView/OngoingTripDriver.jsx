@@ -20,7 +20,8 @@ const OngoingTripDriver = (props) => {
   }, [])
 
   const cancelRoute = async () => {
-    await axios.get(`/cancel-driver-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    await axios.put(`/cancel-driver-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    setUser(null);
   }
 
 
