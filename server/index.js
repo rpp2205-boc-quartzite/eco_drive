@@ -315,14 +315,11 @@ app.post('/rider-list', async (req, res) => {
   }
   const driverID = req.body.userId
   const seats = req.body.total_seats;
-  // console.log('DRIVER DATA: ', driverID);
 
   try {
     const assignedRiders = await getRiderArray(driverID);
-    // console.log('DONE WAITING');
     Promise.all(assignedRiders)
       .then((riders) => {
-        // console.log('ALL RIDERS: ', riders)
         res.status(200).send({riders: riders, seats: seats});
       })
   }
