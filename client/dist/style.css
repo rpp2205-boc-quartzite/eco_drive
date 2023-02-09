@@ -126,6 +126,7 @@ h1 {
 .headerAvatar {
   width: 40px;
   height: 40px;
+  border-radius: 100px;
   background: url(.jpg);
   flex: none;
   order: 0;
