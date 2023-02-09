@@ -17,8 +17,8 @@ class DriverProfile extends React.Component {
     super(props);
     console.log( 'DRIVER PROFILE PROPS', this.props)
     this.state = {
-      //userId: this.props.location.state.id,
-      userId: '63e4530e1c39c3f23167be26',
+      userId: this.props.location.state.id,
+      //userId: '63e4530e1c39c3f23167be26',
       full_name: '',
       email: '',
       start_address: '',
