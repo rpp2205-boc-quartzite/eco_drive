@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { RiInformationLine } from "react-icons/ri";
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -10,14 +9,13 @@ const UpcomingTripDriver = (props) => {
 
   useEffect(() => {
     setInterval(() => {
-      console.log('Interval here');
       const myFunc = async () => {
         let result = await axios.get('/getdriverview',  { params: {userId: props.userId} }).catch(err => console.log('ERR: ', err))
         result = result.data[0];
         setUser(result);
       }
       myFunc();
-    }, 5000);
+    }, 3000);
   }, []);
 
 
@@ -33,14 +31,10 @@ const UpcomingTripDriver = (props) => {
         <h5>Upcoming Trip</h5>
         <div className="card">
           <div className="card-header">
-            <div className='header-info'>
-              <img src={user.avatar} alt="avatar" className='avatar'/>
-              <p>{user.full_name}</p>
-            </div>
             <div className='icons-flex'>
               {user.driver_route.riders.map(rider => {
                 return (
-                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, reviewee_id: rider.rider_id} }>
+                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, reviewee_id: rider.rider_id} } key={rider.rider_id}>
                   <img src={rider.avatar} alt="avatar" className='avatar'/>
                 </Link>
                 )

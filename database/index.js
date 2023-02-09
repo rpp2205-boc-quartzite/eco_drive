@@ -1,9 +1,10 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-const user = 'green-earth-1';
-const pass = 'GreenEarth123';
-const cluster = 'cluster0.ydd0dgw'
-const dbname = 'green-earth';
+const user = process.env.USERNAME;
+const pass = process.env.PASSWORD;
+const cluster = process.env.CLUSTER;
+const dbname = process.env.DBNAME;
 
 const connectStr = `mongodb+srv://${user}:${pass}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`
 
