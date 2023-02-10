@@ -11,7 +11,7 @@ class PreviousDrivesList extends React.Component {
   }
 
   render() {
-    console.log('checking PreviousDrivesList props', this.props.driver_trips)
+    //console.log('checking PreviousDrivesList props', this.props.driver_trips)
       return (
         <div className='profilePreviousBox'>
           {this.props.driver_trips.map((trip) =>

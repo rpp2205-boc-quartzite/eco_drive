@@ -10,7 +10,7 @@ class PreviousDrivesCard extends React.Component {
   }
 
   render() {
-    console.log('this.props in test tile', this.props)
+    //console.log('this.props in test tile', this.props)
     return (
       this.props.start_address ?
       <div className='profilePreviousRoutesBox'>

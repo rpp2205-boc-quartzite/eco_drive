@@ -7,7 +7,7 @@ const PassengerList = (props) => {
     <div>
       <p className="riders">Write Your Review</p>
       <div className="passenger-list">
-        { props.pIds.map( (pId) => <PassengerCard user={props.user} pId={pId} key={pId} />) }
+        { props.pIds.map( (pId) => <PassengerCard user={props.user} pId={pId} key={pId} view={props.view}/>) }
       </div>
     </div>
   )
