@@ -152,6 +152,16 @@ module.exports = {
         error: error,
       });
     });
+  },
+
+  uniqueEmailCheck: (req, res) => {
+    User.findOne({email: req.query.email})
+      .then((user) => {
+        res.status(200).send(user);
+      })
+      .catch((err) => {
+        res.status(400).send(err);
+      });
   }
 };
 

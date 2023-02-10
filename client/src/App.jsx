@@ -21,6 +21,7 @@ import TripCompleteDriver from './components/TripComplete/TripCompleteDriver.jsx
 
 function App() {
   const [userId, setUserId] = useState('');
+  const [loginFailure, setLoginFailure] = useState(false);
   const navigate=useNavigate();
   const cookies = new Cookies();
 
@@ -42,10 +43,6 @@ function App() {
   });
 
   const authenticate = (email, pass) => {
-    if (email === '' || pass === '') {
-      return alert('Please enter an email and/or password');
-    }
-
     axios.post('/login', {email, pass})
     .then((result) => {
       setUserId(result.data.user);
@@ -59,7 +56,7 @@ function App() {
       }
     })
     .catch((err) => {
-      alert('Incorrect email or password. Please try again.');
+      setLoginFailure(true);
     })
   };
 
@@ -87,7 +84,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         <Route path='/register' element={<Register authCheck={authenticate}/>} />
-        <Route path='/login' element={<Login authCheck={authenticate}/>} />
+        <Route path='/login' element={<Login authCheck={authenticate} loginFailure={loginFailure}/>} />
         <Route path='/password-reset' element={<PasswordReset authCheck={authenticate}/>} />
         <Route element={<ProtectedRoute />}>
           <Route path="/driverview" element={<DriverView userId={userId} logOut={logOut}/>} />
