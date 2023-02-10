@@ -1402,7 +1402,7 @@ h1 {
 }
 
 .defaultRouteCardTitle {
-  width: 34px;
+  width: 150px;
   height: 18px;
   font-family: 'Poppins';
   font-style: normal;
@@ -1410,6 +1410,7 @@ h1 {
   font-size: 12px;
   line-height: 18px;
   color: var(--gray4);
+  /* padding-bottom: 10px; */
   flex: none;
   order: 0;
   flex-grow: 0;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './trip-complete-style.css';
 
-import Analytics from './Analytics.jsx';
+import AnalyticsDriver from './AnalyticsDriver.jsx';
 import PassengerList from './PassengerList.jsx';
 
 
@@ -21,7 +21,7 @@ const TripCompleteDriver = () => {
     <div className="trip-complete">
       <h1 className="title">Trip Complete!</h1>
       <PassengerList pIds={passengerIds} user={user}/>
-      <Analytics driver_route={user.driver_route}/>
+      <AnalyticsDriver driver_route={user.driver_route}/>
       <Link to='/riderview'>
         <button id="back-to-home">Back to Home</button>
       </Link>

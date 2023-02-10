@@ -113,7 +113,7 @@ ul.avatars {
   display: flex ; /* Causes LI items to display in row. */
   list-style-type: none ;
   margin: auto ; /* Centers vertically / horizontally in flex container. */
-  padding: 0px 7px 0px 0px ;
+  padding: 0px 85px 0px 0px ;
   z-index: 1 ; /* Sets up new stack-container. */
 }
 
@@ -172,4 +172,23 @@ span.avatars__others {
 
 /* COOL AVATAR OVERLAP END */
 
+.trip-capacity {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--gray4);
+}
 
+.title-margin {
+  margin-bottom: 3px;
+}
+
+.detail-margin {
+  margin-bottom: 6px;
+}
+
+.driver-list-forward-icon {
+
+}
