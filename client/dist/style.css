@@ -265,6 +265,10 @@ h1 {
   flex-grow: 0;
 }
 
+.react-datepicker__time-container {
+  z-index: 9999;
+}
+
 .inputField4 {
   display: flex;
   flex-direction: row;
@@ -311,7 +315,6 @@ h1 {
   -webkit-appearance: none;
   outline: none;
   cursor: pointer;
-  z-index: 1;
 }
 
 .radioInput:checked {
