@@ -5,7 +5,7 @@ import React from 'react';
   // and also sent to the analytics component in the client coded
 
 // need the trip distance in miles
-const Analytics = (props) => {
+const AnalyticsDriver = (props) => {
 
   const kmpg = 25;
 
@@ -30,4 +30,4 @@ const Analytics = (props) => {
   )
 }
 
-export default Analytics;
+export default AnalyticsDriver;

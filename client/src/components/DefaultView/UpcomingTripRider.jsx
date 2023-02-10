@@ -50,9 +50,14 @@ const UpcomingTripRider = (props) => {
               </Link>
             </div>
           </div>
-          <p className='card-detail'>Pickup: {driver.driver_route.start_address}</p>
-          <p className='card-detail'>License plate #: {driver.license_plate}</p>
-          <p className='card-detail'>Time: {driver.driver_route.time} </p>
+          <div className="trip-card-body">
+            <div className="defaultRouteCardTitle title-margin">Pickup:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{driver.driver_route.start_address}</div>
+            <div className="defaultRouteCardTitle title-margin">License plate #:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{driver.license_plate}</div>
+            <div className="defaultRouteCardTitle title-margin">Time:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{driver.driver_route.time}</div>
+          </div>
           <div className="btn-horizontal-flex">
             <Link to="/riderview" className="link link-wrap-btn">
               <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
