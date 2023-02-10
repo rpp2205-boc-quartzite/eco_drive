@@ -17,9 +17,10 @@ const DefaultRouteRider = ({ userId, defaultRoute, favorites, userInfo, from, st
     userFavorites: favorites
   }
 
+  // console.log('can start default trip?', startedTrip, upcomingCheck)
   const handleClick = (e) => {
     e.preventDefault()
-    if (!startedTrip) {
+    if (!startedTrip && !upcomingCheck) {
       navigate('/driver-list', {state: {route: route, userInfo: userInfo, from: from}})
     }
   }
