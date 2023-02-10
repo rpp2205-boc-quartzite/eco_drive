@@ -13,10 +13,10 @@ class RiderRecentCard extends React.Component {
 
   componentDidMount () {
     var id = this.props.id;
-    console.log('IDDDD', id)
+    //console.log('IDDDD', id)
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
-      console.log('ID!!!', result)
+      //console.log('ID!!!', result)
       this.setState({
         avatar: result.data[0].avatar,
         wholeReviewerObj: result
@@ -26,8 +26,8 @@ class RiderRecentCard extends React.Component {
   }
 
   render() {
-    console.log('this.props.wholeObj', this.props.wholeObj)
-    console.log('HEY BRANDON', this.state.wholeReviewerObj)
+    //console.log('this.props.wholeObj', this.props.wholeObj)
+    //console.log('HEY BRANDON', this.state.wholeReviewerObj)
     return (
       <div>
           <Link to="/ratings-reviews" state={{userData: this.props.wholeObj, revieweeData: this.state.wholeReviewerObj, from: 'rider-view', view: 'rider'}}>

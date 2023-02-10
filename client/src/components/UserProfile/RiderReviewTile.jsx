@@ -11,7 +11,7 @@ class RiderReviewTile extends React.Component {
 
 
   render() {
-    console.log('BRANDON PROPS', this.props)
+    //console.log('BRANDON PROPS', this.props)
     return (
       <div className='profileReviewBox'>
 
