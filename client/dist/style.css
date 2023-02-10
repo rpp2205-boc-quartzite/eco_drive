@@ -20,14 +20,20 @@
   font-family: 'Poppins', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
+  background-color: var(--gray1);
 }
 
 #root {
   max-width: 375px;
+  flex-grow: 1;
 }
 
 /* body {
