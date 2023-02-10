@@ -20,7 +20,7 @@ const TripCompleteDriver = () => {
   return (
     <div className="trip-complete">
       <h1 className="title">Trip Complete!</h1>
-      <PassengerList pIds={passengerIds} user={user}/>
+      <PassengerList pIds={passengerIds} user={user} view={'driver'} />
       <Analytics driver_route={user.driver_route}/>
       <Link to='/riderview'>
         <button id="back-to-home">Back to Home</button>
