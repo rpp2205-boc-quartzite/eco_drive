@@ -2914,12 +2914,21 @@ input.review-summary {
 /* ------------------------------------------------ CHELSEA CSS END ------------------------------------------------ */
 
 /* --------------- NICK CSS------------------------------------- */
+.rider-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 375px;
+}
+.map-container {
+  display: flex;
+  padding: 0 16px;
+}
 .Gmap {
   height: 275px;
-  width: 370px;
+  width: 343px;
   margin: auto;
-  border-radius: 5px;
-  border-color: #338F24;
-  border-width: thin;
+  border-radius: 15px;
 }
 /* --------------- NICK CSS END------------------------------------- */

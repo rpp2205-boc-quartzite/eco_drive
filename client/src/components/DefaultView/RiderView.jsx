@@ -83,7 +83,6 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
       setName(result.data[0].full_name)
       setUserInfo(result.data[0])
       setFavorites(result.data[0].favorites)
-      setUserInfo(result.data[0])
       setDefaultRoute(result.data[0].default_rider_route)
       if (result.data[0].rider_route.driver_id !== undefined) {
         setStartedTrip(result.data[0].rider_route.started)
@@ -122,7 +121,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
             <img className='headerAvatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons' size={24} onClick={logOut}/>
+            <RiLogoutBoxRLine className='top-bar-icons' onClick={logOut}/>
           </Link>
         </div>
       </div>

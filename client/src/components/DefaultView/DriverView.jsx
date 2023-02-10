@@ -207,7 +207,7 @@ function DriverView ({ userId, logOut }) {
             <img className='headerAvatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons' size={24} onClick={logOut}/>
+            <RiLogoutBoxRLine className='top-bar-icons' onClick={logOut}/>
           </Link>
         </div>
       </div>
