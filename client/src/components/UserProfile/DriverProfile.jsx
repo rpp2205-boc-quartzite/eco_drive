@@ -132,7 +132,7 @@ class DriverProfile extends React.Component {
               <RiHome4Fill className='top-bar-icons'/>
             </Link>
             <Link to='/'>
-              <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+              <RiLogoutBoxRLine className='top-bar-icons'/>
             </Link>
           </div>
         </div>

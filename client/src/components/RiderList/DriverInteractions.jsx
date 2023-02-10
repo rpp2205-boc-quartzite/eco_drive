@@ -13,8 +13,10 @@ const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
 // state={{dir: directionsResponse, route: route, userInfo: userInfo}}
 
 const containerStyle = {
-  width: '370px',
-  height: '275px'
+  width: '343px',
+  height: '275px',
+  borderRadius: '10px',
+  border: '1px solid var(--green2)'
 };
 
 const center = {
@@ -171,8 +173,8 @@ const DriverInteractions = function(props) {
   // className="allDefaultView"
 
   return (
-    <div>
-    <div className="defaultViewHeader">
+    <div className='rider-list-container'>
+    {/* <div className="defaultViewHeader">
       <div className="headerToggleView">
           <div className="viewToggle">Driver</div>
           <Link to="/riderview">
@@ -194,7 +196,21 @@ const DriverInteractions = function(props) {
             <MdLogout className="logout" size={20}/>
             </Link></div>
         </div>
-        </div>
+      </div> */}
+      <div className='top-bar'>
+              <div className='top-bar-left'>
+                <p>Driver</p>
+                <Link to="/riderview">
+                  <RiRefreshLine className='top-bar-icons' />
+                </Link>
+              </div>
+              <div className='top-bar-right'>
+                <Link to="/driverprofile" state={{id: userInfo._id, from: 'driverview'}}>
+                  <img className='avatar' src={userInfo.avatar} alt="" />
+                </Link>
+                <RiLogoutBoxRLine className='top-bar-icons' onClick={props.logOut}/>
+              </div>
+            </div>
       <br></br>
         <div className='title-bar'>
           <Link to="/driverview">
@@ -202,9 +218,12 @@ const DriverInteractions = function(props) {
           </Link>
             <p>Your Route</p>
         </div>
-      <div className="Gmap">
-        {mapCheck()}
-      </div>
+        <div className='map-container'>
+          <div className="Gmap">
+            {mapCheck()}
+          </div>
+        </div>
+
       <br></br>
       <div className="driver-list">
           <p>Total Distance: {distance}</p>

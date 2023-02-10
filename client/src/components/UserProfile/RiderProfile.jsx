@@ -15,7 +15,7 @@ class RiderProfile extends React.Component {
     this.state = {
       userId: this.props.location.state.id,
       //userId: '63d36e8fcd478f26557c4a37',
-      //userId: '63db055e255ff6bddca10fe6',
+      // userId: '63db055e255ff6bddca10fe6',
       full_name: '',
       email: '',
       start_address: '',
@@ -58,10 +58,6 @@ class RiderProfile extends React.Component {
       })
     })
     .catch(err => console.log(err))
-  }
-
-  logout() {
-    this.props.logOut();
   }
 
   editProfileOrClose() {
@@ -139,8 +135,8 @@ class RiderProfile extends React.Component {
           <Link to="/riderview">
             <RiHome4Fill className='top-bar-icons'/>
           </Link>
-          <Link to='/'>
-            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+          <Link to="/">
+            <RiLogoutBoxRLine className='top-bar-icons'/>
           </Link>
         </div>
       </div>

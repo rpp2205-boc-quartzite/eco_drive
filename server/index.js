@@ -214,7 +214,7 @@ app.post('/reviews/:user_id/report', (req, res) => {
 // ------------------------------------------------------------------------------------------ //
 app.post('/driver-list', async (req, res) => {
   const rider =  {
-    id: req.body.userId,
+    _id: req.body._id,
     start_address: req.body.start_address,
     start_lat: req.body.start_lat,
     start_lng: req.body.start_lng,
@@ -226,7 +226,7 @@ app.post('/driver-list', async (req, res) => {
   const driverList = [];
 
   try {
-    const activeDrivers = await getDriverList();
+    const activeDrivers = await getDriverList(req.body._id);
     for (let driver of activeDrivers) {
       const startDistance = await calculateDistance(rider.start_lat, rider.start_lng, driver.driver_route.start_lat, driver.driver_route.start_lng);
       const endDistance = await calculateDistance(rider.end_lat, rider.end_lng, driver.driver_route.end_lat, driver.driver_route.end_lng);
