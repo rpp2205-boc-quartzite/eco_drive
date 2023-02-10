@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -16,14 +16,22 @@ export default function Register(props) {
   const [avatarCheck, setAvatar] = useState(false);
   const [avatar, setAvatarValue] = useState('');
   const [tosCheck, setTosCheck] = useState(false);
-  const [age, setAge] = useState('');
+  const [age, setAge] = useState(false);
   const [nameCheck, setNameCheck] = useState(false);
   const [emailCheck, setEmailCheck] = useState(false);
   const [ageCheck, setAgeCheck] = useState(false);
   const [passCheck, setPassCheck] = useState(false);
   const [confirmPassCheck, setConfirmPassCheck] = useState(false);
   const [passMatch, setPassMatch] = useState(true);
+  const [emailInUse, setEmailInUse] = useState(false);
   const [currentAge, setCurrentAge] = useState(18);
+  const [changeEmail, setChangeEmail] = useState(false);
+  
+  useEffect(() => {
+    if (email !== '') {
+   
+    }
+  }, [email])
 
   const calculateAge = (date) => {
     const now = new Date();
@@ -36,18 +44,23 @@ export default function Register(props) {
   const handleNext = (event) => {
     event.preventDefault();
     const ageDate = new Date(dob);
-    setAge(calculateAge(ageDate));
-
-    if (full_name === '' || email === '' || (age < 18 || age === '') || password === '' || confirmPass === '') {
+    const trueAge = calculateAge(ageDate);
+    // setAge(calculateAge(ageDate));
+    if (full_name === '' || email === '' || (trueAge < 18 || isNaN(trueAge)) || password === '' || confirmPass === '') {
       if (full_name === '') {
         setNameCheck(true);
       };
       if (email === '') {
         setEmailCheck(true);
       };
-      if (age === '' || age < 18) {
+      if (isNaN(trueAge)) {
+        setAge(false);
         setAgeCheck(true);
       };
+      if (trueAge < 18) {
+        setAgeCheck(false);
+        setAge(true);
+      }
       if (password !== confirmPass) {
         setPass('');
         setConfirmPass('');
@@ -60,51 +73,53 @@ export default function Register(props) {
         setConfirmPassCheck(true);
       };
 
-      // if (age !== '' && age < 18) {
-      //   setCurrentAge(age);
-      //   return;
-      // };
       return;
     };
 
     if (tosCheck === false) {
       return alert('Please agree to Terms of Service so we can harvest your data.');
-    }
+    };
 
+    // axios.get('/unique-email-check', {email: email})
+    // .then((result) => {
+    //   console.log(result)
+    //   setEmailCheck(false);
+    //   setEmailInUse(true);
+    //   return;
+    // })
+    // .catch(() => {
+    //   setDriverCheck(true);
+    // });   
     setDriverCheck(true);
-  }
+  };
 
   const handleAvatar = (event) => {
     event.preventDefault();
     setDriverCheck(null);
     setAvatar(true);
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (avatar === '') {
-      return alert('Please select a photo.');
-    }
 
     if (drivers_license === '') {
-      console.log(email)
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false, is_rider: true})
         .then((result) => {
           props.authCheck(email, password);
         })
         .catch((err) => {
-          alert('Email already in use.');
-        })
+          console.log(err);
+        });
     } else {
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: true, is_rider: false})
         .then((result) => {
           props.authCheck(email, password);
         })
         .catch((err) => {
-          alert('Email already in use.');
+          console.log(err);
         });
     };
-  }
+  };
 
   return (
     <div className='signup-form-container'>
@@ -135,11 +150,17 @@ export default function Register(props) {
                     <div className='valid-check'>*</div>
                     {emailCheck === true &&
                       <div className='error-message'><span className='error-text'>Please input your email</span></div>}
+                    {emailInUse === true &&
+                      <div className='error-message'><span className='error-text'>Email already in use</span></div>}  
                   </div>
                   <input 
                     className='input-field' 
                     value={email} 
-                    onChange={(event) => {setEmail(event.target.value.toLowerCase()); setEmailCheck(false)}} 
+                    onChange={(event) => {
+                      setEmail(event.target.value.toLowerCase()); 
+                      setEmailCheck(false);
+                      setEmailInUse(false);
+                    }} 
                     type='email' 
                     id='email' 
                     name='email' 
@@ -149,15 +170,18 @@ export default function Register(props) {
                   <div className='label-title-container'>
                     <label htmlFor='dob' className='label-title-4'>Date of Birth</label>
                     <div className='valid-check'>*</div>
-                    {/* {currentAge < 18 && 
-                      <div className='error-message'><span className='error-text'>You must be over 18 years old</span></div>} */}
+                    {age === true && 
+                      <div className='error-message'><span className='error-text'>You must be over 18 years old</span></div>}
                     {ageCheck === true && 
                       <div className='error-message'><span className='error-text'>Please enter valid date of birth</span></div>}  
                   </div>
                   <input 
                     className='input-field' 
                     value={dob} 
-                    onChange={(event) => {setDob(event.target.value); setAgeCheck(false)}} 
+                    onChange={(event) => {
+                      setDob(event.target.value); 
+                      setAgeCheck(false);
+                    }} 
                     type='date' 
                     placeholder='mm/dd/yyyy' 
                     id='dob' 
@@ -176,7 +200,11 @@ export default function Register(props) {
                   <input 
                     className='input-field' 
                     value={password} 
-                    onChange={(event) => {setPass(event.target.value); setPassCheck(false); setConfirmPassCheck(false)}} 
+                    onChange={(event) => {
+                      setPass(event.target.value); 
+                      setPassCheck(false); 
+                      setConfirmPassCheck(false)
+                    }} 
                     type='password' 
                     id='password' 
                     name='password' 
