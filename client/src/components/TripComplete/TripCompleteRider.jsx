@@ -21,7 +21,7 @@ const TripCompleteRider = () => {
   return (
     <div className="trip-complete">
       <h1 className="title">Trip Complete!</h1>
-      <PassengerList pIds={passengerIds} user={user}/>
+      <PassengerList pIds={passengerIds} user={user} view={'rider'} />
       <Analytics driver_route={driver.driver_route}/>
       <Link to='/riderview'>
         <button id="back-to-home">Back to Home</button>

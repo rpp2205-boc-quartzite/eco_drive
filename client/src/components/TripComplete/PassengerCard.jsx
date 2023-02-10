@@ -48,9 +48,15 @@ const PassengerCard = (props) => {
           : <RiHeart3Line className='card-icon outlined-heart-icon' onClick={addFavorite}/>
           }
         </div>
-        <Link to="/ratings-reviews" state={ {from: 'trip-complete-rider', userData: props.user, revieweeData: user, view: 'rider' }}>
-          <RiInformationLine className='card-icon info-icon'/>
-        </Link>
+          {
+            props.view === 'driver'
+            ?  <Link to="/ratings-reviews" state={ {from: 'trip-complete-driver', userData: props.user, revieweeData: user, view: props.view }}>
+                <RiInformationLine className='card-icon info-icon'/>
+              </Link>
+            :  <Link to="/ratings-reviews" state={ {from: 'trip-complete-rider', userData: props.user, revieweeData: user, view: props.view }}>
+                <RiInformationLine className='card-icon info-icon'/>
+              </Link>
+          }
       </div>
     )
   } else {
