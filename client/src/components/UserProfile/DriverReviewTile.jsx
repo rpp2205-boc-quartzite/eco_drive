@@ -10,7 +10,7 @@ class DriverReviewTile extends React.Component {
 
 
   render() {
-    console.log('FULL NAMEEEE testing', this.state.full_name)
+    //console.log('FULL NAMEEEE testing', this.state.full_name)
       return (
         <div className='profileReviewBox'>
           {/* <div className='profileReviewerName'>{this.state.full_name}</div>

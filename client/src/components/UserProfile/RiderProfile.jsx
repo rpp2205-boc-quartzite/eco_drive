@@ -26,7 +26,7 @@ class RiderProfile extends React.Component {
       drivers_license: '',
       rider_reviews: [],
       recent_drivers: [],
-      rating: 5,
+      rating: 0,
       rider_trips: [],
       editProfile: false,
       infoChangedSuccess: false,
@@ -43,6 +43,18 @@ class RiderProfile extends React.Component {
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
       console.log('got da rider', result.data[0])
+      if (result.data[0].rider_reviews.length > 0) {
+        var ratings = result.data[0].rider_reviews.map(ratings => ratings.rating)
+        var count = 0
+        for (var i = 0; i < ratings.length; i++) {
+          count += ratings[i]
+        }
+        var average = count / ratings.length
+      } else {
+        var average = 0;
+      }
+
+      console.log('AVGGGG VG', average)
       this.setState({
         full_name: result.data[0].full_name,
         email: result.data[0].email,
@@ -54,7 +66,8 @@ class RiderProfile extends React.Component {
         rider_reviews: result.data[0].rider_reviews,
         recent_drivers: result.data[0].recent_drivers,
         wholeObj: result,
-        rider_trips: result.data[0].rider_trips
+        rider_trips: result.data[0].rider_trips,
+        rating: average
       })
     })
     .catch(err => console.log(err))
