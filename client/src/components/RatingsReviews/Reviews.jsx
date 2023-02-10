@@ -29,6 +29,7 @@ export default function Reviews(props) {
   const route = location.state.route;
   // console.log('userId: ', userId);
   const revieweeId = revieweeData._id;
+  const mapData = location.state.mapData;
   // console.log('revieweeId: ', revieweeId);
   // console.log('route: ', location.state.route);
 
@@ -148,12 +149,20 @@ export default function Reviews(props) {
             <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
         )
-    } else if (location.state.from === 'trip-complete-rider') {
-        return (
-          <Link to="/trip-complete-rider" state={{user: userData, driver: revieweeData}}>
-            <BiArrowBack className="backButton" color={'#262929'} size={20} />
-          </Link>
-        )
+    } else if (location.state.from === 'trip-complete-rider' || location.state.from === 'trip-complete-driver') {
+        if (location.state.from === 'trip-complete-rider') {
+          return (
+            <Link to="/trip-complete-rider" state={{user: userData, driver: revieweeData}}>
+              <BiArrowBack className="backButton" color={'#262929'} size={20} />
+            </Link>
+          )
+        } else {
+          return (
+            <Link to="/trip-complete-driver" state={{user: userData, driver: revieweeData}}>
+              <BiArrowBack className="backButton" color={'#262929'} size={20} />
+            </Link>
+          )
+        }
     } else if (location.state.from === 'riderview') {
         return (
           <Link to="/riderview">
@@ -161,12 +170,32 @@ export default function Reviews(props) {
             <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
         )
-    } else if (location.state.from === 'rider-list') {
+    } else if (location.state.from === 'driverview') {
         return (
           <Link to="/driverview">
             <BiArrowBack className="backButton" color={'#262929'} size={20} />
           </Link>
         )
+    } else if (location.state.from === 'riderprofile') {
+        return (
+          <Link to="/riderprofile" state={{id: userData._id, driver: revieweeData}}>
+            {/* {console.log('userData._id: ', userData._id)} */}
+            <BiArrowBack className="backButton" color={'#262929'} size={20} />
+          </Link>
+        )
+    } else if (location.state.from === 'driverprofile') {
+      return (
+        <Link to="/driverprofile" state={{id: userData._id, driver: revieweeData}}>
+          {/* {console.log('userData._id: ', userData._id)} */}
+          <BiArrowBack className="backButton" color={'#262929'} size={20} />
+        </Link>
+      )
+    } else if (location.state.from === 'rider-list') {
+      return (
+        <Link to="/rider-list" state={{userInfo: userData, dir: location.state.mapData, route: route}}>
+          <BiArrowBack className='card-icon info-icon'/>
+        </Link>
+      )
     }
     })()}
     </div>
@@ -225,7 +254,7 @@ export default function Reviews(props) {
            </div>
       }
       {
-        location.state.from === 'driver-list' || location.state.from === 'rider-list'
+        location.state.from === 'driver-list' || location.state.from === 'rider-list' || location.state.from === 'riderview' || location.state.from === 'driverview'
         ? null
         : <div className='writeReviewButton'>
             <button
@@ -244,7 +273,7 @@ export default function Reviews(props) {
           </div>
       }
       {
-        location.state.from === 'driver-list' || location.state.from === 'rider-list'
+        location.state.from === 'driver-list' || location.state.from === 'rider-list' || location.state.from === 'riderview' || location.state.from === 'driverview' || revieweeData.is_driver === false
         ? null
         : <div className='reportButton'>
             <button
@@ -272,7 +301,7 @@ export default function Reviews(props) {
             <div>
               <div className='profileReviewDiv'>
                 <span className='profileTitle'>Reviews as a Driver</span>
-                <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
+                <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from, userInfo: userInfo, mapData: mapData }} to="/all-reviews">See All</Link>
                 <div className='profileReviewContainer'>
                   {revieweeData.sortedDriverReviews.slice(0, 6).map(review => {
                     return (
@@ -283,7 +312,7 @@ export default function Reviews(props) {
               </div>
               <div className='profileReviewDiv'>
                 <span className='profileTitle'>Reviews as a Rider</span>
-                <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
+                <Link className="btn-select-all-reviews" state={{ text: 'rider', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from, userInfo: userInfo, mapData: mapData }} to="/all-reviews">See All</Link>
                 <div className='profileReviewContainer'>
                   {revieweeData.sortedRiderReviews.slice(0, 6).map(review => {
                     return (
@@ -298,7 +327,7 @@ export default function Reviews(props) {
           return (
             <div className='profileReviewDiv'>
               <span className='profileTitle'>Reviews as a Driver</span>
-              <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
+              <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from, userInfo: userInfo, mapData: mapData }} to="/all-reviews">See All</Link>
               <div className='profileReviewContainer'>
                 {revieweeData.sortedDriverReviews.slice(0, 6).map(review => {
                   return (
@@ -312,7 +341,7 @@ export default function Reviews(props) {
           return (
             <div className='profileReviewDiv'>
               <span className='profileTitle'>Reviews as a Rider</span>
-              <Link className="btn-select-all-reviews" state={{ text: 'driver', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from }} to="/all-reviews">See All</Link>
+              <Link className="btn-select-all-reviews" state={{ text: 'rider', userData: userData, revieweeData: revieweeData, route: route, from: location.state.from, userInfo: userInfo, mapData: mapData }} to="/all-reviews">See All</Link>
               <div className='profileReviewContainer'>
                 {revieweeData.sortedRiderReviews.slice(0, 6).map(review => {
                   return (
@@ -325,7 +354,7 @@ export default function Reviews(props) {
         }
       })()}
     </div>
-    <ReviewModal show={showModal} isReportModalOpen={reportModal} from={location.state.from} reportUser={setReported} userData={userData} revieweeData={revieweeData} submit={() => setSubmitted(true)} close={() => setShowModal(false)} />
+    <ReviewModal show={showModal} view={location.state.view} isReportModalOpen={reportModal} from={location.state.from} reportUser={setReported} userData={userData} revieweeData={revieweeData} submit={() => setSubmitted(true)} close={() => setShowModal(false)} />
   </div>
   )
 }
@@ -595,3 +624,7 @@ export default function Reviews(props) {
     </Link>
 })()}
 </div> */}
+
+{/* <Link to="/ratings-reviews" state={{userData: props.userInfo, revieweeData:rider.profile, from: 'rider-list', view: 'driver', mapData: props.mapData, route: props.route}}>
+<FiInfo className='card-icon info-icon'/>
+</Link> */}

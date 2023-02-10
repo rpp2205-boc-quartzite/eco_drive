@@ -10,7 +10,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
 
 const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
-
+// state={{dir: directionsResponse, route: route, userInfo: userInfo}}
 
 const containerStyle = {
   width: '370px',
@@ -212,7 +212,7 @@ const DriverInteractions = function(props) {
       </div>
         <br></br>
         <div className="driver-list" data="DriverInteractions">
-          <RiderList driver={route} riders={riders} seats={seats} userInfo={userInfo} />
+          <RiderList driver={route} riders={riders} seats={seats} userInfo={userInfo} mapData={location.state.dir} />
         </div>
     </div>
   )
