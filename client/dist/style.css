@@ -982,19 +982,6 @@ h1 {
   top: 0px;
 }
 
-.signup-wrappers {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 24px;
-  position: absolute;
-  width: 375px;
-  height: 556px;
-  left: 0px;
-  top: 0px;
-}
-
 .signup-title {
   width: 343px;
   height: 36px;
