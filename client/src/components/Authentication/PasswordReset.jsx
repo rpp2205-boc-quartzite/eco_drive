@@ -9,6 +9,7 @@ export default function PasswordReset(props) {
   const [request, setRequest] = useState(false);
   const [verifyToken, setVerifyToken] = useState('');
   const [inputToken, setInputToken] = useState('');
+  const [pendingEmail, setPendingEmail] = useState(false);
   const navigate = useNavigate();
 
   const generateOTP = () => {
@@ -26,10 +27,12 @@ export default function PasswordReset(props) {
       return alert('Please enter valid email.');
     }
     var code = generateOTP();
-
+    setRequest(null);
+    setPendingEmail(true);
     axios.post('/sendMail', {email: email, code: code})
       .then((result) => {
         setVerifyToken(code);
+        setPendingEmail(false);
         setRequest(true);
       })
       .catch((err) => {
@@ -85,6 +88,11 @@ export default function PasswordReset(props) {
             </Link>
           </div>
         </div>}
+      {pendingEmail === true &&
+        <div className='loading-screen'>
+          <img className='loading-gif' src="https://media.tenor.com/k-wL_qZAELgAAAAi/test.gif" alt="Loading" />
+          <p>Sending Verification Token...</p>
+        </div>}  
       {request === true &&
         <div>
           <div className='reset-pass-wrapper'>
