@@ -356,6 +356,12 @@ h1 {
   flex-grow: 0;
 }
 
+.primary-btn-find:disabled {
+  background: var(--gray3);
+  color: var(--gray1);
+}
+
+
 .viewToggle {
   float: left;
   font-style: normal;

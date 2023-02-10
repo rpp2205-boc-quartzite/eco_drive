@@ -100,12 +100,24 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('/rider/:_id/defaultroute', {data: route})
-    .then((result) => {
+    if (!start.start_address) {
+      alert('Please enter a starting point')
+    } else if (!end.end_address) {
+      alert('Please enter a destination')
+    } else if (isDefault) {
+      axios.post('/rider/:_id/defaultroute', {data: route})
+      .then((result) => {
+        navigate('/driver-list', {state: {route: route, userInfo: userInfo, from: 'riderview'}})
+      })
+      .catch(err => console.log(err))
+    } else {
       navigate('/driver-list', {state: {route: route, userInfo: userInfo, from: 'riderview'}})
-    })
-    .catch(err => console.log(err))
+    }
   }
+
+  const disabled = Boolean(
+    startedTrip || upcomingCheck
+  ) ? true : false;
 
   return (
     <div className="allDefaultView">
@@ -183,19 +195,14 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
                 <input type="checkbox" className="radioInput" checked={isDefault} onChange={(e) => setIsDefault(!isDefault)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-            {isDefault
-            ? <button
+
+            <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Find Drivers
-                <RiSearchLine className="searchBtn" size={20}/>
-              </button>
-            : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}} style={{ textDecoration: 'none' }}>
-                <button
-                  disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Find Drivers
-                  <RiSearchLine className="searchBtn" size={20}/>
-                </button>
-              </Link>
-            }
+                disabled={disabled}
+                className="primary-btn-find"> {disabled ? `You have an ${startedTrip ? 'ongoing' : 'upcoming'} route` : 'Find Drivers'}
+                {!disabled ? <RiSearchLine className="searchBtn" size={20}/> : ''}
+            </button>
+
           </div>
         </form>
       <div className='default-ongoing-upcoming-flex'>
