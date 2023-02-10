@@ -25,6 +25,7 @@ const UpcomingTripDriver = (props) => {
     props.onChange(false);
   }
 
+
   // upcoming route as a driver
   if (user && user.driver_route.start_address !== undefined) {
     return (
