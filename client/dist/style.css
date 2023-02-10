@@ -1008,7 +1008,30 @@ h1 {
   order: 2;
   flex-grow: 0;
   z-index: 1;
-  
+}
+
+.login-error-message {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-top: 40px;
+  width: 270px;
+  height: 20px;
+  flex: none;
+  order: 5;
+  flex-grow: 0;
+  z-index: 1;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #D63434;
+  flex: none;
+  flex-grow: 0;
+  padding-left: 10px;
 }
 
 .error-text {
