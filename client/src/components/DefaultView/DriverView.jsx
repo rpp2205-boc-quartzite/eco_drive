@@ -59,8 +59,6 @@ function DriverView ({ userId, logOut }) {
     setUpcomingCheck(bool)
   }
 
-  // console.log('can start trip????', startedTrip, upcomingCheck)
-
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
   //*****************************************************//
