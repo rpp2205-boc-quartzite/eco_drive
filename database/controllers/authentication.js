@@ -155,11 +155,9 @@ module.exports = {
   },
 
   uniqueEmailCheck: (req, res) => {
-    console.log(req)
-    User.findOne({email: req.body.email})
-      .then((result) => {
-        console.log(result);
-        res.status(200).send(result);
+    User.findOne({email: req.query.email})
+      .then((user) => {
+        res.status(200).send(user);
       })
       .catch((err) => {
         res.status(400).send(err);

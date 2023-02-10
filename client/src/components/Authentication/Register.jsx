@@ -27,25 +27,38 @@ export default function Register(props) {
   const [currentAge, setCurrentAge] = useState(18);
   const [changeEmail, setChangeEmail] = useState(false);
   
-  useEffect(() => {
-    if (email !== '') {
-   
-    }
-  }, [email])
-
   const calculateAge = (date) => {
     const now = new Date();
     const diff = Math.abs(now - date );
     const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
 
     return age
-  }
+  };
+
+  const emailChecker = () => {
+    if (email !== '') {
+      axios.get(`/unique-email-check?email=${email}`)
+      .then((user) => {
+        console.log(user.data.email);
+        if (user.data.email !== undefined) {
+          setEmailCheck(false);
+          setEmailInUse(true);
+          return;
+        } else {
+          setDriverCheck(true);
+        };
+      })
+      .catch((err) => {
+        console.log(err);
+      });  
+    }
+  };
 
   const handleNext = (event) => {
     event.preventDefault();
     const ageDate = new Date(dob);
     const trueAge = calculateAge(ageDate);
-    // setAge(calculateAge(ageDate));
+
     if (full_name === '' || email === '' || (trueAge < 18 || isNaN(trueAge)) || password === '' || confirmPass === '') {
       if (full_name === '') {
         setNameCheck(true);
@@ -80,17 +93,8 @@ export default function Register(props) {
       return alert('Please agree to Terms of Service so we can harvest your data.');
     };
 
-    // axios.get('/unique-email-check', {email: email})
-    // .then((result) => {
-    //   console.log(result)
-    //   setEmailCheck(false);
-    //   setEmailInUse(true);
-    //   return;
-    // })
-    // .catch(() => {
-    //   setDriverCheck(true);
-    // });   
-    setDriverCheck(true);
+    emailChecker();
+    
   };
 
   const handleAvatar = (event) => {
