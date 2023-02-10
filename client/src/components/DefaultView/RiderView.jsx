@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { RiRefreshLine, RiLogoutBoxRLine, RiSearchLine } from "react-icons/ri";
 import { format } from "date-fns";
 import Autocomplete from "react-google-autocomplete";
@@ -51,10 +51,16 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
   const [timeClicked, setTimeClicked] = useState(false);
+  const [upcomingCheck, setUpcomingCheck] = useState(false)
 
-  const upcomingCheck = Object.keys(upcoming).length > 0;
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
+
+  const handleUpcomingChange = (bool) => {
+    setUpcomingCheck(bool)
+  }
+
+  // console.log('can start trip????', startedTrip, upcomingCheck)
 
   const route = {
     _id: userId,
@@ -81,12 +87,16 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
       if (result.data[0].rider_route.driver_id !== undefined) {
         setStartedTrip(result.data[0].rider_route.started)
       }
-      if (result.data[0].rider_route.start_address !== undefined) {
+      if (result.data[0].rider_route.start_address && result.data[0].rider_route.end_address !== undefined) {
         setUpcoming(result.data[0].rider_route)
+        handleUpcomingChange(true)
+      }
+      if (startedTrip) {
+        handleUpcomingChange(false)
       }
     })
     .catch(err => console.log(err))
-  }, [userId])
+  }, [userId, startedTrip])
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -108,7 +118,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
         </div>
         <div className='top-bar-right'>
           <Link to="/riderprofile" state={{id: userId, userInfo: userInfo, from: 'riderview'}}>
-            <img className='avatar' src={avatar} alt="avatar-small" />
+            <img className='headerAvatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
             <RiLogoutBoxRLine className='top-bar-icons' onClick={logOut}/>
@@ -176,12 +186,12 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Drivers
+                disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Find Drivers
                 <RiSearchLine className="searchBtn" size={20}/>
               </button>
             : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Drivers
+                  disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Find Drivers
                   <RiSearchLine className="searchBtn" size={20}/>
                 </button>
               </Link>
@@ -190,7 +200,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
         </form>
       <div className='default-ongoing-upcoming-flex'>
         {defaultRoute.default
-        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'} startedTrip={startedTrip}/>
+        ? <DefaultRouteRider userId={userId} defaultRoute={defaultRoute} favorites={favorites} userInfo={userInfo} from={'riderview'} startedTrip={startedTrip} upcomingCheck={upcomingCheck}/>
         : (
             <div className="ongoing-trip-container">
               <h5>Default Route</h5>
@@ -212,7 +222,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
           )
         }
         {!startedTrip
-        ? <UpcomingTripRider userId={userId} startTrip={startTrip}/>
+        ? <UpcomingTripRider userId={userId} startTrip={startTrip} onChange={handleUpcomingChange}/>
         : (
             <div className="ongoing-trip-container">
               <h5>Upcoming Trip</h5>

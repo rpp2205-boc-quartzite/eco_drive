@@ -50,10 +50,16 @@ function DriverView ({ userId, logOut }) {
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
   const [timeClicked, setTimeClicked] = useState(false);
+  const [upcomingCheck, setUpcomingCheck] = useState(false)
 
-  const upcomingCheck = Object.keys(upcoming).length > 0;
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
+
+  const handleUpcomingChange = (bool) => {
+    setUpcomingCheck(bool)
+  }
+
+  // console.log('can start trip????', startedTrip, upcomingCheck)
 
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
@@ -165,10 +171,14 @@ function DriverView ({ userId, logOut }) {
       }
       if (result.data[0].driver_route.start_address !== undefined) {
         setUpcoming(result.data[0].driver_route)
+        handleUpcomingChange(true)
+      }
+      if (startedTrip) {
+        handleUpcomingChange(false)
       }
     })
     .catch(err => console.log(err))
-  }, [userId])
+  }, [userId, startedTrip])
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -194,7 +204,7 @@ function DriverView ({ userId, logOut }) {
         </div>
         <div className='top-bar-right'>
           <Link to="/driverprofile" state={{id: userId, userInfo: userInfo, from: 'driverview'}}>
-            <img className='avatar' src={avatar} alt="avatar-small" />
+            <img className='headerAvatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
             <RiLogoutBoxRLine className='top-bar-icons' onClick={logOut}/>
@@ -267,12 +277,12 @@ function DriverView ({ userId, logOut }) {
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Create Route
+                disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Create Route
                 <RiAddFill className="searchBtn" size={20}/>
               </button>
             : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Create Route
+                  disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Create Route
                   <RiAddFill className="searchBtn" size={20}/>
                 </button>
               </Link>
@@ -281,7 +291,7 @@ function DriverView ({ userId, logOut }) {
         </form>
       <div className='default-ongoing-upcoming-flex'>
         {defaultRoute.default
-        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'} startedTrip={startedTrip} />
+        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'} startedTrip={startedTrip} upcomingCheck={upcomingCheck}/>
         : (
             <div className="ongoing-trip-container">
               <h5>Default Route</h5>
@@ -303,7 +313,7 @@ function DriverView ({ userId, logOut }) {
         )
         }
         {!startedTrip
-        ? <UpcomingTripDriver userId={userId} startTrip={startTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo}/>
+        ? <UpcomingTripDriver userId={userId} startTrip={startTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo} onChange={handleUpcomingChange}/>
         : (
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>
