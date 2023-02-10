@@ -58,16 +58,15 @@ const DriverList = (props) => {
   const [successMessageOn, setSuccessMessage] = useState(false);
   const [selectedDriver, setSelectedDriver] = useState({});
 
-  const toggleDriverConfirmation = (action, driverInfo, userInfo, userRouteInfo, startDistance, endDistance) => {
+  const toggleDriverConfirmation = (action, driverInfo, userRouteInfo, startDistance, endDistance) => {
     if (action==='on') {
-      const confirmInfo = {driverInfo, userInfo, userRouteInfo, startDistance, endDistance}
+      const confirmInfo = {driverInfo, userRouteInfo, startDistance, endDistance}
       setSelectedDriver(confirmInfo)
       setDriverConfirmation(!driverConfirmationOn)
     } else if (action==='off') {
       setSelectedDriver({})
       setDriverConfirmation(!driverConfirmationOn)
     }
-
   }
 
   const toggleSuccessMessage = () => {
@@ -94,7 +93,6 @@ const DriverList = (props) => {
             <DriverConfirmation
               driverInfo={selectedDriver.driverInfo}
               userRouteInfo={selectedDriver.userRouteInfo}
-              userInfo={selectedDriver.userInfo}
               startDistance={selectedDriver.startDistance}
               endDistance={selectedDriver.endDistance}
               toggleDriverConfirmation={toggleDriverConfirmation}

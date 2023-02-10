@@ -29,7 +29,7 @@ class DriverProfile extends React.Component {
       drivers_license: '',
       driver_reviews: [],
       recent_riders: [],
-      rating: 4.5,
+      rating: 0,
       driver_trips: [],
       editProfile: false,
       infoChangedSuccess: false,
@@ -44,10 +44,22 @@ class DriverProfile extends React.Component {
   componentDidMount () {
     var id = this.state.userId;
     //console.log('driver props', props)
-    console.log('IDDDD', id)
+    //console.log('IDDDD', id)
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)
+      //console.log ('lenght broo', result.data[0].driver_reviews.length)
+      if (result.data[0].driver_reviews.length > 0) {
+        var ratings = result.data[0].driver_reviews.map(ratings => ratings.rating)
+        var count = 0
+        for (var i = 0; i < ratings.length; i++) {
+          count += ratings[i]
+        }
+        var average = count / ratings.length
+      } else {
+        var average = 0;
+      }
+      console.log('AVGGGG VG', average)
       this.setState({
         full_name: result.data[0].full_name,
         email: result.data[0].email,
@@ -59,7 +71,8 @@ class DriverProfile extends React.Component {
         driver_reviews: result.data[0].driver_reviews,
         recent_riders: result.data[0].recent_riders,
         wholeObj: result,
-        driver_trips: result.data[0].driver_trips
+        driver_trips: result.data[0].driver_trips,
+        rating: average
       })
     })
     .catch(err => console.log(err))
@@ -107,6 +120,8 @@ class DriverProfile extends React.Component {
 
   render () {
     //console.log('CHECKING DRIVER PROPS', this.props.location.state.id)
+    var hey = this.state.driver_reviews.map(ratings => ratings.rating)
+    console.log('YOUOUAOYFOSAUFSIOFU', hey)
     return (
       <div>
       {/* TOP BUTTONS */}
@@ -132,7 +147,7 @@ class DriverProfile extends React.Component {
               <RiHome4Fill className='top-bar-icons'/>
             </Link>
             <Link to='/'>
-              <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+              <RiLogoutBoxRLine className='top-bar-icons'/>
             </Link>
           </div>
         </div>

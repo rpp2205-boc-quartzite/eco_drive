@@ -12,7 +12,7 @@ class DriverRecentList extends React.Component {
   }
 
   render() {
-    console.log('checking DriverRecentList props', this.props.wholeObj)
+    //console.log('checking DriverRecentList props', this.props.wholeObj)
       return (
         <div>
           {this.props.recent_riders.map((driver) =>

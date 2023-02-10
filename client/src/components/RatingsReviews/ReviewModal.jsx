@@ -87,7 +87,8 @@ const ReviewModal = (props) => {
         full_name: props.userData.full_name,
         rating: values.rating,
         review_text: values.text,
-        review_summary: values.summary
+        review_summary: values.summary,
+        view: props.view
       };
       console.log('full_name: ', props.userData.full_name);
       console.log('ReviewModal handleSubmit review', review);

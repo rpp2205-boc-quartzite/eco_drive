@@ -1,9 +1,9 @@
 const User = require('../models/user.js').User;
 
 module.exports = {
-  getDriverList: () => {
+  getDriverList: (userId) => {
     const availableDriver = []
-    return User.find({is_driver: true, "driver_route.started": false, "driver_route.start_address": {$exists: true}})
+    return User.find({is_driver: true, "driver_route.started": false, "driver_route.start_address": {$exists: true}, _id: {$ne: userId}})
       .then((drivers) => {
         for (let driver of drivers) {
           if ((driver.driver_route.riders.length < driver.driver_route.total_seats) && (driver.reported.length < 5)) {

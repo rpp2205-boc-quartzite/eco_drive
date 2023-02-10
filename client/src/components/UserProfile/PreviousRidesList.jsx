@@ -11,7 +11,7 @@ class PreviousRidesList extends React.Component {
   }
 
   render() {
-    console.log('checking PreviousRidesList props', this.props.rider_trips)
+    //console.log('checking PreviousRidesList props', this.props.rider_trips)
       return (
         <div className='profilePreviousBox'>
           {this.props.rider_trips.map((trip) =>

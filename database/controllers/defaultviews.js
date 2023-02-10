@@ -45,7 +45,7 @@ module.exports = {
       // Update rider_router
       await User.findOneAndUpdate(user_id, {rider_route: update})
       // Add rider id to the driver's rider list
-      await module.exports.addIdToRiderListOfDriver(newRoute.driver_id, newRoute._id, newRoute.avatar, newRoute.starting_distance, newRoute.end_distance)
+      await module.exports.addIdToRiderListOfDriver(newRoute.driver_id, newRoute._id, newRoute.start_distance, newRoute.end_distance)
       console.log('Updated user record with new rider route');
     } catch (err) {
       console.log('Error updating rider route: ', err);
@@ -61,11 +61,10 @@ module.exports = {
     return User.findOneAndUpdate(id, update).then((result) => console.log('Updated user record with license info')).catch(err => console.log('Error updating user record'));
   },
 
-  addIdToRiderListOfDriver: (driverId, newRiderId, riderAvatar, startDistance, endDistance) => {
+  addIdToRiderListOfDriver: (driverId, newRiderId, startDistance, endDistance) => {
     const driver_id = {_id: driverId};
     const rider = {
       rider_id: newRiderId,
-      avatar: riderAvatar,
       starting_distance: startDistance,
       end_distance: endDistance
     }

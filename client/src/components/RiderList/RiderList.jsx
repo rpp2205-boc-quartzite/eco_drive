@@ -11,7 +11,6 @@ const RiderList = function(props) {
   const [totalRiders, setTotalRiders] = React.useState(['no', 'riders']);
 
 
-
 React.useEffect(() => {
   if (props.riders.length) {
 
@@ -84,7 +83,7 @@ React.useEffect(() => {
                         <p>{rider.profile.full_name}</p>
                       </div>
                       <div className='icons-flex'>
-                        <Link to="/ratings-reviews" state={{userData: props.userInfo, revieweeData:rider.profile, from: 'rider-list', view: 'driver'}}>
+                        <Link to="/ratings-reviews" state={{userData: props.userInfo, revieweeData:rider.profile, from: 'rider-list', view: 'driver', mapData: props.mapData, route: props.driver}}>
                           <FiInfo className='card-icon info-icon'/>
                         </Link>
                       </div>

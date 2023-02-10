@@ -60,7 +60,7 @@ const DriverCard = ({driverInfo, userInfo, userRouteInfo, route, startDistance, 
         <p>From: {startDistance.text} from your starting point</p>
         <p>To: {endDistance.text} from your destination</p>
         <p>Time: {driverInfo.driver_route.time} </p>
-        <button className='secondary-btn' onClick={() => {toggleDriverConfirmation('on', driverInfo, userInfo, userRouteInfo, startDistance, endDistance)}}>Select Driver</button>
+        <button className='secondary-btn' onClick={() => {toggleDriverConfirmation('on', driverInfo, userRouteInfo, startDistance, endDistance)}}>Select Driver</button>
       </div>
     </>
   )
