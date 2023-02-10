@@ -1,4 +1,3 @@
-import "./RiderList.css";
 import axios from 'axios';
 import mapStyles from "./mapStyles.js";
 import React, { useEffect } from "react";
@@ -14,8 +13,10 @@ const API_KEY = process.env.GOOGLE_MAP_API_KEY_RIDER_LIST;
 
 
 const containerStyle = {
-  width: '370px',
-  height: '275px'
+  width: '343px',
+  height: '275px',
+  borderRadius: '10px',
+  border: '1px solid var(--green2)'
 };
 
 const center = {
@@ -38,29 +39,14 @@ const DriverInteractions = function(props) {
 
   const location = useLocation();
 
-  var data = location.state.dir.json;
+  var mapData = location.state.dir.json;
   var route = location.state.route;
   var userInfo = location.state.userInfo;
 
-  console.log('DATA: ', data);
-  console.log('Route: ', route);
-  console.log('UserInfo: ', userInfo);
+  const directions = JSON.parse(mapData)
 
-
-  // if (typeof window !== 'undefined') {
-  //   if (!localStorage.getItem('mapData')) {
-  //     localStorage.setItem("mapData", data);
-  //     route = JSON.stringify(route)
-  //     localStorage.setItem("route", route);
-  //   } else {
-  //     const localMap = localStorage.getItem("mapData");
-  //     const localRoute = localStorage.getItem("route")
-  //     data = localMap;
-  //     route = JSON.parse(localRoute);
-  //   }
-  // }
-
-  const directions = JSON.parse(data)
+  //Need it to not re-post the route if implemented
+  //possibly test if route is string or not
 
   useEffect(() => {
     axios.post("/add-driver-route", {
@@ -88,7 +74,7 @@ const DriverInteractions = function(props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // console.log('Checked for Riders')
+
       const findRiders = () => {
         const driver = {
           userId: route.id,
@@ -115,9 +101,25 @@ const DriverInteractions = function(props) {
           .catch((err) => console.log('Find drivers error: ', err))
       }
       findRiders();
-    }, 2000);
+    }, 500);
     return () => clearInterval(interval);
   }, [route]);
+
+  if (route) {
+    var savedRoute = route;
+    if (typeof route !== 'string') {
+      savedRoute = JSON.stringify(route);
+    }
+    localStorage.setItem("currentRoute", savedRoute);
+  }
+
+  if (userInfo) {
+    var savedUserInfo = userInfo;
+    if (typeof route !== 'string') {
+      savedUserInfo = JSON.stringify(userInfo);
+    }
+    localStorage.setItem("currentUserInfo", savedUserInfo);
+  }
 
   useEffect(() => {
     if (!loaded)
@@ -171,8 +173,8 @@ const DriverInteractions = function(props) {
   // className="allDefaultView"
 
   return (
-    <div>
-    <div className="defaultViewHeader">
+    <div className='rider-list-container'>
+    {/* <div className="defaultViewHeader">
       <div className="headerToggleView">
           <div className="viewToggle">Driver</div>
           <Link to="/riderview">
@@ -194,7 +196,21 @@ const DriverInteractions = function(props) {
             <MdLogout className="logout" size={20}/>
             </Link></div>
         </div>
-        </div>
+      </div> */}
+      <div className='top-bar'>
+              <div className='top-bar-left'>
+                <p>Driver</p>
+                <Link to="/riderview">
+                  <RiRefreshLine className='top-bar-icons' />
+                </Link>
+              </div>
+              <div className='top-bar-right'>
+                <Link to="/driverprofile" state={{id: userInfo._id, from: 'driverview'}}>
+                  <img className='avatar' src={userInfo.avatar} alt="" />
+                </Link>
+                <RiLogoutBoxRLine className='top-bar-icons' onClick={props.logOut}/>
+              </div>
+            </div>
       <br></br>
         <div className='title-bar'>
           <Link to="/driverview">
@@ -202,9 +218,12 @@ const DriverInteractions = function(props) {
           </Link>
             <p>Your Route</p>
         </div>
-      <div className="Gmap">
-        {mapCheck()}
-      </div>
+        <div className='map-container'>
+          <div className="Gmap">
+            {mapCheck()}
+          </div>
+        </div>
+
       <br></br>
       <div className="driver-list">
           <p>Total Distance: {distance}</p>

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
+import { RiRefreshLine, RiLogoutBoxRLine, RiAddFill } from "react-icons/ri";
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
 import { useNavigate } from 'react-router-dom';
-import { BiSearchAlt2, BiAlarm } from "react-icons/bi";
 
 import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
@@ -51,10 +50,16 @@ function DriverView ({ userId, logOut }) {
   const [favorites, setFavorites] = useState({});
   const [defaultRoute, setDefaultRoute] = useState({});
   const [timeClicked, setTimeClicked] = useState(false);
+  const [upcomingCheck, setUpcomingCheck] = useState(false)
 
-  const upcomingCheck = Object.keys(upcoming).length > 0;
   const API_KEY = process.env.GOOGLE_MAP_API_KEY_VIEWS;
   const navigate = useNavigate()
+
+  const handleUpcomingChange = (bool) => {
+    setUpcomingCheck(bool)
+  }
+
+  // console.log('can start trip????', startedTrip, upcomingCheck)
 
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
@@ -103,18 +108,38 @@ function DriverView ({ userId, logOut }) {
 
   useEffect(() => {
     if (typeof directionsResponse !== 'string') {
-      console.log(directionsResponse)
+      console.log('All Good!')
     }
   }, [directionsResponse])
 
+  if (typeof directionsResponse !== 'string') {
+    var jsonCurrentMapData = JSON.stringify(directionsResponse);
+    localStorage.setItem("currentMapData", jsonCurrentMapData);
+  }
 
+  if (typeof window !== 'undefined') {
+    if (isDefault) {
+      var jsonMapData = JSON.stringify(directionsResponse);
+      localStorage.setItem("defaultRouteMap", jsonMapData);
+      // console.log('Default Route Set', jsonMapData);
+    }
+  }
+
+  const pulledRoute = localStorage.getItem("currentRoute");
+  const passedRoute = JSON.parse(pulledRoute);
+
+  const pulledMapData = localStorage.getItem("currentMapData");
+  const passedMapData = JSON.parse(pulledMapData);
+
+  const pulledUserInfo = localStorage.getItem("currentUserInfo");
+  const passedUserInfo = JSON.parse(pulledUserInfo);
 
     //*****************************************************//
     //ABOVE IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
     //*****************************************************//
 
 
-    console.log('DIRRRRR', directionsResponse)
+    // console.log('DIRRRRR', directionsResponse)
 
   const route = {
     id: userId,
@@ -146,10 +171,14 @@ function DriverView ({ userId, logOut }) {
       }
       if (result.data[0].driver_route.start_address !== undefined) {
         setUpcoming(result.data[0].driver_route)
+        handleUpcomingChange(true)
+      }
+      if (startedTrip) {
+        handleUpcomingChange(false)
       }
     })
     .catch(err => console.log(err))
-  }, [userId])
+  }, [userId, startedTrip])
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -175,16 +204,16 @@ function DriverView ({ userId, logOut }) {
         </div>
         <div className='top-bar-right'>
           <Link to="/driverprofile" state={{id: userId, userInfo: userInfo, from: 'driverview'}}>
-            <img className='avatar' src={avatar} alt="avatar-small" />
+            <img className='headerAvatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons' size={20} onClick={logOut}/>
+            <RiLogoutBoxRLine className='top-bar-icons' onClick={logOut}/>
           </Link>
         </div>
       </div>
 
       <div className="welcomeCont">
-        <div className="welcomeMsg">Welcome {name.split(' ')[0]},</div>
+        <div className="welcomeMsg">Welcome <span className='highlight-name'>{name.split(' ')[0]}</span>,</div>
       </div>
 
       {showPrompt ? <DriverPrompt show={showPrompt} close={closeModal} userId={userId}/> : ''}
@@ -248,13 +277,13 @@ function DriverView ({ userId, logOut }) {
             {isDefault
             ? <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Riders
-                <BiSearchAlt2 className="searchBtn" size={20}/>
+                disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Create Route
+                <RiAddFill className="searchBtn" size={20}/>
               </button>
             : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
                 <button
-                  disabled={!start.start_address || !end.end_address || startedTrip} className="primary-btn-find">Find Riders
-                  <BiSearchAlt2 className="searchBtn" size={20}/>
+                  disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Create Route
+                  <RiAddFill className="searchBtn" size={20}/>
                 </button>
               </Link>
             }
@@ -262,39 +291,46 @@ function DriverView ({ userId, logOut }) {
         </form>
       <div className='default-ongoing-upcoming-flex'>
         {defaultRoute.default
-        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'} startedTrip={startedTrip} />
+        ? <DefaultRouteDriver userId={userId} defaultRoute={defaultRoute} favorites={favorites} dir={directionsResponse} userInfo={userInfo} from={'driverview'} startedTrip={startedTrip} upcomingCheck={upcomingCheck}/>
         : (
             <div className="ongoing-trip-container">
               <h5>Default Route</h5>
-              <div className="card">
-                <p className='no-route-message'>No default route set</p>
+              <div className="driver-card">
+                <p className='not-found-text'>No default route set</p>
               </div>
             </div>
         )
         }
         {startedTrip === true
-        ? <OngoingTripDriver userId={userId} endTrip={endTrip}/>
+        ? <OngoingTripDriver userId={userId} endTrip={endTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo}/>
         : (
           <div className="ongoing-trip-container">
             <h5>Ongoing Trip</h5>
-            <div className="card">
-              <p className='no-route-message'> No active routes </p>
+            <div className="driver-card">
+              <p className='not-found-text'> No active routes </p>
             </div>
           </div>
         )
         }
         {!startedTrip
-        ? <UpcomingTripDriver userId={userId} startTrip={startTrip}/>
+        ? <UpcomingTripDriver userId={userId} startTrip={startTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo} onChange={handleUpcomingChange}/>
         : (
             <div className="ongoing-trip-container">
               <div className="ongoing-title">Upcoming Trip</div>
-              <div className="card">
-                <p className='no-route-message'> No upcoming routes </p>
+              <div className="driver-card">
+                <p className='not-found-text'> No upcoming routes </p>
               </div>
             </div>
           )
         }
       </div>
+      {/* <div>
+      <Link to="/rider-list" state={{dir: passedMapData, route: passedRoute, userInfo: passedUserInfo}}>
+        <button>
+          Place Arrow Here
+        </button>
+      </Link>
+      </div> */}
 
     </div>
   )

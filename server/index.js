@@ -84,13 +84,13 @@ app.put('/unfavorite/:user_id/:favorite_user_id', async (req, res) => {
 })
 
 // cancel rider trip
-app.put('/cancel-rider-route:user_id', async (req, res) => {
+app.put('/cancel-rider-route/:user_id', async (req, res) => {
   let result = await tripComplete.cancelRiderRoute(req.params.user_id)
   res.send(result);
 })
 
 // cancel driver trip
-app.put('/cancel-driver-route:user_id', async (req, res) => {
+app.put('/cancel-driver-route/:user_id', async (req, res) => {
   let result = await tripComplete.cancelDriverRoute(req.params.user_id)
   res.send(result);
 })
@@ -115,7 +115,6 @@ app.get('/getdriverview', function(req, res) {
   let userid = req.query.userId;
   getDriverView(userid)
   .then((result) => {
-    console.log(result)
     res.send(result)
   })
   .catch(err => console.log(err))
@@ -125,7 +124,6 @@ app.get('/getriderview', function(req, res) {
   let userid = req.query.userId;
   getRiderView(userid)
   .then((result) => {
-    console.log(result)
     res.send(result)
   })
   .catch(err => console.log(err))
@@ -216,7 +214,7 @@ app.post('/reviews/:user_id/report', (req, res) => {
 // ------------------------------------------------------------------------------------------ //
 app.post('/driver-list', async (req, res) => {
   const rider =  {
-    id: req.body.userId,
+    _id: req.body._id,
     start_address: req.body.start_address,
     start_lat: req.body.start_lat,
     start_lng: req.body.start_lng,
@@ -228,7 +226,7 @@ app.post('/driver-list', async (req, res) => {
   const driverList = [];
 
   try {
-    const activeDrivers = await getDriverList();
+    const activeDrivers = await getDriverList(req.body._id);
     for (let driver of activeDrivers) {
       const startDistance = await calculateDistance(rider.start_lat, rider.start_lng, driver.driver_route.start_lat, driver.driver_route.start_lng);
       const endDistance = await calculateDistance(rider.end_lat, rider.end_lng, driver.driver_route.end_lat, driver.driver_route.end_lng);
@@ -315,14 +313,11 @@ app.post('/rider-list', async (req, res) => {
   }
   const driverID = req.body.userId
   const seats = req.body.total_seats;
-  // console.log('DRIVER DATA: ', driverID);
 
   try {
     const assignedRiders = await getRiderArray(driverID);
-    // console.log('DONE WAITING');
     Promise.all(assignedRiders)
       .then((riders) => {
-        // console.log('ALL RIDERS: ', riders)
         res.status(200).send({riders: riders, seats: seats});
       })
   }

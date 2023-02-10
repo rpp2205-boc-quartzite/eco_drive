@@ -26,7 +26,7 @@ const OngoingTripRider = (props) => {
   }, [])
 
   const cancelRoute = async () => {
-    await axios.get(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    await axios.put(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
     setDriver(null);
   }
 
@@ -34,7 +34,7 @@ const OngoingTripRider = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="card">
+        <div className="driver-card">
           <div className="card-header">
             <div className='header-info'>
               <img src={driver.avatar} alt="avatar" className='avatar'/>
@@ -54,9 +54,11 @@ const OngoingTripRider = (props) => {
           <p className='card-detail'>License plate #: {driver.license_plate}</p>
           <p className='card-detail'>Time: {driver.driver_route.time} </p>
           <div className="btn-horizontal-flex">
-            <button className="cancel-btn btn-flex-grow" onClick={cancelRoute}>Cancel</button>
+            <Link to="/riderview" className="link link-wrap-btn">
+              <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
+            </Link>
             <Link to="/trip-complete-rider" className="link link-wrap-btn" state={{ driver, user }}>
-              <button type='submit' onClick={props.endTrip}  className="negative-btn btn-flex-grow">End Trip</button>
+              <button type='submit' onClick={props.endTrip}  className="negative-btn">End Trip</button>
             </Link>
           </div>
         </div>
@@ -66,8 +68,8 @@ const OngoingTripRider = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Ongoing Trip</h5>
-        <div className="card">
-          <p className='no-route-message'> No active routes </p>
+        <div className="driver-card">
+          <p className='not-found-text'> No active routes </p>
         </div>
       </div>
     )

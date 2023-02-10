@@ -17,6 +17,7 @@ import DriverList from './components/DriverList/DriverList.jsx';
 import AllReviews from './components/RatingsReviews/AllReviews.jsx';
 import DriverInteractions from './components/RiderList/DriverInteractions.jsx'
 import TripCompleteRider from './components/TripComplete/TripCompleteRider.jsx';
+import TripCompleteDriver from './components/TripComplete/TripCompleteDriver.jsx';
 
 function App() {
   const [userId, setUserId] = useState('');
@@ -72,9 +73,8 @@ function App() {
   const [riderOnGoingRoute, setRiderOnGoingRoute] = useState({});
   const updateRiderOnGoingRoute = (driverInfo, userRouteInfo, startDistance, endDistance) => {
     userRouteInfo.driver_id = driverInfo._id;
-    userRouteInfo.starting_distance = startDistance.text;
+    userRouteInfo.start_distance = startDistance.text;
     userRouteInfo.end_distance = endDistance.text;
-    userRouteInfo.started = false;
     axios.post('/postRiderRoute', userRouteInfo)
     .then((result) => {
       setRiderOnGoingRoute(driverInfo);
@@ -95,10 +95,11 @@ function App() {
           <Route path="/all-reviews" element={<AllReviews />} />
           <Route path="/riderview" element={<RiderView userId={userId} riderOnGoingRoute={riderOnGoingRoute} logOut={logOut}/>} />
           <Route path="/driverprofile" element={<DriverProfile />} />
-          <Route path="/riderprofile" element={<RiderProfile />} />
+          <Route path="/riderprofile" element={<RiderProfile logOut={logOut}/>} />
           <Route path="/driver-list" element={<DriverList updateRiderOnGoingRoute={updateRiderOnGoingRoute} logOut={logOut}/>} />
           <Route path="/rider-list" element={<DriverInteractions updateRiderOnGoingRoute={updateRiderOnGoingRoute}/>} />
           <Route path="/trip-complete-rider" element={<TripCompleteRider />} />
+          <Route path="/trip-complete-driver" element={<TripCompleteDriver />} />
         </Route>
       </Routes>
     </div>

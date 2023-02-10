@@ -26,7 +26,7 @@ class RiderProfile extends React.Component {
       drivers_license: '',
       rider_reviews: [],
       recent_drivers: [],
-      rating: 4,
+      rating: 5,
       rider_trips: [],
       editProfile: false,
       infoChangedSuccess: false,
@@ -136,7 +136,7 @@ class RiderProfile extends React.Component {
             <RiHome4Fill className='top-bar-icons'/>
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons' size={20}/>
+            <RiLogoutBoxRLine className='top-bar-icons'/>
           </Link>
         </div>
       </div>

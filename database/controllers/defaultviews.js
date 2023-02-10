@@ -2,13 +2,11 @@ const User = require('../models/user.js').User;
 
 module.exports = {
   getDriverView: (user) => {
-    console.log('ID', user)
     let id = {_id: user};
-    return User.find(id).then((user) => {return user}).catch(err => console.log(err))
+    return User.find(id).populate('driver_route.riders.rider_id').then((user) => {return user}).catch(err => console.log(err))
   },
 
   getRiderView: (user) => {
-    console.log('ID', user)
     let id = {_id: user};
     return User.find(id).then((user) => {return user}).catch(err => console.log(err))
   },
@@ -47,7 +45,7 @@ module.exports = {
       // Update rider_router
       await User.findOneAndUpdate(user_id, {rider_route: update})
       // Add rider id to the driver's rider list
-      await module.exports.addIdToRiderListOfDriver(newRoute.driver_id, newRoute._id, newRoute.starting_distance, newRoute.end_distance)
+      await module.exports.addIdToRiderListOfDriver(newRoute.driver_id, newRoute._id, newRoute.start_distance, newRoute.end_distance)
       console.log('Updated user record with new rider route');
     } catch (err) {
       console.log('Error updating rider route: ', err);

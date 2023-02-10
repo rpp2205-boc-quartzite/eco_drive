@@ -18,11 +18,14 @@ const DefaultRouteDriver = ({ userId, defaultRoute, favorites, dir, userInfo, fr
     // userFavorites: favorites
   }
 
-  console.log('SOS', dir)
+  var defaultMapData = localStorage.getItem("defaultRouteMap");
+  var parsedMapData = JSON.parse(defaultMapData);
+  // console.log('SOS', defaultMapData)
   const handleClick = (e) => {
     e.preventDefault()
     if (!startedTrip && !upcomingCheck) {
-      navigate('/rider-list', {state: {dir: dir, route: route, userInfo: userInfo, from: from}})
+      localStorage.setItem("currentMapData", defaultMapData);
+      navigate('/rider-list', {state: {dir: parsedMapData, route: route, userInfo: userInfo, from: from}})
     }
   }
 

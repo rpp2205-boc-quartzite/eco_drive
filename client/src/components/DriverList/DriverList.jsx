@@ -9,6 +9,8 @@ import { RiRefreshLine, RiLogoutBoxRLine } from "react-icons/ri";
 
 
 import DriverCard from './DriverCard.jsx'
+import DriverConfirmation from './DriverConfirmation.jsx'
+import BookingSuccessMessage from './BookingSuccessMessage.jsx'
 
 const DriverList = (props) => {
 
@@ -52,6 +54,25 @@ const DriverList = (props) => {
   useEffect(() => {findDrivers()}, [])
   useEffect(() => {findDrivers()}, [route])
 
+  const [driverConfirmationOn, setDriverConfirmation] = useState(false);
+  const [successMessageOn, setSuccessMessage] = useState(false);
+  const [selectedDriver, setSelectedDriver] = useState({});
+
+  const toggleDriverConfirmation = (action, driverInfo, userRouteInfo, startDistance, endDistance) => {
+    if (action==='on') {
+      const confirmInfo = {driverInfo, userRouteInfo, startDistance, endDistance}
+      setSelectedDriver(confirmInfo)
+      setDriverConfirmation(!driverConfirmationOn)
+    } else if (action==='off') {
+      setSelectedDriver({})
+      setDriverConfirmation(!driverConfirmationOn)
+    }
+  }
+
+  const toggleSuccessMessage = () => {
+    setSuccessMessage(!successMessageOn)
+  }
+
 
   if (drivers !== null) {
     if (drivers.length > 0) {
@@ -65,58 +86,89 @@ const DriverList = (props) => {
         }
       }
       return (
-        <div>
-          <div className='top-bar'>
-            <div className='top-bar-left'>
-              <p>Rider</p>
-              <Link to="/driverview">
-                <RiRefreshLine className='top-bar-icons' />
-              </Link>
+        <>
+          { successMessageOn && <BookingSuccessMessage /> }
+          {
+            driverConfirmationOn &&
+            <DriverConfirmation
+              driverInfo={selectedDriver.driverInfo}
+              userRouteInfo={selectedDriver.userRouteInfo}
+              startDistance={selectedDriver.startDistance}
+              endDistance={selectedDriver.endDistance}
+              toggleDriverConfirmation={toggleDriverConfirmation}
+              toggleSuccessMessage={toggleSuccessMessage}
+              updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
+            />
+          }
+          <div className='component-container'>
+            <div className='top-bar'>
+              <div className='top-bar-left'>
+                <p>Rider</p>
+                <Link to="/driverview">
+                  <RiRefreshLine className='top-bar-icons' />
+                </Link>
+              </div>
+              <div className='top-bar-right'>
+                <Link to="/riderprofile">
+                  <img className='avatar' src={userInfo.avatar} alt="" />
+                </Link>
+                <RiLogoutBoxRLine className='top-bar-icons' onClick={props.logOut}/>
+              </div>
             </div>
-            <div className='top-bar-right'>
-              <Link to="/riderprofile">
-                <img className='avatar' src={userInfo.avatar} alt="" />
+            <div className='title-bar'>
+              <Link to="/riderview">
+                <BiArrowBack className='driver-list-back-icon' />
               </Link>
-              <RiLogoutBoxRLine className='top-bar-icons' onClick={props.logOut}/>
+              <p>Your nearest drivers</p>
+            </div>
+            <div className='both-driver-lists'>
+              {favoritesDrivers.length > 0
+                ? <div className='driver-list'>
+                    <p className='subheader-driver'>Favorite drivers</p>
+                    {favoritesDrivers.map((driver) => (
+                      <DriverCard
+                        key={driver.driverInfo._id}
+                        driverInfo={driver.driverInfo}
+                        userInfo={userInfo}
+                        route={route}
+                        userRouteInfo={userRouteInfo}
+                        startDistance={driver.startDistance}
+                        endDistance={driver.endDistance}
+                        updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
+                        toggleDriverConfirmation={toggleDriverConfirmation}
+                      />
+                    ))}
+                  </div>
+                : <div className='driver-list'>
+                    <p className='subheader-driver'>Favorite drivers</p>
+                    <p className='not-found-text'>No favorite drivers found</p>
+                  </div>
+              }
+              {nonFavoritesDrivers.length > 0
+                ? <div className='driver-list'>
+                    <p className='subheader-driver'>Drivers</p>
+                    {nonFavoritesDrivers.map((driver) => (
+                      <DriverCard
+                        key={driver.driverInfo._id}
+                        driverInfo={driver.driverInfo}
+                        userInfo={userInfo}
+                        route={route}
+                        userRouteInfo={userRouteInfo}
+                        startDistance={driver.startDistance}
+                        endDistance={driver.endDistance}
+                        updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
+                        toggleDriverConfirmation={toggleDriverConfirmation}
+                      />
+                    ))}
+                  </div>
+                : <div className='driver-list'>
+                    <p className='subheader-driver'>Drivers</p>
+                    <p className='not-found-text'>No drivers found</p>
+                  </div>
+              }
             </div>
           </div>
-          <div className='title-bar'>
-            <Link to="/riderview">
-              <BiArrowBack className='driver-list-back-icon' />
-            </Link>
-            <p>Your nearest drivers</p>
-          </div>
-          <div className='driver-list'>
-            <p className='subheader-driver'>Favorite drivers</p>
-            {favoritesDrivers.map((driver) => (
-              <DriverCard
-                key={driver.driverInfo._id}
-                driverInfo={driver.driverInfo}
-                userInfo={userInfo}
-                route={route}
-                userRouteInfo={userRouteInfo}
-                startDistance={driver.startDistance}
-                endDistance={driver.endDistance}
-                updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
-              />
-            ))}
-          </div>
-          <div className='driver-list'>
-            <p className='subheader-driver'>Drivers</p>
-            {nonFavoritesDrivers.map((driver) => (
-              <DriverCard
-                key={driver.driverInfo._id}
-                driverInfo={driver.driverInfo}
-                userInfo={userInfo}
-                route={route}
-                userRouteInfo={userRouteInfo}
-                startDistance={driver.startDistance}
-                endDistance={driver.endDistance}
-                updateRiderOnGoingRoute={props.updateRiderOnGoingRoute}
-              />
-            ))}
-          </div>
-        </div>
+        </>
       )
     } else {
       return (

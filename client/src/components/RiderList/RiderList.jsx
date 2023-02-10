@@ -1,5 +1,4 @@
 import React from "react";
-import "./RiderList.css";
 import { Link } from 'react-router-dom';
 import { FiInfo } from "react-icons/fi";
 import axios from 'axios';
@@ -10,6 +9,7 @@ const RiderList = function(props) {
 
 
   const [totalRiders, setTotalRiders] = React.useState(['no', 'riders']);
+
 
 
 React.useEffect(() => {
@@ -77,14 +77,14 @@ React.useEffect(() => {
                 //   <div className="rider-time">{rider.riderID.time}</div>
                 //   <button className="remove-rider" id={rider.riderID.rider_id} type="submit" onClick={removeRider}>decline this rider</button>
                 // </div>
-                  <div className='card'>
+                  <div className='card' key={rider.riderID.rider_id}>
                     <div className='card-header'>
                       <div className='header-info'>
                         <img className='avatar' src={rider.profile.avatar} alt="Rider Avatar" />
                         <p>{rider.profile.full_name}</p>
                       </div>
                       <div className='icons-flex'>
-                        <Link to="/ratings-reviews" state={{userData: props.userInfo, revieweeData:rider.riderID.rider_id, from: 'rider-list', route: props.route}}>
+                        <Link to="/ratings-reviews" state={{userData: props.userInfo, revieweeData:rider.profile, from: 'rider-list', view: 'driver'}}>
                           <FiInfo className='card-icon info-icon'/>
                         </Link>
                       </div>

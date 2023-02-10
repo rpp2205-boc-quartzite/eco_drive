@@ -14,24 +14,27 @@ const UpcomingTripRider = (props) => {
       let result = await axios.get('/getdriverview',  { params: {userId: props.userId} }).catch(err => console.log('ERR: ', err))
       result = result.data[0];
       setUser(result);
-      let driverId = result.rider_route.driver_id;
-      let driverInfo = await axios.get('/getriderview', { params: {userId: driverId}}).catch(err => console.log('ERR: ', err))
-      driverInfo = driverInfo.data[0];
-      setDriver(driverInfo);
+      if (result) {
+        let driverId = result.rider_route.driver_id;
+        let driverInfo = await axios.get('/getriderview', { params: {userId: driverId}}).catch(err => console.log('ERR: ', err))
+        driverInfo = driverInfo.data[0];
+        setDriver(driverInfo);
+      }
     }
     myFunc();
   }, [])
 
   const cancelRoute = async () => {
-    await axios.get(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
+    await axios.put(`/cancel-rider-route/${props.userId}`).catch(err => console.log('ERR: ', err))
     setDriver(null);
+    props.onChange(false);
   }
 
   if (user && driver) {
     return (
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
-        <div className="card">
+        <div className="driver-card">
           <div className="card-header">
             <div className='header-info'>
               <img src={driver.avatar} alt="avatar" className='avatar'/>
@@ -42,7 +45,7 @@ const UpcomingTripRider = (props) => {
                 ? <RiHeart3Fill className='card-icon full-heart-icon'/>
                 : (<RiHeart3Line className='card-icon outlined-heart-icon'/>)
               }
-              <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver }}>
+              <Link to="/ratings-reviews"  state={ {from: 'riderview', userData: user, revieweeData: driver } }>
                 <RiInformationLine className='card-icon info-icon'/>
               </Link>
             </div>
@@ -51,8 +54,10 @@ const UpcomingTripRider = (props) => {
           <p className='card-detail'>License plate #: {driver.license_plate}</p>
           <p className='card-detail'>Time: {driver.driver_route.time} </p>
           <div className="btn-horizontal-flex">
-            <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
-            <button type='submit' onClick={props.startTrip} className="primary-btn">Start Trip</button>
+            <Link to="/riderview" className="link link-wrap-btn">
+              <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
+            </Link>
+            <button type='submit' onClick={props.startTrip} className="primary-btn btn-flex-grow">Start Trip</button>
           </div>
         </div>
       </div>
@@ -61,8 +66,8 @@ const UpcomingTripRider = (props) => {
     return (
       <div className="ongoing-trip-container">
         <h5>Upcoming Trip</h5>
-        <div className="card">
-          <p className='no-route-message'>No upcoming routes</p>
+        <div className="driver-card">
+          <p className='not-found-text'>No upcoming routes</p>
         </div>
       </div>
     )
