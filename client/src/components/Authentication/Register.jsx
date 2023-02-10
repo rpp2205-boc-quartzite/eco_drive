@@ -16,6 +16,14 @@ export default function Register(props) {
   const [avatarCheck, setAvatar] = useState(false);
   const [avatar, setAvatarValue] = useState('');
   const [tosCheck, setTosCheck] = useState(false);
+  const [age, setAge] = useState('');
+  const [nameCheck, setNameCheck] = useState(false);
+  const [emailCheck, setEmailCheck] = useState(false);
+  const [ageCheck, setAgeCheck] = useState(false);
+  const [passCheck, setPassCheck] = useState(false);
+  const [confirmPassCheck, setConfirmPassCheck] = useState(false);
+  const [currentAge, setCurrentAge] = useState(18);
+  
 
   const navigate=useNavigate();
 
@@ -29,20 +37,35 @@ export default function Register(props) {
 
   const handleNext = (event) => {
     event.preventDefault();
-    if (email === '' || full_name === '' || dob === '') {
-      return alert('Please complete empty fields');
-    };
-
     const ageDate = new Date(dob);
+    setAge(calculateAge(ageDate));
 
-    if (calculateAge(ageDate) < 21) {
-      return alert('You must be over 21 to use this application.');
-    }
+    if (full_name === '' || email === '' || (age < 18 || age === '') || password === '' || confirmPass === '') {
+      if (full_name === '') {
+        setNameCheck(true);
+      };
+      if (email === '') {
+        setEmailCheck(true);
+      };
+      if (password === '' || confirmPass === '') {
+        setPassCheck(true);
+        setConfirmPassCheck(true);
+      };
+      if (age === '') {
+        setAgeCheck(true);
+      };
+      if (age !== '' && age < 18) {
+        setCurrentAge(age);
+        return;
+      };
+
+      return;
+    };
 
     if (password !== confirmPass) {
       setPass('');
       setConfirmPass('');
-      return alert('Password does not match!');
+      return;
     }
 
     if (tosCheck === false) {
@@ -96,42 +119,58 @@ export default function Register(props) {
                   <div className='label-title-container'>
                     <label htmlFor='name' className='label-title-2'>Name</label>
                     <div className='valid-check'>*</div>
+                    {nameCheck === true &&
+                      <div className='error-message'><span className='error-text'>Please input your name</span></div>}
                   </div>
-                  <input className='input-field' value={full_name} name='name' onChange={(event) => setName(event.target.value)} id='name' required />
+                  <input className='input-field' value={full_name} name='name' onChange={(event) => {setName(event.target.value); setNameCheck(false)}} id='name' required />
                 </div>
                 <div className='label-container-2'>
                   <div className='label-title-container'>
                     <label htmlFor='email' className='label-title-3'>Email</label>
                     <div className='valid-check'>*</div>
+                    {emailCheck === true &&
+                      <div className='error-message'><span className='error-text'>Please input your email</span></div>}
                   </div>
-                  <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())} type='email' id='email' name='email' required/>
+                  <input className='input-field' value={email} onChange={(event) => {setEmail(event.target.value.toLowerCase()); setEmailCheck(false)}} type='email' id='email' name='email' required/>
                 </div>
                 <div className='label-container-3'>
                   <div className='label-title-container'>
                     <label htmlFor='dob' className='label-title-4'>Date of Birth</label>
                     <div className='valid-check'>*</div>
+                    {currentAge < 18 && 
+                      <div className='error-message'><span className='error-text'>You must be over 18 years old</span></div>}
+                    {ageCheck === true && 
+                      <div className='error-message'><span className='error-text'>Please enter date of birth</span></div>}  
                   </div>
-                  <input className='input-field' value={dob} onChange={(event) => setDob(event.target.value)} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
+                  <input className='input-field' value={dob} onChange={(event) => {setDob(event.target.value); setAgeCheck(false)}} type='date' placeholder='mm/dd/yyyy' id='dob' name='dob' required/>
                 </div>
                 <div className='label-container-4'>
                   <div className='label-title-container'>
                     <label htmlFor='password' className='label-title-5'>Password</label>
                     <div className='valid-check'>*</div>
+                    {password !== confirmPass &&
+                      <div className='error-message'><span className='error-text'>Password does not match</span></div>}
+                    {passCheck === true &&
+                      <div className='error-message'><span className='error-text'>Please enter a password</span></div>}  
                   </div>
-                  <input className='input-field' value={password} onChange={(event) => setPass(event.target.value)} type='password' id='password' name='password' required/>
+                  <input className='input-field' value={password} onChange={(event) => {setPass(event.target.value); setPassCheck(false)}} type='password' id='password' name='password' required/>
                 </div>
                 <div className='label-container-5'>
                   <div className='label-title-container'>
                     <label htmlFor='confirmPass' className='signup-label'>Confirm Password</label>
                     <div className='valid-check'>*</div>
+                    {password !== confirmPass &&
+                      <div className='error-message'><span className='error-text'>Password does not match</span></div>}
+                    {confirmPassCheck === true &&
+                      <div className='error-message'><span className='error-text'>Please enter a password</span></div>}   
                   </div>
-                  <input className='input-field' value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='Confirmpass' name='Confirmpass' required/>
+                  <input className='input-field' value={confirmPass} onChange={(event) => {setConfirmPass(event.target.value); setConfirmPassCheck(false)}} type='password' id='Confirmpass' name='Confirmpass' required/>
                 </div>
               </div>
               </form>
               <div className='tos-wrapper'>
-                  <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(true)}required/>
-                  <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service </label>
+                  <input className='tos-checkbox' type="checkbox" id="checkbox" onClick={(event) => setTosCheck(!tosCheck)}required/>
+                  <label className='tos-text' htmlFor="checkbox">I agree to Terms of Service {tosCheck === false &&<span className='valid-check-tos'>*</span>}</label>
               </div>
           </div>
             <div className='link-frame'>
