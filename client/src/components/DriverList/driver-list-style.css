@@ -259,6 +259,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 16px;
+  height: 32px;
 }
 
 .top-bar-left p {
@@ -273,6 +274,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: 24px;
+  height: 32px;
 }
 
 .no-driver-top {
