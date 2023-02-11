@@ -50,7 +50,7 @@ export default function Register(props) {
       .catch((err) => {
         console.log(err);
       });  
-    }
+    };
   };
 
   const handleNext = (event) => {
@@ -97,8 +97,7 @@ export default function Register(props) {
       return alert('Please agree to Terms of Service so we can harvest your data.');
     };
 
-    emailChecker();
-    
+    emailChecker(); 
   };
 
   const handleAvatar = (event) => {
@@ -109,7 +108,6 @@ export default function Register(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     if (drivers_license === '') {
       axios.post('/register', { email, password, full_name, dob, drivers_license, license_plate, avatar, is_driver: false, is_rider: true})
         .then((result) => {
