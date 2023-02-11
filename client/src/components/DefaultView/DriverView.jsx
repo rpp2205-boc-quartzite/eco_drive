@@ -7,7 +7,6 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
 import { useNavigate } from 'react-router-dom';
-
 import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import OngoingTripDriver from './OngoingTripDriver.jsx';
@@ -72,7 +71,6 @@ function DriverView ({ userId, logOut }) {
   const pickUpRef = React.useRef();
   const dropOffRef = React.useRef();
 
-
   useEffect(() => {
     if (pickUp && dropOff) {
       setLoading(true);
@@ -98,7 +96,7 @@ function DriverView ({ userId, logOut }) {
         });
 
         setDirectionsResponse({json: JSON.stringify(results)});
-        // console.log('FINISHED');
+        console.log('FINISHED');
         setLoading(false);
       }
 
