@@ -16,7 +16,7 @@ const containerStyle = {
   width: '343px',
   height: '275px',
   borderRadius: '10px',
-  border: '1px solid var(--green2)'
+  border: '1px solid var(--gray4)'
 };
 
 const center = {
