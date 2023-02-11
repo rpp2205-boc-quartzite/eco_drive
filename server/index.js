@@ -381,8 +381,15 @@ app.get('*', function(req, res) {
 
 const port = 8080;
 
-const server = app.listen(port, () => {
-  console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
-});
+// const server = app.listen(port, () => {
+//   console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
+// });
 
-module.exports = server;
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {console.log(`Listening on port ${port}`)});
+} else {
+  const server = app.listen(port, () => {console.log(`Listening on port ${port}`)});
+  module.exports = server;
+}
+
+// module.exports = server;

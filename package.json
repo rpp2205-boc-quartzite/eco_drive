@@ -80,13 +80,22 @@
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
   "scripts": {
+    "clear_jest": "jest --clearCache",
     "start": "webpack --mode=production --node-env=production && node ./server/index.js",
     "start:dev": "nodemon ./server/index.js",
     "build:dev": "webpack --mode=development --watch",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch & nodemon ./server/index.js",
-    "test": "jest --coverage",
+    "test": "jest ./ecodrive.test.js --coverage --forceExit",
     "test:rr": "jest ./client/src/components/RatingsReviews/rr.test.js --coverage",
     "react-babel": "babel client/src --out-dir client/compiled --presets=@babel/preset-react --source-maps inline --watch"
   },
