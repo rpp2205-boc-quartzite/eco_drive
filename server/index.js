@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -354,7 +354,8 @@ app.post("/rider-remove", async (req, res) => {
     const driverID = req.body.driverID;
     const riderID = req.body.riderID;
       try {
-        const removedRiders = await removeRiderFromRiderArray(driverID, riderID);
+        // This will both get rider's id off driver_route.riders list and reset rider's rider_route
+        const removedRiders = await tripComplete.cancelRiderRoute(riderID, driverID);
         res.status(200).send(removedRiders);
       }
       catch (err) {

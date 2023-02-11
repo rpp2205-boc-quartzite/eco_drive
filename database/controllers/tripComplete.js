@@ -75,13 +75,15 @@ module.exports = {
   },
 
   // cancel rider route
-  cancelRiderRoute: async (_id) => {
-    let users = await User.find({ _id })
-    let user = users[0];
+  cancelRiderRoute: async (rider_id, driver_id) => {
+    if (driver_id === undefined) {
+      let user = await User.findOne({_id: rider_id});
+      driver_id = user.rider_route.driver_id
+    }
     // remove rider from riders array of driver
-    await User.updateOne({_id: user.rider_route.driver_id }, {$pull: {driver_route: {riders: _id}}}).catch(err => console.log(err));
+    await User.updateOne({_id: driver_id}, {$pull: {"driver_route.riders": {rider_id: rider_id}}}).catch(err => console.log(err));
     // remove rider_route for user
-    await User.updateOne({_id }, {$set: {rider_route: { started: false }}}).catch(err => console.log(err));
+    await User.updateOne({_id: rider_id }, {$set: {rider_route: { started: false }}}).catch(err => console.log(err));
     return 'Successfully cancelled route'
   },
 

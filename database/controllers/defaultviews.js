@@ -61,17 +61,24 @@ module.exports = {
     return User.findOneAndUpdate(id, update).then((result) => console.log('Updated user record with license info')).catch(err => console.log('Error updating user record'));
   },
 
-  addIdToRiderListOfDriver: (driverId, newRiderId, startDistance, endDistance) => {
+  addIdToRiderListOfDriver: async (driverId, newRiderId, startDistance, endDistance) => {
     const driver_id = {_id: driverId};
     const rider = {
       rider_id: newRiderId,
       starting_distance: startDistance,
       end_distance: endDistance
     }
-    User.updateOne(driver_id, {$push: {"driver_route.riders": rider}})
-      .then (() => console.log('Successfully added rider id to driver\'s rider list '))
-      .catch((err) => {
-        console.log('Error adding rider id to driver\'s rider list: ', err)})
+    try {
+      const driver = await User.findOne(driver_id)
+      if (!driver.driver_route.riders.includes(newRiderId)) {
+        await User.updateOne(driver_id, {$push: {"driver_route.riders": rider}})
+        console.log('Successfully added rider id to driver\'s rider list ')
+      } else {
+        console.log('This rider is already in the list')
+      }
+    } catch(err) {
+      console.log('Error adding rider id to driver\'s rider list: ', err)
+    }
   },
 
   removeIdOffRiderListOfDriver: (driverId, riderId) => {

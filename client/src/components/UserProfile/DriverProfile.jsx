@@ -11,10 +11,13 @@ import PreviousDrivesList from './PreviousDrivesList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
 import { randomFacts } from './RandomFacts.jsx';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 class DriverProfile extends React.Component {
   constructor(props) {
     super(props);
+
     console.log( 'DRIVER PROFILE PROPS', this.props)
     this.state = {
       userId: this.props.location.state.id,
@@ -39,12 +42,14 @@ class DriverProfile extends React.Component {
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSuccessClosure = this.handleSuccessClosure.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount () {
     var id = this.state.userId;
-    //console.log('driver props', props)
+    console.log('driver props', this.props)
     //console.log('IDDDD', id)
+    console.log('driver props', this.props)
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)
@@ -97,6 +102,12 @@ class DriverProfile extends React.Component {
     this.setState({infoChangedSuccess: false})
   }
 
+  logOut() {
+    cookies.remove('TOKEN', {
+      path: "/",
+    });
+  }
+
   handleSubmit(event){
     event.preventDefault()
     console.log('submitted!')
@@ -147,7 +158,7 @@ class DriverProfile extends React.Component {
               <RiHome4Fill className='top-bar-icons'/>
             </Link>
             <Link to='/'>
-              <RiLogoutBoxRLine className='top-bar-icons'/>
+              <RiLogoutBoxRLine className='top-bar-icons' onClick={this.logOut}/>
             </Link>
           </div>
         </div>

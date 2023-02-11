@@ -20,14 +20,22 @@
   font-family: 'Poppins', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
+  background-color: var(--gray1);
+  font-family: 'Poppins', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #root {
   max-width: 375px;
+  flex-grow: 1;
+  background-color: var(--gray1);
 }
 
 /* body {
@@ -58,6 +66,7 @@ h1 {
   padding: 0px;
   position: relative;
   width: 375px;
+  font-family: 'Poppins';
 }
 
 .defaultViewHeader {
@@ -354,11 +363,14 @@ h1 {
   order: 2;
   align-self: stretch;
   flex-grow: 0;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
 }
 
 .primary-btn-find:disabled {
   background: var(--gray3);
-  color: var(--gray1);
+  color: var(--gray6);
 }
 
 
