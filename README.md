@@ -72,31 +72,25 @@ Reviews include a 5-star rating, calculated to the nearest half-point. In additi
 - Jest Testing
 - AWS
 
-## Technical Challenges and research that you anticipated
-* Why, what was the plan to overcome those challenges?
-* What did you learn?
-
-## Challenges that were unexpected
-* Why was it a challenge
-* What did you learn?
+## Technical Challenges
+*  Have a better separation of sub-components
+*  Avoid unnecessary overuse of classNames for CSS impacting performance
+*  Take the time to optimize or develop microservices
 
 ## Video Demo / Screen shot walkthrough of the app
-* What were the user stories /  what was MVP (mention Minimal Viable Product)
+
 
 ## How does the app work?
-* What happens behind the scenes when the user interacts with it?
-* OR What are all the places the data travels?  What happens to that data?
-* Optionally include a diagram
-* How does the tech stack come together?
+See the Figma [here.](https://www.figma.com/proto/HEWbDkuO29mAwlEXWmwR8c/EcoDrive?page-id=0%3A1&node-id=3%3A7&viewport=-1612%2C346%2C1.03&scaling=scale-down&starting-point-node-id=3%3A7)
 
 ## What research was required?
+* Research into working with the Google API
+* Different tech stacks that align with our goals
 
-## Workflow and Key lessons from your team - specifically those related to: Agile, CI/CD, testing, working with external stakeholders, ticketing, and user stories.
-* Your git workflow, style guides, commit guides, etc
-* What did you learn from the process
-* What were key takeaways from stand ups, code reviews, etc
-* Writing tests
-* Link to your project board, discuss completed tickets
+## Workflow and Key lessons
+* Maintain better communication around managing .env files
+* Focus on security
+* Don’t commit passwords to repo
 
 ## Next Iteration
 - Get Directions
