@@ -59,7 +59,7 @@ React.useEffect(() => {
         <div>
           <br></br>
           {/* state={{driverData: passedDriver, riderData: totalRiders}} */}
-          <Link to="/driverview">
+          <Link to="/driverview" state={{distance: props.distance}}>
           <button className="primary-btn-find" type="submit" >Accept Riders</button>
           </Link>
           <br></br>
