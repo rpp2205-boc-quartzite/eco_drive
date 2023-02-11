@@ -4,7 +4,9 @@ const path = require('path');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const TerserPlugin = require('terser-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
+require('dotenv').config({ path: './.env' });
+// const Dotenv = require('dotenv-webpack');
 
 const stylesHandler = 'style-loader';
 
@@ -25,7 +27,10 @@ const config = {
     },
 
     plugins: [
-      new Dotenv()
+    //   new Dotenv()
+    new webpack.DefinePlugin({
+        "process.env": JSON.stringify(process.env),
+      }),
     ],
 
     module: {
