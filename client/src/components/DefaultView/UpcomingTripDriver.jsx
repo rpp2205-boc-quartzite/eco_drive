@@ -16,7 +16,7 @@ const UpcomingTripDriver = (props) => {
         setUser(result);
       }
       myFunc();
-    }, 3000);
+    }, 1000);
   }, []);
 
   const cancelRoute = async () => {
@@ -33,6 +33,9 @@ const UpcomingTripDriver = (props) => {
         <h5>Upcoming Trip</h5>
         <div className="card">
           <div className="card-header-driver">
+            {user.driver_route.riders.length === 0
+            ? (<div className="no-riders"> No Riders Yet :(</div>)
+            : (
               <ul className='avatars'>
                 {user.driver_route.riders.map(rider => {
                   return (
@@ -44,6 +47,8 @@ const UpcomingTripDriver = (props) => {
                   )
                 })}
               </ul>
+            )
+            }
             <div>
               <p className="trip-capacity">{user.driver_route.riders.length} / {user.driver_route.total_seats}</p>
             </div>
@@ -56,8 +61,8 @@ const UpcomingTripDriver = (props) => {
           <div className="trip-card-body">
             <div className="defaultRouteCardTitle title-margin">Pickup:</div>
             <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.start_address}</div>
-            <div className="defaultRouteCardTitle title-margin">License plate #:</div>
-            <div className='defaultRouteCardInfo detail-margin'>{user.license_plate}</div>
+            <div className="defaultRouteCardTitle title-margin">Drop Off:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.end_address}</div>
             <div className="defaultRouteCardTitle title-margin">Time:</div>
             <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.time}</div>
           </div>
