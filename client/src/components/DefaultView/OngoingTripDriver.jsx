@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { HiArrowNarrowRight } from 'react-icons/hi';
 import axios from 'axios';
 import './ongoing-trip-style.css';
 
@@ -30,24 +31,29 @@ const OngoingTripDriver = (props) => {
         <h5>Ongoing Trip</h5>
         <div className="card">
           <div className="card-header-driver">
-            {user.driver_route.riders.length === 0
-              ? (<div className="no-riders"> Ride Alone</div>)
-              : (
-                <ul className='avatars'>
-                  {user.driver_route.riders.map(rider => {
-                    return (
-                    <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id._id}>
-                      <li className="avatars__item">
-                        <img src={rider.rider_id.avatar} alt="avatar" className='avatars__img'/>
-                      </li>
-                    </Link>
-                    )
-                  })}
-                </ul>
-              )
+            <div className='card-header-driver-left'>
+              {user.driver_route.riders.length === 0
+                ? (<div className="no-riders">Ride Alone</div>)
+                : (
+                  <ul className='avatars'>
+                    {user.driver_route.riders.map(rider => {
+                      return (
+                        <li className="avatar-li" key={rider.rider_id._id}>
+                          <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} }>
+                            <img src={rider.rider_id.avatar} alt="avatar" className='avatar avatar-item'/>
+                          </Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                )
               }
-            <div>
+            </div>
+            <div className='card-header-driver-right'>
               <p className="trip-capacity">{user.driver_route.riders.length} / {user.driver_route.total_seats}</p>
+              <Link to="/rider-list" state={{dir: props.passedMapData, route: props.passedRoute, userInfo: props.passedUserInfo}}>
+                <HiArrowNarrowRight className='driver-list-forward-icon' />
+              </Link>
             </div>
           </div>
           <div className="trip-card-body">
