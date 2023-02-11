@@ -16,7 +16,7 @@ const UpcomingTripDriver = (props) => {
         setUser(result);
       }
       myFunc();
-    }, 3000);
+    }, 1000);
   }, []);
 
   const cancelRoute = async () => {
