@@ -7,7 +7,6 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "react-google-autocomplete";
 import { useNavigate } from 'react-router-dom';
-
 import DefaultRouteDriver from './DefaultRouteDriver.jsx';
 import DriverPrompt from './DriverPromptModal.jsx';
 import OngoingTripDriver from './OngoingTripDriver.jsx';
@@ -59,8 +58,6 @@ function DriverView ({ userId, logOut }) {
     setUpcomingCheck(bool)
   }
 
-  // console.log('can start trip????', startedTrip, upcomingCheck)
-
   //*****************************************************//
   //BELOW IS CODE THAT RENDERS DATA NEEDED FOR RIDER-LIST MAP/////////////////////////////////////////////////////////////
   //*****************************************************//
@@ -71,7 +68,6 @@ function DriverView ({ userId, logOut }) {
 
   const pickUpRef = React.useRef();
   const dropOffRef = React.useRef();
-
 
   useEffect(() => {
     if (pickUp && dropOff) {
@@ -98,7 +94,7 @@ function DriverView ({ userId, logOut }) {
         });
 
         setDirectionsResponse({json: JSON.stringify(results)});
-        // console.log('FINISHED');
+        console.log('FINISHED');
         setLoading(false);
       }
 
@@ -182,12 +178,24 @@ function DriverView ({ userId, logOut }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('/driver/:_id/defaultroute', {data: route}) //, directionsResponse: directionsResponse
+    if (!start.start_address) {
+      alert('Please enter a starting point')
+    } else if (!end.end_address) {
+      alert('Please enter a destination')
+    } else if (isDefault) {
+      axios.post('/driver/:_id/defaultroute', {data: route})
     .then((result) => {
       navigate('/rider-list', {state: {dir: directionsResponse, route: route, userInfo: userInfo}})
     })
     .catch(err => console.log(err))
+    } else {
+      navigate('/rider-list', {state: {dir: directionsResponse, route: route, userInfo: userInfo}})
+    }
   }
+
+  const disabled = Boolean(
+    startedTrip || upcomingCheck
+  ) ? true : false;
 
   const closeModal = () => {
     setPrompt(!showPrompt)
@@ -274,19 +282,14 @@ function DriverView ({ userId, logOut }) {
                 <input type="checkbox" className="radioInput" checked={isDefault} onChange={(e) => setIsDefault(!isDefault)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-            {isDefault
-            ? <button
+
+              <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Create Route
-                <RiAddFill className="searchBtn" size={20}/>
+                disabled={disabled}
+                className="primary-btn-find"> {disabled ? `You have an ${startedTrip ? 'ongoing' : 'upcoming'} route` : 'Create route'}
+                {!disabled ? <RiAddFill className="searchBtn" size={20}/> : ''}
               </button>
-            : <Link to="/rider-list" state={{dir: directionsResponse, route: route, userInfo: userInfo}} style={{ textDecoration: 'none' }}>
-                <button
-                  disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Create Route
-                  <RiAddFill className="searchBtn" size={20}/>
-                </button>
-              </Link>
-            }
+
           </div>
         </form>
       <div className='default-ongoing-upcoming-flex'>

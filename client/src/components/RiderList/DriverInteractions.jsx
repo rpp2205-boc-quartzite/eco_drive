@@ -35,9 +35,8 @@ const libraries = ["places"];
 
 const DriverInteractions = function(props) {
 
-
-
   const location = useLocation();
+
 
   var mapData = location.state.dir.json;
   var route = location.state.route;
@@ -45,17 +44,15 @@ const DriverInteractions = function(props) {
 
   const directions = JSON.parse(mapData)
 
-  //Need it to not re-post the route if implemented
-  //possibly test if route is string or not
-
   useEffect(() => {
     axios.post("/add-driver-route", {
-      info: route
+      info: route,
+      distance: directions.routes[0].legs[0].distance.text
     })
     .catch(function (error) {
       console.log(error);
     });
-  }, [route])
+  }, [route, directions])
 
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: API_KEY,
@@ -205,7 +202,7 @@ const DriverInteractions = function(props) {
                 </Link>
               </div>
               <div className='top-bar-right'>
-                <Link to="/driverprofile" state={{id: userInfo._id, from: 'driverview'}}>
+                <Link to="/driverprofile" state={{id: userInfo._id, from: 'driverview', distance: distance}}>
                   <img className='avatar' src={userInfo.avatar} alt="" />
                 </Link>
                 <RiLogoutBoxRLine className='top-bar-icons' onClick={props.logOut}/>
@@ -213,7 +210,7 @@ const DriverInteractions = function(props) {
             </div>
       <br></br>
         <div className='title-bar'>
-          <Link to="/driverview">
+          <Link to="/driverview" state={{distance: distance}}>
               <BiArrowBack className='driver-list-back-icon' />
           </Link>
             <p>Your Route</p>
@@ -231,17 +228,10 @@ const DriverInteractions = function(props) {
       </div>
         <br></br>
         <div className="driver-list" data="DriverInteractions">
-          <RiderList driver={route} riders={riders} seats={seats} userInfo={userInfo} mapData={location.state.dir} />
+          <RiderList driver={route} distance={distance} riders={riders} seats={seats} userInfo={userInfo} mapData={location.state.dir} />
         </div>
     </div>
   )
 }
 
 export default DriverInteractions;
-
-//  <div className='card-header'>
-//   <div className='header-info'>
-//     <p>Total Distance: {distance}</p>
-//     <p>Expected Duration: {duration}</p>
-//   </div>
-// </div>

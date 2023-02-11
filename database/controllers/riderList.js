@@ -46,6 +46,7 @@ module.exports = {
       total_seats: newRoute.total_seats,
       started: newRoute.started,
       default: newRoute.default,
+      distance: newRoute.distance,
       riders: newRoute.riders
 
     }
