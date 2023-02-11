@@ -33,6 +33,9 @@ const UpcomingTripDriver = (props) => {
         <h5>Upcoming Trip</h5>
         <div className="card">
           <div className="card-header-driver">
+            {user.driver_route.riders.length === 0
+            ? (<div className="no-riders"> No Riders Yet :(</div>)
+            : (
               <ul className='avatars'>
                 {user.driver_route.riders.map(rider => {
                   return (
@@ -44,6 +47,8 @@ const UpcomingTripDriver = (props) => {
                   )
                 })}
               </ul>
+            )
+            }
             <div>
               <p className="trip-capacity">{user.driver_route.riders.length} / {user.driver_route.total_seats}</p>
             </div>

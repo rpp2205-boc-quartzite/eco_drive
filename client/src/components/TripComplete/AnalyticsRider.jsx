@@ -13,8 +13,8 @@ const AnalyticsRider = (props) => {
 
   return (
     <div>
-      <p className="riders">Your Savings:</p>
-      <p className="riders">${savings}</p>
+      {/* <p className="riders">Your Savings:</p> */}
+      <p className="riders"></p>
     </div>
   )
 }

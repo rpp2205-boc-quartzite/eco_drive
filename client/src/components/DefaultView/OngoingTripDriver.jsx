@@ -30,17 +30,22 @@ const OngoingTripDriver = (props) => {
         <h5>Ongoing Trip</h5>
         <div className="card">
           <div className="card-header-driver">
-            <ul className='avatars'>
-              {user.driver_route.riders.map(rider => {
-                return (
-                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id}>
-                  <li className="avatars__item">
-                    <img src={rider.rider_id.avatar} alt="avatar" className='avatars__img'/>
-                  </li>
-                </Link>
-                )
-              })}
-            </ul>
+            {user.driver_route.riders.length === 0
+              ? (<div className="no-riders"> Ride Alone</div>)
+              : (
+                <ul className='avatars'>
+                  {user.driver_route.riders.map(rider => {
+                    return (
+                    <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id._id}>
+                      <li className="avatars__item">
+                        <img src={rider.rider_id.avatar} alt="avatar" className='avatars__img'/>
+                      </li>
+                    </Link>
+                    )
+                  })}
+                </ul>
+              )
+              }
             <div>
               <p className="trip-capacity">{user.driver_route.riders.length} / {user.driver_route.total_seats}</p>
             </div>
