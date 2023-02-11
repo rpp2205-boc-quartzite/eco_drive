@@ -19,7 +19,7 @@ const db = require('../database/index.js');
 // db controllers
 const tripComplete = require('../database/controllers/tripComplete.js');
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
-const { calculateDistance } = require('./helpers/driverListHelpers.js')
+const { calculateDistance } = require('./helpers/driverListHelpers.js');
 const { getRiderArray, addDriversRoute, removeRiderFromRiderArray} = require ('../database/controllers/riderList.js');
 
 const { postReviewHandler } = require('../database/controllers/reviews.js');
@@ -170,8 +170,8 @@ app.get('/getreviews', function(req, res) {
   let userid = req.query.id;
   getRiderView(userid)
   .then((result) => {
-    console.log(result)
-    res.send(result)
+    console.log(result[0].full_name);
+    res.send(result[0]);
   })
   .catch(err => console.log(err))
 });
@@ -180,10 +180,8 @@ app.get('/getreviews', function(req, res) {
 
 app.post('/newreview', (req, res) => {
   let review = req.body;
-  console.log('this is a test', req);
   postReviewHandler(review)
   .then((response) => {
-    console.log('review', response);
     res.status(201).send(response);
   })
   .catch(err => {
@@ -194,11 +192,8 @@ app.post('/newreview', (req, res) => {
 app.post('/reviews/:user_id/report', (req, res) => {
   let report = req.body;
   report.user_id = req.params.user_id;
-  console.log('this is a test', req);
-  console.log('this is a report', report);
   postReportHandler(report)
   .then((response) => {
-    console.log('review', response);
     res.status(201).send(response);
   })
   .catch(err => {
@@ -386,8 +381,8 @@ app.get('*', function(req, res) {
 
 const port = 8080;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
 });
 
-//module.exports = server;
+module.exports = server;
