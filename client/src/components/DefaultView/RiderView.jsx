@@ -16,6 +16,16 @@ import './ongoing-trip-style.css';
 
 function RiderView ({ userId, riderOnGoingRoute, logOut }) {
 
+  const location = useLocation();
+
+  var distance;
+  if (location.state) {
+    distance = location.state.distance
+  } else {
+    distance = 0;
+  }
+
+
   const [startedTrip, setStartedTrip] = useState(riderOnGoingRoute.started ? riderOnGoingRoute.started : false);
 
   console.log('Started trip: ', startedTrip)
@@ -60,8 +70,6 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
     setUpcomingCheck(bool)
   }
 
-  // console.log('can start trip????', startedTrip, upcomingCheck)
-
   const route = {
     _id: userId,
     full_name: name,
@@ -100,12 +108,24 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios.post('/rider/:_id/defaultroute', {data: route})
-    .then((result) => {
+    if (!start.start_address) {
+      alert('Please enter a starting point')
+    } else if (!end.end_address) {
+      alert('Please enter a destination')
+    } else if (isDefault) {
+      axios.post('/rider/:_id/defaultroute', {data: route})
+      .then((result) => {
+        navigate('/driver-list', {state: {route: route, userInfo: userInfo, from: 'riderview'}})
+      })
+      .catch(err => console.log(err))
+    } else {
       navigate('/driver-list', {state: {route: route, userInfo: userInfo, from: 'riderview'}})
-    })
-    .catch(err => console.log(err))
+    }
   }
+
+  const disabled = Boolean(
+    startedTrip || upcomingCheck
+  ) ? true : false;
 
   return (
     <div className="allDefaultView">
@@ -183,19 +203,14 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
                 <input type="checkbox" className="radioInput" checked={isDefault} onChange={(e) => setIsDefault(!isDefault)}/> <div className="saveDefaultText">Set as default route</div>
               </div>
             </div>
-            {isDefault
-            ? <button
+
+            <button
                 onClick={(e) => handleClick(e)}
-                disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Find Drivers
-                <RiSearchLine className="searchBtn" size={20}/>
-              </button>
-            : <Link to="/driver-list" state={{route: route, userInfo: userInfo, from: 'riderview'}} style={{ textDecoration: 'none' }}>
-                <button
-                  disabled={!start.start_address || !end.end_address || startedTrip || upcomingCheck} className="primary-btn-find">Find Drivers
-                  <RiSearchLine className="searchBtn" size={20}/>
-                </button>
-              </Link>
-            }
+                disabled={disabled}
+                className="primary-btn-find"> {disabled ? `You have an ${startedTrip ? 'ongoing' : 'upcoming'} route` : 'Find Drivers'}
+                {!disabled ? <RiSearchLine className="searchBtn" size={20}/> : ''}
+            </button>
+
           </div>
         </form>
       <div className='default-ongoing-upcoming-flex'>
@@ -211,7 +226,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
         )
         }
         {startedTrip === true
-        ? <OngoingTripRider userId={userId} riderOnGoingRoute={riderOnGoingRoute} endTrip={endTrip}/>
+        ? <OngoingTripRider userId={userId} riderOnGoingRoute={riderOnGoingRoute} endTrip={endTrip} distance={distance}/>
         : (
             <div className="ongoing-trip-container">
               <h5>Ongoing Trip</h5>

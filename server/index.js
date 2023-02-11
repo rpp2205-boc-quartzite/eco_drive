@@ -340,6 +340,7 @@ app.post("/add-driver-route", (req, res) => {
     time: req.body.info.time,
     total_seats: req.body.info.total_seats,
     started: false,
+    distance: req.body.distance,
     riders: []
   }
 

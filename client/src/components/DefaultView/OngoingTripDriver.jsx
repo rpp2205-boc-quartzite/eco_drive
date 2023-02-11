@@ -30,29 +30,39 @@ const OngoingTripDriver = (props) => {
         <h5>Ongoing Trip</h5>
         <div className="card">
           <div className="card-header-driver">
-            <ul className='avatars'>
-              {user.driver_route.riders.map(rider => {
-                return (
-                <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id}>
-                  <li className="avatars__item">
-                    <img src={rider.avatar} alt="avatar" className='avatars__img'/>
-                  </li>
-                </Link>
-                )
-              })}
-            </ul>
+            {user.driver_route.riders.length === 0
+              ? (<div className="no-riders"> Ride Alone</div>)
+              : (
+                <ul className='avatars'>
+                  {user.driver_route.riders.map(rider => {
+                    return (
+                    <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id._id}>
+                      <li className="avatars__item">
+                        <img src={rider.rider_id.avatar} alt="avatar" className='avatars__img'/>
+                      </li>
+                    </Link>
+                    )
+                  })}
+                </ul>
+              )
+              }
             <div>
-              {user.driver_route.riders.length} / {user.driver_route.total_seats}
+              <p className="trip-capacity">{user.driver_route.riders.length} / {user.driver_route.total_seats}</p>
             </div>
           </div>
-          <p className='card-detail'>Pickup: {user.driver_route.start_address}</p>
-          <p className='card-detail'>License plate #: {user.license_plate}</p>
-          <p className='card-detail'>Time: {user.driver_route.time}</p>
+          <div className="trip-card-body">
+            <div className="defaultRouteCardTitle title-margin">Pickup:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.start_address}</div>
+            <div className="defaultRouteCardTitle title-margin">Drop Off:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.end_address}</div>
+            <div className="defaultRouteCardTitle title-margin">Time:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.time}</div>
+          </div>
           <div className="btn-horizontal-flex">
             <Link to="/driverview" className="link link-wrap-btn">
               <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
             </Link>
-            <Link to="/trip-complete-driver" className="link link-wrap-btn" state={{ user }}>
+            <Link to="/trip-complete-driver" className="link link-wrap-btn" state={{ user, distance: props.distance }}>
               <button type='submit' onClick={props.endTrip}  className="negative-btn">End Trip</button>
             </Link>
           </div>
