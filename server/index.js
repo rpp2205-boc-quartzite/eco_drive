@@ -24,7 +24,7 @@ const { getRiderArray, addDriversRoute, removeRiderFromRiderArray} = require ('.
 
 const { postReviewHandler } = require('../database/controllers/reviews.js');
 const { postReportHandler } = require('../database/controllers/report.js');
-const { register, login, validate, sendMail, changePassword } = require('../database/controllers/authentication.js');
+const { register, login, validate, sendMail, changePassword, uniqueEmailCheck } = require('../database/controllers/authentication.js');
 const { updateDriverProfile, updateRiderProfile, getUserInfo } = require('../database/controllers/userProfile.js')
 const { getDriverView, getRiderView, postDriverRoute, postRiderRoute, postDriverLicense, removeIdOffRiderListOfDriver, postDefaultRiderRoute, postDefaultDriverRoute } = require('../database/controllers/defaultviews.js')
 
@@ -109,6 +109,7 @@ app.post('/login', login);
 app.get('/validate', validate);
 app.post('/sendMail', sendMail);
 app.put('/change-password', changePassword);
+app.get('/unique-email-check', uniqueEmailCheck);
 
 // ---- Default Driver & Rider view routes  ---- //
 app.get('/getdriverview', function(req, res) {
@@ -339,6 +340,7 @@ app.post("/add-driver-route", (req, res) => {
     time: req.body.info.time,
     total_seats: req.body.info.total_seats,
     started: false,
+    distance: req.body.distance,
     riders: []
   }
 

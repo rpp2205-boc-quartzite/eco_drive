@@ -265,6 +265,10 @@ h1 {
   flex-grow: 0;
 }
 
+.react-datepicker__time-container {
+  z-index: 9999;
+}
+
 .inputField4 {
   display: flex;
   flex-direction: row;
@@ -311,7 +315,6 @@ h1 {
   -webkit-appearance: none;
   outline: none;
   cursor: pointer;
-  z-index: 1;
 }
 
 .radioInput:checked {
@@ -352,6 +355,12 @@ h1 {
   align-self: stretch;
   flex-grow: 0;
 }
+
+.primary-btn-find:disabled {
+  background: var(--gray3);
+  color: var(--gray1);
+}
+
 
 .viewToggle {
   float: left;
@@ -848,6 +857,21 @@ h1 {
   flex-grow: 0;
 }
 
+.valid-check-tos {
+  width: 9px;
+  height: 24px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--red);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  padding-left: 5px;
+}
+
 .input-field {
   box-sizing: border-box;
   display: flex;
@@ -980,6 +1004,59 @@ h1 {
   height: 556px;
   left: 0px;
   top: 0px;
+}
+
+.error-message {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  width: 190px;
+  height: 20px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  z-index: 1;
+}
+
+.login-error-message {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-top: 40px;
+  width: 270px;
+  height: 20px;
+  flex: none;
+  order: 5;
+  flex-grow: 0;
+  z-index: 1;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #D63434;
+  flex: none;
+  flex-grow: 0;
+  padding-left: 10px;
+}
+
+.error-text {
+  width: 190px;
+  height: 18px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #D63434;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
 
 .signup-title {
