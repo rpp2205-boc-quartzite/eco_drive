@@ -11,6 +11,11 @@ export default function PasswordReset(props) {
   const [inputToken, setInputToken] = useState('');
   const [pendingEmail, setPendingEmail] = useState(false);
   const [emailCheck, setEmailCheck] = useState(false);
+  const [tokenCheck, setTokenCheck] = useState(false);
+  const [passMatch, setPassMatch] = useState(false);
+  const [passCheck, setPassCheck] = useState(false);
+  const [confirmPassCheck, setConfirmPassCheck] = useState(false);
+  const [missToken, setMissToken] = useState(false);
   const navigate = useNavigate();
 
   const generateOTP = () => {
@@ -49,18 +54,27 @@ export default function PasswordReset(props) {
         console.log(err);
       });  
     };
-
   };
 
   const submitReset = (event) => {
     event.preventDefault();
-
-    if (password !== confirmPass) {
-      return alert('Password does not match!');
-    }
+    if (inputToken === '') {
+      setMissToken(true);
+      return;
+    };
     if (verifyToken !== inputToken) {
-      return alert('Verification code does not match!');
+      setTokenCheck(true);
+      return;
+    };
+    if (password === '' || confirmPass === '') {
+      passMatch(false);
+      setPassCheck(true);
+      setConfirmPassCheck(true);
     }
+    if (password !== confirmPass) {
+      setPassMatch(true);
+      return;
+    };
 
     axios.put('/change-password', {email: email, password: password})
       .then((result) => {
@@ -70,8 +84,8 @@ export default function PasswordReset(props) {
       .catch((err) => {
         alert('Something went wrong!');
         console.log(err);
-      })
-  }
+      });
+  };
 
   return (
     <div className='auth-form-container'>
@@ -85,8 +99,10 @@ export default function PasswordReset(props) {
                 <div className='label-title-container-pass'>
                   <label className='label-title-8' htmlFor='email'>Enter your email</label>
                   <div className='valid-check-pass'>*</div>
+                  {missToken === true &&
+                      <div className='error-message'><span className='error-text'>Please enter verification code</span></div>}  
                   {emailCheck === true &&
-                      <div className='error-message'><span className='error-text'>Email not found. No token sent</span></div>}
+                      <div className='error-message'><span className='error-text'>Email not found. No code sent</span></div>}
                 </div>
                 <input className='input-field' value={email} onChange={(event) => setEmail(event.target.value)}type='email' id='email' name='email' />
               </div>
@@ -116,7 +132,8 @@ export default function PasswordReset(props) {
                   <div className='label-title-container-pass'>
                     <label className='verify-code-title'>Verification Code</label>
                     <div className='valid-check-pass'>*</div>
-                    <div className='error-message'><span className='error-text'>Incorrect Verification Code</span></div>
+                    {tokenCheck === true &&
+                      <div className='error-message'><span className='error-text'>Incorrect Verification Code</span></div>}
                   </div>
                   <input className='input-field' value={inputToken} onChange={(event) => setInputToken(event.target.value)}type='text' id='inputToken' name='inputToken' />
                 </div>
@@ -124,7 +141,10 @@ export default function PasswordReset(props) {
                   <div className='label-title-container-pass'>
                     <label className='verify-code-pass'>New Password</label>
                     <div className='valid-check-pass'>*</div>
-                    <div className='error-message'><span className='error-text'>Password does not match</span></div>
+                    {passMatch === true && 
+                      <div className='error-message'><span className='error-text'>Password does not match</span></div>}
+                    {passCheck === true &&
+                      <div className='error-message'><span className='error-text'>Please enter a password</span></div>}   
                   </div>
                   <input className='input-field' value={password} onChange={(event) => setPassword(event.target.value)} type='password' id='password' name='password' />
                 </div>
@@ -132,7 +152,10 @@ export default function PasswordReset(props) {
                   <div className='label-title-container-pass'>
                     <label className='verify-code-confirm'>Confirm Password</label>
                     <div className='valid-check-pass'>*</div>
-                    <div className='error-message'><span className='error-text'>Password does not match</span></div>
+                    {passMatch === true && 
+                      <div className='error-message'><span className='error-text'>Password does not match</span></div>}
+                    {confirmPassCheck === true &&
+                      <div className='error-message'><span className='error-text'>Please enter a password</span></div>}   
                   </div>
                   <input className='input-field' value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} type='password' id='passConfirm' name='passConfirm' />
                 </div>
