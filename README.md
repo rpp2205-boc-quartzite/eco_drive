@@ -2,6 +2,14 @@
 ## Mobile app enabling people commuting to a similar location to carpool together
 A mobile app that connects carpoolers to save the earth by reducing carbon emissions and traffic congestion. It allows users to find and join carpools with individuals who have a similar commute, providing a convenient and eco-friendly way to get to work or school.
 
+## Contributors
+@wulfmatik
+@bbissing
+@chelseapae
+@huantran123
+@camjhirsh
+@netbek932
+@romanlaughs
 
 * Sign-up / Login Authentication - Blake
   - Sign-up View
@@ -50,3 +58,55 @@ These above analytics will also be compiled and totaled, to be viewed in the use
 If a user chooses to leave a review at a later date, they can access that review form by clicking on the list of previous riders/drivers and following an option to complete the review form via that other person’s profile listing.
 Users can only leave reviews for others that they have ridden with previously. 
 Reviews include a 5-star rating, calculated to the nearest half-point. In addition, they can write a full review via the text box on the form.
+
+## Tech stack
+- React
+- MongoDB
+- Node.js
+- Express
+- Axios
+- Webpack/Babel
+- Google Maps API
+- VS Code
+- Git/Github
+- Jest Testing
+- AWS
+
+## Technical Challenges and research that you anticipated
+* Why, what was the plan to overcome those challenges?
+* What did you learn?
+
+## Challenges that were unexpected
+* Why was it a challenge
+* What did you learn?
+
+## Video Demo / Screen shot walkthrough of the app
+* What were the user stories /  what was MVP (mention Minimal Viable Product)
+
+## How does the app work?
+* What happens behind the scenes when the user interacts with it?
+* OR What are all the places the data travels?  What happens to that data?
+* Optionally include a diagram
+* How does the tech stack come together?
+
+## What research was required?
+
+## Workflow and Key lessons from your team - specifically those related to: Agile, CI/CD, testing, working with external stakeholders, ticketing, and user stories.
+* Your git workflow, style guides, commit guides, etc
+* What did you learn from the process
+* What were key takeaways from stand ups, code reviews, etc
+* Writing tests
+* Link to your project board, discuss completed tickets
+
+## Next Iteration
+- Get Directions
+- Multilingual Support
+- User Chat
+- 2-factor authentication
+- Financial Incentive framework and supporting infrastructure (Venmo integration)
+- Dark mode
+- Actual ToS
+- Driver License verification
+- Background check
+- User Selfie photos
+
