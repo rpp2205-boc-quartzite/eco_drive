@@ -11,7 +11,7 @@ class RiderReviewsList extends React.Component {
   }
 
   render() {
-    //console.log('asdf', this.props.rider_reviews)
+    console.log('this.props.rider_reviews', this.props.rider_reviews)
     // console.log('HEYGEYRERH', this.props.userId)
       return (
         <div>
