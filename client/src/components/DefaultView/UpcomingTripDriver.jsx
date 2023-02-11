@@ -56,8 +56,8 @@ const UpcomingTripDriver = (props) => {
           <div className="trip-card-body">
             <div className="defaultRouteCardTitle title-margin">Pickup:</div>
             <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.start_address}</div>
-            <div className="defaultRouteCardTitle title-margin">License plate #:</div>
-            <div className='defaultRouteCardInfo detail-margin'>{user.license_plate}</div>
+            <div className="defaultRouteCardTitle title-margin">Drop Off:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.end_address}</div>
             <div className="defaultRouteCardTitle title-margin">Time:</div>
             <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.time}</div>
           </div>

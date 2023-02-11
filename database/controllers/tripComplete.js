@@ -40,7 +40,7 @@ module.exports = {
     if (route === "driver") {
       // set new rider_list using non-duplicate combined array
       let combined = user.recent_riders.concat(user.driver_route.riders)
-      let filtered = [...new Set(combined)]
+      let filtered = [...new Set(combined)].slice(-10);
       await User.updateOne({ _id }, {$set: {recent_riders: filtered}}).catch(err => console.log(err));
       // add route to driver_trips
       await User.updateOne({ _id }, {$push: {driver_trips: user.driver_route}}).catch(err => console.log(err));
@@ -50,7 +50,8 @@ module.exports = {
 
     } else if (route === "rider") {
       // add driver to recent drivers
-      await User.updateOne({ _id }, {$push: {recent_drivers: user.rider_route.driver_id}}).catch(err => console.log(err));
+      let newRecents = user.recent_riders.concat(user.rider_route.driver_id).slice(-5);
+      await User.updateOne({ _id }, {$set: {recent_drivers: newRecents}}).catch(err => console.log(err));
       // add route to rider_trips
       await User.updateOne({ _id }, {$push: {rider_trips: user.rider_route}}).catch(err => console.log(err));
       // clear rider_route

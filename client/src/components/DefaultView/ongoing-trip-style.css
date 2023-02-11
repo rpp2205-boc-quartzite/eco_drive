@@ -112,7 +112,7 @@
 ul.avatars {
   display: flex ; /* Causes LI items to display in row. */
   list-style-type: none ;
-  margin: auto ; /* Centers vertically / horizontally in flex container. */
+  /* margin: auto ; Centers vertically / horizontally in flex container. */
   /* padding: 0px 85px 0px 0px ; */
   z-index: 1 ; /* Sets up new stack-container. */
 }
@@ -187,6 +187,7 @@ span.avatars__others {
 
 .detail-margin {
   margin-bottom: 6px;
+  overflow: auto;
 }
 
 .driver-list-forward-icon {

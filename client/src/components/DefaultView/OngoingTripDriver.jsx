@@ -48,8 +48,8 @@ const OngoingTripDriver = (props) => {
           <div className="trip-card-body">
             <div className="defaultRouteCardTitle title-margin">Pickup:</div>
             <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.start_address}</div>
-            <div className="defaultRouteCardTitle title-margin">License plate #:</div>
-            <div className='defaultRouteCardInfo detail-margin'>{user.license_plate}</div>
+            <div className="defaultRouteCardTitle title-margin">Drop Off:</div>
+            <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.end_address}</div>
             <div className="defaultRouteCardTitle title-margin">Time:</div>
             <div className='defaultRouteCardInfo detail-margin'>{user.driver_route.time}</div>
           </div>
@@ -57,7 +57,7 @@ const OngoingTripDriver = (props) => {
             <Link to="/driverview" className="link link-wrap-btn">
               <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
             </Link>
-            <Link to="/trip-complete-driver" className="link link-wrap-btn" state={{ user }}>
+            <Link to="/trip-complete-driver" className="link link-wrap-btn" state={{ user, distance: props.distance }}>
               <button type='submit' onClick={props.endTrip}  className="negative-btn">End Trip</button>
             </Link>
           </div>

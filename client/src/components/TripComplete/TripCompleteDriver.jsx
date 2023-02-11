@@ -17,11 +17,13 @@ const TripCompleteDriver = () => {
     }
   })
 
+  console.log(location.state.distance);
+
   return (
     <div className="trip-complete">
       <h1 className="title">Trip Complete!</h1>
       <PassengerList pIds={passengerIds} user={user} view={'driver'}/>
-      <AnalyticsDriver driver_route={user.driver_route}/>
+      <AnalyticsDriver distance={location.state.distance}/>
       <Link to='/riderview'>
         <button id="back-to-home">Back to Home</button>
       </Link>

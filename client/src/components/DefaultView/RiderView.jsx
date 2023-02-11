@@ -16,6 +16,16 @@ import './ongoing-trip-style.css';
 
 function RiderView ({ userId, riderOnGoingRoute, logOut }) {
 
+  const location = useLocation();
+
+  var distance;
+  if (location.state) {
+    distance = location.state.distance
+  } else {
+    distance = 0;
+  }
+
+
   const [startedTrip, setStartedTrip] = useState(riderOnGoingRoute.started ? riderOnGoingRoute.started : false);
 
   console.log('Started trip: ', startedTrip)
@@ -216,7 +226,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
         )
         }
         {startedTrip === true
-        ? <OngoingTripRider userId={userId} riderOnGoingRoute={riderOnGoingRoute} endTrip={endTrip}/>
+        ? <OngoingTripRider userId={userId} riderOnGoingRoute={riderOnGoingRoute} endTrip={endTrip} distance={distance}/>
         : (
             <div className="ongoing-trip-container">
               <h5>Ongoing Trip</h5>
