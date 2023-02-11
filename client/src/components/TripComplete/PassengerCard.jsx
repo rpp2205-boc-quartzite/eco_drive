@@ -10,7 +10,12 @@ const PassengerCard = (props) => {
 
   useEffect(() => {
     const myFunc = async () => {
-      let result = await axios.get('/getdriverview',  { params: {userId: props.pId} }).catch(err => console.log(err));
+      var pId = props.pId;
+      if (props.pId._id) {
+        console.log('Keanu', props.pId._id)
+        pId = props.pId._id;
+      }
+      let result = await axios.get('/getdriverview',  { params: {userId: pId} }).catch(err => console.log(err));
       result = result.data[0];
       setUser(result);
     }
