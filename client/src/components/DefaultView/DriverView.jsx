@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { RiRefreshLine, RiLogoutBoxRLine, RiAddFill } from "react-icons/ri";
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
@@ -14,6 +14,15 @@ import UpcomingTripDriver from './UpcomingTripDriver.jsx';
 import './ongoing-trip-style.css';
 
 function DriverView ({ userId, logOut }) {
+
+  const location = useLocation();
+
+  var distance;
+  if (location.state) {
+    distance = location.state.distance
+  } else {
+    distance = 0;
+  }
 
   const [startedTrip, setStartedTrip] = useState(false);
 
@@ -206,7 +215,7 @@ function DriverView ({ userId, logOut }) {
       <div className='top-bar'>
         <div className='top-bar-left'>
           <p>Driver</p>
-          <Link to="/riderview">
+          <Link to="/riderview" state={ {distance} }>
             <RiRefreshLine className='top-bar-icons' />
           </Link>
         </div>
@@ -305,7 +314,7 @@ function DriverView ({ userId, logOut }) {
         )
         }
         {startedTrip === true
-        ? <OngoingTripDriver userId={userId} endTrip={endTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo}/>
+        ? <OngoingTripDriver userId={userId} endTrip={endTrip} passedRoute={passedRoute} passedMapData={passedMapData} passedUserInfo={passedUserInfo} distance={distance}/>
         : (
           <div className="ongoing-trip-container">
             <h5>Ongoing Trip</h5>

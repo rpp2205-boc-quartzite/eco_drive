@@ -22,7 +22,7 @@ const TripCompleteRider = () => {
     <div className="trip-complete">
       <h1 className="title">Trip Complete!</h1>
       <PassengerList pIds={passengerIds} user={user} view={'rider'}/>
-      <AnalyticsRider rider_route={user.rider_route}/>
+      <AnalyticsRider distance={location.state.distance}/>
       <Link to='/riderview'>
         <button id="back-to-home">Back to Home</button>
       </Link>

@@ -62,7 +62,7 @@ const OngoingTripRider = (props) => {
             <Link to="/riderview" className="link link-wrap-btn">
               <button className="cancel-btn" onClick={cancelRoute}>Cancel</button>
             </Link>
-            <Link to="/trip-complete-rider" className="link link-wrap-btn" state={{ driver, user }}>
+            <Link to="/trip-complete-rider" className="link link-wrap-btn" state={{ driver, user, distance: props.distance }}>
               <button type='submit' onClick={props.endTrip}  className="negative-btn">End Trip</button>
             </Link>
           </div>
