@@ -45,6 +45,7 @@ class DriverProfile extends React.Component {
     var id = this.state.userId;
     //console.log('driver props', props)
     //console.log('IDDDD', id)
+    console.log('driver props', this.props)
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
       console.log('got da driver', result)

@@ -39,7 +39,6 @@ export default function Register(props) {
     if (email !== '') {
       axios.get(`/unique-email-check?email=${email}`)
       .then((user) => {
-        console.log(user.data.email);
         if (user.data.email !== undefined) {
           setEmailCheck(false);
           setEmailInUse(true);
@@ -73,7 +72,12 @@ export default function Register(props) {
       if (trueAge < 18) {
         setAgeCheck(false);
         setAge(true);
-      }
+      };
+      if (trueAge >= 18) {
+        console.log('here')
+        setAgeCheck(false);
+        setAge(false);
+      };
       if (password !== confirmPass) {
         setPass('');
         setConfirmPass('');
@@ -185,6 +189,7 @@ export default function Register(props) {
                     onChange={(event) => {
                       setDob(event.target.value); 
                       setAgeCheck(false);
+                      setAge(false);
                     }} 
                     type='date' 
                     placeholder='mm/dd/yyyy' 
