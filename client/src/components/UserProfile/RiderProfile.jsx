@@ -7,6 +7,8 @@ import PreviousRidesList from './PreviousRidesList.jsx';
 import Ratings from 'react-ratings-declarative';
 import { useLocation, useParams, Link } from "react-router-dom";
 import { randomFacts } from './RandomFacts.jsx';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 class RiderProfile extends React.Component {
   constructor(props) {
@@ -36,6 +38,7 @@ class RiderProfile extends React.Component {
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSuccessClosure = this.handleSuccessClosure.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount () {
@@ -90,6 +93,12 @@ class RiderProfile extends React.Component {
 
   handleSuccessClosure() {
     this.setState({infoChangedSuccess: false})
+  }
+
+  logOut() {
+    cookies.remove('TOKEN', {
+      path: "/",
+    });
   }
 
   handleSubmit(event){
@@ -149,7 +158,7 @@ class RiderProfile extends React.Component {
             <RiHome4Fill className='top-bar-icons'/>
           </Link>
           <Link to="/">
-            <RiLogoutBoxRLine className='top-bar-icons'/>
+            <RiLogoutBoxRLine className='top-bar-icons' onClick={this.logOut}/>
           </Link>
         </div>
       </div>
