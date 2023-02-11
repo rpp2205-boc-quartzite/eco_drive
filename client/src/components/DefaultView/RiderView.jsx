@@ -138,7 +138,7 @@ function RiderView ({ userId, riderOnGoingRoute, logOut }) {
         </div>
         <div className='top-bar-right'>
           <Link to="/riderprofile" state={{id: userId, userInfo: userInfo, from: 'riderview'}}>
-            <img className='headerAvatar' src={avatar} alt="avatar-small" />
+            <img className='avatar' src={avatar} alt="avatar-small" />
           </Link>
           <Link to="/">
             <RiLogoutBoxRLine className='top-bar-icons' onClick={logOut}/>

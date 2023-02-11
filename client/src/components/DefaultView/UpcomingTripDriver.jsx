@@ -41,7 +41,7 @@ const UpcomingTripDriver = (props) => {
                   return (
                   <Link to="/ratings-reviews" state={ {from: 'driverview', userData: user, revieweeData: rider.rider_id, view: 'driver'} } key={rider.rider_id._id}>
                     <li className="avatars__item">
-                      <img src={rider.rider_id.avatar} alt="avatar" className='avatars__img'/>
+                      <img src={rider.rider_id.avatar} alt="avatar" className='avatar'/>
                     </li>
                   </Link>
                   )
