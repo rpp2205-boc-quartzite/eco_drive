@@ -1,1 +1,0 @@
-module.exports= 'AIzaSyAEg8kOA_ww2St8FNAdPlWFu_WSUmSeSac';
