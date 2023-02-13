@@ -60,17 +60,12 @@ Users can only leave reviews for others that they have ridden with previously.
 Reviews include a 5-star rating, calculated to the nearest half-point. In addition, they can write a full review via the text box on the form.
 
 ## Tech stack
-- React
-- MongoDB
-- Node.js
-- Express
-- Axios
-- Webpack/Babel
-- Google Maps API
-- VS Code
-- Git/Github
-- Jest Testing
-- AWS
+|Front End | HTML | CSS | React | axios |
+|Back End | Node.js | Express.js | MongoDB |
+|APIs | Google Maps API | Unsplash API |
+|Dev Tools | Webpack | Babel | VS Code | Git/Github |
+|Testing | Jest |
+|Deployment | AWS |
 
 ## Technical Challenges
 *  Have a better separation of sub-components
