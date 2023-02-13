@@ -6,13 +6,13 @@ A mobile app that connects carpoolers to save the earth by reducing carbon emiss
 </p>
 
 ## Contributors
-@wulfmatik
-@bbissing
-@chelseapae
-@huantran123
-@camjhirsh
-@netbek932
-@romanlaughs
+[@wulfmatik](https://github.com/wulfmatik)
+[@bbissing](https://github.com/bbissing)
+[@chelseapae](https://github.com/chelseapae)
+[@huantran123](https://github.com/huantran123)
+[@camjhirsh](https://github.com/camjhirsh)
+[@netbek932](https://github.com/netbek932)
+[@romanlaughs](https://github.com/romanlaughs)
 
 * Sign-up / Login Authentication - Blake
   - Sign-up View
