@@ -68,34 +68,34 @@ Reviews include a 5-star rating, calculated to the nearest half-point. In additi
 |Deployment | AWS |
 <table>
   <tr>
-    <td>Frontend</td>
+    <td><b>Frontend</b></td>
     <td>HTML</td>
     <td>CSS</td>
     <td>React</td>
     <td>Axios</td>
   </tr>
   <tr>
-    <td>Backend</td>
+    <td><b>Backend</b></td>
     <td>Node.js</td>
     <td>Express.js</td>
     <td>MongoDB</td>
     <td></td>
   </tr>
   <tr>
-    <td>APIs</td>
+    <td><b>APIs</b></td>
     <td>Google Maps API</td>
     <td>Unsplash API</td>
     <td></td>
   </tr>
   <tr>
-    <td>Dev Tools</td>
+    <td><b>Dev Tools</b></td>
     <td>Webpack</td>
     <td>Babel</td>
     <td>VS Code</td>
     <td>Git/Github</td>
    </tr>
   <tr>
-    <td>Testing + Deployment</td>
+    <td><b>Testing + Deployment</b></td>
     <td>Jest Testing</td>
     <td>AWS</td>
     <td></td>
