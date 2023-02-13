@@ -90,7 +90,7 @@ See the Figma [here.](https://www.figma.com/proto/HEWbDkuO29mAwlEXWmwR8c/EcoDriv
 ## Workflow and Key lessons
 * Maintain better communication around managing .env files
 * Focus on security
-* Don’t commit passwords to repo
+* Don’t commit passwords and API keys to repo
 
 ## Next Iteration
 - Get Directions
