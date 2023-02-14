@@ -144,7 +144,7 @@ app.post('/postRiderRoute', function(req, res) {
 });
 
 app.post('/postDriverLicense', function(req, res) {
-  console.log('here is license', req.body.licenseInfo)
+  // console.log('here is license', req.body.licenseInfo)
   var data = req.body.licenseInfo;
   postDriverLicense(data)
   .then(result => res.end())
@@ -170,7 +170,7 @@ app.get('/getreviews', function(req, res) {
   let userid = req.query.id;
   getRiderView(userid)
   .then((result) => {
-    console.log(result[0].full_name);
+    // console.log(result[0].full_name);
     res.send(result[0]);
   })
   .catch(err => console.log(err))
@@ -243,7 +243,7 @@ app.post('/driver-list', async (req, res) => {
 
 // Add/remove driver to/off user's favorites list
 app.put('/driver-list', async (req, res) => {
-  console.log('/driver-list', req)
+  // console.log('/driver-list', req)
   try {
     if (req.query.action === 'add-favorite') {
       await addFavorite(req.query.userId, req.query.driverId)
@@ -262,17 +262,17 @@ app.put('/driver-list', async (req, res) => {
 
 app.get('/getuserinfo', function(req, res) {
   let userid = req.query.id;
-  console.log('USERID in INDEXJS server', req.query.id)
+  // console.log('USERID in INDEXJS server', req.query.id)
   getUserInfo(userid)
   .then((result) => {
-    console.log(result)
+    // console.log(result)
     res.send(result)
   })
   .catch(err => console.log(err))
 });
 
 app.post('/updateDriverProfile', function(req, res) {
-  console.log('DATA IN INDEX.JS SERVER', req.body)
+  // console.log('DATA IN INDEX.JS SERVER', req.body)
   var data = req.body;
   updateDriverProfile(data)
   .then(result => {
@@ -282,7 +282,7 @@ app.post('/updateDriverProfile', function(req, res) {
   .catch(err => console.log(err))
 });
 app.post('/updateRiderProfile', function(req, res) {
-  console.log('DATA IN INDEX.JS RIDER SERVER', req.body)
+  // console.log('DATA IN INDEX.JS RIDER SERVER', req.body)
   var data = req.body;
   updateRiderProfile(data)
   .then(result => {
