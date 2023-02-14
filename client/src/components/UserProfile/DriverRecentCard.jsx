@@ -28,23 +28,16 @@ class DriverRecentCard extends React.Component {
   }
 
   render() {
-    console.log('userData: ', this.props.wholeObj.data[0]);
-    console.log('revieweeData: ', this.state.wholeReviewerObj.data[0]);
-    if (this.state.wholeReviewerObj.data[0] === undefined) {
-      console.log('revieweeData undefined', this.state.wholeReviewerObj.data[0]);
-      return null;
-    } else {
-      return (
-        <div>
-            <Link to="/ratings-reviews" state={{userData: this.props.wholeObj.data[0], revieweeData: this.state.wholeReviewerObj.data[0], from: 'driverprofile', view: 'driver'}}>
-            {this.state.avatar ?
-            <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/> :
-            <img className='profileRecentDriver' src="https://drive.google.com/uc?export=view&id=1lJDY3CixLoKNFD1CkLhqcySmOPg5k02Y" alt="drive image"/>
-          }</Link>
-          </div>
+    console.log('this.props.wholeObj', this.props.wholeObj)
+    return (
+      <div>
+          <Link to="/ratings-reviews" state={{userData: this.props.wholeObj.data[0], revieweeData: this.state.wholeReviewerObj.data[0], from: 'driverprofile', view: 'driver'}}>
+            <img className='profileRecentDriver' src={this.state.avatar} alt="profile avatar"/>
+          </Link>
+
+        </div>
       )
     }
-  }
 }
 
 export default DriverRecentCard;
