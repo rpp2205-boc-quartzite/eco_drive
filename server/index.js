@@ -19,7 +19,7 @@ const db = require('../database/index.js');
 // db controllers
 const tripComplete = require('../database/controllers/tripComplete.js');
 const { getDriverList, addFavorite, removeFavorite } = require('../database/controllers/driverList.js')
-const { calculateDistance } = require('./helpers/driverListHelpers.js')
+const { calculateDistance } = require('./helpers/driverListHelpers.js');
 const { getRiderArray, addDriversRoute, removeRiderFromRiderArray} = require ('../database/controllers/riderList.js');
 
 const { postReviewHandler } = require('../database/controllers/reviews.js');
@@ -144,7 +144,7 @@ app.post('/postRiderRoute', function(req, res) {
 });
 
 app.post('/postDriverLicense', function(req, res) {
-  console.log('here is license', req.body.licenseInfo)
+  // console.log('here is license', req.body.licenseInfo)
   var data = req.body.licenseInfo;
   postDriverLicense(data)
   .then(result => res.end())
@@ -170,8 +170,8 @@ app.get('/getreviews', function(req, res) {
   let userid = req.query.id;
   getRiderView(userid)
   .then((result) => {
-    console.log(result)
-    res.send(result)
+    // console.log(result[0].full_name);
+    res.send(result[0]);
   })
   .catch(err => console.log(err))
 });
@@ -180,10 +180,8 @@ app.get('/getreviews', function(req, res) {
 
 app.post('/newreview', (req, res) => {
   let review = req.body;
-  console.log('this is a test', req);
   postReviewHandler(review)
   .then((response) => {
-    console.log('review', response);
     res.status(201).send(response);
   })
   .catch(err => {
@@ -194,11 +192,8 @@ app.post('/newreview', (req, res) => {
 app.post('/reviews/:user_id/report', (req, res) => {
   let report = req.body;
   report.user_id = req.params.user_id;
-  console.log('this is a test', req);
-  console.log('this is a report', report);
   postReportHandler(report)
   .then((response) => {
-    console.log('review', response);
     res.status(201).send(response);
   })
   .catch(err => {
@@ -248,7 +243,7 @@ app.post('/driver-list', async (req, res) => {
 
 // Add/remove driver to/off user's favorites list
 app.put('/driver-list', async (req, res) => {
-  console.log('/driver-list', req)
+  // console.log('/driver-list', req)
   try {
     if (req.query.action === 'add-favorite') {
       await addFavorite(req.query.userId, req.query.driverId)
@@ -267,17 +262,17 @@ app.put('/driver-list', async (req, res) => {
 
 app.get('/getuserinfo', function(req, res) {
   let userid = req.query.id;
-  console.log('USERID in INDEXJS server', req.query.id)
+  // console.log('USERID in INDEXJS server', req.query.id)
   getUserInfo(userid)
   .then((result) => {
-    console.log(result)
+    // console.log(result)
     res.send(result)
   })
   .catch(err => console.log(err))
 });
 
 app.post('/updateDriverProfile', function(req, res) {
-  console.log('DATA IN INDEX.JS SERVER', req.body)
+  // console.log('DATA IN INDEX.JS SERVER', req.body)
   var data = req.body;
   updateDriverProfile(data)
   .then(result => {
@@ -287,7 +282,7 @@ app.post('/updateDriverProfile', function(req, res) {
   .catch(err => console.log(err))
 });
 app.post('/updateRiderProfile', function(req, res) {
-  console.log('DATA IN INDEX.JS RIDER SERVER', req.body)
+  // console.log('DATA IN INDEX.JS RIDER SERVER', req.body)
   var data = req.body;
   updateRiderProfile(data)
   .then(result => {
@@ -387,8 +382,15 @@ app.get('*', function(req, res) {
 
 const port = 8080;
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
-});
+// const server = app.listen(port, () => {
+//   console.log(`listening on port ${port}, on this path ${path.join(__dirname, '../client/dist')}`);
+// });
 
-//module.exports = server;
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {console.log(`Listening on port ${port}`)});
+} else {
+  const server = app.listen(port, () => {console.log(`Listening on port ${port}`)});
+  module.exports = server;
+}
+
+// module.exports = server;

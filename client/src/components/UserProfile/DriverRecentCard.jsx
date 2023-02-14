@@ -18,7 +18,7 @@ class DriverRecentCard extends React.Component {
     console.log('RECENT CARD HCELSEA IDDDD', typeof id)
     axios.get('/getUserInfo', { params: {id} })
     .then((result) => {
-      //console.log('ID!!!', result)
+      // console.log('ID!!!', result)
       this.setState({
         avatar: result.data[0].avatar,
         wholeReviewerObj: result
@@ -38,7 +38,6 @@ class DriverRecentCard extends React.Component {
         </div>
       )
     }
-
 }
 
 export default DriverRecentCard;
