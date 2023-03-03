@@ -6,8 +6,7 @@ A mobile app that connects carpoolers to save the earth by reducing carbon emiss
 </p>
 <br/>
 
-<video align="center" src="https://user-images.githubusercontent.com/103070104/222847145-14da17ee-447b-438b-b85c-a0082fdef508.mov" />
-<br/>
+https://user-images.githubusercontent.com/103070104/222848316-8e56c10d-824a-48f8-9132-59ad76b2adf2.mp4
 
 ## Contributors
 [@wulfmatik](https://github.com/wulfmatik)  |  [@bbissing](https://github.com/bbissing)  |  [@chelseapae](https://github.com/chelseapae)  |  [@huantran123](https://github.com/huantran123)  |  [@camjhirsh](https://github.com/camjhirsh)  |  [@netbek932](https://github.com/netbek932)  |  [@romanlaughs](https://github.com/romanlaughs)
