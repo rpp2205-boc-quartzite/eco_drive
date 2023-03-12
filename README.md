@@ -48,7 +48,7 @@ Drivers have the ability to save a default route and view previous routes, the s
 When a driver begins a trip, they will be presented with a list of nearby riders based on the number of available passenger seats. 
 Drivers have the ability to decline assigned riders prior to confirmation. That rider will then be replaced in the list with another nearby rider – ensuring full capacity is maintained.
   - Both Views Interactions  (Cameron)
-Upon trip completion, users are presented with a ‘Trip Completed’ notification that contains information like money saved, earned, carbon footprint, as well as a link to leave a review for the driver / riders.
+Once riders or drivers have been booked, each rider or driver is able to "Start Trip" once they have begin their trip. Once started, the user can "End Trip" and the trip will be archived. The user will be presented with a ‘Trip Completed’ notification that contains a brief trip analytic regarding money saved on the trip. They will be able to favorite fellow rider/drivers and link out to leave a review for the driver / riders.
 These above analytics will also be compiled and totaled, to be viewed in the user profile page.
 * Current User Profile & Analytics - Chelsea
   - The user profile contains the user’s picture as well as their personal account information. Their information can be edited and updated at user discretion. The user profile can be toggled between rider and driver information, including driver or rider reviews being separated in this way.
